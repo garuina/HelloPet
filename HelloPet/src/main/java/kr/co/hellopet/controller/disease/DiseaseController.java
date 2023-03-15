@@ -39,7 +39,7 @@ public class DiseaseController {
 			group = "dog";
 		}
 		
-		List<DiseaseResultMapVO> resultMaps = service.selectDisease(group);
+		List<DiseaseResultMapVO> resultMaps = service.selectDiseases(group);
 		model.addAttribute("resultMaps", resultMaps);
 		model.addAttribute("group", group);
 		
@@ -48,13 +48,16 @@ public class DiseaseController {
 	}
 	
 	@GetMapping("disease/view")
-	public String view() {
+	public String view(Model model, int cate1, int cate2) {
+		
+		DiseaseVO vo = service.selectDisease(cate1, cate2);
+		
+		model.addAttribute("vo", vo);
+		
 		return "disease/view";
 	}
 	
 	
-	
-	/*cat*/
 
 	
 	
