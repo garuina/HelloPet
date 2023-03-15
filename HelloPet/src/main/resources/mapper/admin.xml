@@ -10,7 +10,7 @@
 <mapper namespace="kr.co.hellopet.dao.AdminDAO">
 	
 	<select id="selectAdmin" resultType="kr.co.hellopet.vo.MedicalVO">
-		select * from `pet_hospital_pharmacy` where `uid`='good123';
+		select * from `pet_hospital_pharmacy` where `uid`=#{uid};
 	</select>
 	
 	<update id="updateAdmin">
@@ -18,7 +18,7 @@
             `email`=#{email},
             `ceo`=#{ceo},
             `ceoHp`=#{ceoHp}
-        where `uid`='good123';
+        where `uid`=#{uid};
 	</update>
 
 

@@ -1,5 +1,6 @@
 package kr.co.hellopet.controller.cs;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -151,6 +152,7 @@ public class CsController {
 	/* qna */
 	@GetMapping("cs/qna/list")
 	public String qnaList(Model model, String pg) {
+		
 		int currentPage = service.getCurrentPage(pg);
 		int pageSize = 10;
         int start = service.getLimitStart(currentPage);
@@ -213,7 +215,11 @@ public class CsController {
 		/* 답변 */
 		String regip = req.getRemoteAddr();
         vo.setRegip(regip);
-		service.insertReply(vo);
+		int result = service.insertReply(vo);
+		
+		if(result > 0) {
+			service.updateReply(vo.getNo());
+		}
 		
 		return "redirect:/cs/qna/view?no="+vo.getNo()+"&pg="+currentPage;
 	}
@@ -228,8 +234,12 @@ public class CsController {
 	@GetMapping("cs/qnaReply/delete")
     public String qnaReplyDelete(CsVO vo,String pg, HttpServletRequest req){
         int currentPage = service.getCurrentPage(pg);
-        service.deleteReply(vo.getNo());
+        int result = service.deleteReply(vo.getNo());
 
+        if(result > 0) {
+			service.updateDelReply(vo.getNo());
+		}
+        
         return "redirect:/cs/qna/view?no="+vo.getNo()+"&pg="+currentPage;
     }
 

@@ -61,14 +61,14 @@
                                         </div>
                                     </div>
                                     <div class="button">
-                                        <a th:href="@{/cs/faq/modify(no=${faq.no})}" class="btnModify">수정</a>    
-                                        <a th:href="@{/cs/faq/delete(no=${faq.no})}" class="btnDel">삭제</a>
+                                        <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/cs/faq/modify(no=${faq.no})}" class="btnModify">수정</a>    
+                                        <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/cs/faq/delete(no=${faq.no})}" class="btnDel">삭제</a>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                <a th:href="@{/cs/faq/write}" class="btnWrite">글쓰기</a>    
+                <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/cs/faq/write}" class="btnWrite">글쓰기</a>    
                 </div>
             </section>
         </main>

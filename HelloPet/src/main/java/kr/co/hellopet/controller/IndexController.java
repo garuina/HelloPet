@@ -1,5 +1,6 @@
 package kr.co.hellopet.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class IndexController {
 
 	@GetMapping(value = {"", "index"})
 	public String index(Model model, CsVO vo, String pg) {
+		
 		int currentPage = service.getCurrentPage(pg);
 		
 		/* 공지사항 FAQ 5개씩 */

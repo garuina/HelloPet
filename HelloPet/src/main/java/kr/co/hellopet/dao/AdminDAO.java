@@ -14,7 +14,7 @@ import kr.co.hellopet.vo.MedicalVO;
 @Repository
 public interface AdminDAO {
 	
-	public MedicalVO selectAdmin();
+	public MedicalVO selectAdmin(String uid);
 	public int updateAdmin(MedicalVO vo);
 
 }

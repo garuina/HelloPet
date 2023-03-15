@@ -1,13 +1,22 @@
 <th:block th:include="@{admin/_header.html}"/>
+<script>
+
+	$(function(){
+		var uid = $('input[name=uid]').val();
+		console.log(uid);
+	});
+	
+</script>
         <main>
             <div class="top">
                 <h3>정보관리</h3>
             </div>
             <div class="info_div">
                 <table class="info_table">
+                <input type="hidden" name="uid" th:value="${#authentication.principal.medical.uid}"/>
                     <tr>
                         <td>아이디</td>
-                        <td><span>[[${vo.uid}]]</span></td>
+                        <td><span th:text="${vo.uid}"></span></td>
                     </tr>
                     <tr>
                         <td>비밀번호</td>
@@ -15,23 +24,23 @@
                     </tr>
                     <tr>
                         <td>병원명/약국명</td>
-                        <td><span>[[${vo.medicalName}]]</span></td>
+                        <td><span th:text="${vo.medicalName}"></span></td>
                     </tr>
                     <tr>
                         <td>TEL</td>
-                        <td><span>[[${vo.tel}]]</span></td>
+                        <td><span th:text="${vo.tel}"></span></td>
                     </tr>
                     <tr>
                         <td>EMAIL</td>
-                        <td><span>[[${vo.email}]]</span></td>
+                        <td><span th:text="${vo.email}"></span></td>
                     </tr>
                     <tr>
                         <td>대표자명</td>
-                        <td><span>[[${vo.ceo}]]</span></td>
+                        <td><span th:text="${vo.ceo}"></span></td>
                     </tr>
                     <tr>
                         <td>대표자 전화번호</td>
-                        <td><span>[[${vo.ceoHp}]]</span></td>
+                        <td><span th:text="${vo.ceoHp}"></span></td>
                     </tr>
                     <tr>
                         <td>회원탈퇴</td>
@@ -39,7 +48,7 @@
                     </tr>
                     <tr>
                         <td>주소</td>
-                        <td><span>[[${vo.addr1}]]</span></td>
+                        <td><span th:text="${#authentication.principal.medical.addr1}"></span></td>
                     </tr>
                     
                 </table>

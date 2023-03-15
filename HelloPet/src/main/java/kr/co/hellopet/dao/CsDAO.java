@@ -34,6 +34,8 @@ public interface CsDAO {
 	public int insertReply(CsVO vo);
 	public List<CsVO> selectReply(int no);
 	public int deleteReply(int no);
+	public int updateReply(int no);
+	public int updateDelReply(int no);
 	
 	/* faq */
 	public int insertFaq(CsVO vo);

@@ -77,8 +77,8 @@
                     </table>
                     <div class="button">
                         <a th:href="@{/cs/notice/list(pg=${currentPage})}" class="btnList">목록</a>
-                        <a th:href="@{/cs/notice/modify(no=${vo.no}, pg=${currentPage})}" class="btnModify">수정</a>
-                        <a th:href="@{/cs/notice/delete(no=${vo.no},pg=${currentPage})}" class="btnDel">삭제</a>
+                        <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/cs/notice/modify(no=${vo.no}, pg=${currentPage})}" class="btnModify">수정</a>
+                        <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/cs/notice/delete(no=${vo.no},pg=${currentPage})}" class="btnDel">삭제</a>
                     </div>
                     
                 </div>
