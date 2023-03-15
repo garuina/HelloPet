@@ -71,4 +71,5 @@
 		SELECT * FROM `api_pharmacy` WHERE `pharNo` =#{pharNo};
 	</select>
 
+
 </mapper>

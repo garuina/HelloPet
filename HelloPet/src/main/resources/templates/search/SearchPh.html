@@ -72,16 +72,17 @@ $(function(){
                   html += "<span id='tel'>" + tel + "</span></span>"
                   html += "<span class='button-wrap'>"
                   html += "<a href='/HelloPet/search/view?pharNo="+ph.pharNo+"'><img src='/HelloPet/img/search-자세히.png'></a>";
-                  html += "<a href='/HelloPet/search/reserve?pharNo="+ph.pharNo+"'><img src='/HelloPet/img/search-예약가능.png'></a></span></li>";
                   
               });
-            }
-          } else {//검색결과 없을 때 ㅠㅜ
-        	// #section2 숨기기
-	        $('#section2').hide();
-	        // #section3 내용 변경
-	        $('#section3').html('검색결과가 없습니다.').show();
-          }
+            } else {//검색결과 없을 때 ㅠㅜ
+             // #section2 보이기
+             $('#section2').hide();
+           	 console.log("없어요");
+ 	         // #section3 내용 변경
+ 	         $('#section3').html('검색결과가 없습니다.').show();
+           }
+            
+          } 
    	  
           $('.lists ul').empty();
           $('.lists ul').append(html);

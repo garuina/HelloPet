@@ -38,14 +38,8 @@ public class SearchController {
 	@GetMapping("search/reserve")
 	public String reserve(Model model, String hosNo, String pharNo) {
 		
-		if (hosNo != null) {
-			SearchVO a = service.selectViewHs(hosNo);
-			model.addAttribute("a", a);
-			} else if (pharNo != null) {
-			SearchVO b = service.selectViesPh(pharNo);
-			model.addAttribute("b", b);
-			}
-		
+		SearchVO hs = service.selectViewHs(hosNo);
+		model.addAttribute("hs", hs);
 		
 		return "search/reserve";
 	}
@@ -62,7 +56,7 @@ public class SearchController {
 			SearchVO a = service.selectViewHs(hosNo);
 			model.addAttribute("a", a);
 			} else if (pharNo != null) {
-			SearchVO b = service.selectViesPh(pharNo);
+			SearchVO b = service.selectViewPh(pharNo);
 			model.addAttribute("b", b);
 			}
 			return "search/view";

@@ -37,4 +37,5 @@ public interface SearchDAO {
 	public SearchVO selectViewHs(String hosNo);
 	public SearchVO selectViewPh(String pharNo);
 
+
 }
