@@ -71,9 +71,11 @@ public class SearchService {
 	public SearchVO selectViewHs(String hosNo){
 		return dao.selectViewHs(hosNo);
 	}
-	public SearchVO selectViesPh(String pharNo) {
+	
+	public SearchVO selectViewPh(String pharNo){
 		return dao.selectViewPh(pharNo);
 	}
+
 	
 	
 	// 페이징 처리 시작 ///////////////////////////////////////////////////////
