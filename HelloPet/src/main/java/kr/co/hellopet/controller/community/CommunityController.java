@@ -9,6 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.CommunityService;
 import kr.co.hellopet.vo.CommunityVO;
@@ -143,15 +148,29 @@ public class CommunityController {
 			//좋아요 랭킹 3위 목록 가져오기
 			List<CommunityVO> ranks = service.selectTalkRanks(cate);
 			
+			
+			
+			
+			
 			model.addAttribute("articles", articles);
 			model.addAttribute("ranks",ranks);
 			model.addAttribute("sort", sort);
 			model.addAttribute("cate", cate);
 			
-			
 			return "community/talktalk/list";
 		}
 	
+	// talktalk 모달 뷰
+		@RequestMapping(value="community/talktalk/view", method= {RequestMethod.GET})
+		public CommunityVO talkView(Model model, @RequestParam("no") int no) {
+			
+			//글 가져오기
+			CommunityVO article = service.selectTalkArticle(no);
+			
+			model.addAttribute("article", article);
+			return article;
+		}
+		
 	// talktalk 글쓰기
 	@GetMapping("community/talktalk/write")
 	public String talkWrite() {
