@@ -15,6 +15,10 @@
 </script>
 <script>
 	$(function(){
+		
+		var level = $('input[name=level]').val(); // 현재 로그인한 사용자의 레벨을 얻어옵니다.
+		console.log(level);
+		
 		$('.btnDel').click(function(){
 			if(confirm('정말 삭제하시겠습니까?')){
 				return true;
@@ -23,10 +27,15 @@
 			}
 		});
 		$('.btnComplete').click(function(){
-			if(confirm('답변을 작성하시겠습니까?')){
-				return true;
-			}else{
+			if(level < 7){
+				alert('관리자만 답변을 작성할 수 있습니다.');
 				return false;
+			}else{
+				if(confirm('답변을 작성하시겠습니까?')){
+					return true;
+				}else{
+					return false;
+				}
 			}
 		});
 
@@ -37,7 +46,6 @@
 				return false;
 			}
 		});
-		
 	});
 	
 </script>
@@ -79,6 +87,8 @@
                     <th:block th:if="${#lists.isEmpty(replys)}">
 	                    <section class="replyForm">
 	                        <form action="#" method="post">
+	                        <input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}"/>
+	                        <input type="hidden" name="level" th:value="${#authentication.principal.member.level}"/>
 	                            <textarea name="content" placeholder="답변 입력"></textarea>
 	                            <div>
 	                                <input type="submit" class="btn btnComplete" value="작성"/>
@@ -93,16 +103,16 @@
                     <!-- 답변목록 -->
                     <section class="replyList">
 	                    <th:block th:if="${#lists.isEmpty(replys)}">
-	                        <p class="empty">등록된 답변이 없습니다.</p>
+		                    <p class="empty">등록된 답변이 없습니다.</p>
 	                    </th:block>
 	                    <th:block th:unless="${#lists.isEmpty(replys)}">
 	                        <article th:each="reply:${replys}">
 	                        	<h3>Reply</h3>
 	                        	<p class="content" >[[${reply.content}]]</p><br>
-	                            <span class="nick" >[[${reply.nick}]]&nbsp;</span>
+	                            <span class="nick" >관리자&nbsp;</span>
 	                            <span class="date" >[[${reply.rdate.substring(2,10)}]]</span>
 	                            <div>
-	                                <a th:href="@{/cs/qnaReply/delete(no=${vo.no},pg=${currentPage})}" class="remove">삭제</a>
+	                                <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/cs/qnaReply/delete(no=${vo.no},pg=${currentPage})}" class="remove">삭제</a>
 	                            </div>
 	                        </article>
 	                    </th:block>                

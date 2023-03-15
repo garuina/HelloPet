@@ -13,7 +13,7 @@
 	<insert id="insertNotice">
 		insert into `cs_article` set 
 		    `group`='notice', 
-		    `uid`='admin',
+		    `uid`=#{uid},
 		    `title`=#{title}, 
 		    `content`=#{content},
 		    `img`=#{img},
@@ -49,7 +49,7 @@
 	<insert id="insertFaq">
 		insert into `cs_article` set 
 		    `group`='faq', 
-		    `uid`='admin',
+		    `uid`=#{uid},
 		    `title`=#{title}, 
 		    `content`=#{content},
 		    `regip`=#{regip},
@@ -70,7 +70,7 @@
     <insert id="insertQna">
 		insert into `cs_article` set 
 		    `group`='qna', 
-		    `uid`='admin',
+		    `uid`=#{uid},
 		    `title`=#{title}, 
 		    `content`=#{content},
 		    `regip`=#{regip},
@@ -92,7 +92,7 @@
     	insert into `cs_article` set 
 		    `parent`=#{no},
 		    `group`='qna', 
-		    `uid`='admin',
+		    `uid`=#{uid},
 		    `content`=#{content},
 		    `regip`=#{regip},
 		    `rdate`=NOW();
@@ -104,9 +104,20 @@
 	            order by `no` desc
 	            limit 0,1;
     </select>
+    <update id="updateReply">
+    	update `cs_article` set
+    		`reply`=1 where `no`=#{no};
+    </update>
+    <update id="updateDelReply">
+    	update `cs_article` set
+    		`reply`=0 where `no`=#{no};
+    </update>
+    
     <delete id="deleteReply">
         delete from `cs_article` where `parent`=#{no};
     </delete>
+    
+    
     
     <!-- 공통 -->
     <select id="selectArticle" resultType="kr.co.hellopet.vo.CsVO">

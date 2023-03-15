@@ -81,6 +81,12 @@ public class CsService {
 	public int deleteReply(int no) {
 		return dao.deleteReply(no);
 	}
+	public int updateReply(int no) {
+		return dao.updateReply(no);
+	}
+	public int updateDelReply(int no) {
+		return dao.updateDelReply(no);
+	}
 	
 	/* faq */
 	public int insertFaq(CsVO vo) {

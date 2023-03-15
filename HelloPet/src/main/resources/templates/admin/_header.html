@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +23,7 @@
             <div class="headerTop">
                 <div>
                     <span>관리자</span>
-                    <a href="#">로그아웃</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
                     <a th:href="@{/}">홈으로 가기</a>
                 </div>
             </div>

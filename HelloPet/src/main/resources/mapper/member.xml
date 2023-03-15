@@ -40,7 +40,8 @@
 			`zip` 		  = #{zip} ,
 			`addr1` 	  = #{addr1} ,
 			`addr2` 	  = #{addr2} ,
-			`reserve`     = #{reserve},
+			`business` 	  = #{business} ,
+			`reserve`     = 0,
 			`reserveOk`   = #{reserveOk},
 			`regip` 	  = #{regip} ,
 			`rdate` 	  = now();

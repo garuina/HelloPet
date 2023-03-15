@@ -129,6 +129,6 @@ public class MemberService {
 	
 	public void updateMedicalPasswordByCodeAndInfo(String code, String email, String name, String hp) {
 		String pass = passwordEncoder.encode(code);
-		dao.updatePetOwnerPasswordByCodeAndInfo(pass, email, name, hp);
+		dao.updateMedicalPasswordByCodeAndInfo(pass, email, name, hp);
 	}
 }

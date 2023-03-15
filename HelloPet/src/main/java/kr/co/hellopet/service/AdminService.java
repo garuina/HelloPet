@@ -17,8 +17,8 @@ public class AdminService {
 	@Autowired
 	private AdminDAO dao;
 
-	public MedicalVO selectAdmin() {
-		return dao.selectAdmin();
+	public MedicalVO selectAdmin(String uid) {
+		return dao.selectAdmin(uid);
 	}
 	public int updateAdmin(MedicalVO vo) {
 		return dao.updateAdmin(vo);

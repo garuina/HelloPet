@@ -27,6 +27,7 @@
                 <div class="container">
                     <form onsubmit="return validateForm()" method="post">
                         <table class="writeTable">
+                        <input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}"/>
                             <caption>FAQ 작성</caption>
                             <tr>
                                 <th>Q</th>

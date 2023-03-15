@@ -196,7 +196,38 @@ public class PetMemberController {
 	@PostMapping("member/changePass")
 	public Map<String, Integer> changePass(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("hp") String hp) {
 		
-		return null;
+		// ajax 데이터 수신 확인
+				System.out.println("email : " +  email + " name : " + name + " hp : "+  hp);
+
+				// 임시비밀번호 생성하기
+				String code = service.makeRandomPass();
+				System.out.println("인증번호는 " + code + " 입니다.");
+
+				// 데이터를 map 에 담기
+				Map<String, Integer> resultMap = new HashMap<>();
+
+				// 수신한 데이터를 바탕으로 데이터 조회 (owner table)
+				int countMember = service.selectCountMemberForChangePass(email, name, hp);
+
+				// 수신한 데이터를 바탕으로 데이터 조회 (medical table)
+				int countMedical = service.selectCountMedicalForChangePass(email, name, hp);
+
+				System.out.println("countMedical : " + countMedical);
+
+				if(countMember == 1) {
+					service.updateMedicalPasswordByCodeAndInfo(code, email, name, hp);
+					resultMap.put("result", 1);
+					passwordMail.SendPasswordEmail(email, code);
+
+				}else if(countMedical == 1) {
+					service.updateMedicalPasswordByCodeAndInfo(code, email, name, hp);
+					resultMap.put("result", 1);
+					passwordMail.SendPasswordEmail(email, code);
+				}else {
+					resultMap.put("result", 0);
+				}
+
+				return resultMap;
 	}
 
 	// uid 중복체크
