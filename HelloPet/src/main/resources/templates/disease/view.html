@@ -10,14 +10,14 @@
                     </div>
                     <div class="tab">
                         <ul>
-                            <li class="on"><a href="#">반려견</a></li>
-                            <li><a href="#">반려묘</a></li>
+                            <li class="on"><a th:href="@{/disease/index(group=dog)}">반려견</a></li>
+                            <li><a th:href="@{/disease/index(group=cat)}">반려견</a></li>
                         </ul>
                         
                     </div>
                 <div class="top-round top-round--lager">
-                    <h4 class="title">코 이상</h4>
-                    <p class="pr">콧물을 많이 흘린다</p>
+                    <h4 class="title">[[${vo.c1Name}]]</h4> 
+                    <p class="pr">[[${vo.c2Name}]]</p>
                 </div>
                 <section class="section-disease">
                     <div class="container">
@@ -27,12 +27,8 @@
                                 <div class="disease-block">
                                     <span class="type">
                                     </span>
-                                    <span class="title">세균 및 바이러스 감염</span>
-                                    <p class="pr">
-                                        "반려견이 콧물이 나는 경우 가장 흔한 원인은 바이러스, 세균, 진균 등에 의한 감염이다. 
-                                        일반 엑스레이 및 치과 엑스레이검사, 비강 내시경 검사, CT검사, 콧물의 세균/ 곰팡이 배양검사 및 세포학검사, 비강점막 조직검사 등 여러 검사를 통해 비교적 정확한 
-                                        원인을 찾을 수 있다. 검사 이후에는 일반적으로 항생제, 항진균제, 소염제 등의 약물처방으로 치료를 합니다."
-                                    </p>
+                                    <span class="title">[[${vo.disName}]]</span>
+                                    <p class="pr">[[${vo.description}]]</p>
                                     
                                     <div class="border-box">
                                         <span class="box-title">진료가능 항목</span>
@@ -47,7 +43,7 @@
                                     "본 질병 조회는 문헌, 통계자료 분석에 의한 결과이므로 참고 자료로 활용하시고, 보다 정확한 진단은
                                     수의사님의 진료가 필요합니다."                             
                                 </p>
-                               
+           
                              </div>   
                         </div>
                     </div>

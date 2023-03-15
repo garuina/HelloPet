@@ -47,10 +47,9 @@ $(document).ready(function(){
                  <dl class="search-category-list">
                      <dt class="title">
                          [[${resultMap.c1Name}]]
-                     </dt>    
-              
+                     </dt>             
                     	<dd class="name">
-                         <a th:href="@{/disease/view}" th:each="cate2VO:${resultMap.cate2VOList}">[[${cate2VO.c2Name}]]</a>
+                         <a th:href="@{/disease/view(cate1=${cate2VO.cate1}, cate2=${cate2VO.cate2})}" th:each="cate2VO:${resultMap.cate2VOList}">[[${cate2VO.c2Name}]]</a>
                     	</dd>
                  </dl>
              </article>

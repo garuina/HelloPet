@@ -26,4 +26,6 @@ public class DiseaseResultMapVO {
 	private String c2Name;
 	private List<Disease_cate1VO> cate1VList;
 	
+	private String description;
+	
 }

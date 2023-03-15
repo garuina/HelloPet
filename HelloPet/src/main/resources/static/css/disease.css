@@ -165,59 +165,50 @@ main {
 /*푸터*/
 
 footer {
-    width: 100%;
-    height: 192px;
+    margin-top: 100px;
+    height: 200px;
     background: #b4e8e3;
-    border-top: 1px solid #e9e9e9;
-    box-sizing: border-box;
+    padding: 43px 0 75px;
 }
-
-footer>div {
-    width: 1200px;
-    height: auto;
-    padding-top: 20px;
-    box-sizing: border-box;
-    margin: 0 auto;
+.footer-col:first-child {
+    max-width: 524px;
 }
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
 
-footer>div>.footer_info>p {
+}
+.info {margin: 0 50px;}
+.info li {
     float: left;
-    height: 100%;
-    line-height: 20px;
-    font-size: 15px;
-    color: #10958b;
-}
-
-footer>div>.footer_link {
-    float: right;
-}
-
-footer>div>.footer_link>ul {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-footer>div>.footer_link>ul>li {
-    display: inline-block;
-    font-weight: bold;
-}
-
-footer>div>.footer_link>ul>li>a {
+    padding: 8px;
+    line-height: .8;
     font-size: 17px;
     color: #10958b;
-    font-weight: bold;
-    padding: 0 10px;
+    font-weight: 300;
 }
-
-footer p>strong {
-    display: inline-block;
-    padding: 6px 15px 7px 0;
+.info li:first-child {
+    font-weight: bold;
+    font-weight: 700;
+}
+.link {
+    margin-right: 100px;
+}
+.link li {
+    float: left;
+    padding: 0 2px;
+}
+.link li a {
+    display: block;
+    line-height: 1;
+    font-family: bold;
+    font-size: 17px;
     color: #10958b;
-    font-size: 30px;
-    font-weight: bold;
+    font-weight: 700;
+    padding: 2px;
+    margin: 0 2px 10px;
 }
-
 
 
 
