@@ -10,14 +10,33 @@
         	
         	// 모달 창 열림
                 $('.gallery_item').click(function(){
-                    $('#modal').css('display','flex');
+                	
+                	let no = $('div[name=rank_no]').attr("value");
+                	
+                	//location.href = "/HelloPet/community/talktalk/list?no="+no;
+                    
+                	let jsonData = {'no': no};
+                	
+                	$.ajax({
+						url : "community/talktalk/view",
+				    	method : 'GET',
+				    	data : jsonData,
+				    	dataType : 'json',
+				    	success : function(data){
+				    		
+				    	}
+					});
+
+                	
+                	$('#modal').css('display','flex');
                     $('.v-overlay').css('display','flex');
                     
                     var slider = $('.gallery_modal_left').bxSlider({
                     	mode: 'horizontal'
                     	
                       });
-                    slider.reloadSlider();
+                    
+                    
                 });
         	// x를 누르면 모달 창 닫힘
                 $('.modal_close').click(function(){
@@ -61,11 +80,13 @@
         	
             	
             	
+            	
             });
         		
         		
            
     </script>
+    
         <main>
             <div class="top">
                 <h3>커뮤니티</h3>
@@ -103,7 +124,8 @@
                             <img th:src="@{/img/congratulate_img.png}" alt="랭킹이미지">
                         </div>
                         <div class="gallery_items">
-                            <div class="gallery_item" th:each="rank : ${ranks}">
+                        	<th:block th:each="rank : ${ranks}">
+                            <div class="gallery_item" name="rank_no" th:value="${rank.no}">
                                 <div class="gallery_item_con1" th:style="'background-image: url('+@{__${rank.img1.substring(9)}__}+');'"></div>
                                 <div class="gallery_item_con2">
                                     <div class="gallery_info1">
@@ -121,6 +143,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </th:block>
                         </div>
                     </div>
                     <div class="talk_normal">
@@ -176,6 +199,7 @@
     		<div class="v-overlay_scrim" style="opacity: 0.46; background-color: rgb(33, 33, 33); border-color: rgb(33, 33, 33);"></div>
     		<div class="v-overlay_content"></div>
     	</div>
+    	
          <div role="document" id="modal" tabindex="0" style="z-index: 202;">
             <div class="modal_active" style="transform-origin: center center; max-width: 1200px;">
                 <div class="modal_gallery_view">

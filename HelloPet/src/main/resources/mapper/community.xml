@@ -124,12 +124,13 @@
 			`title`=#{title},
 			`content`=#{content},
 			`rdate`=now()
-			where `no`=25;
+			where `no`=#{no};
 	</update>
 	
 	<select id="selectTalkArticle" resultType="kr.co.hellopet.vo.CommunityVO">
-    	select * from `community_article`
-    		where `no`=25;
+    	select a.*, b.nick from `community_article` as a
+    		join `pet_owner` as b on a.uid = b.uid
+    		where `no`=#{no};
     </select>
     
     <select id="selectTalkCount" resultType="int">
