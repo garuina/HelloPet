@@ -58,8 +58,8 @@
                 </div>
                 <div class="view_link">
                     <a th:href="@{/community/tip/list}"><button class="view_list">목록</button></a>
-                    <a th:href="@{/community/tip/modify(group='tip', no=${article.no})}"><button class="view_modify">수정</button></a>
-                    <a th:href="@{/community/tip/delete(group='tip', no=${article.no})}"><button class="view_delete">삭제</button></a>
+                    <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/community/tip/modify(group='tip', no=${article.no})}"><button class="view_modify">수정</button></a>
+                    <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/community/tip/delete(group='tip', no=${article.no})}"><button class="view_delete">삭제</button></a>
                 </div>
             </div>
         </main>

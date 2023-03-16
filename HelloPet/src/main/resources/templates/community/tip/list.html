@@ -45,7 +45,7 @@
                         </table>
                     </div>
                     <div class="write">
-                        <a th:href="@{/community/tip/write}"><button>글쓰기</button></a>
+                        <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/community/tip/write}"><button>글쓰기</button></a>
                     </div>
                     <div class="paging">
                     	<th:block th:if="${pageGroupStart > 1}">
@@ -63,3 +63,4 @@
 
             
         </main>
+<th:block th:include="@{community/_footer.html}"/>
