@@ -213,6 +213,14 @@ public class CommunityController {
 		return "redirect:/community/talktalk/list";
 	}
 	
+	// talktalk 글삭제
+		@GetMapping("community/talktalk/delete")
+		public String talkDelete(int no){
+			service.deleteArticle(no);
+			
+			return "redirect:/community/talktalk/list";
+		}
+	
 	
 	
 }
