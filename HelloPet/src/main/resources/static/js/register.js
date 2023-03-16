@@ -195,16 +195,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 $('input[name=register_submit]').click(function(){
 
     // 휴대폰 검증

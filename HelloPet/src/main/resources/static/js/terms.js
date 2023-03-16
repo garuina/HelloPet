@@ -29,7 +29,7 @@ $(document).ready(function(){
 
     $('input:checkbox').click(function(){
 
-        let length = $('#member_check:checked').length;
+        let length = $('.member_check:checked').length;
 
         if(length > 1){
             $('input[name=all]').prop('checked',true);
