@@ -3,6 +3,7 @@ package kr.co.hellopet.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.CommunityVO;
@@ -51,7 +52,7 @@ public interface CommunityDAO {
 	public int selectTalkCount(String cate);
 	
 	// talk 글보기
-	public CommunityVO selectTalkArticle(int no);
+	public CommunityVO selectTalkArticle(@Param("no") int no);
 	
 	// talk 글수정
 	public int updateTalkArticle(CommunityVO vo);
