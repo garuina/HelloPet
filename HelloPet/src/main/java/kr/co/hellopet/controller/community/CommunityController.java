@@ -1,6 +1,8 @@
 package kr.co.hellopet.controller.community;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.CommunityService;
+import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.CommunityVO;
 
 /*
@@ -161,14 +164,17 @@ public class CommunityController {
 		}
 	
 	// talktalk 모달 뷰
-		@RequestMapping(value="community/talktalk/view", method= {RequestMethod.GET})
-		public CommunityVO talkView(Model model, @RequestParam("no") int no) {
+		@ResponseBody
+		@GetMapping("community/talktalk/view")
+		public Map<String, CommunityVO> talkView(Model model, @RequestParam("no") int no) {
 			
 			//글 가져오기
 			CommunityVO article = service.selectTalkArticle(no);
 			
-			model.addAttribute("article", article);
-			return article;
+			Map<String, CommunityVO> map = new HashMap<>();
+			
+			map.put("result", article);
+			return map;
 		}
 		
 	// talktalk 글쓰기

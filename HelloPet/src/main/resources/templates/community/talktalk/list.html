@@ -8,25 +8,48 @@
         
         $(function(){
         	
+        	
+        	
+        	
         	// 모달 창 열림
                 $('.gallery_item').click(function(){
                 	
+                	
                 	let no = $('div[name=rank_no]').attr("value");
+                	
+                	
                 	
                 	//location.href = "/HelloPet/community/talktalk/list?no="+no;
                     
-                	let jsonData = {'no': no};
+                	let jsonData = {'no' : no};
                 	
                 	$.ajax({
-						url : "community/talktalk/view",
+						url : "/HelloPet/community/talktalk/view",
 				    	method : 'GET',
 				    	data : jsonData,
 				    	dataType : 'json',
 				    	success : function(data){
 				    		
+				    		$('.writer_nick').html('<strong>'+data.result.nick+'</strong>');
+				    		$('.content_info_item span').html('<strong>'+data.result.reply+'</strong>');
+				    		$('.like_aria').html('<strong>소풍이</strong>님 외 <strong>'+data.result.heart+'명</strong>이 좋아합니다.');
+				    		$('.gallery_content_tit').html(data.result.title);
+				    		$('.gallery_content_txt').html(data.result.content);
+				    		$('.gallery_content_date').html(data.result.rdate.substring(0, 10));
+				    		$('.gallery_modify').click(function(){
+				    			location.href = "/HelloPet/community/talktalk/modify?no="+no;
+				    		});
+				    		$('.modal_img1 a').html('<img th:src="@{'+data.result.img1+'}" alt="img1">');
+				    		
+				    		
+				    		
+				    		
+				    		
+				    		
+				    		
+				    		
 				    	}
 					});
-
                 	
                 	$('#modal').css('display','flex');
                     $('.v-overlay').css('display','flex');
@@ -94,7 +117,7 @@
             <div class="tab">
                 <ul>
                     <li><a th:href="@{/community/tip/list}">반려동물 꿀팁</a></li>
-                    <li class="on"><a href="#">반려동물 톡톡</a></li>
+                    <li class="on"><a th:href="@{/community/talktalk/list}">반려동물 톡톡</a></li>
                 </ul>
             </div>
             <section id="talkMain">
@@ -209,9 +232,9 @@
                     <div class="modal_body">
                         <div class="gallery_modal">
                             <div class="gallery_modal_left">
-                                            	<div class="gallery_slide_img"><a href="#"><img th:src="@{/img/talk_rank_thumb1.jpg}" alt="img1"></a></div>
-                                            	<div class="gallery_slide_img"><a href="#"><img th:src="@{/img/talk_rank_thumb2.jpg}" alt="img2"></a></div>
-                                            	<div class="gallery_slide_img"><a href="#"><img th:src="@{/img/talk_rank_thumb3.jpg}" alt="img3"></a></div>
+                                            	<div class="gallery_slide_img modal_img1"><a href="#"><img th:src="@{/img/talk_rank_thumb1.jpg}" alt="img1"></a></div>
+                                            	<div class="gallery_slide_img modal_img2"><a href="#"><img th:src="@{/img/talk_rank_thumb2.jpg}" alt="img2"></a></div>
+                                            	<div class="gallery_slide_img modal_img3"><a href="#"><img th:src="@{/img/talk_rank_thumb3.jpg}" alt="img3"></a></div>
                             </div>
                             <div class="gallery_modal_right">
                                 <div class="gallery_content">
@@ -221,7 +244,7 @@
                                                 <div class="content_item_inner">
                                                     <div class="content_item_img" th:style="'background-image: url('+@{/img/content_item.jpg}+');'"></div>
                                                     <div class="content_item_con">
-                                                        <div class="content_item_txt">
+                                                        <div class="content_item_txt writer_nick">
                                                             <strong>동동</strong>
                                                         </div>
                                                     </div>
@@ -261,7 +284,7 @@
                                             </div>
                                             <div class="gallery_content_txt">지원합니다.</div>
                                             <div class="gallery_modify_delete">
-                                                <div class="gallery_modify"><a th:href="@{/community/talktalk/modify(group='talktalk', no='${articles.no}')}">수정</a></div>ㅣ
+                                                <div class="gallery_modify"><a href="#">수정</a></div>ㅣ
                                                 <div class="gallery_delete"><a href="#">삭제</a></div>
                                             </div>
                                         </div>
