@@ -9,8 +9,11 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +54,8 @@ public class PetMemberController {
 	
 	// 로그인
 	@GetMapping("member/login")
-	public String login() {
+	public String login(HttpServletRequest requset) {
+		
 		return "member/login";
 	}
 	
@@ -221,17 +225,17 @@ public class PetMemberController {
 		// 수신한 데이터를 바탕으로 데이터 조회 (medical table)
 		int countMedical = service.selectCountMedicalForChangePass(email, name, hp);
 
-		System.out.println("countMedical : " + countMedical);
-
 		if(countMember == 1) {
 			service.updatePetOwnerPasswordByCodeAndInfo(code, email, name, hp);
 			resultMap.put("result", 1);
 			passwordMail.SendPasswordEmail(email, code);
+			System.out.println("일반 회원입니다.");
 
 		}else if(countMedical == 1) {
 			service.updateMedicalPasswordByCodeAndInfo(code, email, name, hp);
 			resultMap.put("result", 1);
 			passwordMail.SendPasswordEmail(email, code);
+			System.out.println("병원 회원입니다.");
 		}else {
 			resultMap.put("result", 0);
 		}

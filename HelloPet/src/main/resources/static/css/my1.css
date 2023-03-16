@@ -67,22 +67,29 @@ header > .menu > div {
     width: 1200px;
     height: 100%;
     margin: 0 auto;
+    position: relative;
 }
 header > .menu > div > ul {
     display: inline-block;
     margin-top: 20px;
-    
 }
 header > .menu > div > ul > li {float: left;}
 header > .menu > div > ul > li > a {
     font-size: 20px;
     color: white;
-    padding: 0 64px;
+    padding: 0 60px;
 }
-header > .menu > div > ul > li img {width: 70px;}
+header > .menu > div > ul > li img {
+position: absolute;
+width: 120px;
+z-index: 1;
+}
 header > .menu > div > ul > li:nth-child(3) {
     position: relative;
-    top: -22px;
+    top: -46px;
+}
+header > .menu > div > ul > li:nth-child(4) {
+margin-left: 110px;
 }
 
 footer {
@@ -96,7 +103,7 @@ footer {
 }
 .footer .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     position: relative;
 
 }
@@ -304,21 +311,20 @@ footer {
 }
 
 #sub-wrap {
-    min-height: 600px;
+    min-height: 800px;
 }
-#sub-wrap > .sub-contents {
-    padding: 20px 0 160px;
-}
+#sub-wrap > .sub-contents {}
+
 #sub-wrap > .sub-contents > .container {
-    margin: auto;
-    max-width: 1200px;
-    padding: 0;
+    width: 100%;
 }
 #sub-wrap .mypage-container {
     display: flex;
     flex-wrap: wrap;
     position: relative;
     padding-top: 80px;
+    width: 1200px;
+    margin: 0 auto
 }
 
 #sub-wrap .mypage-navigation{
