@@ -30,7 +30,9 @@ public class AdminController {
 		return "admin/info";
 	}
 	@GetMapping("admin/confirm/list")
-	public String confirmList() {
+	public String confirmList(Model model) {
+		
+		
 		return "admin/confirm/list";
 	}
 	

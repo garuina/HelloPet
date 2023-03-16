@@ -33,9 +33,9 @@ public class ListsController {
         int pageStartNum = service.getpageStartNum(total, start);
         int groups[] = service.getPageGroup(currentPage, lastPageNum);
 		
-		List<ListsVO> hits = service.selectHit();
-		List<ListsVO> news = service.selectNew();
-		List<ListsVO> reserves = service.selectReserve();
+		List<ListsVO> hits = service.selectHit(start);
+		List<ListsVO> news = service.selectNew(start);
+		List<ListsVO> reserves = service.selectReserve(start);
 		
 		
 		
