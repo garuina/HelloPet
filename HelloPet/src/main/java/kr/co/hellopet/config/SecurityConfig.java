@@ -16,6 +16,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		// 접근권한
 		http.authorizeRequests().antMatchers("/").permitAll();
+		http.authorizeRequests().antMatchers("/member/**").permitAll();
+		/*
+		 * http.authorizeRequests().antMatchers("/admin/**").hasAnyRole("7");
+		 * */
 		//추후 수정 예정 2023/03/08
 		
 		//위조 방지
