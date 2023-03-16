@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -129,6 +130,7 @@ public class CommunityController {
 		@GetMapping("community/talktalk/list")
 		public String talkList(String pg, Model model, String cate, String sort) {
 			
+			
 			//페이징 
 	    	int currentPage = service.getCurrentPage2(pg); // 현재 페이지 번호
 			int total = 0;
@@ -154,7 +156,6 @@ public class CommunityController {
 			
 			
 			
-			
 			model.addAttribute("articles", articles);
 			model.addAttribute("ranks",ranks);
 			model.addAttribute("sort", sort);
@@ -171,7 +172,13 @@ public class CommunityController {
 			//글 가져오기
 			CommunityVO article = service.selectTalkArticle(no);
 			
+			
+			
 			Map<String, CommunityVO> map = new HashMap<>();
+			
+			
+			
+			
 			
 			map.put("result", article);
 			return map;
