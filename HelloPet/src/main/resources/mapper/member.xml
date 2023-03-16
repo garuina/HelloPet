@@ -67,6 +67,11 @@
 								`tel`      LIKE '%-%-%';
 	</select>
 	
+	<!-- terms 약관 출력 -->
+	<select id="selectTerms" resultType="kr.co.hellopet.vo.TermsVO">
+		SELECT * FROM `member_terms`
+	</select>
+	
 	<!-- register uid 중복조회 -->
 	<select id="countUid" resultType="int">
 		SELECT COUNT(`uid`) FROM `pet_owner` WHERE `uid` = #{uid};
