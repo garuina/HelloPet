@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.hellopet.dao.SearchDAO;
+import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
-
+/*
+ * 날짜 : 2023-03-09~
+ * 이름 : 장인화
+ * 내용 : SearchService 작성
+ * */
 @Service
 public class SearchService {
 	
@@ -76,6 +81,15 @@ public class SearchService {
 		return dao.selectViewPh(pharNo);
 	}
 
+	//reserve
+	public void insertReserve(ReserveVO vo) {
+		dao.insertReserve(vo);
+	}
+	
+	// complete
+	public ReserveVO selectComplete(String uid) {
+		return dao.selectComplete(uid);
+	}
 	
 	
 	// 페이징 처리 시작 ///////////////////////////////////////////////////////

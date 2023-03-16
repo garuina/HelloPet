@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.SearchService;
+import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 
 @Controller
@@ -36,7 +38,7 @@ public class SearchController {
 	}
 	
 	@GetMapping("search/reserve")
-	public String reserve(Model model, String hosNo, String pharNo) {
+	public String reserve(Model model, String hosNo) {
 		
 		SearchVO hs = service.selectViewHs(hosNo);
 		model.addAttribute("hs", hs);
@@ -44,8 +46,24 @@ public class SearchController {
 		return "search/reserve";
 	}
 	
+	@PostMapping("search/reserve")
+	public String reserve(Model model, ReserveVO vo) {
+		
+		
+		service.insertReserve(vo);
+		String uid = vo.getUid();
+		return "redirect:/search/complete?uid="+ uid;
+		
+	}
+	
 	@GetMapping("search/complete")
-	public String complete() {
+	public String complete(Model model,String uid) {
+		
+		ReserveVO rv = service.selectComplete(uid);
+		model.addAttribute("rv",rv);
+		
+		model.addAttribute(uid);
+		
 		return "search/complete";
 	}
 	
