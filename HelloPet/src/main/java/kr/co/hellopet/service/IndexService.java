@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.hellopet.dao.IndexDAO;
 import kr.co.hellopet.vo.CsVO;
+import kr.co.hellopet.vo.ListsVO;
 /* 
  *  날짜 : 2023/03/13
  *  이름 : 김채영
@@ -17,6 +18,16 @@ public class IndexService {
 	
 	@Autowired
 	private IndexDAO dao;
+	
+	public List<ListsVO> selectHit(){
+		return dao.selectHit();
+	}
+	public List<ListsVO> selectNew(){
+		return dao.selectNew();
+	}
+	public List<ListsVO> selectReserve(){
+		return dao.selectReserve();
+	}
 	
 	public List<CsVO> selectNotice(){
 		return dao.selectNotice();

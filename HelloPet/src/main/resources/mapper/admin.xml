@@ -21,5 +21,10 @@
         where `uid`=#{uid};
 	</update>
 
+	<select id="selectReserves" resultType="kr.co.hellopet.vo.AdminReserveVO">
+		select a.*, b.`uid` from `reserve_list` as a
+			join `pet_hospital_pharmacy` as b on a.medNo=b.medNo
+		 	where `uid`=#{uid} order by `rdate` desc #{start}, 10;
+	</select>
 
 </mapper>

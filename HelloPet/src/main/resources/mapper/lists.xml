@@ -12,17 +12,17 @@
 	<select id="selectHit" resultType="kr.co.hellopet.vo.ListsVO">
 		select a.*, b.* from `pet_hospital_pharmacy` as a
 		join `api_hospital` as b on a.medNo = b.hosNo
-		where `level`=2 order by `hit` desc;
+		where `level`=2 order by `hit` desc limit #{start},10;
 	</select>
 	<select id="selectNew" resultType="kr.co.hellopet.vo.ListsVO">
 		select a.*, b.* from `pet_hospital_pharmacy` as a
 		join `api_hospital` as b on a.medNo = b.hosNo
-		where `level`=2 order by `rdate` desc;
+		where `level`=2 order by `rdate` desc limit #{start},10;
 	</select>
 	<select id="selectReserve" resultType="kr.co.hellopet.vo.ListsVO">
 		select a.*, b.* from `pet_hospital_pharmacy` as a
 		join `api_hospital` as b on a.medNo = b.hosNo
-		where `level`=2 order by `reserve` desc;
+		where `level`=2 order by `reserve` desc limit #{start},10;
 	</select>
 	<select id="selectCountTotal" resultType="int" parameterType="map">
         select count(`medNo`) from `pet_hospital_pharmacy` where `level`=2;

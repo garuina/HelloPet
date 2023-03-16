@@ -19,14 +19,14 @@ public class ListsService {
 	@Autowired
 	private ListsDAO dao;
 	
-	public List<ListsVO> selectHit(){
-		return dao.selectHit();
+	public List<ListsVO> selectHit(int start){
+		return dao.selectHit(start);
 	}
-	public List<ListsVO> selectNew(){
-		return dao.selectNew();
+	public List<ListsVO> selectNew(int start){
+		return dao.selectNew(start);
 	}
-	public List<ListsVO> selectReserve(){
-		return dao.selectReserve();
+	public List<ListsVO> selectReserve(int start){
+		return dao.selectReserve(start);
 	}
 	public int selectCountTotal() {
 		return dao.selectCountTotal();
@@ -54,10 +54,10 @@ public class ListsService {
 	int lastpageNum = 0;
 	
 	if(total % 10 == 0) {
-	    lastpageNum = total / 7;
+	    lastpageNum = total / 10;
 	
 	}else {
-	    lastpageNum = total / 7 + 1;
+	    lastpageNum = total / 10 + 1;
 	}
 	return lastpageNum;
 	}
@@ -70,9 +70,9 @@ public class ListsService {
 	// 페이지 그룹
 	public int[] getPageGroup(int currentPage, int lastPageNum) {
 	
-	int groupCurrent = (int) Math.ceil(currentPage / 7.0);
-	int groupStart = (groupCurrent - 1) * 7 + 1;
-	int groupEnd = groupCurrent * 7;
+	int groupCurrent = (int) Math.ceil(currentPage / 10.0);
+	int groupStart = (groupCurrent - 1) * 10 + 1;
+	int groupEnd = groupCurrent * 10;
 	
 	if(groupEnd > lastPageNum) {
 	    groupEnd = lastPageNum;

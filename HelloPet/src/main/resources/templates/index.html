@@ -13,40 +13,12 @@
                         <div class="topic-row">
                             <div class="topic-col grade-col">
                                 <h2 class="gradient-title gradient-style1">최다방문</h2>
-                                <ul class="chart-list">
+                                <ul class="chart-list" th:each="hitItem,i:${hits}">
                                     <li>
-                                        <a href="#">
-                                            <em class="chart-num">1</em>
-                                            <strong class="chart-name">이민혁동물병원</strong>
-                                            <span class="chart-addr">서울특별시 광진구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">2</em>
-                                            <strong class="chart-name">장인화동물병원</strong>
-                                            <span class="chart-addr">부산광역시 해운대구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">3</em>
-                                            <strong class="chart-name">김경준동물병원</strong>
-                                            <span class="chart-addr">경기도 용인시</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">4</em>
-                                            <strong class="chart-name">임민지동물병원</strong>
-                                            <span class="chart-addr">부산광역시 남구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">5</em>
-                                            <strong class="chart-name">김채영동물병원</strong>
-                                            <span class="chart-addr">서울특별시 중구</span>
+                                        <a class="btnchart" th:href="@{/search/view(hosNo=${hitItem.medNo})}">
+                                            <em class="chart-num">[[${i.index + 1}]]</em>
+                                            <strong class="chart-name">[[${hitItem.medicalName}]]</strong>
+                                            <span class="chart-addr">[[${hitItem.addr1}]]</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -56,40 +28,12 @@
                             </div>
                             <div class="topic-col grade-col">
                                 <h2 class="gradient-title gradient-style2">최근등록순</h2>
-                                <ul class="chart-list">
+                                <ul class="chart-list" th:each="newItem,i:${news}">
                                     <li>
-                                        <a href="#">
-                                            <em class="chart-num">1</em>
-                                            <strong class="chart-name">이민혁동물병원</strong>
-                                            <span class="chart-addr">서울특별시 광진구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">2</em>
-                                            <strong class="chart-name">장인화동물병원</strong>
-                                            <span class="chart-addr">부산광역시 해운대구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">3</em>
-                                            <strong class="chart-name">김경준동물병원</strong>
-                                            <span class="chart-addr">경기도 용인시</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">4</em>
-                                            <strong class="chart-name">임민지동물병원</strong>
-                                            <span class="chart-addr">부산광역시 남구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">5</em>
-                                            <strong class="chart-name">김채영동물병원</strong>
-                                            <span class="chart-addr">서울특별시 중구</span>
+                                        <a class="btnchart" th:href="@{/search/view(hosNo=${newItem.medNo})}">
+                                            <em class="chart-num">[[${i.index + 1}]]</em>
+                                            <strong class="chart-name">[[${newItem.medicalName}]]</strong>
+                                            <span class="chart-addr">[[${newItem.addr1}]]</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -99,40 +43,12 @@
                             </div>
                             <div class="topic-col grade-col">
                                 <h2 class="gradient-title gradient-style3">예약많은순</h2>
-                                <ul class="chart-list">
+                                <ul class="chart-list" th:each="reItem,i:${reserves}">
                                     <li>
-                                        <a href="#">
-                                            <em class="chart-num">1</em>
-                                            <strong class="chart-name">이민혁동물병원</strong>
-                                            <span class="chart-addr">서울특별시 광진구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">2</em>
-                                            <strong class="chart-name">장인화동물병원</strong>
-                                            <span class="chart-addr">부산광역시 해운대구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">3</em>
-                                            <strong class="chart-name">김경준동물병원</strong>
-                                            <span class="chart-addr">경기도 용인시</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">4</em>
-                                            <strong class="chart-name">임민지동물병원</strong>
-                                            <span class="chart-addr">부산광역시 남구</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <em class="chart-num">5</em>
-                                            <strong class="chart-name">김채영동물병원</strong>
-                                            <span class="chart-addr">서울특별시 중구</span>
+                                        <a class="btnchart" th:href="@{/search/view(hosNo=${reItem.medNo})}">
+                                            <em class="chart-num">[[${i.index + 1}]]</em>
+                                            <strong class="chart-name">[[${reItem.medicalName}]]</strong>
+                                            <span class="chart-addr">[[${reItem.addr1}]]</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -171,10 +87,10 @@
                                     </h3>
                                     <h4 class="subtitle">국내 모든 펫서비스를 빠르게 확인하고 이용해보세요!</h4>
                                     <div class="button-wrap">
-                                        <a th:href="@{/search/SearchHs}" class="button button-border-gradient">
+                                        <a th:href="@{/search/SearchHs}" id="sh" class="button button-border-gradient">
                                             <span class="color-blue">동물병원</span>
                                         </a>
-                                        <a th:href="@{/search/SearchPm}" class="button button-border-gradient">
+                                        <a th:href="@{/search/SearchPh}" id="sh2" class="button button-border-gradient">
                                             <span class="color-point">동물약국</span>
                                         </a>
                                     </div>
@@ -237,12 +153,12 @@
                                 <div class="board-box">
                                     <div class="board-box-title">
                                         공지사항
-                                        <a th:href="@{/cs/notice/list}" class="board-box-more"> 더보기 +</a>
+                                        <a th:href="@{/cs/notice/list}" class="board board-box-more"> 더보기 +</a>
                                     </div>
                                     <div class="board-box-list">
                                         <ul th:each="notice:${notices}">
                                             <li>
-                                                <a th:href="@{/cs/notice/view(no=${notice.no}, pg=${currentPage}, rdate=${notice.rdate})}">
+                                                <a class="board" th:href="@{/cs/notice/view(no=${notice.no}, pg=${currentPage}, rdate=${notice.rdate})}">
                                                     <span class="board-box-date"> [[${notice.rdate.substring(2,10)}]] </span>
                                                     <strong class="board-box-tit">[[${notice.title}]]</strong>
                                                 </a>
@@ -255,12 +171,12 @@
                                 <div class="board-box">
                                     <div class="board-box-title">
                                         FAQ
-                                        <a th:href="@{/cs/faq/list}" class="board-box-more"> 더보기 +</a>
+                                        <a th:href="@{/cs/faq/list}" class="board board-box-more"> 더보기 +</a>
                                     </div>
                                     <div class="board-box-list">
                                         <ul th:each="faq:${faqs}">
                                             <li>
-                                                <a th:href="@{/cs/faq/list}">
+                                                <a class="board" th:href="@{/cs/faq/list}">
                                                     <span class="board-box-date"> [[${faq.rdate.substring(2,10)}]] </span>
                                                     <strong class="board-box-tit">[[${faq.title}]]</strong>
                                                 </a>
