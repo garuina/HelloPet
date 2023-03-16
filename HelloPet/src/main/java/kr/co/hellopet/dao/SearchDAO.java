@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 /*
  * 날짜 : 2023-03-09 ~
@@ -36,6 +37,12 @@ public interface SearchDAO {
 	//view
 	public SearchVO selectViewHs(String hosNo);
 	public SearchVO selectViewPh(String pharNo);
-
+	
+	
+	//reserve (병원예약하기)
+	public void insertReserve(ReserveVO vo);
+	
+	//complete (예약결과 가져오기)
+	public ReserveVO selectComplete(String uid);
 
 }
