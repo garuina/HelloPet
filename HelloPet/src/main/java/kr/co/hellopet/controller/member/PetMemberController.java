@@ -26,6 +26,7 @@ import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.Api_PharmacyVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
+import kr.co.hellopet.vo.TermsVO;
 
 /* 
  *  HelloPet Project 
@@ -66,6 +67,10 @@ public class PetMemberController {
 		
 		model.addAttribute("type",type);
 		
+		List<TermsVO> vo = service.selectTerms();
+		
+		model.addAttribute("vo", vo);
+		
 		return "member/terms";
 	}
 	
@@ -74,7 +79,9 @@ public class PetMemberController {
 	@PostMapping("member/authority")
 	public void authority(@RequestParam("check") boolean check, HttpSession session) {
 		
-		session.setAttribute("termAgreed", check);		
+		System.out.println("check : " + check);
+		
+		session.setAttribute("termAgreed", check);	
 	}
 	
 	// 가입 (일반회원)
@@ -109,6 +116,8 @@ public class PetMemberController {
 	public String registerMedical(HttpSession session) {
 		
 		boolean termAgreed = Boolean.TRUE.equals(session.getAttribute("termAgreed"));
+		
+		System.out.println("termsAgreed : " + termAgreed);
 		
 		  if (!termAgreed) {
 		    return "redirect:/member/terms?type=medical";

@@ -238,7 +238,7 @@ let isReserveOk 	= false;
 			}
 		});
 		
-		$('input[name=ceo]').keyup(function(){
+		$('input[name=ceo]').focusout(function(){
 			
 			let ceo = $(this).val();
 			
