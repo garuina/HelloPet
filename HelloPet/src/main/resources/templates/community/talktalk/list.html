@@ -12,13 +12,8 @@
         	// 모달 창 열림
                 $('.gallery_item').click(function(){
                 	
-                	
-                	
                 	let no = $(this).attr("value");
                 	let uid = $('input[name=uid]').val();
-                	
-                	
-                	//location.href = "/HelloPet/community/talktalk/list?no="+no;
                     
                 	let jsonData = {'no' : no};
                 	
@@ -47,6 +42,8 @@
 				    		if(data.result.uid != uid){
 				    			$('.gallery_modify_delete').html('');
 				    		}
+				    		
+				    		  
 				    	}
 					});
                 	$('#modal').css('display','flex');
@@ -56,6 +53,7 @@
                     	mode: 'horizontal'
                     	
                       });
+                    
                     
                     
                     
@@ -235,11 +233,15 @@
             
         </main>
 <th:block th:include="@{community/_footer.html}"/>
+		<th:block>
+    	<input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}" sec:authorize="isAuthenticated()">
+    	</th:block>
+    	
          <div class="v-overlay" style="z-index:201; display:none;">
     		<div class="v-overlay_scrim" style="opacity: 0.46; background-color: rgb(33, 33, 33); border-color: rgb(33, 33, 33);"></div>
     		<div class="v-overlay_content"></div>
     	</div>
-    	<input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}">
+    	
          <div role="document" id="modal" tabindex="0" style="z-index: 202;">
             <div class="modal_active" style="transform-origin: center center; max-width: 1200px;">
                 <div class="modal_gallery_view">
