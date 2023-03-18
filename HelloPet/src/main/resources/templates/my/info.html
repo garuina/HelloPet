@@ -143,31 +143,35 @@ let isNickOk 		= true;
 			}
 		});
 		
-		$('input[name=infoModify]').click(function(){
-			let name = $('input[name=name]').val();
-			let email = $('input[name=email]').val();
-			let nick = $('input[name=nick]').val();
-			let hp = $('input[name=hp]').val();	
+		// 회원 정보 update 기능 구현 완료
+		const form = document.querySelector('form');
+		
+		form.onsubmit = function(){
 			
-			// 이름 검증
+			let name 	 = $('input[name=name]').val();
+			let orgName  = $('input[name=ori-Name]').val();
+			let email 	 = $('input[name=email]').val();
+			let orgEmail = $('input[name=ori-Email]').val();
+			let nick 	 = $('input[name=nick]').val();
+			let oriNick  = $('input[name=ori-Nick]').val();
+			let hp 		 = $('input[name=hp]').val();	
+			let oriHp 	 = $('input[name=ori-Hp]').val();
+			
+			// 일치여부
+			if(name == orgName && email == orgEmail &&  nick == oriNick && hp == oriHp){
+				alert('기존 회원 정보와 동일합니다.');
+			}
+			
 			if(!isNameOk){
 				alert('이름 확인 하십시요.');
 				$('input[name=name]').focus();
 				return false;
 			}
 			
-			
 			// 이메일 검증
 			if(!isEmailOk){
 				alert('이메일을 확인 하십시요.');
 				$('input[name=email]').focus();
-			}
-			
-			
-			// 연락처 검증
-			if(!isHpOk){
-				alert('전화번호를 확인 하십시요.');
-				$('input[name=hp]').focus();
 				return false;
 			}
 			
@@ -178,9 +182,46 @@ let isNickOk 		= true;
 				return false;
 			}
 			
+			// 연락처 검증
+			if(!isHpOk){
+				alert('전화번호를 확인 하십시요.');
+				$('input[name=hp]').focus();
+				return false;
+			}
+			
 			// 최종 전송
 			return true;
+		}
+		
+		// 회원 삭제 - 기능구현 완료
+		$('button[name=btnWithdrawMember]').click(function(e){
+			e.preventDefault();
 			
+			let uid = $('input[name=uid]').val();
+			
+			let jsonData = {'uid' : uid};
+			
+			let aws = confirm('탈퇴하시겠습니까?');
+			
+			if(aws){
+				
+				$.ajax({
+					url : '/HelloPet/my/withdrawMember',
+					method : 'GET',
+					data : jsonData,
+					dataType : 'json',
+					success : function(data){
+						console.log(data);
+						if(data == 1){
+							alert('탈퇴 완료 되었습니다.');
+							location.href = '/HelloPet/';
+						}else{
+							// 실패
+							alert('실패하였습니다. 관리자에게 문의해주세요.');
+						}
+					}
+				});
+			}
 		});
 	});
 
@@ -253,7 +294,7 @@ let isNickOk 		= true;
 	                </tr>
 	                <tr>
 	                    <td>회원탈퇴</td>
-	                    <td><button>탈퇴하기</button></td>
+	                    <td><button name="btnWithdrawMember">탈퇴하기</button></td>
 	                </tr>
 	            </table>
 	            <div id="info_modify">

@@ -210,6 +210,19 @@ public class MyController {
 	}
 	
 	@ResponseBody
+	@GetMapping("my/withdrawMember")
+	public int withdrawMember(@RequestParam("uid") String uid) {
+		
+		int result = service.deleteWithdrawMember(uid);
+		
+		System.out.println("uid : " + uid);
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
+	@ResponseBody
 	@GetMapping("my/myReserve_List")
 	public Map<String, Object> myReserveList(Authentication authentication, String pg) {
 		
