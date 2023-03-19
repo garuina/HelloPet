@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.SearchService;
+import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
@@ -69,7 +70,11 @@ public class SearchController {
 	}
 	
 	@GetMapping("search/view2")
-	public String view() {
+	public String view(Model model) {
+		
+		List<Api_HospitalVO> lists = service.selectView2();
+		model.addAttribute("lists",lists);
+		
 		return "search/view2";
 	}
 	

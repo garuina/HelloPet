@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.hellopet.dao.SearchDAO;
+import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
@@ -87,7 +88,14 @@ public class SearchService {
 	public SearchVO selectViewPh(String pharNo){
 		return dao.selectViewPh(pharNo);
 	}
-
+	
+	
+	//view2
+	public List<Api_HospitalVO> selectView2(){
+		return dao.selectView2();
+	}
+	
+	
 	//reserve
 	public void insertReserve(ReserveVO vo) {
 		dao.insertReserve(vo);

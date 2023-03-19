@@ -80,9 +80,9 @@ public class PetMemberController {
 	@PostMapping("member/authority")
 	public void authority(@RequestParam("check") boolean check, HttpSession session) {
 		
-		System.out.println("check : " + check);
-		
-		session.setAttribute("termAgreed", check);	
+	    session.setAttribute("termAgreed", check);	
+	    
+	    System.out.println("termAgreed: " + session.getAttribute("termAgreed"));
 	}
 	
 	// 가입 (일반회원)
@@ -96,7 +96,7 @@ public class PetMemberController {
 		    
 		  }else {
 			  session.removeAttribute("termAgreed");
-			  return "/member/register";
+			  return "member/register";
 		  }
 		}
 	

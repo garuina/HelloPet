@@ -103,7 +103,7 @@
 	                <label sec:authorize="hasAuthority('ROLE_3')"><span th:onclick="location.href='/Hellopet/admin/info'">내 약국관리</span></label></a>
 	                <label sec:authorize="hasAuthority('ROLE_7')"><span>웹관리자님</span></label></a>
                 	<a sec:authorize="isAuthenticated()" th:href="@{/member/logout}" class="logout">로그아웃</a>
-                    <a sec:authorize="hasAuthority('ROLE_1')" href="#">마이페이지</a>
+                    <a sec:authorize="hasAuthority('ROLE_1')" th:href="@{/my/info}">마이페이지</a>
                     <a th:href="@{/message/message}" class="socket">알림</a>
                 </div>
             </div>

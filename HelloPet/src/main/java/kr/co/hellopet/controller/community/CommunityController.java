@@ -80,6 +80,7 @@ public class CommunityController {
 		int find = service.findHeart(no, uid);
 
 		model.addAttribute("uid", uid);
+		
 		model.addAttribute("article", article);
 		model.addAttribute("find",find);
 		

@@ -17,6 +17,7 @@ button {outline: none; border: none;}
 #wrapper {
     width: 100%;
     min-width: 1200px;
+    background: #e1f3f3;
 }
 
 header {
@@ -101,7 +102,67 @@ header>.menu {
 }
 
 
+
+main {
+    width: 100%;
+    min-width: 1200px;
+    margin: 0 auto;
+}
+.top {
+    overflow: hidden;
+    height: 200px;
+    background-color: #e1f4f3;
+    text-align: center;
+}
+
+.top > h3 {
+    color: #555;
+    font-size: 38px;
+    font-weight: bold;
+    padding-top: 60px;
+}
+
+.tab {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    margin-top: -40px;
+}
+.tab > ul {
+    width: 700px;
+    height: 100%;
+    background: white;
+}
+
+.tab > ul > li {
+    text-align: center;
+    float: left;
+    width: 33.3%;
+    align-items: center;
+    line-height: 70px;
+    border-bottom: 1px solid #10958b;
+}
+.tab > ul > li > a {
+    font-weight: bold;
+    font-size: 20px;
+    color: #10958b;
+}
+.tab > ul > .on {
+    background: #32a69f;
+}
+.tab > ul > .on a {
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
 /*푸터*/
+
 footer {
     margin-top: 100px;
     height: 180px;
@@ -113,11 +174,11 @@ footer {
 }
 .footer .container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     position: relative;
 
 }
-.info {margin: 0 -8px;}
+.info {margin: 0 50px;}
 .info li {
     float: left;
     padding: 8px;
@@ -131,7 +192,7 @@ footer {
     font-weight: 700;
 }
 .link {
-    margin: -10px;
+    margin-right: 100px;
 }
 .link li {
     float: left;
@@ -152,8 +213,12 @@ footer {
 #container {
     position:relative;
     z-index: 2;
-    padding-bottom: 90px;
     clear: both;
+    
+}
+.wid1300 {
+    width: 1200px;
+    margin: 0 padding
 }
 div {
     display: block;
@@ -174,33 +239,13 @@ div {
     top: -9999px;
     left: -9999px;
 }
-.location span.ic-home::after{
-    content: '';
-    width: 14px;
-    height: 13px;
-    display: inline-block;
-    background: url(/product/img/sp_img.png) -300px -50px no-repeat;
-    vertical-align: -1px;
-}
-.location span::before{
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    margin-top: -4px;
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-top: #b6b6b6 1px solid;
-    border-left: #b6b6b6 1px solid;
-    transform: rodate(135deg);
-}
-a {
-    color: #666;
-    text-decoration: none;
-}
+
+
+
+
+
 .location {
-    max-width: 1300px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 15px 0;
     font-size: 13px;
@@ -224,48 +269,57 @@ h2{
 }
 .sub-cate {
     position: relative;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
     font-size: 14px;
+    margin-top: -15px;
 }
 .sub-cate .depth1 {
     border: #e0e0e0 1px solid;
-    border-top: #333 2px solid;
+    border-top: #e1f3f3 2px solid;
+    border-bottom: 1px;
     padding: 15px 0;
 }
 .sub-cate .depth2 {
     border: #e0e0e0 1px solid;
-    border-top:none;
-    padding: 13px 18px
+    margin-left:70px;
+    margin-right: 70px;
+
 }
 .sub-cate .depth4 {
-    margin: 5px 0 0 0;
-    border: #e0e0e0 1px solid;    
+    margin: 50px 0 0 0;
+    margin-left:70px;
+    margin-right: 70px;   
 }
 ul {
     list-style: none;
     display: block;
     margin-block-start: 1em;
-    margin-block-end: 1em;
+    margin-block-end: 1.5em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    padding-inline-start: 40px;
 }
 .sub-cate .depth1 > li {
     position: relative;
     padding: 0 10px;
     float: left;
+    margin-left:70px;
+    margin-right: 70px;
 }
 .sub-cate .depth2 > li {
-    padding: 5px 20px;
+    padding: 15px 20px;
     float: left;
+   
 }
 .sub-cate .depth4 > li {
    display: table;
    width: 100%;
    table-layout: fixed;
+   border: #e0e0e0 1px solid;
 }
 .sub-cate .depth2 > li a{
     color: #333;
+    margin: 10px;
+    margin-left: -10px;
 }
 li {
     display: list-item;
@@ -325,6 +379,7 @@ label{
     vertical-align: middle;
     outline: 0;
     cursor: default;
+    color: #535a70;
 }
 input {
     writing-mode: horizontal-tb !important;
@@ -349,6 +404,16 @@ input[type=checkbox]{
     text-indent: -10000px;
     appearance: none;
 }
+input[type=checkbox] + label::before {
+    content:"";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    border: solid 1px #484b40;
+    vertical-align: -2px;
+    background-color: #fff;
+}
 .sub-cate .bt-open.active {
     background:  #50545a url(/product/img/sp_img.png) 9px -386px no-repeat;
 }
@@ -364,15 +429,21 @@ a{
     color: #666;
     text-decoration: none;
 }
-.pro-list{
-    margin: -30px 0 0 -13px;
+.pro-lst{
+    margin: -30px 0 0 50px;
+    display: inline-block;
     overflow: hidden;
+    margin-right: -60px;
+
+   
 }
-.pro-lst .probx {
+.pro-lst .probx{
     position: relative;
     float: left;
     width: 315px;
-    margin: 30px 0 0 13px;
+    margin: 10px 0 0 20px;
+    height: 620px;
+    margin-bottom: 5px;
 }
 .pro-lst .probx .thumb {
     display: block;
@@ -434,7 +505,7 @@ i {
 .pro-lst .probx .price {
     position: relative;
     height: 70px;
-    width: 100%;
+    width: 90%;
     border: #efefef 1px solid;
     border-top: none;
     border-bottom: #cbcbcb 1px solid;
@@ -482,3 +553,19 @@ i {
     vertical-align: -4px;
     margin-left: 10px;
 }
+
+div{
+    
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+}
+a{
+    color: #666;
+    text-decoration: none;
+    
+}
+
+
