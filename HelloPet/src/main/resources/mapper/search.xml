@@ -75,6 +75,11 @@
 		SELECT * FROM `api_pharmacy` WHERE `pharNo` =#{pharNo};
 	</select>
 	
+	<!-- view2 -->
+	<select id="selectView2" resultType="kr.co.hellopet.vo.Api_HospitalVO">
+		select * from `api_hospital`;
+	</select>
+	
 	<!-- reserve -->
 	<insert id="insertReserve">
 		insert into `reserve_list` set
