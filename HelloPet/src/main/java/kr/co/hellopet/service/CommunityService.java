@@ -214,14 +214,53 @@ public class CommunityService {
 	
 	// 글 좋아요 안눌렀을때 +1
 	public int insertHeart(int no, String uid) {
+		
+		// 전체 좋아요 수 +1
+		dao.updateHeartUp(no);
+		
 		return dao.insertHeart(no, uid);
 	}
 	
 	// 글 좋아요 눌렀을때 -1
 	public int deleteHeart(int no, String uid) {
+		
+		// 전체 좋아요 수 -1
+		dao.updateHeartDown(no);
+		
 		return dao.deleteHeart(no, uid);
 	}
 	
+	// 댓글달기
+	public int insertReply(CommunityVO vo) {
+		
+		// 전체 댓글수 +1
+		dao.updateReplyUp(vo);
+		
+		return dao.insertReply(vo);
+	}
+		
+	// 댓글출력
+	public List<CommunityVO> selectReplys(int no){
+		return dao.selectReplys(no);
+	}
+	
+	
+	
+	// 댓글삭제
+	public int deleteReply(int no, String uid, int reply_no) {
+		
+		dao.updateReplyDown(no);
+		
+		return dao.deleteReply(no, uid, reply_no);
+	}
+	
+	
+	// 모달창 최근 좋아요누른 별명 출력
+	public CommunityVO selectHeartUser(int no) {
+		return dao.selectHeartUser(no);
+	}
+	
+
 	// 페이징(tip)
 	public int getLastPageNum(int total) {
 		
