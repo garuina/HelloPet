@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
@@ -42,6 +43,9 @@ public interface SearchDAO {
 	//view
 	public SearchVO selectViewHs(String hosNo);
 	public SearchVO selectViewPh(String pharNo);
+	
+	//view2
+	public List<Api_HospitalVO> selectView2();
 	
 	
 	//reserve (병원예약하기)
