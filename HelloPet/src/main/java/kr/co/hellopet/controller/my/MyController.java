@@ -8,6 +8,9 @@ package kr.co.hellopet.controller.my;
  */
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.config.MyUserDetails;
 import kr.co.hellopet.service.MyService;
+import kr.co.hellopet.vo.CommunityVO;
+import kr.co.hellopet.vo.CsVO;
 import kr.co.hellopet.vo.MemberVO;
+import kr.co.hellopet.vo.ReserveVO;
 
 @Controller
 public class MyController {
@@ -63,17 +69,194 @@ public class MyController {
 	}
 
 	@GetMapping("my/myArticle")
-	public String myArticle() {
+	public String myArticle(Authentication authentication, Model model, String pg) {
+		
+		String uid = authentication.getName();
+		
+		// 현재 페이지
+		int currentPage = service.getCurrentPage(pg);
+		
+		// 시작
+		int start = service.getLimitStart(currentPage);
+		
+		// total
+		int total = service.selectCountMyArticle(uid);
+		
+		// 마지막 페이지 번호
+		int lastPageNum = service.getLastPageNum(total);
+		
+		// 페이시 시작번호
+		int pageStartNum = service.getPageStartNum(total, start);
+		
+		// group 값
+		int groups[] = service.getPageGroup(currentPage, lastPageNum);
+		
+		// article list 정보
+		List<CommunityVO> articles = service.selectMyArticle(uid, start);
+		
+		//System.out.println("currentPage : " + currentPage);
+		//System.out.println("lastPageNum : " + lastPageNum);
+		//System.out.println("pageStartNum : " + pageStartNum);
+		//System.out.println("groups[0] : " + groups[0] + " groups[1] : " + groups[1]);
+		
+		// model 에 담기
+		model.addAttribute("articles", articles);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("pageStartNum", pageStartNum);
+		model.addAttribute("groups", groups);
+		model.addAttribute("total",total);
+		
 		return "my/myArticle";
 	}
 	
 	@GetMapping("my/myQna")
-	public String myQna() {
+	public String myQna(Model model, Authentication authentication, String pg) {
+		
+		String uid = authentication.getName();
+		
+		// 현재 페이지
+		int currentPage = service.getCurrentPage(pg);
+		
+		// 시작
+		int start = service.getLimitStart(currentPage);
+		
+		// total
+		int total = service.selectCountMyQna(uid);
+		
+		// 마지막 페이지 번호
+		int lastPageNum = service.getLastPageNum(total);
+		
+		// 페이시 시작번호
+		int pageStartNum = service.getPageStartNum(total, start);
+		
+		// group 값
+		int groups[] = service.getPageGroup(currentPage, lastPageNum);
+		
+		// article list 정보
+		List<CsVO> articles = service.selectMyQna(uid, start);
+		
+		//System.out.println("currentPage : " + currentPage);
+		//System.out.println("lastPageNum : " + lastPageNum);
+		//System.out.println("pageStartNum : " + pageStartNum);
+		//System.out.println("groups[0] : " + groups[0] + " groups[1] : " + groups[1]);
+		
+		// model 에 담기
+		model.addAttribute("articles", articles);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("pageStartNum", pageStartNum);
+		model.addAttribute("groups", groups);
+		model.addAttribute("total",total);
+		
 		return "my/myQna";
 	}
 	
 	@GetMapping("my/myReserve")
-	public String myReserve() {
+	public String myReserve(Authentication authentication, Model model, String pg) {
+		
+		String uid = authentication.getName();
+		
+		// 현재 페이지
+		int currentPage = service.getCurrentPage(pg);
+		
+		// 시작
+		int start = service.getLimitStart(currentPage);
+		
+		// total
+		int total = service.selectCountMyReserve(uid);
+		
+		// 마지막 페이지 번호
+		int lastPageNum = service.getLastPageNum(total);
+		
+		// 페이시 시작번호
+		int pageStartNum = service.getPageStartNum(total, start);
+		
+		// group 값
+		int groups[] = service.getPageGroup(currentPage, lastPageNum);
+		
+		// article list 정보
+		List<ReserveVO> articles = service.selectMyReserve(uid, start);
+		
+		//System.out.println("currentPage : " + currentPage);
+		//System.out.println("lastPageNum : " + lastPageNum);
+		//System.out.println("pageStartNum : " + pageStartNum);
+		//System.out.println("groups[0] : " + groups[0] + " groups[1] : " + groups[1]);
+		
+		// model 에 담기
+		model.addAttribute("articles", articles);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("pageStartNum", pageStartNum);
+		model.addAttribute("groups", groups);
+		model.addAttribute("total",total);
+		
 		return "my/myReserve";
+	}
+	
+	@ResponseBody
+	@GetMapping("my/myReserveCancel")
+	public Map<String, Integer> myReserveCancel(@RequestParam("rev_No") List<Integer> rev_No) {
+		
+		for(int no : rev_No) {
+			service.deleteMyReserve(no);
+		}
+		
+		Map<String, Integer> resultMap = new HashMap<>();
+		
+		resultMap.put("result", rev_No.size());
+		
+		return resultMap;
+	}
+	
+	@ResponseBody
+	@GetMapping("my/withdrawMember")
+	public int withdrawMember(@RequestParam("uid") String uid) {
+		
+		int result = service.deleteWithdrawMember(uid);
+		
+		System.out.println("uid : " + uid);
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("my/myReserve_List")
+	public Map<String, Object> myReserveList(Authentication authentication, String pg) {
+		
+		String uid = authentication.getName();
+		
+		// 현재 페이지
+		int currentPage = service.getCurrentPage(pg);
+		
+		// 시작
+		int start = service.getLimitStart(currentPage);
+		
+		// total
+		int total = service.selectCountMyReserve(uid);
+		
+		// 마지막 페이지 번호
+		int lastPageNum = service.getLastPageNum(total);
+		
+		// 페이시 시작번호
+		int pageStartNum = service.getPageStartNum(total, start);
+		
+		// group 값
+		int groups[] = service.getPageGroup(currentPage, lastPageNum);
+		
+		// article list 정보
+		List<ReserveVO> articles = service.selectMyReserve(uid, start);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("articles", articles);
+		map.put("total", total);
+		map.put("currentPage", currentPage);
+		map.put("lastPageNum", lastPageNum);
+		map.put("pageStartNum", pageStartNum);
+		map.put("groups", groups);
+		
+		return map;
 	}
 }

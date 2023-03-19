@@ -71,7 +71,6 @@ public class CommunityController {
 		CommunityVO article = service.selectTipView(no);
 		
 		int find = service.findHeart(no, uid);
-
 		
 		model.addAttribute("article", article);
 		model.addAttribute("find",find);
