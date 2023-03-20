@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <main>
+     
             <div id="sub-wrap">
                 <div class="top">
                     <h3>동물병원</h3>
@@ -137,38 +137,7 @@
                     </span>
                 </div>
             </li>
-            <li ng-hide="!isMedicalProduct()" class>
-               <strong class="tit">성별</strong>
-               <div class="con">
-                <span ng-repeat="codetable in genders" class="ng-scope">
-                    <input type="checkbox" id="catePetType186" value="186" ng-checked="selPetType.indexOf(codetable.code)> -1" ng-click="toggleSelectionPetType(codetable.code)">
-                    <label for="cateGender186" ng-class="(selfPetGender.indexOf(codetable.code) > -1) ? 'areaactive' : 'areanon'" class="ng-binding areanon">남</label>
-                </span>
-                <span ng-repeat="codetable in pettypes" class="ng-scope">
-                    <input type="checkbox" id="catePetType187" value="187" ng-checked="selPetGender.indexOf(codetable.code)> -1" ng-click="toggleSelectionPetType(codetable.code)">
-                    <label for="catePetType187" ng-class="(selfPetType.indexOf(codetable.code) > -1) ? 'areaactive' : 'areanon'" class="ng-binding areanon">여</label>
-                </span>
-               </div>
-            </li>
-            
-            </li>
-            <li ng-show="enablePetSize()" class>
-                <strong class="tit">크기</strong>
-                <div class="con">
-                    <span ng-repeat="codetable in petsizes" class="ng-scope" > 
-                        <input type="checkbox" id="cateSize183" value="183" ng-checked="selPetSize.indexOf(codetable.code) > -1">
-                        <label for="cateSize183" ng-class= "(selPetSize.indexOf(codetable.code) > -1) ? 'areaactive' : 'areanon'" class="ng-binding areanon">소형</label>
-                    </span>
-                    <span ng-repeat="codetable in petsizes" class="ng-scope" > 
-                        <input type="checkbox" id="cateSize184" value="184" ng-checked="selPetSize.indexOf(codetable.code) > -1">
-                        <label for="cateSize184" ng-class= "(selPetSize.indexOf(codetable.code) > -1) ? 'areaactive' : 'areanon'" class="ng-binding areanon">중형</label>
-                    </span>
-                    <span ng-repeat="codetable in petsizes" class="ng-scope" > 
-                        <input type="checkbox" id="cateSize185" value="185" ng-checked="selPetSize.indexOf(codetable.code) > -1">
-                        <label for="cateSize185" ng-class= "(selPetSize.indexOf(codetable.code) > -1) ? 'areaactive' : 'areanon'" class="ng-binding areanon">대형</label>
-                    </span>
-                </div>                
-            </li>
+          
         </ul>
         
     </div>
@@ -249,6 +218,75 @@
         <div class="probx">
             
             <a href="#">
+                <span class="thumb">
+                    <img src="/product/img/Pro_pro_동탄_제왕절개.jpg" alt style="width:316px;height:320px;">
+                </span>
+                <div class="desc">
+                    <p class="org">동탄동물병원(화성)</p>
+                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
+                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
+                </div>
+            </a>
+                <div class="price">
+                    <div class="cost">
+                        <p class="sm">마이펫플러스 초대가</p>
+                        <p class="won">
+                            <strong>600.000</strong>
+                            원
+                        </p>                       
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="pro-lst" id="productList">
+        <div class="probx">
+           <a href="#">
+                <span class="thumb">
+                    <img src="/product/img/Pro_pro_동탄_제왕절개.jpg" alt style="width:316px;height:320px;">
+                </span>
+                <div class="desc">
+                    <p class="org">동탄동물병원(화성)</p>
+                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
+                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
+                </div>
+            </a>
+                <div class="price">
+                    <div class="cost">
+                        <p class="sm">마이펫플러스 초대가</p>
+                        <p class="won">
+                            <strong>600.000</strong>
+                            원
+                        </p>                       
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="pro-lst" id="productList">
+        <div class="probx">
+           <a href="#">
+                <span class="thumb">
+                    <img src="/product/img/Pro_pro_동탄_제왕절개.jpg" alt style="width:316px;height:320px;">
+                </span>
+                <div class="desc">
+                    <p class="org">동탄동물병원(화성)</p>
+                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
+                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
+                </div>
+            </a>
+                <div class="price">
+                    <div class="cost">
+                        <p class="sm">마이펫플러스 초대가</p>
+                        <p class="won">
+                            <strong>600.000</strong>
+                            원
+                        </p>                       
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="pro-lst" id="productList">
+        <div class="probx">
+           <a href="#">
                 <span class="thumb">
                     <img src="/product/img/Pro_pro_동탄_제왕절개.jpg" alt style="width:316px;height:320px;">
                 </span>
