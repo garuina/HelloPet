@@ -177,32 +177,6 @@ footer {
     background-image: linear-gradient(90deg,#1dc6f7,#00e5c2);
 }
 
-
-#qna .mypage-nav__list-link_active {
-    display: block;
-    position: relative;
-    padding: 20px 0;
-    line-height: 1;
-    font-size: 20px;
-    color: #0dbcaf;
-    font-weight: 700;
-    border-bottom: 1px solid #0dbcaf;
-    cursor: pointer;
-}
-
-#qna .mypage-nav__list-link {
-    display: block;
-    position: relative;
-    padding: 20px 0;
-    line-height: 1;
-    font-size: 20px;
-    color: #777;
-    font-weight: 300;
-    border-bottom: 1px solid #dbdee8;
-    cursor: pointer;
-}
-
-
 #qna .paging {
     width: 100%;
     padding: 40px 0;
@@ -343,7 +317,6 @@ footer {
     height: 10px;
     background-image: linear-gradient(90deg,#1dc6f7,#00e5c2);
 }
-
 
 #sub-wrap .mypage-nav__list-link_active {
     display: block;
@@ -538,7 +511,7 @@ footer {
     width: 950px;
     height: auto;
     margin-left: 20px;
-    padding-top: 40px;
+    
     padding-left: 10px;
     box-sizing: border-box;
 }

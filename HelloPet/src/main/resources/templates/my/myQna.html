@@ -18,7 +18,7 @@
                                         </td>
                                     </tr>
                                     
-                                    <tr th:each="article,i:${articles}" th:if="${total > 0}">
+                                    <tr th:each="article,i:${articles}" th:if="${articles.size() > 0}">
                                         <td>[[${pageStartNum - i.index }]]</td>
                                         <td><a th:href="@{/cs/qna/view(no=${article.no})}">[[${article.title}]]</a></td>
                                         <!-- 날짜를 어떤 형식으로 ?  -->
