@@ -19,9 +19,18 @@ import kr.co.hellopet.vo.MedicalVO;
 @Repository
 public interface AdminDAO {
 	
+	/* 현재 로그인한 관리자 가져오기*/
 	public MedicalVO selectAdmin(String uid);
+	
+	/* 관리자 정보 수정 */
 	public int updateAdmin(MedicalVO vo);
+	
+	/* 예약내역 */
 	public List<AdminReserveVO> selectReserves(@Param("start") int start, String medNo);
 	public int selectCountTotal(String medNo);
 	public AdminReserveVO selectReserve(@RequestParam("revNo") Integer revNo);
+	
+	/* 예약 상태 변경 */
+	public int updateConfirm(int revNo);
+	public int updateReject(AdminReserveVO vo);
 }
