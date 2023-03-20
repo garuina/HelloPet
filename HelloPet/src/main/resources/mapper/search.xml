@@ -76,8 +76,8 @@
 	</select>
 	
 	<!-- view2 -->
-	<select id="selectView2" resultType="kr.co.hellopet.vo.Api_HospitalVO">
-		select * from `api_hospital`;
+	<select id="selectView2" resultType="kr.co.hellopet.vo.MemberVO">
+		select * from `pet_owner` where `uid` =#{uid};
 	</select>
 	
 	<!-- reserve -->
