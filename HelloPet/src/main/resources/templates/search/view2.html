@@ -1,16 +1,16 @@
 <th:block th:include="@{search/_header.html}"/>
 <!-- 
-날짜 : 2023-03-14
+날짜 : 2023-03-20
 이름 : 장인화
-내용 : View에 병원,약국 자세히 결과, 지도 출력
+내용 : View2에 내 주변 병원 찾기
  -->
  
  <style>
  	.view2 > .addrT{
  	    margin: 0 auto;
  		text-align: center;
-    	padding: 100px;
-    	font-size: 20px;
+    	padding: 50px 0 30px;
+    	font-size: 30px;
         font-weight: 400;
         display: table;
  	}
@@ -28,7 +28,43 @@
  		color: darkblue;
  	}
  	
- 
+ 	.view2 > .ns {
+ 		width: 500px;
+    	height: 51px;
+    	margin-left: 530px;
+    	margin-bottom: 20px
+ 	}
+ 	
+ 	.view2 > .ns input {
+ 		width: 300px;
+    	height: 35px;
+ 	}
+ 	
+ 	.view2 > .ns button {
+ 		width: 60px;
+    	height: 35px;
+    	margin-left: 10px;
+    	background-color: #0dbcaf;
+    	color: #fff;
+ 	}
+ 	
+ 	.result {
+ 	 	width: 800px;
+ 		margin: 0 auto;
+ 		text-align: center;
+		padding: 25px; 		
+ 	}
+ 	
+ 	.result > .explain {
+ 		margin-top: 10px;
+ 	}
+ 	
+ 	.result .placeName {
+ 		font-size: 25px;
+ 		color: #0dbcaf;
+ 		margin: 5px
+ 	}
+ 	
  </style>
  
  <main>
@@ -45,19 +81,51 @@
 	    </div>
 	     
 	 	 <div class="addrT">
-	 	  	혹시 주소가 <div class="addrH">' [[${m.addr1}]] '</div>이 아닌가요?
+	 	  	혹시 주소가 <div class="addrH" id="addrH">' [[${m.addr1}]] '</div>이 아닌가요?
+	 	 </div>
+	 	 <div class="ns" id="ns">
+	 	 	<input type="text" name="NewAddr" placeholder="주소를 입력해주세요."><button type="button" id="click">확인</button>
 	 	 </div>
       </div>
         
     <div id="map" style="width:60%;height:400px; margin: 0 auto;"></div>
+    
+    <div class="result">
+    	
+        <div class="explain">
+         <p class="addr"></p>
+        </div>
+    </div>
       
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5f25185293d664bcd951443d8b8e4a67&libraries=services"></script>
     <script>
 		
+     $('#ns').hide();	
+     
+     
      let addr = $('input[name=addr]').val();
      console.log(addr);	
      let search = addr + ' 동물병원';
-     console.log(search);
+     console.log("s1 : " + search);
+     
+     $(function(){
+    	 $('#addrH').click(function(){
+    		 $('#ns').show();	
+    	 });
+    	 
+    	 let NewAddr = $('input[name=NewAddr]').val();
+    	 
+    	 $('#click').click(function(){
+    		 $('#ns').hide();
+    		 
+    		 search = newAddr + ' 동물병원'; 
+    		 console.log("s2 : " + search);
+    	 });
+    	 
+    	 
+     });
+     
+     console.log("s3 : " + search);
      
 	 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 	    var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -109,6 +177,27 @@
 	            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
 	            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
 	            infowindow.open(map, marker);
+	            
+	            // 마커 정보 (이것저것~~ 제목,주소,전번) 밑에 출력하자
+	            var content = "<img src='/HelloPet/img/search-지도.jpg' alt='지도아이콘'></br>";
+	            
+	            content += "<span class='placeName'>" + place.place_name + "</span></br>"
+	            
+	            if (place.road_address_name) {
+	                content += "<span class='placeAddr'>" + place.road_address_name + "</span></br>"
+	            } else if (place.address_name) {
+	                content += "<span class='placeAddr'>" +  place.address_name + "</span></br>"
+	            }
+	            
+	            if (place.phone) {
+	                content += "<span class='placePh'>" + place.phone; + "</span></br>"
+	            }
+	            
+	            console.log(content);
+	            
+	            $('.addr').empty();
+	            $('.addr').append(content);
+	            
 	        });
 	    }
 		
