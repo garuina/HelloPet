@@ -39,7 +39,11 @@
                 </div>
             </div>
         </header>
-        <main id="container" ng-app="appProduct" class="ng-scope">
+        <main id="sub-wrap">
+                <div class="top">
+                    <h3>동물병원</h3>
+                </div>
+                <id="container" ng-app="appProduct" class="ng-scope">
             <div class="wid1300">
                 <div class="lodcation">
                     <span class="ic-home">
@@ -52,11 +56,7 @@
                 </div>
             </div>
         </div>
-     
-            <div id="sub-wrap">
-                <div class="top">
-                    <h3>동물병원</h3>
-                </div>
+    </div>
         <div class="sub-cate ng-scope" ng-controller="ProductListController">
             <ul class="depth1">
                 <li ng-repeat="category in categorys" ng-class="(selFirstCategory.indexOf(category.Id > -1) ? 'active' : ''"class="ng-scope active)"> 
