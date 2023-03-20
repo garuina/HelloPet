@@ -125,10 +125,6 @@ public class MyService {
 		int groupStart = (currentPage - 1) / 5 * 5 + 1;
 		int groupEnd = groupStart + 4;
 		
-		System.out.println("currentPage: " + currentPage);
-		System.out.println("groupStart: " + groupStart);
-		System.out.println("groupEnd: " + groupEnd);
-		
 		if(groupEnd > lastPageNum) {
 			groupEnd = lastPageNum;
 		}

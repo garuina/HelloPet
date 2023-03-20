@@ -15,6 +15,8 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -97,7 +99,8 @@ public class MyController {
 		//System.out.println("currentPage : " + currentPage);
 		//System.out.println("lastPageNum : " + lastPageNum);
 		//System.out.println("pageStartNum : " + pageStartNum);
-		//System.out.println("groups[0] : " + groups[0] + " groups[1] : " + groups[1]);
+		System.out.println("total : " + total);
+		System.out.println("groups[0] : " + groups[0] + " groups[1] : " + groups[1]);
 		
 		// model 에 담기
 		model.addAttribute("articles", articles);
@@ -139,7 +142,7 @@ public class MyController {
 		//System.out.println("currentPage : " + currentPage);
 		//System.out.println("lastPageNum : " + lastPageNum);
 		//System.out.println("pageStartNum : " + pageStartNum);
-		//System.out.println("groups[0] : " + groups[0] + " groups[1] : " + groups[1]);
+		System.out.println("groups[0] : " + groups[0] + " groups[1] : " + groups[1]);
 		
 		// model 에 담기
 		model.addAttribute("articles", articles);
@@ -205,6 +208,7 @@ public class MyController {
 		Map<String, Integer> resultMap = new HashMap<>();
 		
 		resultMap.put("result", rev_No.size());
+		
 		
 		return resultMap;
 	}
