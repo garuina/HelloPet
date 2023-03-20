@@ -52,11 +52,17 @@
  	 	width: 800px;
  		margin: 0 auto;
  		text-align: center;
-		padding: 25px 		
+		padding: 25px; 		
  	}
  	
  	.result > .explain {
- 		margin-top: 10px
+ 		margin-top: 10px;
+ 	}
+ 	
+ 	.result .placeName {
+ 		font-size: 25px;
+ 		color: #0dbcaf;
+ 		margin: 5px
  	}
  	
  </style>
@@ -85,12 +91,9 @@
     <div id="map" style="width:60%;height:400px; margin: 0 auto;"></div>
     
     <div class="result">
-    	<div>
-    		<img th:src="@{/img/search-지도.jpg}" alt="지도아이콘">
-    	</div>
-        
+    	
         <div class="explain">
-         <p class="addr">zip  hosAddr Tell</p>
+         <p class="addr"></p>
         </div>
     </div>
       
@@ -174,6 +177,27 @@
 	            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
 	            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
 	            infowindow.open(map, marker);
+	            
+	            // 마커 정보 (이것저것~~ 제목,주소,전번) 밑에 출력하자
+	            var content = "<img src='/HelloPet/img/search-지도.jpg' alt='지도아이콘'></br>";
+	            
+	            content += "<span class='placeName'>" + place.place_name + "</span></br>"
+	            
+	            if (place.road_address_name) {
+	                content += "<span class='placeAddr'>" + place.road_address_name + "</span></br>"
+	            } else if (place.address_name) {
+	                content += "<span class='placeAddr'>" +  place.address_name + "</span></br>"
+	            }
+	            
+	            if (place.phone) {
+	                content += "<span class='placePh'>" + place.phone; + "</span></br>"
+	            }
+	            
+	            console.log(content);
+	            
+	            $('.addr').empty();
+	            $('.addr').append(content);
+	            
 	        });
 	    }
 		
