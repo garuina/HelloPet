@@ -1016,6 +1016,36 @@ padding: 0 15px;
 }
 
 
+/*view2*/
+.view2 {
+    min-height: 300px;
+    
+}
+
+.view2 > .contents{
+    
+}
+
+.view2 > .contents> div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 215px;
+    background: #e1f4f3;
+}
+
+.view2 > .contents>.view-top > .title {
+    line-height: 1.4;
+    font-size: 35px;
+    color: #555;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 15px;
+    margin-top: 40px;
+}
+
+
 /*reserve*/
 #reserve > .re{
     width: 900px;

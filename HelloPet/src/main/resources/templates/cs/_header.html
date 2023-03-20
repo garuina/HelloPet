@@ -29,8 +29,14 @@
         	console.log(level);
         	
         	$('.btnqna').click(function(){
-        		if(level != null && $.trim(level) !== ''){
-        			return true;
+        		if(level !=  null && $.trim(level) !== ''){
+        			if(level == 1 || level == 7){
+        				return true;
+        			}else{
+        				alert('일반회원만 가능합니다.')
+        				return false;
+        			}
+        			
         		}else{
         			alert('로그인이 필요합니다.');
         			return false;
