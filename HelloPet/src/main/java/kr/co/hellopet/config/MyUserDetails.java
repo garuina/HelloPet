@@ -84,5 +84,6 @@ public class MyUserDetails implements UserDetails {
 		boolean isEnabled = memberLevel != 0 || medicalLevel != 0;
 		
 	    return true;
+
 	}
 }

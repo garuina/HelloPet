@@ -31,5 +31,12 @@
 	<select id="selectCountTotal" resultType="int" parameterType="map">
         select count(`revNo`) from `reserve_list` WHERE `medNo`=#{medNo};
     </select>
+    
+    <update id="updateConfirm">
+    	update `reserve_list` set `status`= 1 where `revNo`=#{revNo};
+    </update>
+    <update id="updateReject">
+    	update `reserve_list` set `status`= 2 where `revNo`=#{revNo};
+    </update>
 
 </mapper>
