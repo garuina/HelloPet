@@ -12,10 +12,15 @@
                                         <th>내용</th>
                                         <th>등록일</th>
                                     </tr>
-
-                                    <tr th:each="article,i:${articles}">
+                                    <tr th:if="${articles.size() == 0}">
+                                        <td colspan="3">
+                                        	게시글이 없습니다.
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr th:each="article,i:${articles}" th:if="${total > 0}">
                                         <td>[[${pageStartNum - i.index }]]</td>
-                                        <td><a href="#">[[${article.title}]]</a></td>
+                                        <td><a th:href="@{/cs/qna/view(no=${article.no})}">[[${article.title}]]</a></td>
                                         <!-- 날짜를 어떤 형식으로 ?  -->
                                         <td>[[${#strings.substring(article.rdate, 0, 19)}]]</td>
                                     </tr>
@@ -29,12 +34,21 @@
 								      &lt;&nbsp;이전
 								    </a>
 								</span>
-		                        <span class="num">
+								
+		                        <span class="num" th:if="${groups[1] == 0}">
+								  <th:block th:each="num:${#numbers.sequence(1, groups[0])}">
+								    <a th:href="@{/my/myQna(pg=${num})}" 
+								      th:class="${num==currentPage ? 'on':'off'}"+"${num==currentPage?'num current':'num'}">[[${num}]]</a>
+								  </th:block>
+								</span>
+								
+		                        <span class="num" th:if="${groups[1] > 0}">
 		                        <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
 		                            <a th:href="@{/my/myQna(pg=${num})}" 
 		                            th:class="${num==currentPage ? 'on':'off'}"+"${num==currentPage?'num current':'num'}">[[${num}]]</a>
 		                        </th:block>
 		                        </span>
+		                        
 		                        <span class="next" th:if="${groups[1] < lastPageNum}">
 		                            <a th:href="@{/my/myQna(pg=${groups[1]+1})}">다음&nbsp;></a>
 		                        </span>

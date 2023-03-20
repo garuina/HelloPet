@@ -13,8 +13,7 @@
                           <th>조회수</th>
                       </tr>
                       <tr th:each="article,i:${articles}">
-                          <td>[[${pageStartNum - i.index }]]</td>
-                          <!-- <td>[[${article.no}]]</td>  -->
+                          <td>[[${total}]]</td>
                           <td><a href="">[[${article.title}]]</a></td>
                           <td>[[${article.rdate}]]</td>
                           <td>[[${article.hit}]]</td>
