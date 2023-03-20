@@ -1,4 +1,7 @@
 <th:block th:include="@{my/_header.html}"/>
+<script>
+	
+</script>
  <div class="mypage-contents">
       <div class="mypage-contents_head">
           <h2 class="mypage-contents__title">게시글관리</h2>
@@ -12,7 +15,12 @@
                           <th>작성일</th>
                           <th>조회수</th>
                       </tr>
-                      <tr th:each="article,i:${articles}">
+                      <tr th:if="${articles.size() == 0}">
+							<td colspan="4">
+								게시글이 없습니다.
+							</td>
+                      </tr>
+                      <tr th:each="article,i:${articles}" th:if="${articles.size() > 0}">
                           <td>[[${total}]]</td>
                           <td><a th:href="@{/community/talktalk/modify(no=${article.no})}">[[${article.title}]]</a></td>
                           <td>[[${article.rdate}]]</td>
@@ -27,11 +35,17 @@
 						      &lt;&nbsp;이전
 						    </a>
 						</span>
-                        <span class="num">
-                        <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
-                            <a th:href="@{/my/myArticle(pg=${num})}" 
-                            th:class="${num==currentPage ? 'on':'off'}"+"${num==currentPage?'num current':'num'}">[[${num}]]</a>
-                        </th:block>
+                        <span class="num" th:if="${groups[1] == 0}">
+	                        <th:block th:each="num:${#numbers.sequence(1,groups[0])}">
+	                            <a th:href="@{/my/myArticle(pg=${num})}" 
+	                            th:class="${num==currentPage ? 'on':'off'}"+"${num==currentPage?'num current':'num'}">[[${num}]]</a>
+	                        </th:block>
+                        </span>
+                        <span class="num" th:if="${groups[1] > 0}">
+	                        <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+	                            <a th:href="@{/my/myArticle(pg=${num})}" 
+	                            th:class="${num==currentPage ? 'on':'off'}"+"${num==currentPage?'num current':'num'}">[[${num}]]</a>
+	                        </th:block>
                         </span>
                         <span class="next" th:if="${groups[1] < lastPageNum}">
                             <a th:href="@{/my/myArticle(pg=${groups[1]+1})}">다음&nbsp;></a>

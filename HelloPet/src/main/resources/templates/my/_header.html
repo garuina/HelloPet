@@ -12,8 +12,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/my.css}">
-
 </head>
+<script>
+
+	$(document).ready(function(){
+	  $('.mypage-nav_list:eq(0)').click(function(){
+	    $('.mypage-nav__list-link_active').removeClass('mypage-nav__list-link_active');
+	  });
+	});
+
+</script>
 <body>
     <div id="wrapper">
          <header class="header">
@@ -53,22 +61,22 @@
                         <nav class="mypage-navigation">
                             <ul class="mypage-nav">
                                 <li class="mypage-nav_list">
-                                    <a href="./info.html" class="mypage-nav__list-link_active">
+                                    <a th:href="@{/my/info}" class="mypage-nav__list-link_active">
                                         <span>보호자 정보관리</span>
                                     </a>
                                 </li>
                                 <li class="mypage-nav_list">
-                                    <a href="./myReserve.html" class="mypage-nav__list-link">
+                                    <a th:href="@{/my/myReserve}" class="mypage-nav__list-link">
                                         <span>예약관리</span>
                                     </a>
                                 </li>
                                 <li class="mypage-nav_list">
-                                    <a href="./myArticle.html" class="mypage-nav__list-link">
+                                    <a th:href="@{/my/myArticle}" class="mypage-nav__list-link">
                                         <span>게시글 관리</span>
                                     </a>
                                 </li>
                                 <li class="mypage-nav_list">
-                                    <a href="./myQna.html" class="mypage-nav__list-link">
+                                    <a th:href="@{/my/myQna}" class="mypage-nav__list-link">
                                         <span>1:1 문의</span>
                                     </a>
                                 </li>

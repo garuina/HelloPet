@@ -40,7 +40,6 @@
 							async: false
 						});
 					}
-					
 					location.href="/HelloPet/member/registerMedical";
 				}
 	        }else{
@@ -58,7 +57,8 @@
 <main class="terms_main">
     <div class="terms_div">
         <div class="terms_top">
-            <span>펫오너 회원가입</span>
+            <span th:if="${type == 'owner'}">펫오너 회원가입</span>
+            <span th:if="${type == 'medical'}">병원 약국 회원가입</span>
             <div class="terms_top2">
                 <span>이용약관</span>
                 <div class="terms_img">
@@ -74,6 +74,7 @@
                 </p>
             </div>
             <div class="terms_check">
+            	<input type="hidden" th:value="${type}">
             	<input type="hidden" name="type" th:value="${type}">
                 <input type="checkbox" name="terms_check" class="member_check">
                 <span>이용약관에 동의합니다.</span>
