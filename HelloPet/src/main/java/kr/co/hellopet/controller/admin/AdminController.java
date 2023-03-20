@@ -1,7 +1,9 @@
 package kr.co.hellopet.controller.admin;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.hellopet.service.AdminService;
 import kr.co.hellopet.vo.AdminReserveVO;
+import kr.co.hellopet.vo.CommunityVO;
 import kr.co.hellopet.vo.CsVO;
 import kr.co.hellopet.vo.MedicalVO;
 
@@ -35,7 +38,7 @@ public class AdminController {
 		return "admin/info";
 	}
 	@GetMapping("admin/confirm/list")
-	public String confirmList(Model model, String pg, String medNo, Principal principal, Integer revNo) {
+	public String confirmList(Model model, String pg, String medNo, Principal principal, @RequestParam(value="revNo", required=false) Integer revNo) {
 		
 		String uid = principal.getName();
 		MedicalVO vo = service.selectAdmin(uid);
@@ -53,10 +56,15 @@ public class AdminController {
 		
         // 예약 목록 출력
 		List<AdminReserveVO> reserves = service.selectReserves(start, medNo);
-		
+		int size = reserves.size();
+		int idx = 1;
+		for(AdminReserveVO res : reserves) {
+			res.setId(1+ size - idx++);
+		}
 		// 팝업창 예약 정보 출력
 		AdminReserveVO reserve = service.selectReserve(revNo);
-		model.addAttribute("reserve",reserve);
+		
+		model.addAttribute("res",reserve);
 		
 		
 		model.addAttribute("reserves", reserves);
@@ -68,12 +76,31 @@ public class AdminController {
         return "admin/confirm/list";
 	}
 	
+	@ResponseBody
 	@PostMapping("admin/confirm/list")
-	public String view(Model model, @RequestParam(value="revNo", required = false) Integer revNo) {
+	public Map<String, AdminReserveVO> list(Model model,@RequestParam(value="revNo", required = false) Integer revNo,@RequestParam(value="medNo", required = false) Integer medNo) {
 		AdminReserveVO reserve = service.selectReserve(revNo);
-		model.addAttribute("reserve",reserve);
+		Map<String, AdminReserveVO> map = new HashMap<>();
+		map.put("result", reserve);
 		
-		return "admin/confirm/list";
+		return map;
+	}
+	
+	@ResponseBody
+	@GetMapping("admin/confirm/ok")
+	public boolean ok(@RequestParam(value="revNo", required = false) Integer revNo) {
+	    int result = service.updateConfirm(revNo);
+	    return result == 1;
+	}
+	
+	@ResponseBody
+	@GetMapping("admin/confirm/view")
+	public Map<String, AdminReserveVO> view(@RequestParam(value="revNo", required = false) Integer revNo) {
+		AdminReserveVO reserve = service.selectReserve(revNo);
+		Map<String, AdminReserveVO> map = new HashMap<>();
+		map.put("result", reserve);
+		
+		return map;
 	}
 	
 	@GetMapping("admin/infoModify")

@@ -22,12 +22,17 @@ public class AdminService {
 	@Autowired
 	private AdminDAO dao;
 
+	/* 현재 로그인한 관리자 가져오기*/
 	public MedicalVO selectAdmin(String uid) {
 		return dao.selectAdmin(uid);
 	}
+	
+	/* 관리자 정보 수정 */
 	public int updateAdmin(MedicalVO vo) {
 		return dao.updateAdmin(vo);
 	}
+	
+	/* 예약내역 */
 	public List<AdminReserveVO> selectReserves(int start, String medNo){
 		return dao.selectReserves(start, medNo);
 	}
@@ -36,6 +41,14 @@ public class AdminService {
 	}
 	public AdminReserveVO selectReserve(Integer revNo) {
 		return dao.selectReserve(revNo);
+	}
+	
+	/* 예약 상태 변경 */
+	public int updateConfirm(int revNo) {
+		return dao.updateConfirm(revNo);
+	}
+	public int updateReject(AdminReserveVO vo) {
+		return dao.updateReject(vo);
 	}
 	
 	/////////// 페이징 처리 ////////////
