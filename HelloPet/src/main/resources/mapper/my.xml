@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="selectCountMyArticle" resultType="int">
-		SELECT COUNT(`no`) FROM `cs_article` WHERE `uid` = #{uid};
+		SELECT COUNT(`no`) FROM `community_article` WHERE `uid` = #{uid};
 	</select>
 	
 	<select id="selectCountMyQna" resultType="int">
@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="selectCountMyReserve" resultType="int">
-		SELECT COUNT('revNo') FROM `reserve_list` WHERE `uid` = 'leemh4390'
+		SELECT COUNT('revNo') FROM `reserve_list` WHERE `uid` = #{uid};
 	</select>	
 
 	<!-- 회원정보 update -->
