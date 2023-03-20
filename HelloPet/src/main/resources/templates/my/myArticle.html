@@ -14,7 +14,7 @@
                       </tr>
                       <tr th:each="article,i:${articles}">
                           <td>[[${total}]]</td>
-                          <td><a href="">[[${article.title}]]</a></td>
+                          <td><a th:href="@{/community/talktalk/modify(no=${article.no})}">[[${article.title}]]</a></td>
                           <td>[[${article.rdate}]]</td>
                           <td>[[${article.hit}]]</td>
                       </tr>
