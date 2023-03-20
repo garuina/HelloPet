@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.hellopet.service.SearchService;
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 
@@ -70,13 +71,14 @@ public class SearchController {
 	}
 	
 	@GetMapping("search/view2")
-	public String view(Model model) {
+	public String view2(Model model, String uid) {
 		
-		List<Api_HospitalVO> lists = service.selectView2();
-		model.addAttribute("lists",lists);
+		MemberVO m = service.selectView2(uid);
+		model.addAttribute("m", m);
 		
 		return "search/view2";
 	}
+	
 	
 	
 	@GetMapping("search/view")

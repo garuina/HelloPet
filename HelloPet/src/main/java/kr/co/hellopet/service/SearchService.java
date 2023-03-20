@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.hellopet.dao.SearchDAO;
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 /*
@@ -91,8 +92,8 @@ public class SearchService {
 	
 	
 	//view2
-	public List<Api_HospitalVO> selectView2(){
-		return dao.selectView2();
+	public MemberVO selectView2(String uid){
+		return dao.selectView2(uid);
 	}
 	
 	

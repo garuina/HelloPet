@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 /*
@@ -45,7 +46,7 @@ public interface SearchDAO {
 	public SearchVO selectViewPh(String pharNo);
 	
 	//view2
-	public List<Api_HospitalVO> selectView2();
+	public MemberVO selectView2(String uid);
 	
 	
 	//reserve (병원예약하기)
