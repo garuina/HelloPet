@@ -111,6 +111,8 @@
                 	let jsonData2 = {'no' : no,
 									'uid' : uid};
                 	
+                	alert(no);
+                	
                 	// 좋아요 여부
                 	if(heartVal > 0){
                 		$('.heart-icon').html('<button class="icon-heart-mint"></button>');
@@ -124,6 +126,7 @@
         				    	success : function(data){
         				    			$('.heart-icon').html('<button class="icon-heart"></button>');
         				    			window.location.reload();
+        				    			
         				    	}
         				    		
         				    	});
@@ -147,9 +150,7 @@
         				    	});
                 		});
                 		
-                		
                 	}
-                	
                 	
                 	
                 	// 댓글출력
