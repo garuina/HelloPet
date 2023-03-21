@@ -80,7 +80,7 @@ $(function(){
     	$.ajax({
 			url : "/HelloPet/admin/confirm/view",
 	    	method : 'get',
-	    	data : {'revNo': revNo},
+	    	data : {'revNo': revNo, 'medNo':medNo},
 	    	success: function(data){
 				var revNum = data.result.revNo;
 				var uid = data.result.uid;
@@ -101,7 +101,7 @@ $(function(){
 					html += '<td style="display:none;">' + medical + '</td>';
 					html += '<td style="display:none;">' + medNo + '</td>';
 				
-					$('.confirmResult').html(html);
+					$('.rejectResult').html(html);
 				
 				}else{
 					var html = '<td>';

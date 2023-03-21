@@ -15,7 +15,6 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link async="" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/admin.css}">
-    <link rel="stylesheet" th:href="@{/css/admin_product.css}">
     <script th:src="@{/js/popup.js}"></script>
 </head>
 <body>
@@ -23,18 +22,27 @@
         <header class="header">
             <div class="headerTop">
                 <div>
-                    <span th:text="${vo.medicalName}+'님'"></span>
+                    <span sec:authorize="hasAuthority('ROLE_2')"  th:text="${vo.medicalName}+'님'"></span>
+                    <span sec:authorize="hasAuthority('ROLE_3')"  th:text="${vo.medicalName}+'님'"></span>
                     <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
                     <a th:href="@{/}">홈으로 가기</a>
                 </div>
             </div>
             <div class="menu">
                 <div>
-                    <ul>
-                        <li class="logo"><a th:href="@{/admin/info(medNo=${vo.medNo})}"><img th:src="@{/img/admin_logo.png}" alt="logo"></a></li>
+                    <ul sec:authorize="hasAuthority('ROLE_2')">
+                        <li class="logo"><a  th:href="@{/admin/info(medNo=${vo.medNo})}"><img th:src="@{/img/admin_logo.png}" alt="logo"></a></li>
                         <li><a th:href="@{/admin/info(medNo=${vo.medNo})}">정보관리</a></li>
                         <li><a th:href="@{/admin/confirm/list(medNo=${vo.medNo})}">예약내역</a></li>
-                        <li><a th:href="@{/admin/product/list(medNo=${vo.medNo})}">진료상품관리</a></li>
+                    </ul>
+                    <ul sec:authorize="hasAuthority('ROLE_3')">
+                        <li class="logo"><a  th:href="@{/admin/info(pharNo=${vo.pharNo})}"><img th:src="@{/img/admin_logo.png}" alt="logo"></a></li>
+                        <li><a th:href="@{/admin/info(pharNo=${vo.pharNo})}">정보관리</a></li>
+                    </ul>
+                    <ul sec:authorize="hasAuthority('ROLE_7')">
+                        <li class="logo"><a  th:href="@{/admin/info}"><img th:src="@{/img/admin_logo.png}" alt="logo"></a></li>
+                        <li><a th:href="@{/admin/info}">정보관리</a></li>
+                        <li><a th:href="@{/admin/product/list}">진료상품관리</a></li>
                     </ul>
                 </div>
             </div>

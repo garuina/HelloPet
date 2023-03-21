@@ -1,7 +1,8 @@
 <th:block th:include="@{admin/_header.html}"/>
+<link rel="stylesheet" th:href="@{/css/admin_product.css}">
         <main>
             <div class="top">
-                <h3>진료상품현황</h3>
+                <h3>진료상품관리</h3>
             </div>
             <div class="product_list">
             <table>
@@ -36,17 +37,19 @@
                 
             </table>
             <input type="button" class="btn_delete" value="선택삭제">
-            <a th:href="@{/admin/product/register(medNo=${vo.medNo})}" class="btn_register">상품등록</a>
-                   <div class="paging">
+
+            <a th:href="@{/admin/product/register}" class="btn_register">상품등록</a>
+                     <div class="paging">
                     	<th:block th:if="${pageGroupStart > 1}">
                         <a th:href="@{/admin/product/list(pg=${pageGroupStart - 1})}" class="prev">←</a>
                         </th:block>
                         <th:block th:each="num,iterStat : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
-                        <a th:href="@{/admin/product/list(pg=${num},medNo=${vo.medNo})}" th:class="${num} eq ${currentPage} ? 'num on':'num'">[[${num}]]</a>
+                        <a th:href="@{/admin/product/list(pg=${num})}" th:class="${num} eq ${currentPage} ? 'num on':'num'">[[${num}]]</a>
                         </th:block>
                         <th:block th:if="${pageGroupEnd < lastPageNum}">
                         <a th:href="@{/admin/product/list(pg=${pageGroupEnd + 1})}" class="next">→</a>
                         </th:block>
                     </div>
+
         </main>
 <th:block th:include="@{admin/_footer.html}"/>

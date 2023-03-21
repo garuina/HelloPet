@@ -33,7 +33,7 @@
 	
 	<select id="selectAdminProducts" resultType="kr.co.hellopet.vo.AdminProductVO">
 		select * from `product`
-			where `medNo`=#{medNo} 
+			 
 			order by `prodNo` desc
 			limit #{start},10;
 	</select>
@@ -45,7 +45,7 @@
 	
 	<select id="selectProductCount" resultType="int">
 		select count(`prodNo`) from `product`
-			where `medNo`=#{medNo};
+			order by `rdate` desc;
 	</select>
 	
 	<update id="updateAdminProduct">

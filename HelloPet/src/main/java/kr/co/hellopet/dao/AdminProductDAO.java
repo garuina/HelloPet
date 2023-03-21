@@ -25,10 +25,10 @@ public interface AdminProductDAO {
 	public int insertAdminProduct(AdminProductVO vo);
 	
 	// 관리자 상품 목록
-	public List<AdminProductVO> selectAdminProducts(int start, int medNo);
+	public List<AdminProductVO> selectAdminProducts(int start);
 	
 	// 관리자 상품 목록갯수
-	public int selectProductCount(int medNo);
+	public int selectProductCount();
 		
 	
 	
