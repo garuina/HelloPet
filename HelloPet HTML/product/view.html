@@ -40,34 +40,34 @@
             </div>
         </header> 
 
-        <main id="sub-wrap">
-            <div class="top">
+        <main 
+            div class="top">
                 <h3>진료상품</h3>
-            </div>
-            <main id="container" ng-app="appProduct" class="ng-scope">
-                <div class="wid1300">
-                    <div class="lodcation">
-                        <span class="ic-home">
-                            <em>HOME</em>
-                        </span>
-                            >
-                        <span>
-                            <a href="#">동물병원</a>
-                        </span>
-                            >
-                        <span>
-                            <a href="#">수술/치료</a>
-                        </span>
-                            >
-                        <span>
-                            <a href="#">비뇨산부의학과</a>
-                        </span>
-                    </div>
+            </div>            
+      
+        <id="container" ng-app="appProduct" class="ng-scope">
+            <div class="wid1300">
+                <div class="lodcation">
+                    <span class="ic-home">
+                        <em>HOME</em>
+                    </span>
+                        >
+                    <span>
+                        <a href="#">동물병원</a>
+                    </span>
+                        >
+                    <span>
+                        <a href="#">수술/치료</a>
+                    </span>
+                        >
+                    <span>
+                        <a href="#">비뇨산부의학과</a>
+                    </span>
                 </div>
             </div>
         <div class="prod-hd">
             <div class="thumb">
-                <img src="/product/img/Pro_상세이미지_제왕절개.jpg"  >
+                <img src="/product/img/Pro_pro_동탄_제왕절개.jpg"  style=" width: 500px;" >
             </div>
             </div>
         <div class="prod-inf">
@@ -84,15 +84,18 @@
             </dl>
             <dl>
                 <dt>판매병원명</dt>
-                <dd>동탄동물병원</dd>
+                <dd class="hospital">
+                    <strong id="sSaleHospInfo">동탄동물병원</strong>
+                </dd>
             </dl>
             <dl>
                 <dt>기본 설명</dt>
-                <dd>혈액검사 포함</dd>
+                <dd class="description">
+                    <strong id="sSaleDescriptInfo">혈액검사 포함</strong>
+                </dd>
             </dl>
         </div>
-        <div class="totalSelectedWrap" id="dPriceSummary">
-        </div>
+        
         </div>
         <div class="button-box">
             <a style="cursor:pointer" class="btn btn-lg btn-line blue" id="aCardAdd">예약하기</a>

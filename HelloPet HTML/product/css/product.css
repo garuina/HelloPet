@@ -217,46 +217,43 @@ footer {
     
 }
 .wid1300 {
-    width: 1200px;
-    margin: 0 padding
+    width: 1900px;
+    margin: 0 padding;
+    border-bottom: 2px solid rgb(225, 243, 243);
+    margin-top: 5px;
+
 }
+
 div {
     display: block;
 }
-.location{ 
+.lodcation{ 
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto; 
     padding: 15px 0;
     font-size: 13px;
-
+    margin-left: 100px;
 }
-.location span.ic-home {
+
+
+.lodcation span.ic-home {
     padding: 0;
     margin: 0;
     background: none;
 }
-.location span {
+.lodcation span {
     position: relative;
     display: inline-block;
     color: #999;
     font-weight: 400;
 }
-.location span.ic-home em {
+.lodcation span.ic-home em {
     position: absolute;
     top: -9999px;
     left: -9999px;
 }
 
 
-
-
-
-.location {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px 0;
-    font-size: 13px;
-}
 .cate-tit {
     margin: 55px 0 20px;
 }
@@ -278,12 +275,15 @@ h2{
     position: relative;
     margin-bottom: 70px;
     font-size: 14px;
-    margin-top: 105px;
+    margin-top: 70px;
 }
 .sub-cate .depth1 {
    
     border-bottom: 1px;
     padding: 15px 0;
+    border-top: #e0e0e0 2px solid;
+    margin-left: 70px;
+    margin-right: 70px;
 }
 .sub-cate .depth2 {
     border: #e0e0e0 1px solid;
@@ -312,7 +312,7 @@ ul {
     margin-right: 70px;
 }
 .sub-cate .depth2 > li {
-    padding: 15px 20px;
+    padding: 15px 30px;
     float: left;
    
 }
@@ -320,7 +320,8 @@ ul {
    display: table;
    width: 100%;
    table-layout: fixed;
-   border: #e0e0e0 1px solid;
+   border-top: #e0e0e0 2px solid;
+   border-bottom: #e0e0e0 2px solid;
 }
 .sub-cate .depth2 > li a{
     color: #333;
@@ -347,7 +348,7 @@ li {
     border-right: #e0e0e0 1px solid;
     width: 124px;
     color: #000;
-    font-weight: 400;
+    font-weight: 400px;
     padding: 15px;
     background-color: #f8f8f8;
 }
@@ -369,17 +370,7 @@ a {
     text-decoration: none;
     transition: all 0.2s ease-in-out;
 }
-input[type="checkbox" i] {
-    background-color: initial;
-    cursor: default;
-    margin: 3px 3px 3px 4px;
-    padding-left: initial;
-    border: initial  ;
-}
-.sub-cate .depth4 > li > .con label {
-    display: inline-block;
-    margin: 5px 10px 5px 0;
-}
+
 label{
     box-sizing: border-box;
     vertical-align: middle;
@@ -387,9 +378,7 @@ label{
     cursor: default;
     color: #535a70;
 }
-input {
-    writing-mode: horizontal-tb !important;
-}
+
 .sub-cate .depth4 > li + li {
     border-top:  #e0e0e0 1px solid;
 }
@@ -402,14 +391,15 @@ input {
 }
 input[type=checkbox]{
     position: absolute;
-    top: 0;
-    left: -1000%;
+    top: 4px;
     overflow: hidden;
-    width: 1px;
-    height: 1px;
-    text-indent: -10000px;
+    width: 18px;
+    height: 19px;
     appearance: none;
+    margin-top: 10px;
+    margin-bottom: 9px;
 }
+
 input[type=checkbox] + label::before {
     content:"";
     display: inline-block;
@@ -439,7 +429,7 @@ a{
     margin: -30px 0 0 50px;
     display: inline-block;
     overflow: hidden;
-    margin-right: -30px;
+    margin-right: -25px;
 
    
 }
@@ -573,6 +563,19 @@ a{
     text-decoration: none;
     
 }
+a:hover {
+    color: #3c83dc;
+    }
+
+.sub-cate .depth2 > li a:hover {
+        color: #3c83dc;
+    }
+
+
+
+
+
+
 
 
 /*view*/
@@ -581,8 +584,8 @@ a{
     max-width: 1200px;
     margin: 0 auto;
     display: inline-block;
-    margin-left: 150px;
-    padding-top: 60px;
+    margin-left: 350px;
+    padding-top: 100px;
     margin-right: 150px;
     padding-bottom: 80px;
 }
@@ -615,7 +618,7 @@ height: 50px;
 .prod-hd .prod-inf .dv-tit .tit{
     color-scheme: #000;
     font-size: 35px;
-    font-weight: 400;
+    font-weight: 400px;
     margin-bottom: 15px;
 }
 .prod-gud dl{
@@ -629,10 +632,12 @@ height: 50px;
     width: 100px;
     color: #000;
     font-weight: 600;
+    font-size: 20px;
 }
 .prod-gud dl > * {
     display: table-cell;
     vertical-align: middle;
+    font-size: 18px;
 }
 .prod-gud dl > dd.price {
     font-size: 20px;
@@ -642,6 +647,30 @@ height: 50px;
     font-size: 37px;
     font-weight: 'Montserrat';
 }
+.prod-gud dl > dd.hospital {
+    font-size: 20px;
+    color: #000;
+}
+.prod-gud dl > dd.hospital strong{
+    font-size: 37px;
+    font-weight: 'Montserrat';
+    font-size: 20px;
+    margin-left: 20px
+}
+.prod-gud dl > dd.description {
+    font-size: 20px;
+    color: #000;
+}
+.prod-gud dl > dd.description strong{
+    font-size: 37px;
+    font-weight: 'Montserrat';
+    font-size: 20px;
+    margin-left: 20px
+}
+
+
+
+
 .prod-hd .button-box{
     margin: 10px 0 0 0;
 }
@@ -652,14 +681,15 @@ height: 50px;
 .btn.btn-lg{
     height: 60px;
     line-height: 58px;
-    font-size: 18px;
+    font-size: 20px;
 }
 .btn.blue{
-    color: #789dc7;
-    border-color: #789dc7;
+    color: #fff;
+    border-color:#10958b;
+    background-color: #10958b;
 }
 .btn{
-    min-width: 110px;
+    min-width: 350px;
     padding-inline-start: 0 30px;
     display: inline-block;
     vertical-align: middle;
@@ -669,17 +699,18 @@ height: 50px;
     border: #333 1px solid;
     text-align: center;
     background-color: #fff;
+    margin-top: -120px
 }
 .prod-gud{
     margin-left: 10px;
-    margin-top: -280px;
+    margin-top: -570px;
     float: right;
-    margin-right: 490px
+    margin-right: 590px;
 }
 .prod-inf{
     margin-left: 150px;
     float: right;
-    margin-right: 460px;
+    margin-right: 400px;
     margin-top: 40px;
    
 }
@@ -689,11 +720,12 @@ height: 50px;
 .button-box{
     float: right;
     margin-right: 500px;
+    margin-top: -150px;
 }
 .prod-bx{
     display: table;
     margin: 0 auto;
-    margin-top: 200px;
+    margin-top: -80px;
     border-top: #e1f3f3 5px solid;
 }
 .prod-bx .detail-left{
@@ -712,5 +744,14 @@ height: 50px;
 }
 .prod-bx .map-wr{
     margin: 40px 0 0 0;
+}
+
+.prod-inf .tit{
+    font-size: 38px;
+    margin-top: -630px;
+    margin-left: 80px;
+}
+a:hover {
+color: #3c83dc;
 }
 
