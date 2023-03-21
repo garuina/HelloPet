@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.hellopet.dao.AdminDAO;
 import kr.co.hellopet.vo.AdminReserveVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MessageVO;
 
 /* 
  *  날짜 : 2023/03/14
@@ -33,8 +34,8 @@ public class AdminService {
 	}
 	
 	/* 예약내역 */
-	public List<AdminReserveVO> selectReserves(int start, String medNo){
-		return dao.selectReserves(start, medNo);
+	public List<AdminReserveVO> selectReserves(int start, String medNo, int pageSize){
+		return dao.selectReserves(start, medNo, pageSize);
 	}
 	public int selectCountTotal(String medNo) {
 		return dao.selectCountTotal(medNo);
@@ -44,11 +45,20 @@ public class AdminService {
 	}
 	
 	/* 예약 상태 변경 */
-	public int updateConfirm(int revNo) {
+	public boolean updateConfirm(int revNo) {
 		return dao.updateConfirm(revNo);
 	}
-	public int updateReject(AdminReserveVO vo) {
-		return dao.updateReject(vo);
+	public boolean updateReject(int revNo) {
+		return dao.updateReject(revNo);
+	}
+	
+	/* 메시지 */
+	public int insertMsg(MessageVO vo) {
+		return dao.insertMsg(vo);
+	}
+	
+	public int updateReserve(String medNo) {
+		return dao.updateReserve(medNo);
 	}
 	
 	/////////// 페이징 처리 ////////////

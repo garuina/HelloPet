@@ -15,31 +15,48 @@ $(function(){
     	$('#popConfirm').addClass('on');
     	
     	$.ajax({
-			url : "/HelloPet/admin/confirm/list",
-	    	method : 'post',
+			url : "/HelloPet/admin/confirm/ok",
+	    	method : 'get',
 	    	data : {'revNo': revNo},
 	    	success: function(data){
-				if(data.result.petNum == 1){
-					$('.popupTable tr:eq(1) > td:eq(0)').text(data.result.revNo);
-					$('.popupTable tr:eq(1) > td:eq(1)').text(data.result.oname);
-					$('.popupTable tr:eq(1) > td:eq(2)').text(data.result.oph);
-					$('.popupTable tr:eq(1) > td:eq(3)').text(data.result.petName1+'/'+data.result.petType1+'/'+data.result.petAge1);
-					$('.popupTable tr:eq(1) > td:eq(4)').text(data.result.department);
-					$('.popupTable tr:eq(1) > td:eq(5)').text(data.result.memo);
-					$('.popupTable tr:eq(1) > td:eq(6)').text(data.result.revDate);
-					$('.popupTable tr:eq(1) > td:eq(7)').text(data.result.revTime.substring(0,5));
-					
-				}else{
-					$('.popupTable tr:eq(1) > td:eq(0)').text(data.result.revNo);
-					$('.popupTable tr:eq(1) > td:eq(1)').text(data.result.oname);
-					$('.popupTable tr:eq(1) > td:eq(2)').text(data.result.oph);
-					$('.popupTable tr:eq(1) > td:eq(3)').text(data.result.petName1+'/'+data.result.petType1+'/'+data.result.petAge1+', '+data.result.petName2+'/'+data.result.petType2+'/'+data.result.petAge2);
-					$('.popupTable tr:eq(1) > td:eq(4)').text(data.result.department);
-					$('.popupTable tr:eq(1) > td:eq(5)').text(data.result.memo);
-					$('.popupTable tr:eq(1) > td:eq(6)').text(data.result.revDate);
-					$('.popupTable tr:eq(1) > td:eq(7)').text(data.result.revTime.substring(0,5));
-				}
+				var revNum = data.result.revNo;
+				var uid = data.result.uid;
+				var medical = data.result.medicalName;
+				var medNo = data.result.medNo;
 				
+				
+				if(data.result.petNum == 1){
+					var html = '<td>';
+					html += revNum + '</td>';
+					html += '<td>' + data.result.oname + '</td>';
+					html += '<td>' + data.result.oph + '</td>';
+					html += '<td>' + data.result.petName1+'/'+data.result.petType1+'/'+data.result.petAge1 + '</td>';
+					html += '<td>' + data.result.department + '</td>';
+					html += '<td>' + data.result.memo + '</td>';
+					html += '<td>' + data.result.revDate + '</td>';
+					html += '<td>' + data.result.revTime.substring(0,5) + '</td>';
+					html += '<td style="display:none;">' + uid + '</td>';
+					html += '<td style="display:none;">' + medical + '</td>';
+					html += '<td style="display:none;">' + medNo + '</td>';
+				
+					$('.confirmResult').html(html);
+				
+				}else{
+					var html = '<td>';
+					html += revNum + '</td>';
+					html += '<td>' + data.result.oname + '</td>';
+					html += '<td>' + data.result.oph + '</td>';
+					html += '<td>' + data.result.petName1+'/'+data.result.petType1+'/'+data.result.petAge1+', '+data.result.petName2+'/'+data.result.petType2+'/'+data.result.petAge2 + '</td>';
+					html += '<td>' + data.result.department + '</td>';
+					html += '<td>' + data.result.memo + '</td>';
+					html += '<td>' + data.result.revDate + '</td>';
+					html += '<td>' + data.result.revTime.substring(0,5) + '</td>';
+					html += '<td style="display:none;">' + uid + '</td>';
+					html += '<td style="display:none;">' + medical + '</td>';
+					html += '<td style="display:none;">' + medNo + '</td>';
+				
+					$('.confirmResult').html(html);
+				}
 			}
 		});
     });
@@ -65,25 +82,42 @@ $(function(){
 	    	method : 'get',
 	    	data : {'revNo': revNo},
 	    	success: function(data){
+				var revNum = data.result.revNo;
+				var uid = data.result.uid;
+				var medical = data.result.medicalName;
+				var medNo = data.result.medNo;
+				
 				if(data.result.petNum == 1){
-					$('.popupTable2 tr:eq(1) > td:eq(0)').text(data.result.revNo);
-					$('.popupTable2 tr:eq(1) > td:eq(1)').text(data.result.oname);
-					$('.popupTable2 tr:eq(1) > td:eq(2)').text(data.result.oph);
-					$('.popupTable2 tr:eq(1) > td:eq(3)').text(data.result.petName1+'/'+data.result.petType1+'/'+data.result.petAge1);
-					$('.popupTable2 tr:eq(1) > td:eq(4)').text(data.result.department);
-					$('.popupTable2 tr:eq(1) > td:eq(5)').text(data.result.memo);
-					$('.popupTable2 tr:eq(1) > td:eq(6)').text(data.result.revDate);
-					$('.popupTable2 tr:eq(1) > td:eq(7)').text(data.result.revTime.substring(0,5));
-					
+					var html = '<td>';
+					html += revNum + '</td>';
+					html += '<td>' + data.result.oname + '</td>';
+					html += '<td>' + data.result.oph + '</td>';
+					html += '<td>' + data.result.petName1+'/'+data.result.petType1+'/'+data.result.petAge1 + '</td>';
+					html += '<td>' + data.result.department + '</td>';
+					html += '<td>' + data.result.memo + '</td>';
+					html += '<td>' + data.result.revDate + '</td>';
+					html += '<td>' + data.result.revTime.substring(0,5) + '</td>';
+					html += '<td style="display:none;">' + uid + '</td>';
+					html += '<td style="display:none;">' + medical + '</td>';
+					html += '<td style="display:none;">' + medNo + '</td>';
+				
+					$('.confirmResult').html(html);
+				
 				}else{
-					$('.popupTable2 tr:eq(1) > td:eq(0)').text(data.result.revNo);
-					$('.popupTable2 tr:eq(1) > td:eq(1)').text(data.result.oname);
-					$('.popupTable2 tr:eq(1) > td:eq(2)').text(data.result.oph);
-					$('.popupTable2 tr:eq(1) > td:eq(3)').text(data.result.petName1+'/'+data.result.petType1+'/'+data.result.petAge1+', '+data.result.petName2+'/'+data.result.petType2+'/'+data.result.petAge2);
-					$('.popupTable2 tr:eq(1) > td:eq(4)').text(data.result.department);
-					$('.popupTable2 tr:eq(1) > td:eq(5)').text(data.result.memo);
-					$('.popupTable2 tr:eq(1) > td:eq(6)').text(data.result.revDate);
-					$('.popupTable2 tr:eq(1) > td:eq(7)').text(data.result.revTime.substring(0,5));
+					var html = '<td>';
+					html += revNum + '</td>';
+					html += '<td>' + data.result.oname + '</td>';
+					html += '<td>' + data.result.oph + '</td>';
+					html += '<td>' + data.result.petName1+'/'+data.result.petType1+'/'+data.result.petAge1+', '+data.result.petName2+'/'+data.result.petType2+'/'+data.result.petAge2 + '</td>';
+					html += '<td>' + data.result.department + '</td>';
+					html += '<td>' + data.result.memo + '</td>';
+					html += '<td>' + data.result.revDate + '</td>';
+					html += '<td>' + data.result.revTime.substring(0,5) + '</td>';
+					html += '<td style="display:none;">' + uid + '</td>';
+					html += '<td style="display:none;">' + medical + '</td>';
+					html += '<td style="display:none;">' + medNo + '</td>';
+				
+					$('.rejectResult').html(html);
 				}
 				
 			}

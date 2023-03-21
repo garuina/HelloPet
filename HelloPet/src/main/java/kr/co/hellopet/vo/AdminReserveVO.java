@@ -34,5 +34,15 @@ public class AdminReserveVO {
 	private String revTime;
 	private String rdate;
 	private int status;
+	
+	private String medicalName;
+	
+	// 메시지
+	private int msgNo;
+	private String medical;
+	private String title;
+	private String content;
+	private int msgStatus;
+	private String msgRdate;
 
 }

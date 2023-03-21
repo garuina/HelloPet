@@ -114,6 +114,7 @@ main {
     min-width: 1200px;
     width: 100%;
     height: auto;
+    min-height: 700px;
     margin: 0 auto;
 }
 
@@ -190,7 +191,13 @@ section > .container {
     padding-bottom: 15px;
     border-bottom: 1px solid #10958b;
 }
-
+.msg-div > .empty {
+	padding: 100px;
+    text-align: center;
+    box-sizing: border-box;
+    border:none;
+    font-size: 20px;
+}
 
 .msg-list>li {
     display: flex;
