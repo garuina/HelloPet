@@ -276,6 +276,13 @@ footer {
     }
 }
 
+.SearchIndex .mawa {
+  transition: all 0.2s linear;
+}
+.SearchIndex .mawa:hover {
+  transform: scale(1.02);
+}
+
 
 .SearchIndex > .btns > #s2  {
     position: relative;
@@ -1045,6 +1052,71 @@ padding: 0 15px;
     margin-top: 40px;
 }
 
+
+ 	.view2 > .addrT{
+ 	    margin: 0 auto;
+ 		text-align: center;
+    	padding: 50px 0 30px;
+    	font-size: 30px;
+        font-weight: 400;
+        display: table;
+ 	}
+ 	
+ 	.view2 > .addrT >.addrH{
+ 		
+ 		font-weight: 500;
+ 		color: cornflowerblue;
+ 		display: table-cell;
+ 		
+ 	}
+ 	
+ 	.view2 > .addrT >.addrH:hover{
+ 		
+ 		color: darkblue;
+ 	}
+ 	
+ 	.view2 > .ns {
+ 		width: 800px;
+    	height: 51px;
+    	margin: 0 auto;
+    	display: block;
+    	text-align: center;
+ 	}
+ 	
+ 	.view2 > .ns input {
+ 		width: 300px;
+    	height: 35px;
+    	margin: 0 auto;
+    	display: inline-block;
+ 	}
+ 	
+ 	.view2 > .ns button {
+ 		width: 60px;
+    	height: 35px;
+    	margin-left: 10px;
+    	background-color: #0dbcaf;
+    	color: #fff;
+    	display: inline-block;
+    	
+    	
+ 	}
+ 	
+ 	.view2 .result {
+ 	 	width: 800px;
+ 		margin: 0 auto;
+ 		text-align: center;
+		padding: 25px; 		
+ 	}
+ 	
+ 	.view2 .result > .explain {
+ 		margin-top: 10px;
+ 	}
+ 	
+ 	.view2 .result .placeName {
+ 		font-size: 25px;
+ 		color: #0dbcaf;
+ 		margin: 5px
+ 	}
 
 /*reserve*/
 #reserve > .re{
