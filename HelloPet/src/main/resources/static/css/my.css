@@ -318,7 +318,7 @@ footer {
     background-image: linear-gradient(90deg,#1dc6f7,#00e5c2);
 }
 
-#sub-wrap .mypage-nav__list-link_active {
+.mypage-nav_list > a.active {
     display: block;
     position: relative;
     padding: 20px 0;
@@ -330,7 +330,7 @@ footer {
     cursor: pointer;
 }
 
-#sub-wrap .mypage-nav__list-link {
+.mypage-nav_list > a {
     display: block;
     position: relative;
     padding: 20px 0;
@@ -439,7 +439,7 @@ footer {
 /* info */
 .info_div {
     float: left;
-    width: 950px;
+    width: 920px;
     height: auto;
     margin-left: 10px;
     padding-top: 20px;
@@ -508,7 +508,7 @@ footer {
 /* myReserve */
 .reserve_div {
     float: left;
-    width: 950px;
+    width: 920px;
     height: auto;
     margin-left: 20px;
     
@@ -570,4 +570,19 @@ footer {
     font-size: 14px;
     font-weight: bold;
     margin-top: 4px;
+}
+
+.info_table tr:nth-child(1) > td > input {
+	display:block;
+	width: 400px;
+	text-align: center;
+}
+
+.info_table tr > td > input {
+	display:block;
+	width: 400px;
+	text-align: center;
+	padding: 10px;
+	margin-left: 70px;
+	border: none;
 }

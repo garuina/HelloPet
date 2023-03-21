@@ -1,63 +1,4 @@
 <th:block th:include="@{my/_header.html}"/>
-<script>
-	$(document).ready(function(){
-		$('.reserve_cancel').click(function(){
-			
-			// 배열 생성
-			let arr_rev   = [];			
-			
-			// 데이터를 배열에 넣기
-			$('.rev_No:checked').each(function(){
-				arr_rev.push($(this).val());
-			});
-			
-			// 크기 확인
-			let length = arr_rev.length;
-			let size = $('input[type=checkbox]').length;
-			let pg = $('input[name=currentPage]').val();
-			let lastPageNum = $('input[name=lastPageNum]').val();
-			
-			if(length > 0){
-				
-				let jsonData = {'rev_No' : arr_rev};
-				
-				alert('size : ' + size + ' length :' + length)
-				// ajax 처리..
-				$.ajax({
-					url : '/HelloPet/my/myReserveCancel',
-					method : 'GET' ,
-					data : jsonData ,
-					dataType : 'json' ,
-					traditional : true ,
-					success : function(data) {
-						if(data.result > 0){
-							alert(data.result + " 건이 삭제되었습니다.");
-							//마지막 페이지인지?
-							if(pg == lastPageNum){
-								
-								// 삭제하는 게시글 갯수와 전체 게시물 갯수가 같은지?
-								if(size == length){
-									pg -= 1
-									location.href='/HelloPet/my/myReserve?pg='+pg;
-								}else{
-									location.href='/HelloPet/my/myReserve?pg='+pg;
-								}
-								
-							//아니라면
-							}else{
-								location.href='/HelloPet/my/myReserve?pg='+pg;
-							}
-						}
-					}
-				});
-				
-			}else{
-				alert('취소하고 싶은 게시글을 체크해주세요.');
-			}
-		});
-	});
-		
-</script>
  	<div class="mypage-contents">
 	     <div class="mypage-contents_head">
 	         <h2 class="mypage-contents__title">게시글관리</h2>
@@ -114,6 +55,7 @@
 				      &lt;&nbsp;이전
 				    </a>
 				</span>
+				
                 <span class="num" th:if="${groups[1] == 0}">
 				  <th:block th:each="num:${#numbers.sequence(1, groups[0])}">
 				    <a th:href="@{/my/myReserve(pg=${num})}" 
@@ -126,6 +68,7 @@
                     th:class="${num==currentPage ? 'on':'off'}"+"${num==currentPage?'num current':'num'}">[[${num}]]</a>
                 </th:block>
                 </span>
+                
                 <span class="next" th:if="${groups[1] < lastPageNum}">
                     <a th:href="@{/my/myReserve(pg=${groups[1]+1})}">다음&nbsp;></a>
                 </span>

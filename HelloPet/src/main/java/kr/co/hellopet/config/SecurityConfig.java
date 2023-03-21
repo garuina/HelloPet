@@ -8,7 +8,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.server.authentication.RedirectServerAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
@@ -17,7 +20,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		// 접근권한
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/member/**").permitAll();
+		// member 에 접근하는 사용자가 로그인을 한 사용자라면 index 로 이동
+		http.authorizeRequests().antMatchers("/member/**").anonymous().and().exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"));
+		http.authorizeRequests().antMatchers("/my/**").hasAnyRole("1");
+		http.authorizeRequests().antMatchers("/community/**").permitAll();
+		http.authorizeRequests().antMatchers("/cs/**").permitAll();
+		http.authorizeRequests().antMatchers("/disease/**").permitAll();
+		http.authorizeRequests().antMatchers("/lists/**").permitAll();
+		http.authorizeRequests().antMatchers("/message/**").permitAll();
+		http.authorizeRequests().antMatchers("/search/**").permitAll();
 	/*
 	 * http.authorizeRequests().antMatchers("/admin/**").hasAnyRole("7");
 	 */
