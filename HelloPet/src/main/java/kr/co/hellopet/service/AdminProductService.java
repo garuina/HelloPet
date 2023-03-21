@@ -95,13 +95,13 @@ public class AdminProductService {
 	
 	
 	// 관리자 상품 목록
-	public List<AdminProductVO> selectAdminProducts(int start, int medNo){
-		return dao.selectAdminProducts(start, medNo);
+	public List<AdminProductVO> selectAdminProducts(int start){
+		return dao.selectAdminProducts(start);
 	}
 	
 	// 관리자 상품 목록갯수
-	public int selectProductCount(int medNo) {
-		return dao.selectProductCount(medNo);
+	public int selectProductCount() {
+		return dao.selectProductCount();
 	}
 	
 	

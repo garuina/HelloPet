@@ -93,6 +93,7 @@ header > .menu > div > ul > li > a {
     padding: 0 64px;
 }
 header > .menu > div > ul > li img {width: 80%;}
+
 header > .menu > div > ul > li:nth-child(1) {
     position: relative;
     top: 3px;
@@ -448,7 +449,7 @@ table {
 .popup.on {display: block;}
 .popup > div {
     display: table;        
-    width: 62%;
+    width: 70%;
     height: auto;                
     margin: 0 auto;
     margin-top: 200px;

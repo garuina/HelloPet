@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.hellopet.dao.AdminDAO;
 import kr.co.hellopet.vo.AdminReserveVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
 
 /* 
@@ -26,6 +27,9 @@ public class AdminService {
 	/* 현재 로그인한 관리자 가져오기*/
 	public MedicalVO selectAdmin(String uid) {
 		return dao.selectAdmin(uid);
+	}
+	public MemberVO selectUser(String uid) {
+		return dao.selectUser(uid);
 	}
 	
 	/* 관리자 정보 수정 */

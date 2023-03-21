@@ -1,4 +1,5 @@
 <th:block th:include="@{admin/_header.html}"/>
+<link rel="stylesheet" th:href="@{/css/admin_product.css}">
 <script>
 	$(function(){
 		$(function(){
@@ -153,13 +154,13 @@
                         <tr>
                             <td>상품금액</td>
                             <td> 
-                                <input type="text" class="p-price" name="price" placeholder="상품금액을 입력하세요.">
+                                <input type="text" class="p-price" name="price" placeholder="상품금액을 입력하세요."> 원
                             </td>
                         </tr>
                         <tr>
                             <td>할인율</td>
                             <td> 
-                                <input type="text" class="p-sale" name="discount" placeholder="할인율을 입력하세요.">
+                                <input type="text" class="p-sale" name="discount" placeholder="할인율을 입력하세요."> %
                             </td>
                         </tr>
                         <tr>

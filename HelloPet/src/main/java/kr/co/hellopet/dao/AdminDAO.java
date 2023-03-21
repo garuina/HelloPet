@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.hellopet.vo.AdminReserveVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
 
 /* 
@@ -22,6 +23,7 @@ public interface AdminDAO {
 	
 	/* 현재 로그인한 관리자 가져오기*/
 	public MedicalVO selectAdmin(String uid);
+	public MemberVO selectUser(String uid);
 	
 	/* 관리자 정보 수정 */
 	public int updateAdmin(MedicalVO vo);

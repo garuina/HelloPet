@@ -22,7 +22,7 @@ public class AdminProductController {
 	private AdminProductService service;
 	
 	@GetMapping("admin/product/list")
-	public String productList(Model model, Principal principal, int medNo, String pg) {
+	public String productList(Model model, Principal principal, String pg) {
 
 		String uid = principal.getName();
 		
@@ -35,7 +35,7 @@ public class AdminProductController {
     	int currentPage = service.getCurrentPage(pg); // 현재 페이지 번호
 		int total = 0;
 		
-		total = service.selectProductCount(medNo);
+		total = service.selectProductCount();
 		
 		int lastPageNum = service.getLastPageNum(total);// 마지막 페이지 번호
 		int[] result = service.getPageGroupNum(currentPage, lastPageNum); // 페이지 그룹번호
@@ -43,7 +43,7 @@ public class AdminProductController {
 		int start = service.getStartNum(currentPage); // 시작 인덱스
 		
 		
-		List<AdminProductVO> products = service.selectAdminProducts(start, medNo);
+		List<AdminProductVO> products = service.selectAdminProducts(start);
 		
 		model.addAttribute("vo",vo);
 		model.addAttribute("products",products);
