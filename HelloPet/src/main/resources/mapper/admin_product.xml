@@ -38,9 +38,27 @@
 			limit #{start},10;
 	</select>
 	
+	<select id="selectAdminProduct" resultType="kr.co.hellopet.vo.AdminProductVO">
+		select * from `product`
+			where `prodNo`=#{prodNo};
+	</select>
+	
 	<select id="selectProductCount" resultType="int">
 		select count(`prodNo`) from `product`
 			where `medNo`=#{medNo};
 	</select>
+	
+	<update id="updateAdminProduct">
+		update `product` set 
+			`prodName`=#{prodName},
+			`descript`=#{descript},
+			`medicalName`=#{medicalName},
+			`price`=#{price},
+			`discount`=#{discount},
+			`thumb1`=#{thumb1},
+			`detail`=#{detail},
+			`regip`=#{regip}
+			where `prodNo`=#{prodNo};
+	</update>
 	
 </mapper>

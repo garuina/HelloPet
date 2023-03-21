@@ -16,12 +16,12 @@
                     <th>조회</th>
                     <th>관리</th>
                 </tr>
-                <tr th:each="product : ${product}">
+                <tr th:each="product : ${products}">
                     <td>
                         <input type="checkbox" name="상품코드">
                     </td>
                     <td>
-                        <img th:src="@{product.thumb1.substring(9)}" class="thumb">
+                        <img th:src="${product.thumb1}" class="thumb">
                     </td>
                     <td>[[${product.prodNo}]]</td>
                     <td>[[${product.prodName}]]</td>
@@ -30,29 +30,23 @@
                     <td>[[${product.medicalName}]]</td>
                     <td>[[${product.hit}]]</td>
                     <td>
-                        <a href="#">수정</a>
+                        <a th:href="@{/admin/product/modify(medNo=${vo.medNo}, prodNo=${product.prodNo})}">수정</a>
                     </td>
                 </tr>
                 
             </table>
             <input type="button" class="btn_delete" value="선택삭제">
             <a th:href="@{/admin/product/register(medNo=${vo.medNo})}" class="btn_register">상품등록</a>
-                    <div class="paging">
-                        <span class="prev">
-                            <a href="#"><</a>
-                        </span>
-                        <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                        </span>
-                        <span class="next">
-                            <a href="#">></a>
-                        </span>
-            </div>
+                   <div class="paging">
+                    	<th:block th:if="${pageGroupStart > 1}">
+                        <a th:href="@{/admin/product/list(pg=${pageGroupStart - 1})}" class="prev">←</a>
+                        </th:block>
+                        <th:block th:each="num,iterStat : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                        <a th:href="@{/admin/product/list(pg=${num},medNo=${vo.medNo})}" th:class="${num} eq ${currentPage} ? 'num on':'num'">[[${num}]]</a>
+                        </th:block>
+                        <th:block th:if="${pageGroupEnd < lastPageNum}">
+                        <a th:href="@{/admin/product/list(pg=${pageGroupEnd + 1})}" class="next">→</a>
+                        </th:block>
+                    </div>
         </main>
 <th:block th:include="@{admin/_footer.html}"/>

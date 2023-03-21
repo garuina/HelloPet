@@ -42,7 +42,7 @@ public class AdminProductController {
 		int pageStartNum = service.getPageStartNum(total, currentPage); // 페이지 시작번호
 		int start = service.getStartNum(currentPage); // 시작 인덱스
 		
-		
+		// 상품 리스트
 		List<AdminProductVO> products = service.selectAdminProducts(start, medNo);
 		
 		model.addAttribute("vo",vo);
@@ -78,7 +78,36 @@ public class AdminProductController {
 		vo.setRegip(regip);
 		
 		service.insertAdminProduct(vo);
-		return "redirect:/admin/product/list";
+		return "redirect:/admin/product/list?medNo="+vo.getMedNo();
+	}
+	
+	@GetMapping("admin/product/modify")
+	public String productModify(Model model, Principal principal, int prodNo) {
+		
+		String uid = principal.getName();
+		
+		MedicalVO vo = service.selectAdmin(uid);
+		
+		// 상품 정보
+		AdminProductVO product = service.selectAdminProduct(prodNo);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("product",product);
+		
+		return "admin/product/modify";
+	}
+	
+	@PostMapping("admin/product/modify")
+	public String productModify(HttpServletRequest req, AdminProductVO vo, int medNo) {
+		
+		String regip = req.getRemoteAddr();
+		vo.setRegip(regip);
+		
+		
+		
+		
+		service.updateAdminProduct(vo);
+		return "redirect:/admin/product/list?medNo="+medNo;
 	}
 	
 }
