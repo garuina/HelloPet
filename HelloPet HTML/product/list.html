@@ -39,11 +39,11 @@
                 </div>
             </div>
         </header>
-        <main id="sub-wrap">
-                <div class="top">
+        <main div class="top">
                     <h3>동물병원</h3>
                 </div>
-                <id="container" ng-app="appProduct" class="ng-scope">
+
+    <id="container" ng-app="appProduct" class="ng-scope">
             <div class="wid1300">
                 <div class="lodcation">
                     <span class="ic-home">
@@ -55,8 +55,6 @@
                     </span>
                 </div>
             </div>
-        </div>
-    </div>
         <div class="sub-cate ng-scope" ng-controller="ProductListController">
             <ul class="depth1">
                 <li ng-repeat="category in categorys" ng-class="(selFirstCategory.indexOf(category.Id > -1) ? 'active' : ''"class="ng-scope active)"> 
@@ -119,8 +117,8 @@
                 </li>
             </ul>
 
-            <ul class="depth4" style="display: block;">
-            <li ng-hide="!isMedicalProduct() && !isDeilveryProduct()" class>
+            <ul class="depth4">
+            <li ng-hide="!isMedicalProduct()" class>
                 <strong class="tit">반려동물유형</strong>
                 <div class="con">
                     <span ng-repeat="codetable in pettypes" class="ng-scope">
