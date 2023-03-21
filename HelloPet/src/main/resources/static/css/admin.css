@@ -487,29 +487,29 @@ table {
     box-sizing: border-box;
 }
 
-.popup > div > section > article {}
-.popup > div > section > article > h3 {
+.popup > div > section > form > article {}
+.popup > div > section > form > article > h3 {
     font-size: 20px;
     margin-bottom: 4px;
 }
-.popup > div > section > article > .popupTable {
+.popup > div > section > form > article > .popupTable {
     flex: 1;
     width: 100%;
     border-bottom: 3px solid#dddddd;
     border-top: 3px solid#dddddd;
 }
-.popup > div > section  > article > .popupTable tr {
+.popup > div > section > form  > article > .popupTable tr {
     flex: 1;
 }
 
-.popup > div > section  > article > .popupTable tr > th {
+.popup > div > section > form  > article > .popupTable tr > th {
     padding: 10px 10px;
     color: #333;
     background-color: #fbfbfb;
     font-size: 16px;
     border-bottom: 1px solid #dddddd;
 }
-.popup > div > section > article > .popupTable tr > td{
+.popup > div > section > form > article > .popupTable tr > td{
     padding: 15px 10px;
     color: #555;
     background-color: #fff;
@@ -517,24 +517,24 @@ table {
     border-bottom: 1px solid #dddddd;
     text-align: center;
 }
-.popup > div > section > article > .popupTable2 {
+.popup > div > section > form > article > .popupTable2 {
     flex: 1;
     width: 100%;
     border-bottom: 3px solid#dddddd;
     border-top: 3px solid#dddddd;
 }
-.popup > div > section  > article > .popupTable2 tr {
+.popup > div > section  > form > article > .popupTable2 tr {
     flex: 1;
 }
 
-.popup > div > section  > article > .popupTable2 tr > th {
+.popup > div > section > form  > article > .popupTable2 tr > th {
     padding: 10px 10px;
     color: #333;
     background-color: #fbfbfb;
     font-size: 16px;
     border-bottom: 1px solid #dddddd;
 }
-.popup > div > section > article > .popupTable2 tr > td{
+.popup > div > section > form > article > .popupTable2 tr > td{
     padding: 15px 10px;
     color: #555;
     background-color: #fff;

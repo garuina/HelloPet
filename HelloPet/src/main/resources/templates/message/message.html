@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>HelloPet</title>
@@ -11,16 +12,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/message.css}">
-    <script th:src="@{/js/popup.js}"></script>
+    <script th:src="@{/js/msgPopup.js}"></script>
+    <script>
+    	$(function(){
+    		
+    		var urlParams = new URL(location.href).searchParams;
+			var uid= urlParams.get('uid');
+			console.log('here1 ' +uid);
+    	});
+    	
+    	function goHos (){
+        	var medNo = $('.medNo').text();
+        	console.log(medNo);
+        	
+        	location.href="/HelloPet/admin/info?medNo="+medNo;
+        }
+        function goMsg (){
+        	var uid = $('.uid').text();
+        	console.log(uid);
+        	
+        	location.href="/HelloPet/message/message?uid="+uid;
+        }
+    	
+    </script>
 </head>
 <body>
     <div id="wrapper">
         <header class="header">
             <div class="headerTop">
                 <div>
-                    <a href="#">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
+                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_2')"><span class="medNo" sec:authentication="principal.medical.medNo"></span></label>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/member/login}">로그인</a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/member/join}">회원가입</a>
+                    <label sec:authorize="hasAuthority('ROLE_1')"><span class="name" sec:authentication="principal.member.nick">길동</span>님</label>
+                    <label sec:authorize="hasAuthority('ROLE_2')" onclick="goHos()">내 병원관리</label>
+	                <label sec:authorize="hasAuthority('ROLE_3')"><span th:onclick="location.href='/Hellopet/admin/info'">내 약국관리</span></label></a>
+	                <label sec:authorize="hasAuthority('ROLE_7')"><span>웹관리자님</span></label></a>
+                	<a sec:authorize="isAuthenticated()" th:href="@{/member/logout}" class="logout">로그아웃</a>
+                    <a sec:authorize="hasAuthority('ROLE_1')" th:href="@{/my/info}">마이페이지</a>
+                    <a onclick="goMsg()" class="message">알림</a>
                 </div>
             </div>
             <div class="menu">
@@ -40,49 +70,27 @@
                 <section class="message">
                     <div class="container">
                         <div class="msg-div">
-                            <h2>알림창</h2>
-                            <ul class="msg-list">
-                                <li>
-                                    <a href="#" class="msg">김채영님이 좋아요를 눌렀습니다.</a>
-                                    <span class="status0">안읽음</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="msg">김채영님이 댓글을 달았습니다.</a>
-                                    <span class="status0">안읽음</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="msg">김채영님이 좋아요를 눌렀습니다.</a>
-                                    <span class="status0">안읽음</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="msg">김채영님이 좋아요를 눌렀습니다.</a>
-                                    <span class="status0">안읽음</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="msg">김채영님이 좋아요를 눌렀습니다.</a>
-                                    <span class="status0">안읽음</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="msg">김채영님이 좋아요를 눌렀습니다.</a>
-                                    <span class="status0">안읽음</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="msg">김채영님이 좋아요를 눌렀습니다.</a>
-                                    <span class="status1">읽음</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="msg">김채영님이 좋아요를 눌렀습니다.</a>
-                                    <span class="status1">읽음</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="msg">김채영님이 좋아요를 눌렀습니다.</a>
-                                    <span class="status1">읽음</span>
-                                </li>
-                            </ul>
+                             <h2>알림창</h2>
+                             <th:block th:if="${#lists.isEmpty(msgs)}">
+		                    	<p class="empty">알림이 없습니다.</p>
+	                   		 </th:block>
+	                   		 <th:block th:unless="${#lists.isEmpty(msgs)}">
+	                            <ul class="msg-list" th:each="msg:${msgs}">
+	                                <li>
+	                                	<span style="display: none;" class="msgNo">[[${msg.msgNo}]]</span>
+	                                    <a href="#" class="msg">[[${msg.title}]]</a>
+	                                    
+	                                    <th:block th:if="${msg.msgStatus == 0}">
+	                                    	<span class="status0">안읽음</span>
+	                                    </th:block>
+	                                    <th:block th:if="${msg.msgStatus == 1}">
+	                                    	<span class="status1">읽음</span>
+	                                    </th:block>
+	                                </li>
+	                            </ul>
+                             </th:block>
                         </div>
-                        
                     </div>
-
                 </section>
             </section>
         </main>
@@ -114,12 +122,12 @@
         </footer>
         <!-- 알림 자세히보기 팝업 -->
         <div id="popMsg" class="popup">
-            <div>
+            <div class="msgDiv">
                 <nav>
                     <h1>알림</h1>
                     <button class="btnClose">X</button>
                 </nav>
-                <p>김채영님이 회원님의 게시물에 좋아요를 눌렀습니다.</p>
+		        <p></p>
             </div>
         </div>
     </div>

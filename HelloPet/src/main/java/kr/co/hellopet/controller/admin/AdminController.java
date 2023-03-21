@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.hellopet.service.AdminService;
+import kr.co.hellopet.socket.NotificationHandler;
 import kr.co.hellopet.vo.AdminReserveVO;
 import kr.co.hellopet.vo.CommunityVO;
 import kr.co.hellopet.vo.CsVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MessageVO;
 
 @Controller
 public class AdminController {
 
 	@Autowired
 	private AdminService service;
+	
 	
 	@GetMapping("admin/info")
 	public String info(Model model, Principal principal) {
@@ -48,14 +51,15 @@ public class AdminController {
 		// 페이징 처리
 		int currentPage = service.getCurrentPage(pg);
         int start = service.getLimitStart(currentPage);
-
+        int pageSize = 10;
+        
         int total = service.selectCountTotal(medNo);
         int lastPageNum = service.getLastPageNum(total);
         int pageStartNum = service.getpageStartNum(total, start);
         int groups[] = service.getPageGroup(currentPage, lastPageNum);
 		
         // 예약 목록 출력
-		List<AdminReserveVO> reserves = service.selectReserves(start, medNo);
+		List<AdminReserveVO> reserves = service.selectReserves(start, medNo, pageSize);
 		int size = reserves.size();
 		int idx = 1;
 		for(AdminReserveVO res : reserves) {
@@ -72,12 +76,13 @@ public class AdminController {
         model.addAttribute("lastPageNum", lastPageNum);
         model.addAttribute("pageStartNum", pageStartNum);
         model.addAttribute("groups", groups);
+        model.addAttribute("medNo", medNo);
 		
         return "admin/confirm/list";
 	}
 	
 	@ResponseBody
-	@PostMapping("admin/confirm/list")
+	@GetMapping("admin/confirm/ok")
 	public Map<String, AdminReserveVO> list(Model model,@RequestParam(value="revNo", required = false) Integer revNo,@RequestParam(value="medNo", required = false) Integer medNo) {
 		AdminReserveVO reserve = service.selectReserve(revNo);
 		Map<String, AdminReserveVO> map = new HashMap<>();
@@ -87,10 +92,23 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@GetMapping("admin/confirm/ok")
-	public boolean ok(@RequestParam(value="revNo", required = false) Integer revNo) {
-	    int result = service.updateConfirm(revNo);
-	    return result == 1;
+	@PostMapping("admin/confirm/ok")
+	public Map<String, Boolean> ok(@RequestParam(value="revNo", required = false) Integer revNo, MessageVO vo, String medical, String uid, String medNo) {
+	    boolean success = service.updateConfirm(revNo);
+	    Map<String, Boolean> map = new HashMap<>();
+	    map.put("result", success);
+	    
+	    vo.setUid(uid);
+	    vo.setMedical(medical);
+	    
+	    if(success == true) {
+	    	vo.setTitle(vo.getMedical()+ "에서 예약을 수락하였습니다.");
+	    	vo.setContent(vo.getMedical()+ "에서 예약을 수락하였습니다.");
+	    	service.insertMsg(vo);
+	    	service.updateReserve(medNo);
+	    }
+	    
+	    return map;
 	}
 	
 	@ResponseBody
@@ -101,6 +119,24 @@ public class AdminController {
 		map.put("result", reserve);
 		
 		return map;
+	}
+	
+	@ResponseBody
+	@PostMapping("admin/confirm/view")
+	public Map<String, Boolean> view(@RequestParam(value="revNo", required = false) Integer revNo, MessageVO vo, String medical, String uid) {
+	    boolean success = service.updateReject(revNo);
+	    Map<String, Boolean> map = new HashMap<>();
+	    map.put("result", success);
+	    
+	    vo.setUid(uid);
+	    vo.setMedical(medical);
+	    
+	    if(success == true) {
+	    	vo.setTitle("거절사유 : " + vo.getMedical()+ "에서 예약을 거절하였습니다.");
+	    	service.insertMsg(vo);
+	    }
+	    
+	    return map;
 	}
 	
 	@GetMapping("admin/infoModify")

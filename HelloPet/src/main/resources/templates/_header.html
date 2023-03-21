@@ -83,6 +83,12 @@
         	
         	location.href="/HelloPet/admin/info?medNo="+medNo;
         }
+        function goMsg (){
+        	var uid = $('.uid').text();
+        	console.log(uid);
+        	
+        	location.href="/HelloPet/message/message?uid="+uid;
+        }
         
     </script>
 </head>
@@ -94,8 +100,12 @@
                 	<label style="display: none;" sec:authorize="hasAuthority('ROLE_1')"><span class="level" sec:authentication="principal.member.level"></span></label>
                 	<label style="display: none;" sec:authorize="hasAuthority('ROLE_7')"><span class="level" sec:authentication="principal.member.level"></span></label>
                 	<label style="display: none;" sec:authorize="hasAuthority('ROLE_2')"><span class="level" sec:authentication="principal.medical.level"></span></label>
-                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_2')"><span class="medNo" sec:authentication="principal.medical.medNo"></span></label>
                 	<label style="display: none;" sec:authorize="hasAuthority('ROLE_3')"><span class="level" sec:authentication="principal.medical.level"></span></label>
+                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_2')"><span class="medNo" sec:authentication="principal.medical.medNo"></span></label>
+                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_1')"><span class="uid" sec:authentication="principal.member.uid"></span></label>
+                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_7')"><span class="uid" sec:authentication="principal.member.uid"></span></label>
+                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_2')"><span class="uid" sec:authentication="principal.medical.uid"></span></label>
+                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_3')"><span class="uid" sec:authentication="principal.medical.uid"></span></label>
                     <a sec:authorize="!isAuthenticated()" th:href="@{/member/login}">로그인</a>
                     <a sec:authorize="!isAuthenticated()" th:href="@{/member/join}">회원가입</a>
                     <label sec:authorize="hasAuthority('ROLE_1')"><span class="name" sec:authentication="principal.member.nick">길동</span>님</label>
@@ -104,7 +114,7 @@
 	                <label sec:authorize="hasAuthority('ROLE_7')"><span>웹관리자님</span></label></a>
                 	<a sec:authorize="isAuthenticated()" th:href="@{/member/logout}" class="logout">로그아웃</a>
                     <a sec:authorize="hasAuthority('ROLE_1')" th:href="@{/my/info}">마이페이지</a>
-                    <a th:href="@{/message/message}" class="socket">알림</a>
+                    <a sec:authorize="isAuthenticated()" onclick="goMsg()" class="message">알림 ([[${result}]])</a>
                 </div>
             </div>
             <div class="menu">

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.hellopet.vo.AdminReserveVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MessageVO;
 
 /* 
  *  날짜 : 2023/03/14
@@ -26,11 +27,15 @@ public interface AdminDAO {
 	public int updateAdmin(MedicalVO vo);
 	
 	/* 예약내역 */
-	public List<AdminReserveVO> selectReserves(@Param("start") int start, String medNo);
+	public List<AdminReserveVO> selectReserves(@Param("start") int start, String medNo, int pageSize);
 	public int selectCountTotal(String medNo);
 	public AdminReserveVO selectReserve(@RequestParam("revNo") Integer revNo);
 	
 	/* 예약 상태 변경 */
-	public int updateConfirm(int revNo);
-	public int updateReject(AdminReserveVO vo);
+	public boolean updateConfirm(int revNo);
+	public boolean updateReject(int revNo);
+	
+	/* 메시지 */
+	public int insertMsg(MessageVO vo);
+	public int updateReserve(String medNo);
 }
