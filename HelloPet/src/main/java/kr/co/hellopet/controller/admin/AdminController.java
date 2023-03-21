@@ -21,6 +21,7 @@ import kr.co.hellopet.vo.AdminReserveVO;
 import kr.co.hellopet.vo.CommunityVO;
 import kr.co.hellopet.vo.CsVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
 
 @Controller
@@ -36,8 +37,10 @@ public class AdminController {
 		String uid = principal.getName();
 		
 		MedicalVO vo = service.selectAdmin(uid);
+		MemberVO user = service.selectUser(uid);
 		
 		model.addAttribute("vo",vo);
+		model.addAttribute("user",user);
 		return "admin/info";
 	}
 	@GetMapping("admin/confirm/list")

@@ -1,7 +1,8 @@
 <th:block th:include="@{admin/_header.html}"/>
+<link rel="stylesheet" th:href="@{/css/admin_product.css}">
         <main>
             <div class="top">
-                <h3>진료상품현황</h3>
+                <h3>진료상품관리</h3>
             </div>
             <div class="product_list">
             <table>
@@ -36,7 +37,7 @@
                 
             </table>
             <input type="button" class="btn_delete" value="선택삭제">
-            <a th:href="@{/admin/product/register(medNo=${vo.medNo})}" class="btn_register">상품등록</a>
+            <a th:href="@{/admin/product/register}" class="btn_register">상품등록</a>
                     <div class="paging">
                         <span class="prev">
                             <a href="#"><</a>

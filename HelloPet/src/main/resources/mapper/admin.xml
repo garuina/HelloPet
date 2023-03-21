@@ -13,6 +13,10 @@
 		select * from `pet_hospital_pharmacy` where `uid`=#{uid};
 	</select>
 	
+	<select id="selectUser" resultType="kr.co.hellopet.vo.MemberVO">
+		select * from `pet_owner` where `uid` = #{uid};	
+	</select>
+	
 	<update id="updateAdmin">
 		update `pet_hospital_pharmacy` set
             `email`=#{email},

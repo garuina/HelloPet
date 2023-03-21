@@ -39,7 +39,7 @@ import kr.co.hellopet.vo.TermsVO;
 
 //푸시되어라
 @Controller
-public class PetMemberController {
+public class MemberController {
 	
 	@Autowired
 	private MemberService service;
@@ -125,7 +125,7 @@ public class PetMemberController {
 		    
 		  }else {
 			  session.removeAttribute("termAgreed");
-			  return "/member/registerMedical";
+			  return "member/registerMedical";
 		  }
 	}
 	
