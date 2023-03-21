@@ -43,14 +43,18 @@ public class AdminProductController {
 		int start = service.getStartNum(currentPage); // 시작 인덱스
 		
 		
+		List<AdminProductVO> products = service.selectAdminProducts(start, medNo);
+		
 		model.addAttribute("vo",vo);
+		model.addAttribute("products",products);
 		model.addAttribute("lastPageNum", lastPageNum);		
 		model.addAttribute("currentPage", currentPage);		
 		model.addAttribute("pageGroupStart", result[0]);
 		model.addAttribute("pageGroupEnd", result[1]);
 		model.addAttribute("pageStartNum", pageStartNum+1);
 		
-		List<AdminProductVO> products = service.selectAdminProducts(start, medNo);
+		
+		
 		
 		return "admin/product/list";
 	}

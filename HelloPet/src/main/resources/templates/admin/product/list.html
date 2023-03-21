@@ -16,176 +16,24 @@
                     <th>조회</th>
                     <th>관리</th>
                 </tr>
-                <tr>
+                <tr th:each="product : ${product}">
                     <td>
                         <input type="checkbox" name="상품코드">
                     </td>
                     <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
+                        <img th:src="@{product.thumb1.substring(9)}" class="thumb">
                     </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
+                    <td>[[${product.prodNo}]]</td>
+                    <td>[[${product.prodName}]]</td>
+                    <td>[[${product.price}]]</td>
+                    <td>[[${product.discount}]]</td>
+                    <td>[[${product.medicalName}]]</td>
+                    <td>[[${product.hit}]]</td>
                     <td>
                         <a href="#">수정</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                       <a href="#">수정</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#">수정</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#">수정</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#">수정</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#">수정</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#">수정</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#">수정</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#">수정</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="상품코드">
-                    </td>
-                    <td>
-                        <img th:src="@{/img/진공미용기.jpg}" class="thumb">
-                    </td>
-                    <td>201603292</td>
-                    <td>펫니즈 스마트 애완동물 진공 미용기 PNZ-PC850W</td>
-                    <td>59,900</td>
-                    <td>10</td>
-                    <td>채영동물병원</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#">수정</a>
-                    </td>
-                </tr>
+                
             </table>
             <input type="button" class="btn_delete" value="선택삭제">
             <a th:href="@{/admin/product/register(medNo=${vo.medNo})}" class="btn_register">상품등록</a>
