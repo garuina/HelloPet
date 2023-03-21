@@ -37,25 +37,39 @@ public class AdminProductService {
 		
 		int result = 0;
 		
-		
 		// DB에 저장할 이미지 경로 지정
 		List<String> names = imgsUpload(vo);
 		
 		vo.setThumb1("/HelloPet/file/"+names.get(0));
 		vo.setDetail("/HelloPet/file/"+names.get(1));
 		
-		
-		
-		
-		
-		
-		
-		
 			result = dao.insertAdminProduct(vo);
 		
 		return result;
 	}
 	
+	// 관리자 상품 수정하기
+	public int updateAdminProduct(AdminProductVO vo) {
+		
+		
+		int result = 0;
+		
+		// DB에 저장할 이미지 경로 지정
+		List<String> names = imgsUpload(vo);
+		
+		
+			vo.setThumb1("/HelloPet/file/"+names.get(0));
+			vo.setDetail("/HelloPet/file/"+names.get(1));
+		
+		
+		
+			result = dao.updateAdminProduct(vo);
+		
+		return result;
+	}
+	public AdminProductVO selectAdminProduct(int prodNo) {
+		return dao.selectAdminProduct(prodNo);
+	}
 	
 	// 가상 업로드 경로
     private String uploadsPath = "file/";

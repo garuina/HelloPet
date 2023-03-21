@@ -31,4 +31,9 @@ public interface AdminProductDAO {
 	public int selectProductCount();
 		
 	
+	
+	// 관리자 상품 수정
+	public AdminProductVO selectAdminProduct(int prodNo);
+	public int updateAdminProduct(AdminProductVO vo);
+	
 }
