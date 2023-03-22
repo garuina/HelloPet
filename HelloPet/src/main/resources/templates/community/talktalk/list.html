@@ -97,7 +97,6 @@
 				    		}
 				    		
 				    		
-				    		
 				    		  
 				    	}
 					});
@@ -127,6 +126,7 @@
         				    	method : 'GET',
         				    	data : jsonData2,
         				    	dataType : 'json',
+        				    	async:false,
         				    	success : function(data){
         				    			$('.heart-icon').html('<button class="icon-heart"></button>');
         				    			window.location.reload();
@@ -146,6 +146,7 @@
         				    	method : 'GET',
         				    	data : jsonData2,
         				    	dataType : 'json',
+        				    	async:false,
         				    	success : function(data){
         				    		$('.heart-icon').html('<button class="icon-heart-mint"></button>');
         				    		window.location.reload();
@@ -165,8 +166,14 @@
 				    	dataType : 'json',
 				    	success : function(data){
 				    		for(let i=0; i < data.result.length; i++){
-				    		$('.content_reply').append('<div class="content_item_inner"><div class="content_item_img"></div><div class="content_item_con"><div class="content_item_con_head"><div class="content_item_txt"><strong>'+data.result[i].nick+'</strong></div><div class="content_item_date">'+data.result[i].rdate.substring(0,10)+'</div></div><div class="content_item_con_body"><div class="content_item_txt">'+data.result[i].content+'</div><div class="content_item_btn_wrap"><div class="info_item"><div role="dialog" class="v_dialog_container"></div><span style="cursor: pointer;"></span></div><button class="reply_btn" value1="'+data.result[i].reply_no+'" value2="'+data.result[i].uid+'">삭제</button></div></div></div></div>');
+				    		if(uid == data.result[i].uid){
+				    			$('.content_reply').append('<div class="content_item_inner" value10="'+data.result[i].reply_no+'"><div class="content_item_img"></div><div class="content_item_con"><div class="content_item_con_head"><div class="content_item_txt"><strong>'+data.result[i].nick+'</strong></div><div class="content_item_date">'+data.result[i].rdate.substring(0,10)+'</div></div><div class="content_item_con_body"><div class="content_item_txt">'+data.result[i].content+'</div><div class="content_item_btn_wrap"><div class="info_item"><div role="dialog" class="v_dialog_container"></div><span style="cursor: pointer;"></span></div><button class="reply_btn" value1="'+data.result[i].reply_no+'" value2="'+data.result[i].uid+'">삭제</button></div></div></div></div>');
+				    		}else if(uid != data.result[i].uid){
+				    			$('.content_reply').append('<div class="content_item_inner"><div class="content_item_img"></div><div class="content_item_con"><div class="content_item_con_head"><div class="content_item_txt"><strong>'+data.result[i].nick+'</strong></div><div class="content_item_date">'+data.result[i].rdate.substring(0,10)+'</div></div><div class="content_item_con_body"><div class="content_item_txt">'+data.result[i].content+'</div><div class="content_item_btn_wrap"><div class="info_item"><div role="dialog" class="v_dialog_container"></div></div></div></div></div></div>');
+				    		}
 				    		console.log(data.result[i]);	
+				    		console.log(uid);
+				    		console.log(data.result[i].uid);
 				    		}
 				    	}
 				    	
@@ -180,7 +187,8 @@
             		$('#modal .button').click(function(){
             			
             			let content = $('input[name=content]').val();
-                    	
+            			
+            			
                     	jsonData3 = {'uid':uid,
                 				'no':no,
                 				'nick':nick,
@@ -195,13 +203,17 @@
     				    	method : 'POST',
     				    	data : jsonData3,
     				    	dataType : 'json',
+    				    	async:false,
     				    	success : function(data){
+    				    		
     				    		alert("댓글이 입력되었습니다.");
     				    		window.location.reload();
+    				    		/*location.href = "/HelloPet/community/talktalk/list?no="+no;
+    				    		$('div[value1='+no+']').trigger('click');*/
     				    	}
                     		
                     	});
-                    	
+                    	$('#modal').load();
             		});
                 	 
                 	// 댓글 삭제하기
@@ -209,27 +221,28 @@
             			
             			let reply_no = $(this).attr("value1");
             			let reply_id = $(this).attr("value2");
+            			let replyTotal = $('.content_item_img').length-2;
+            			
             			
             			$.ajax({
     						url : "/HelloPet/community/deleteReplys",
     				    	method : 'GET',
     				    	data : {'no':no, 'uid':uid, 'reply_no':reply_no},
     				    	dataType : 'json',
+    				    	async:false,
     				    	success : function(data){
     				    		
-    				    		if(reply_id != uid ){
-    				    			alert("글 작성자가 아닙니다.");
-    				    		}else if(reply_id == uid){
     				    			alert("댓글이 삭제되었습니다.");
-        				    		window.location.reload();
-    				    		}
-    				    		
+    				    			$('div[value10='+reply_no+']').remove();
+    				    			$('.content_info_item span').html('<strong>'+replyTotal+'</strong>');
+    				    			console.log(replyTotal);
     				    	},
     				    	error : function(){
     				    		alert("로그인을 하세요.");
     				    	}
                     		
                     	});
+            			
             		});
                 	 
             		
@@ -245,13 +258,14 @@
         	
         	// x를 누르면 모달 창 닫힘
                 $('.modal_close').click(function(){
-                	$('#modal').css('display','none');
-                	$('.v-overlay').css('display','none');
+                	/*$('#modal').css('display','none');
+                	$('.v-overlay').css('display','none');*/
                 	window.location.reload();
+                	
                 });
                 
         	// 모달화면 밖 클릭시 모달 창 닫힘
-                $(document).mouseup(function (e){
+               /* $(document).mouseup(function (e){
 
                 	let container = $('#modal');
 					let overlay = $('.v-overlay');
@@ -260,7 +274,7 @@
                 	container.css('display','none');
                 	overlay.css('display','none');
                 	}
-                });
+                });*/
         	
         		
         	
