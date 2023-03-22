@@ -1,5 +1,6 @@
 package kr.co.hellopet.controller.message;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +24,25 @@ public class MessageController {
 	private MessageService service;
 	
 	@GetMapping("message/message")
-	public String message(Model model,String uid, String msgNo) {
+	public String message(Model model,Principal principal, String msgNo, String pg) {
 		
-		List<MessageVO> msgs = service.selectMsgs(uid);
+		String uid = principal.getName();
+		
+		int currentPage = service.getCurrentPage(pg);
+        int start = service.getLimitStart(currentPage);
+
+        int total = service.selectCountTotal(uid);
+        int lastPageNum = service.getLastPageNum(total);
+        int pageStartNum = service.getpageStartNum(total, start);
+        int groups[] = service.getPageGroup(currentPage, lastPageNum);
+		
+		List<MessageVO> msgs = service.selectMsgs(start,uid);
 		model.addAttribute("msgs", msgs);
+		model.addAttribute("currentPage", currentPage);
+        model.addAttribute("lastPageNum", lastPageNum);
+        model.addAttribute("pageStartNum", pageStartNum);
+        model.addAttribute("groups", groups);
+        model.addAttribute("uid", uid);
 		
 		return "message/message";
 	}

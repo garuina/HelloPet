@@ -10,8 +10,12 @@
 <mapper namespace="kr.co.hellopet.dao.MessageDAO">
 	
 	<select id="selectMsgs" resultType="kr.co.hellopet.vo.MessageVO">
-		select * from `message` where `uid`=#{uid} order by `msgRdate` desc;
+		select * from `message` where `uid`=#{uid} order by `msgRdate` desc limit #{start},10;
 	</select>
+	<select id="selectCountTotal" resultType="int" parameterType="map">
+        select count(`msgNo`) from `message` where `uid`=#{uid};
+    </select>
+	
 	<select id="selectMsg" resultType="kr.co.hellopet.vo.MessageVO">
 		select * from `message` where `msgNo`=#{msgNo};
 	</select>

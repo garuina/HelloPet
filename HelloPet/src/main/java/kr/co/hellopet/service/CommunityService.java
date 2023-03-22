@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hellopet.dao.CommunityDAO;
 import kr.co.hellopet.vo.CommunityVO;
+import kr.co.hellopet.vo.MessageVO;
 
 /*
  * 날짜 : 2023/03/09
@@ -258,6 +259,11 @@ public class CommunityService {
 	// 모달창 최근 좋아요누른 별명 출력
 	public CommunityVO selectHeartUser(int no) {
 		return dao.selectHeartUser(no);
+	}
+	
+	// 메세지 보내기
+	public int insertMsg(MessageVO vo) {
+		return dao.insertMsg(vo);
 	}
 	
 

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hellopet.dao.CsDAO;
 import kr.co.hellopet.vo.CsVO;
+import kr.co.hellopet.vo.MessageVO;
 
 /* 
  *  날짜 : 2023/03/09
@@ -109,6 +110,11 @@ public class CsService {
 	}
     public int deleteArticle(int no) {
     	return dao.deleteArticle(no);
+    }
+    
+    /* message */
+    public int insertMsg(MessageVO vo) {
+    	return dao.insertMsg(vo);
     }
 	
 	// 파일 이미지

@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.CsService;
 import kr.co.hellopet.vo.CsVO;
+import kr.co.hellopet.vo.MessageVO;
 
 /* 
  *  날짜 : 2023/03/09
@@ -209,7 +212,7 @@ public class CsController {
 	}
 	
 	@PostMapping("cs/qna/view")
-	public String qnaView(CsVO vo, String pg, HttpServletRequest req) {
+	public String qnaView(CsVO vo, String pg, HttpServletRequest req, @RequestParam(value="writerUid", required=false) String writerUid, MessageVO msg) {
 		int currentPage = service.getCurrentPage(pg);
 		
 		/* 답변 */
@@ -218,7 +221,12 @@ public class CsController {
 		int result = service.insertReply(vo);
 		
 		if(result > 0) {
-			service.updateReply(vo.getNo());
+			int reply = service.updateReply(vo.getNo());
+			
+			msg.setUid(writerUid);
+			msg.setTitle("회원님의 문의글에 답변이 달렸습니다.");
+			msg.setContent("마이페이지 > 1:1 문의에서 확인하세요.");
+			service.insertMsg(msg);
 		}
 		
 		return "redirect:/cs/qna/view?no="+vo.getNo()+"&pg="+currentPage;

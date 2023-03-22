@@ -9,6 +9,7 @@ import kr.co.hellopet.dao.SearchDAO;
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
+import kr.co.hellopet.vo.MessageVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 /*
@@ -98,8 +99,11 @@ public class SearchService {
 	
 	
 	//reserve
-	public void insertReserve(ReserveVO vo) {
-		dao.insertReserve(vo);
+	public int insertReserve(ReserveVO vo) {
+		return dao.insertReserve(vo);
+	}
+	public MedicalVO selectHospital(String medNo) {
+		return dao.selectHospital(medNo);
 	}
 	
 	// complete
@@ -161,6 +165,9 @@ public class SearchService {
 		
     // 페이징 처리 끝 ///////////////////////////////////////////////////////
 	
-	
+	// 메시지
+	public int insertMsg(MessageVO vo) {
+		return dao.insertMsg(vo);
+	}
 	
 }

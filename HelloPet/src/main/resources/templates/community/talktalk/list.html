@@ -16,8 +16,11 @@
                 	
                 	let no = $(this).attr("value1");
                 	let uid = $('input[name=uid]').val();
+                	let nick = $('input[name=nick]').val();
                 	let heartVal = 0;
                 	let heartUser = "";
+                	let writerUid = $(this).find('.gallery_info1').find('.writerUid').text().trim();
+                	console.log('writer :' +writerUid);
                 	
 					// 모달창 제일 최근 좋아요 누른 별명출력 
                 	$.ajax({
@@ -109,7 +112,9 @@
                     
                     
                 	let jsonData2 = {'no' : no,
-									'uid' : uid};
+									'uid' : uid,
+									'writerUid': writerUid,
+									'nick': nick};
                 	
                 	
                 	// 좋아요 여부
@@ -178,6 +183,8 @@
                     	
                     	jsonData3 = {'uid':uid,
                 				'no':no,
+                				'nick':nick,
+                				'writerUid': writerUid,
                 				'content':content};
 						
                     	
@@ -341,6 +348,7 @@
                                 <div class="gallery_item_con1" th:style="'background-image: url('+@{__${rank.img1.substring(9)}__}+');'"></div>
                                 <div class="gallery_item_con2">
                                     <div class="gallery_info1">
+                                    <div class="writerUid" style="display: none">[[${rank.uid}]]</div>
                                         <div class="gallery_title">[[${rank.title}]]</div>
                                         <div class="gallery_like_comment">
                                             <div class="gallery_like"><span class="gallery_like_icon" th:style="'background-image: url('+@{/img/icon-heart.png}+');'"></span>[[${rank.heart}]]</div>
@@ -365,6 +373,7 @@
                                 <div class="gallery_item_con1" th:style="'background-image: url('+@{__${article.img1.substring(9)}__}+');'"></div>
                                 <div class="gallery_item_con2">
                                     <div class="gallery_info1">
+                                        <div class="writerUid" style="display: none">[[${article.uid}]]</div>
                                         <div class="gallery_title">[[${article.title}]]</div>
                                         <div class="gallery_like_comment">
                                         <div class="gallery_like"><span class="gallery_like_icon"  th:style="'background-image: url('+@{/img/icon-heart.png}+');'"></span>[[${article.heart}]]</div>
@@ -522,6 +531,7 @@
                                         <div class="content_write">
                                             <div class="input_box">
                                             	<input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}" sec:authorize="isAuthenticated()">
+                                            	<input type="hidden" name="nick" th:value="${#authentication.principal.member.nick}" sec:authorize="isAuthenticated()">
                                                 <input type="text" placeholder="댓글을 입력해주세요." class="input" name="content">
                                                 <input type="button" class="button" value="확인">
                                             </div>
