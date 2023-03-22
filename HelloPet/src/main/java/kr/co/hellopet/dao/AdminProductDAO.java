@@ -30,10 +30,14 @@ public interface AdminProductDAO {
 	// 관리자 상품 목록갯수
 	public int selectProductCount();
 		
+	// 체크목록 삭제
+	public int deleteCheck(String prodNo);
 	
 	
 	// 관리자 상품 수정
 	public AdminProductVO selectAdminProduct(int prodNo);
 	public int updateAdminProduct(AdminProductVO vo);
+	
+	
 	
 }

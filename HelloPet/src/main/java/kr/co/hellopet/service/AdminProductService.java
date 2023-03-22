@@ -118,6 +118,10 @@ public class AdminProductService {
 		return dao.selectProductCount();
 	}
 	
+	// 체크목록 삭제
+	public int deleteCheck(String prodNo) {
+		return dao.deleteCheck(prodNo);
+	}
 	
 	
 	// 페이징

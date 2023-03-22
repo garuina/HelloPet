@@ -61,4 +61,8 @@
 			where `prodNo`=#{prodNo};
 	</update>
 	
+	<delete id="deleteCheck">
+		delete from `product` WHERE `prodNo` in (#{prodNo}); 
+	</delete>
+	
 </mapper>

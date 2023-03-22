@@ -1,7 +1,10 @@
 package kr.co.hellopet.controller.admin;
 
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.AdminProductService;
 import kr.co.hellopet.vo.AdminProductVO;
@@ -108,6 +112,19 @@ public class AdminProductController {
 		
 		service.updateAdminProduct(vo);
 		return "redirect:/admin/product/list?medNo="+medNo;
+	}
+	
+	@ResponseBody
+	@GetMapping("admin/product/delete")
+	public Map<String, Integer> delete(String prodNo, HttpServletRequest req) {
+		List<String> list = Arrays.asList(prodNo.split(","));
+		int result = 0;
+		for(String no : list) {
+			result = service.deleteCheck(no);
+		}
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		return map;
 	}
 	
 }
