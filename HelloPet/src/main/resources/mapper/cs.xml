@@ -137,4 +137,21 @@
 	<delete id="deleteArticle">
         delete from `cs_article` where `no`=#{no} or `parent`=#{parent};
     </delete>
+    
+    <!-- message -->
+    <insert id="insertMsg">
+    	insert into `message` set
+    		`uid`=#{uid},
+    		<choose>
+					<when test="medical == null">
+						`medical`=null,
+					</when>
+					<when test="medical != null">
+						`medical`=#{medical},
+					</when>
+    		</choose>
+    		`title`=#{title},
+    		`content`=#{content},
+    		`msgRdate`=NOW();
+    </insert>
 </mapper>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.CommunityService;
 import kr.co.hellopet.vo.CommunityVO;
+import kr.co.hellopet.vo.MessageVO;
 
 /*
  * 날짜 : 2023/03/09
@@ -271,14 +272,17 @@ public class CommunityController {
 	// 글 좋아요 안눌렀을때 +1
 	@ResponseBody
 	@GetMapping("community/HeartUp")
-	public int HeartUp(@RequestParam("no") int no, @RequestParam("uid") String uid){
+	public int HeartUp(@RequestParam("no") int no, @RequestParam("uid") String uid, MessageVO vo, String writerUid, String nick){
 		
 		int up = service.insertHeart(no, uid);
 		
-		
-		
+		if(up > 0) {
+			vo.setUid(writerUid);
+			vo.setTitle(nick + "님이 회원님의 게시물에 좋아요를 눌렀습니다.");
+			vo.setContent(nick + "님이 회원님의 게시물에 좋아요를 눌렀습니다.");
+			service.insertMsg(vo);
+		}
 		return up;
-		
 	}
 	
 	// 글 좋아요 눌렀을때 -1
@@ -313,18 +317,25 @@ public class CommunityController {
 	// 댓글달기
 	@ResponseBody
 	@PostMapping("community/insertReplys")
-	public Map<String, CommunityVO> insertReply(CommunityVO vo, HttpServletRequest req){
+	public Map<String, CommunityVO> insertReply(CommunityVO vo, HttpServletRequest req, MessageVO msg, String nick, String writerUid){
 		
 		
 		String regip = req.getRemoteAddr();
 		vo.setRegip(regip);
 		
 		
-		service.insertReply(vo);
+		int reply = service.insertReply(vo);
 		
 		Map<String, CommunityVO> map = new HashMap<>();
 		
 		map.put("result", vo);
+		
+		if(reply > 0) {
+			msg.setUid(writerUid);
+			msg.setTitle(nick +"님이 회원님의 게시물에 댓글을 달았습니다.");
+			msg.setContent("댓글내용 : "+ msg.getContent());
+			service.insertMsg(msg);
+		}
 		
 		return map;
 		

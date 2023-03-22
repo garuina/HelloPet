@@ -11,8 +11,9 @@ import kr.co.hellopet.vo.MessageVO;
 @Repository
 public interface MessageDAO {
 	
-	public List<MessageVO> selectMsgs(String uid);
+	public List<MessageVO> selectMsgs(int start, String uid);
 	public MessageVO selectMsg(String msgNo);
 	public int updateMsg(String msgNo);
+	public int selectCountTotal(String uid);
 
 }

@@ -12,6 +12,8 @@ $(function(){
 	
 	let uid = $('span[name=uid]').text();
 	
+	let medicalUid = $('input[name=medicalUid]').val();
+	
 	$('#num').change(function() {
 	    var selectedValue = $(this).val(); // 현재 선택된 select option의 값을 확인합니다.
 	    console.log(selectedValue);
@@ -161,6 +163,7 @@ $(function(){
                     <label sec:authorize="isAuthenticated()" style="display: none;"><span class="uid" name="uid" sec:authentication="principal.member.uid">길동</span></label>
                     <label sec:authorize="isAuthenticated()" style="display: none;"><span class="oName" name="oName" sec:authentication="principal.member.name">길동</span></label>
                     <input type="hidden" name="medNo" th:value="${hs.hosNo}">
+                    <input type="hidden" name="medicalUid" th:value="${md.uid}">
                     <input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}">
                     <input type="hidden" name="oName" th:value="${#authentication.principal.member.name}">
                     <div>

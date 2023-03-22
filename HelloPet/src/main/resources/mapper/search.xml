@@ -123,6 +123,11 @@
 			`status` 	= 0;
 	</insert>
 	
+	<select id="selectHospital" resultType="kr.co.hellopet.vo.MedicalVO">
+		SELECT * FROM `pet_hospital_pharmacy` 
+			   WHERE `medNo`= #{medNo};
+	</select>
+	
 	<!-- complete -->
 	<select id="selectComplete" resultType="kr.co.hellopet.vo.ReserveVO">
 		SELECT a.medicalName, b.* FROM `pet_hospital_pharmacy` AS a 
@@ -130,5 +135,22 @@
 			   ON a.medNo = b.medNo
 			   WHERE b.uid = #{uid} AND `reserveOk`=1 ORDER BY b.rdate DESC LIMIT 1;
 	</select>
+	
+	<!-- 메시지 보내기 -->
+	<insert id="insertMsg">
+    	insert into `message` set
+    		`uid`=#{uid},
+    		<choose>
+					<when test="medical == null">
+						`medical`=null,
+					</when>
+					<when test="medical != null">
+						`medical`=#{medical},
+					</when>
+    		</choose>
+    		`title`=#{title},
+    		`content`=#{content},
+    		`msgRdate`=NOW();
+    </insert>
 	
 </mapper>

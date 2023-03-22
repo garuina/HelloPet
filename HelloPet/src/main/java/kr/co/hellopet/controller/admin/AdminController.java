@@ -135,7 +135,8 @@ public class AdminController {
 	    vo.setMedical(medical);
 	    
 	    if(success == true) {
-	    	vo.setTitle("거절사유 : " + vo.getMedical()+ "에서 예약을 거절하였습니다.");
+	    	vo.setTitle(vo.getMedical()+ "에서 예약을 거절하였습니다.");
+	    	vo.setContent("거절사유 : "+vo.getContent());
 	    	service.insertMsg(vo);
 	    }
 	    

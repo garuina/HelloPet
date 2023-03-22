@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.CommunityVO;
+import kr.co.hellopet.vo.MessageVO;
 
 /*
  * 날짜 : 2023/03/09
@@ -96,4 +97,6 @@ public interface CommunityDAO {
 	// 모달창 최근 좋아요누른 별명 출력
 	public CommunityVO selectHeartUser(int no);
 	
+	// 메세지 보내기
+	public int insertMsg(MessageVO vo);
 }

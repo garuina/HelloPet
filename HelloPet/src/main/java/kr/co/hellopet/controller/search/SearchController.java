@@ -25,6 +25,7 @@ import kr.co.hellopet.service.SearchService;
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
+import kr.co.hellopet.vo.MessageVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 
@@ -46,15 +47,27 @@ public class SearchController {
 		SearchVO hs = service.selectViewHs(hosNo);
 		model.addAttribute("hs", hs);
 		
+		MedicalVO md = service.selectHospital(hosNo);
+		model.addAttribute("md", md);
+		
 		return "search/reserve";
 	}
 	
 	@PostMapping("search/reserve")
-	public String reserve(Model model, ReserveVO vo) {
+	public String reserve(Model model, ReserveVO vo, MessageVO msg, String medicalUid, String medicalName) {
 		
 		
-		service.insertReserve(vo);
+		int result = service.insertReserve(vo);
 		String uid = vo.getUid();
+		
+		
+		if(result > 0) {
+			msg.setUid(medicalUid);
+			msg.setMedical(medicalName);
+			msg.setTitle("새로운 예약이 도착했습니다.");
+			msg.setContent("내 병원관리 > 예약내역을 확인해주세요.");
+			service.insertMsg(msg);
+		}
 		return "redirect:/search/complete?uid="+ uid;
 		
 	}

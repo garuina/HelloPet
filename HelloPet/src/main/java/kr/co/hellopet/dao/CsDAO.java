@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.CsVO;
+import kr.co.hellopet.vo.MessageVO;
 
 /* 
  *  날짜 : 2023/03/09
@@ -46,4 +47,7 @@ public interface CsDAO {
 	public int updateArticleHit(int no);
 	public int updateArticle(CsVO vo);
     public int deleteArticle(int no);
+
+    /* message */
+    public int insertMsg(MessageVO vo);
 }
