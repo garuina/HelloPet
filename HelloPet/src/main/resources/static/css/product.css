@@ -656,15 +656,14 @@ footer {
 
 #productView .wid1200 {
 	position: relative;
-   	width: 1600px;
+   	width: 1200px;
     border-bottom: 2px solid rgb(225, 243, 243);
 	margin: 0 auto;
 }
 
 #productView .lodcation{
 	position: absolute;
-	left: 60px;
-    width: 1600px;
+    width: 1200px;
     margin: 0 auto; 
     padding: 15px 0;
     font-size: 13px;
@@ -681,35 +680,36 @@ footer {
 
 #productView .hhh{
 	position: relative;
-	width: 1600px;
-	height: 750px;
+	width: 1200px;
+	height: 500px;
 	margin: 0 auto;
 	
 }
 
-
 #productView .prod-hd{
 	position: absolute;
-	left: 180px;
-	top: 40px;
-	width:1500px;
-    float: left;
-    margin: 0 auto;
-    padding-top: 50px;
-    padding-bottom: 80px;
+	width: 45%;
+	left: 0;
+	top: 50px;
+	padding-top: 35px;
+	padding-bottom: 80px;
+	padding-left: 20px;
+	box-sizing: border-box;
 }
+
 #productView .prod-hd .prod-thumb {
-	float: left;
 	width: 700px;
 	margin-top: 50px;
 	margin-left: 180px;
 	height: 50px;
-
+	box-sizing: border-box;
 }
+
 #productView .prod-hd .prod-thumb .thumb{
     border-radius: 10px 10px 0 0;
     overflow: hidden;
 }
+
 #productView .prod-hd .prod-thumb .thumb img{
     display: block;
     width: 100%;
@@ -717,20 +717,22 @@ footer {
 
 #productView .explain {
 	position: absolute;
-	top: 750px;
-	right: 180px;
+	width: 55%;
+	right: 0;
+	padding-top: 50px;
+	padding-bottom: 80px;
+	padding-left: 20px;
+	box-sizing: border-box;
+	top: 60px;
+}
+
+
+#productView .prod-inf{
 	margin: 0 auto;
-	text-align: center;
-	display: inline-block;
+    padding: 0 0 20px 0;
+    border-bottom: #6a6b6c 2px solid;
 }
 
-
-#productView .prod-hd .prod-inf{
-	position: absolute;
-	top: 750px;
-	right: 180px;
-    width: 550px;
-}
 #productView .prod-hd .prod-gud{
 	position: relative;
 	top: 800px;
@@ -828,59 +830,89 @@ footer {
     background-color: #fff;
     margin-top: -120px
 }
-.prod-gud{
+
+
+#productView .button-box{
 	position: absolute;
-    margin-top: -530px;
-    float: right;
+    display: block;
+    margin: 0px auto;
+    left: 160px;
+    top: 480px
 }
-.prod-inf{
-	position: relative;
-    float: right;
-    margin-top: 40px;
-   
-}
-.prod-hd .totalSelectedWrap {
-    margin: 25px 0 0 0;
-}
-.button-box{
-	position: absolute;
-    float: right;
-    margin-right: 500px;
-    margin-top: -150px;
-}
-.prod-bx{
-	width: 1600px;
+#productView .prod-bx{
+	width: 1200px;
 	position: relative;
     display: table;
     margin: 0 auto;
     margin-top: -80px;
     border-top: #e1f3f3 5px solid;
 }
-.prod-bx .detail-left{
+#productView .prod-bx .detail-left{
 	margin: 0 auto;
     padding: 0 30px 0 50px;
 }
-.prod-bx .d101{
+#productView .prod-bx .d101{
     padding: 35px 0 0 0;
     text-align: center;
 }
-.prod-bx .detail-tit{
+#productView .prod-bx .detail-tit{
     font-size: 17px;
     color: #000;
     font-weight: 400;
     margin: 40px 0 5px 0;
     margin-left: 310px;
 }
-.prod-bx .map-wr{
+#productView .prod-bx .map-wr{
     margin: 40px 0 0 0;
 }
 
-.prod-inf .tit{
+#productView .prod-inf .tit{
     font-size: 38px;
-    margin-top: -630px;
-    margin-left: 80px;
 }
-a:hover {
+#productView a:hover {
 color: #3c83dc;
 }
+
+#productView .paging {
+    width: 100%;
+    padding: 40px 0;
+    text-align: center;
+}
+
+#productView .paging > span > a {
+    color: #777;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+
+#productView .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#productView .paging > .num > a.on {
+    color: #39d9c8;
+     font-weight: bold;
+     border: 1px solid #39d9c8;
+}
+
+#productView .paging > span > a:hover{
+    color: #39d9c8;
+}
+
+#productView .paging > .num > a:hover {
+    border: 1px solid #39d9c8;
+    text-decoration: none;
+}
+
+
+
 
