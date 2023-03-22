@@ -1,0 +1,112 @@
+<th:block th:include="@{product/_header.html}"/>
+<div id="productView">
+
+    <div id="container" ng-app="appProduct" class="ng-scope">
+    	<div class="div1">
+	    	<h3 class="title">진료상품</h3>
+	    </div>
+    
+        <div class="wid1200">
+	          <div class="lodcation">
+	              <span class="ic-home">
+	              	  <a th:href="@{/index}">HOME</a>
+	              </span>
+	                  >
+	              <span>
+	                  <a href="#">동물병원</a>
+	              </span>
+	                  >
+	              <span>
+	                  <a href="#">수술/치료</a>
+	              </span>
+	                  >
+	              <span>
+	                  <a href="#">비뇨산부의학과</a>
+	              </span>
+	           </div>
+        </div>
+        
+        <div class="hhh">
+	       	<div class="prod-hd">
+	            <div class="thumb">
+	                <img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}"  style=" width: 650px;" >
+	            </div>
+	        </div>
+	        
+	        
+	        <div class="explain">
+		        <div class="prod-inf">
+		            <h2 class="tit">반려견·반려묘 제왕절개 수술 </h2>
+		        </div>
+		        
+		        <div class="prod-gud">
+		            <dl>
+		                <dt>수술가격</dt>
+		                <dd class="price">
+		                    <strong id="sSalePriceInfo">600,000</strong>
+		                    원
+		                </dd>
+		            </dl>
+		            <dl>
+		                <dt>판매병원명</dt>
+		                <dd class="hospital">
+		                    <strong id="sSaleHospInfo">동탄동물병원</strong>
+		                </dd>
+		            </dl>
+		            <dl>
+		                <dt>기본 설명</dt>
+		                <dd class="description">
+		                    <strong id="sSaleDescriptInfo">혈액검사 포함</strong>
+		                </dd>
+		            </dl>
+		        </div>
+		    
+		        <div class="button-box">
+		            <a style="cursor:pointer" class="btn btn-lg btn-line blue" id="aCardAdd">예약하기</a>
+		        </div>
+			  </div>  
+		</div>  
+		  
+		  
+		  
+		  
+        <div class="prod-con" style="margin-top :150px">
+            <div class="prod-tab"></div>
+        </div>
+        <div class="prod-bx">
+            <div class="detail-left">
+                <div class="d101" id="d101">
+                    <img th:src="@{/img/Pro-1.jpg}">
+                </div>
+
+            </div>
+        </div>
+       
+        <h3 class="detail-tit">업체정보 : 동탄동물병원(화성)</h3>
+        <div class="map-wr">
+
+        </div>
+	  
+	  <!-- 검색목록 페이지 번호 -->
+      <div class="paging">
+          <span class="prev">
+              <a href="#"><&nbsp;이전</a>
+          </span>
+          <span class="num">
+              <a href="#" class="on">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+          </span>
+          <span class="next">
+              <a href="#">다음&nbsp;></a>
+          </span>
+      </div>
+
+   </div>    
+            
+            
+   	 
+
+</div>
+
+<th:block th:include="@{product/_footer.html}"/>
