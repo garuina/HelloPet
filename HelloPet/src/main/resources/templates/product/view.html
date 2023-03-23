@@ -1,4 +1,5 @@
 <th:block th:include="@{product/_header.html}"/>
+
 <div id="productView">
 
     <div id="container" ng-app="appProduct" class="ng-scope">
@@ -13,7 +14,7 @@
 	              </span>
 	                  >
 	              <span>
-	                  <a href="#">동물병원</a>
+	                  <a href="#">진료상품</a>
 	              </span>
 	                  >
 	              <span>
@@ -43,8 +44,13 @@
 		            <dl>
 		                <dt>수술가격</dt>
 		                <dd class="price">
-		                    <strong id="sSalePriceInfo">600,000</strong>
-		                    원
+							<div class="oriPrice">
+								<span class="ori">60000원</span>
+								<span class="discount">20%↓</span>
+							</div>	
+							<div class="disPrice">
+								<span>48000원</span>
+							</div>	
 		                </dd>
 		            </dl>
 		            <dl>
@@ -81,30 +87,38 @@
 
             </div>
         </div>
-       
-        <h3 class="detail-tit">업체정보 : 동탄동물병원(화성)</h3>
-        <div class="map-wr">
-
-        </div>
+		
+		<div class="detail">	       
+        	<h3 class="detail-tit">업체정보 : 동탄동물병원(화성)</h3>
+		</div>
+			
+        <div id="map"></div>
+        
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5f25185293d664bcd951443d8b8e4a67&libraries=services"></script>
+        <script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = { 
+			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨
+			    };
+			
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			
+			// 마커가 표시될 위치입니다 
+			var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+			
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			    position: markerPosition
+			});
+			
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
+			
+			   
+		</script>
 	  
-	  <!-- 검색목록 페이지 번호 -->
-      <div class="paging">
-          <span class="prev">
-              <a href="#"><&nbsp;이전</a>
-          </span>
-          <span class="num">
-              <a href="#" class="on">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-          </span>
-          <span class="next">
-              <a href="#">다음&nbsp;></a>
-          </span>
-      </div>
-
-   </div>    
-            
-            
+	  
    	 
 
 </div>

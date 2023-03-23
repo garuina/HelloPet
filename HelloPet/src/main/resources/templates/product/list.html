@@ -1,9 +1,26 @@
 <th:block th:include="@{product/_header.html}"/>
+<script>
+
+$(document).ready(function() {
+    $('input[type="checkbox"]').click(function() {
+        var selectedTypes = $('input[type="checkbox"]:checked').map(function() {
+            return this.value;
+        }).get();
+        
+        console.log(selectedTypes);
+        
+    });
+});
+
+
+</script>
+
+
 <div id="productList">
 
     <div id="container" ng-app="appProduct" class="ng-scope">
     	<div class="div1">
-	    	<h3 class="title">동물병원</h3>
+	    	<h3 class="title">진료상품</h3>
 	    </div>
     
         <div class="wid1200">
@@ -13,55 +30,21 @@
               </span>
                   >
               <span>
-                  <a th:href="@{/product/list}">동물병원</a>
+                  <a th:href="@{/product/list}">진료상품</a>
               </span>
            </div>
         </div>
         
         <div class="sub-cate ng-scope" ng-controller="ProductListController">
             <ul class="depth1">
-                <li ng-repeat="category in categorys" ng-class="(selFirstCategory.indexOf(category.Id > -1) ? 'active' : ''"class="ng-scope active)"> 
-                    <a style="cursor:pointer;" ng-click="toggleSelectionCategory(category.Id)" class="ng-binding">수술/치료</a>
+                <li th:each="cate1:${cate1s}"> 
+                    <a th:href="@{/product/list(cate1=${cate1.cate1})}">[[${cate1.c1Name}]]</a>
                 </li> 
-                <li ng-repeat="category in categorys" ng-class="(selFirstCategory.indexOf(category.Id > -1) ? 'active' : ''"class="ng-scope)">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionFirstCategory(category.Id)" class="ng-binding">예방접종</a>
-                </li>
-            
-                <li ng-repeat="category in categorys" ng-class="(selFirstCategory.indexOf(category.Id > -1) ? 'active' : ''"class="ng-scope)">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionFirstCategory(category.Id)" class="ng-binding">검진/검사</a>
-                </li>
-            
-                <li ng-repeat="category in categorys" ng-class="(selFirstCategory.indexOf(category.Id > -1) ? 'active' : ''"class="ng-scope)">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionFirstCategory(category.Id)" class="ng-binding">기타</a>
-                </li>
+               
             </ul>
-            <ul class="depth2 ng-scope" ng-repeat="category in categorys | filter:filterSelectedCategory1()">
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope active">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">비뇨산부의학과</a>
-                </li>
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">정형외과</a>
-                </li>
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">종양의학과</a>
-                </li>
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">치과</a>
-                </li>
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">안과</a>
-                </li>
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">일반외과</a>
-                </li>
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">일반내과</a>
-                </li>
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">이비인후과</a>
-                </li>
-                <li ng-repeat="childcode in category.ChildCodes" ng-class="(selMediumCategory.indexOf(childcode.Id) > -1) ? 'active' : '':" class="ng-scope">
-                    <a style="cursor:pointer;" ng-click="toggleSelectionMedCategory(childcode.Id)" class="ng-binding">심장의학과</a>
+            <ul class="depth2 ng-scope">
+                <li th:each="selectC2:${selectC2s}">
+                    <a style="cursor:pointer;" th:href="@{/product/list(cate1=${selectC2.cate1},cate2=${selectC2.cate2})}">[[${selectC2.c2Name}]]</a>
                 </li>
             </ul>
 
@@ -70,11 +53,11 @@
 	                <strong class="tit">반려동물유형</strong>
 	                <div class="con">
 	                    <span>
-	                        <input type="checkbox" id="dog">
+	                        <input type="checkbox" name="type" value="dog">
 	                        <label for="dog">반려견</label>
 	                    </span>
 	                    <span>
-	                        <input type="checkbox" id="cat">
+	                        <input type="checkbox" name="type" value="cat">
 	                        <label for="cat">반려묘</label>
 	                    </span>
 	                </div>
@@ -82,275 +65,59 @@
 	       </ul>
       </div>
       <div class="pro-lst" id="productList">
-	        <div class="probx">
-		            <a href="#">
+	        <div class="probx" th:each="product:${products}">
+		            <a th:href="@{/product/view(prodNo=${product.prodNo})}">
 		                <span class="thumb">
-		                    <img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
+		                    <img th:src="${product.thumb1}" alt style="width:316px;height:320px;">
 		                </span>
 		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
+		                    <p class="org">[[${product.medicalName}]]</p>
+		                    <p class="prd">[[${product.prodName}]]</p>
+		                    <p class="txt">[[${product.descript}]]</p>
 		                </div>
 		            </a>
 	                <div class="price">
 	                    <div class="cost">
 	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
+	                        <th:block th:if="${product.discount != 0}">
+	                        	<div class="oriPrice">
+	                        		<span class="ori">[[${product.price}]]원</span>
+	                        		<span class="discount">[[${product.discount}]]%</span>
+	                        	</div>
+	                        </th:block>
+	                        <th:block th:if="${product.discount == 0}">
+		                        <div class="disPrice">
+		                        	<span>[[${product.price}]]원</span>
+		                        </div>
+	                        </th:block>
+	                        <th:block th:if="${product.discount != 0}">
+	                        	<div class="disPrice">
+		                        	<span data-th-text="${#numbers.formatInteger(product.price*(100-product.discount)/100, 3, 'COMMA')}">
+		                        	[[${#numbers.formatInteger(product.price*(100-product.discount)/100, 3)}]]원</span>
+		                        </div>
+	                        </th:block>                        
 	                    </div>
 	                </div>
 	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-							<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-							<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
-	          <div class="probx">
-		            <a href="#">
-		                <span class="thumb">
-		                	<img th:src="@{/img/Pro_pro_동탄_제왕절개.jpg}" alt style="width:316px;height:320px;">
-		                </span>
-		                <div class="desc">
-		                    <p class="org">동탄동물병원(화성)</p>
-		                    <p class="prd">반려견·반려묘 제왕절개 수술</p>
-		                    <p class="txt">혈액검사&nbsp;포함,&nbsp;방사선촬영,&nbsp;포함,&nbsp;영양수액,&nbsp;포함,&nbsp;진통주사,&nbsp;포함</p>
-		                </div>
-		            </a>
-	                <div class="price">
-	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
-	                        <p class="won">
-	                            <strong>600.000</strong>
-	                            원
-	                        </p>                       
-	                    </div>
-	                </div>
-	          </div>
+	          
+	         
 	        
 	  </div>
 	  
-	  <!-- 검색목록 페이지 번호 -->
-      <div class="paging">
-          <span class="prev">
-              <a href="#"><&nbsp;이전</a>
-          </span>
-          <span class="num">
-              <a href="#" class="on">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-          </span>
-          <span class="next">
-              <a href="#">다음&nbsp;></a>
-          </span>
-      </div>
+	   <!-- 상품목록 페이지 번호 -->
+       <div class="paging">
+	       <th:block th:if="${groups[0]>1}">
+	           <span class="prev"><a th:href="@{/product/list(cate1=${cate1},cate2=${cate2},pg=${groups[0]-1})}"><&nbsp;이전</a></span>
+	       </th:block>
+	       <th:block th:if="${groups[1] != 0}">
+	       <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+	           <span class="num"><a th:href="@{/product/list(cate1=${cate1},cate2=${cate2},pg=${num})}" th:class="${num == currentPage?'num on':'num'}">[[${num}]]</a></span>
+	       </th:block>
+	       </th:block>
+	       <th:block th:if="${groups[1]<lastPageNum}">
+	           <span class="next"><a th:href="@{/product/list(cate1=${cate1},cate2=${cate2},pg=${groups[1] + 1})}">다음&nbsp;></a></span>
+	       </th:block>
+       </div>
 
    </div>    
             

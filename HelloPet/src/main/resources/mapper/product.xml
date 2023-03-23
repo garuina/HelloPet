@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 
+ 	날짜 : 2023/03/23
+ 	이름 : 장인화
+ 	내용 : HelloPet product 페이지 기능구현
+  -->
+<mapper namespace="kr.co.hellopet.dao.ProductDAO">
+	
+	<select id="Cate1" resultType="kr.co.hellopet.vo.Cate1VO">
+		SELECT * FROM `product_cate1`;
+	</select>
+	
+	<select id="Cate2" resultType="kr.co.hellopet.vo.Cate2VO">
+		SELECT * FROM `product_cate2`;
+	</select>
+	
+	<select id="SelectCate2" resultType="kr.co.hellopet.vo.Cate2VO">
+		SELECT * FROM `product_cate2` WHERE `cate1` = #{cate1}; 
+	</select>
+	
+	<select id="SelectProduct" resultType="kr.co.hellopet.vo.ProductVO">
+		SELECT * FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} limit #{start}, 9;
+	</select>
+	
+	
+	<select id="SelectCountTotal" resultType="int" parameterType="map">
+		Select Count(`prodNo`) FROM `product` where `prodCate1` =#{cate1} and `prodCate2` =#{cate2};  	
+	</select>
+	
+</mapper>

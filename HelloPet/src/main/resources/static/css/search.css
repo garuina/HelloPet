@@ -278,9 +278,10 @@ footer {
 
 .SearchIndex .mawa {
   transition: all 0.2s linear;
+  overflow: hidden;
 }
 .SearchIndex .mawa:hover {
-  transform: scale(1.02);
+ transform: scale(1.02);
 }
 
 
@@ -334,6 +335,8 @@ footer {
     height: 100%;
     margin: 100px 0px 60px 17px;
 }
+
+
 
 
 
