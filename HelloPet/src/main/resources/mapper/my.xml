@@ -15,7 +15,7 @@
 	</select>
 
 	<select id="selectMyArticle" resultType="kr.co.hellopet.vo.CommunityVO">
-		SELECT * FROM `community_article` WHERE `uid` = #{uid} ORDER BY `no` DESC LIMIT #{start},7;
+		SELECT * FROM `community_article` WHERE `uid` = #{uid} AND `parent` = 0 ORDER BY `no` DESC LIMIT #{start},7;
 	</select>
 	
 	<select id="selectMyQna" resultType="kr.co.hellopet.vo.CsVO">
@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="selectCountMyArticle" resultType="int">
-		SELECT COUNT(`no`) FROM `community_article` WHERE `uid` = #{uid};
+		SELECT COUNT(`no`) FROM `community_article` WHERE `uid` = #{uid} AND `parent` = 0;
 	</select>
 	
 	<select id="selectCountMyQna" resultType="int">
