@@ -129,10 +129,9 @@
         				    	success : function(data){
         				    			$('.heart-icon').html('<button class="icon-heart"></button>');
         				    			alert("좋아요를 취소했습니다.");
-        				    	},
-        				    	complete : function(){
-        				    		heartVal = 0;
+        				    			window.location.reload();
         				    	}
+        				    	
         				    		
         				    	});
                 		});
@@ -151,10 +150,9 @@
         				    	success : function(data){
         				    		$('.heart-icon').html('<button class="icon-heart-mint"></button>');
         				    		alert("좋아요를 눌렀습니다.");
-        				    	},
-        				    	complete : function(){
-        				    		heartVal = 1;
+        				    		window.location.reload();
         				    	}
+        				    	
         				    		
         				    	});
                 		});
