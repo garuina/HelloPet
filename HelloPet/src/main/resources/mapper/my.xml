@@ -15,7 +15,7 @@
 	</select>
 
 	<select id="selectMyArticle" resultType="kr.co.hellopet.vo.CommunityVO">
-		SELECT * FROM `community_article` WHERE `uid` = #{uid} ORDER BY `no` DESC LIMIT #{start},7;
+		SELECT * FROM `community_article` WHERE `uid` = #{uid} AND `parent` = 0 ORDER BY `no` DESC LIMIT #{start},7;
 	</select>
 	
 	<select id="selectMyQna" resultType="kr.co.hellopet.vo.CsVO">
@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id="selectMyReserve" resultType="kr.co.hellopet.vo.ReserveVO">
-		SELECT a.*, b.hosName FROM `reserve_list` AS a JOIN `api_hospital` AS b ON a.medNo = b.hosNo WHERE a.uid =  #{uid} LIMIT #{start}, 7;
+		SELECT a.*, b.hosName FROM `reserve_list` AS a JOIN `api_hospital` AS b ON a.medNo = b.hosNo WHERE a.uid =  #{uid} ORDER BY `rdate` DESC LIMIT #{start}, 7;
 	</select>
 	
 	<select id="selectMyReserves" resultType="kr.co.hellopet.vo.ReserveVO">
@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="selectCountMyArticle" resultType="int">
-		SELECT COUNT(`no`) FROM `community_article` WHERE `uid` = #{uid};
+		SELECT COUNT(`no`) FROM `community_article` WHERE `uid` = #{uid} AND `parent` = 0;
 	</select>
 	
 	<select id="selectCountMyQna" resultType="int">

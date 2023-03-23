@@ -108,19 +108,19 @@
 	</select>
 
 	<select id="selectFindId" resultType="kr.co.hellopet.vo.MemberVO">
-		SELECT * FROM `pet_owner` WHERE `name` = #{name} AND `hp` = #{hp};
+		SELECT * FROM `pet_owner` WHERE `name` = #{name} AND `hp` = #{hp} AND `level` > 0;
 	</select>
 	
 	<select id="selectFindMedicalId" resultType="kr.co.hellopet.vo.MedicalVO">
-		SELECT * FROM `pet_hospital_pharmacy` WHERE `name` = #{name} AND `hp` = #{hp};
+		SELECT * FROM `pet_hospital_pharmacy` WHERE `name` = #{name} AND `hp` = #{hp} AND `level` > 0;
 	</select>
 	
 	<select id="selectCountMemberForChangePass" resultType="int">
-		SELECT COUNT(`uid`) FROM `pet_owner` WHERE `email`= #{email} AND `name` = #{name} AND `hp` = #{hp};
+		SELECT COUNT(`uid`) FROM `pet_owner` WHERE `email`= #{email} AND `name` = #{name} AND `hp` = #{hp} AND `level` > 0;
 	</select>
 	
 	<select id="selectCountMedicalForChangePass" resultType="int">
-		SELECT COUNT(`uid`) FROM `pet_hospital_pharmacy` WHERE `email`= #{email} AND `name` = #{name} AND `hp` = #{hp};
+		SELECT COUNT(`uid`) FROM `pet_hospital_pharmacy` WHERE `email`= #{email} AND `name` = #{name} AND `hp` = #{hp} AND `level` > 0;
 	</select>
 	
 	<update id="updatePetOwnerPasswordByCodeAndInfo">
