@@ -10,7 +10,6 @@
         	/*<![CDATA[*/
         	
         	
-        	
         	// 모달 창 열림
                 $('.gallery_item').click(function(){
                 	
@@ -129,8 +128,10 @@
         				    	async:false,
         				    	success : function(data){
         				    			$('.heart-icon').html('<button class="icon-heart"></button>');
-        				    			window.location.reload();
-        				    			
+        				    			alert("좋아요를 취소했습니다.");
+        				    	},
+        				    	complete : function(){
+        				    		heartVal = 0;
         				    	}
         				    		
         				    	});
@@ -149,7 +150,10 @@
         				    	async:false,
         				    	success : function(data){
         				    		$('.heart-icon').html('<button class="icon-heart-mint"></button>');
-        				    		window.location.reload();
+        				    		alert("좋아요를 눌렀습니다.");
+        				    	},
+        				    	complete : function(){
+        				    		heartVal = 1;
         				    	}
         				    		
         				    	});
@@ -172,8 +176,6 @@
 				    			$('.content_reply').append('<div class="content_item_inner"><div class="content_item_img"></div><div class="content_item_con"><div class="content_item_con_head"><div class="content_item_txt"><strong>'+data.result[i].nick+'</strong></div><div class="content_item_date">'+data.result[i].rdate.substring(0,10)+'</div></div><div class="content_item_con_body"><div class="content_item_txt">'+data.result[i].content+'</div><div class="content_item_btn_wrap"><div class="info_item"><div role="dialog" class="v_dialog_container"></div></div></div></div></div></div>');
 				    		}
 				    		console.log(data.result[i]);	
-				    		console.log(uid);
-				    		console.log(data.result[i].uid);
 				    		}
 				    	}
 				    	
@@ -187,6 +189,7 @@
             		$('#modal .button').click(function(){
             			
             			let content = $('input[name=content]').val();
+            			
             			
             			
                     	jsonData3 = {'uid':uid,
@@ -208,14 +211,12 @@
     				    		
     				    		alert("댓글이 입력되었습니다.");
     				    		window.location.reload();
-    				    		/*location.href = "/HelloPet/community/talktalk/list?no="+no;
-    				    		$('div[value1='+no+']').trigger('click');*/
     				    	}
                     		
                     	});
-                    	$('#modal').load();
+                    	
             		});
-                	 
+            		
                 	// 댓글 삭제하기
             		$('.content_reply').on('click','button',function(){
             			

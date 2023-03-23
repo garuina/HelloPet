@@ -24,10 +24,14 @@
                 	let heartVal = "[[${find}]]";
                		let uid = "[[${uid}]]";
                 	let no = "[[${article.no}]]";
+                	let writerUid = "[[${article.uid}]]";
+                	let nick = $('input[name=nick]').val();
                 	
                 	
                 	let jsonData = {'no' : no,
-        							'uid' : uid};
+        							'uid' : uid,
+        							'writerUid' : writerUid,
+        							'nick' : nick};
         	
                 
                 	if(heartVal > 0){
@@ -74,6 +78,7 @@
             /*]]>*/
         </script>
         <main>
+        	<input type="hidden" name="nick" th:value="${#authentication.principal.member.nick}" sec:authorize="isAuthenticated()">
             <div class="top">
                 <h3>커뮤니티</h3>
             </div>
