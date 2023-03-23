@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// 접근권한
 		http.authorizeRequests().antMatchers("/").permitAll();
 		// member 에 접근하는 사용자가 로그인을 한 사용자라면 index 로 이동
-		http.authorizeRequests().antMatchers("/member/**").anonymous().and().exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"));
+		/*
 		http.authorizeRequests().antMatchers("/my/**").hasAnyRole("1");
 		http.authorizeRequests().antMatchers("/community/**").permitAll();
 		http.authorizeRequests().antMatchers("/cs/**").permitAll();
@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/lists/**").permitAll();
 		http.authorizeRequests().antMatchers("/message/**").permitAll();
 		http.authorizeRequests().antMatchers("/search/**").permitAll();
+		*/
 	/*
 	 * http.authorizeRequests().antMatchers("/admin/**").hasAnyRole("7");
 	 */
@@ -38,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable();
 		
 		// 로그인 설정
-		http.formLogin().loginPage("/member/login").defaultSuccessUrl("/").failureUrl("/member/login?success=100")
+		http.formLogin().loginPage("/member/login").defaultSuccessUrl("/index").failureUrl("/member/login?success=100")
 		.usernameParameter("uid").passwordParameter("pass");
 		
 		// 자동로그인 설정
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// 로그아웃 설정
 		http.logout().invalidateHttpSession(true)
 		.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-		.logoutSuccessUrl("/");
+		.logoutSuccessUrl("/index");
        
 	}
 	
