@@ -511,7 +511,7 @@ footer {
     border: #efefef 1px solid;
     border-top: none;
     border-bottom: #cbcbcb 1px solid;
-    padding: 12px 15px 0;
+    padding: 5px 15px 0;
     display: table;
     font-family: 'Montserrat','Noto Sans KR';
 }
@@ -521,7 +521,7 @@ footer {
 }
 #productList .pro-lst .probx .price .sm {
     color: #818491;
-    font-size: 13px;
+    font-size: 15px;
 }
 #productList .pro-lst .probx .price .won {
     color: #000;
@@ -555,6 +555,38 @@ footer {
     vertical-align: -4px;
     margin-left: 10px;
 }
+
+#productList .oriPrice{
+	font-size: 18px;
+    max-width: 200px;
+    display: inline-block;
+    margin: 6px auto;
+}
+
+#productList .ori{
+	color: rgb(170, 170, 170);
+	text-decoration: line-through;
+	
+}
+
+#productList .discount{
+	margin-left: 5px;
+    margin-right: 10px;
+    color: red;
+
+}
+
+#productList .disPrice{
+	display: inline-block;
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 0px;
+}
+
+#productList .disPrice span:after{
+	content: "원";
+}
+
 
 #productList div{
     
@@ -772,10 +804,24 @@ footer {
     font-size: 20px;
     color: #000;
 }
-#productView .prod-gud dl > dd.price strong{
-    font-size: 37px;
-    font-weight: 'Montserrat';
+#productView .oriPrice{
 }
+
+#productView .ori{
+   color: rgb(170, 170, 170);
+   text-decoration: line-through;
+}
+
+#productView .discount{
+	color: red;
+}
+
+#productView .disPrice{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
 #productView .prod-gud dl > dd.hospital {
     font-size: 20px;
     color: #000;
@@ -814,9 +860,16 @@ footer {
 }
 #productView .btn.blue{
     color: #fff;
-    border-color:#10958b;
-    background-color: #10958b;
+    border-color:#39d9c8;
+    background-color: #39d9c8;
 }
+
+#productView .btn.blue:hover{
+    box-shadow: 2px 2px 20px #ddd;
+}
+
+
+
 #productView .btn{
     min-width: 350px;
     padding-inline-start: 0 30px;
@@ -855,15 +908,25 @@ footer {
     padding: 35px 0 0 0;
     text-align: center;
 }
-#productView .prod-bx .detail-tit{
-    font-size: 17px;
+
+#productView .detail{
+	max-width: 1200px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+#productView .detail h3 {
+    font-size: 20px;
     color: #000;
     font-weight: 400;
-    margin: 40px 0 5px 0;
-    margin-left: 310px;
 }
-#productView .prod-bx .map-wr{
-    margin: 40px 0 0 0;
+#productView #map{
+	
+	
+	width:960px;
+	height: 500px;
+	margin: 30px auto;
+
 }
 
 #productView .prod-inf .tit{
@@ -871,46 +934,6 @@ footer {
 }
 #productView a:hover {
 color: #3c83dc;
-}
-
-#productView .paging {
-    width: 100%;
-    padding: 40px 0;
-    text-align: center;
-}
-
-#productView .paging > span > a {
-    color: #777;
-    font-size: 11px;
-    letter-spacing: -1px;
-}
-
-#productView .paging > .num > a {
-    display: inline-block;
-    min-width: 14px;
-    margin: 0 2px;
-    padding: 8px 9px;
-    border: 1px solid #c4c4c4;
-    background: url() 0 0 repeat-x;
-    color: #000;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none;
-}
-
-#productView .paging > .num > a.on {
-    color: #39d9c8;
-     font-weight: bold;
-     border: 1px solid #39d9c8;
-}
-
-#productView .paging > span > a:hover{
-    color: #39d9c8;
-}
-
-#productView .paging > .num > a:hover {
-    border: 1px solid #39d9c8;
-    text-decoration: none;
 }
 
 

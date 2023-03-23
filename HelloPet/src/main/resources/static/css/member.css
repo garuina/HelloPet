@@ -7,6 +7,7 @@
 a {
     text-decoration: none;
     color: #555;
+    cursor: pointer;
 }
 ul, ol {list-style: none;}
 input, textarea {
@@ -19,6 +20,7 @@ button {outline: none; border: none;}
     min-width: 1200px;
 }
 
+/* header */
 header {
     min-width: 1200px;
     width: 100%;
@@ -29,7 +31,7 @@ header {
 header>div {
     width: 100%;
     box-sizing: border-box;
-   
+
 }
 
 header>.headerTop {
@@ -50,9 +52,28 @@ header>.headerTop>div>a {
     height: 100%;
     line-height: 35px;
     padding: 0 10px;
-    font-size: 14px;
+    font-size: 15px;
     color: #555;
     font-weight: 300;
+}
+header>.headerTop>div>label{
+    display: inline-block;
+    height: 100%;
+    line-height: 35px;
+    padding: 0 10px;
+    font-size: 15px;
+    color: #555;
+    font-weight: 300;
+    cursor: pointer;
+}
+header>.headerTop>div>a:hover {
+	color: #10958b;
+}
+header>.headerTop>div>label:hover {
+	color: #10958b;
+}
+header>.headerTop>div>.message {
+	color: #3c83dc;
 }
 
 header>.menu {
@@ -72,6 +93,7 @@ header > .menu > div {
 header > .menu > div > ul {
     display: inline-block;
     margin-top: 20px;
+
 }
 header > .menu > div > ul > li {float: left;}
 header > .menu > div > ul > li > a {
@@ -80,16 +102,16 @@ header > .menu > div > ul > li > a {
     padding: 0 60px;
 }
 header > .menu > div > ul > li img {
-position: absolute;
-width: 120px;
-z-index: 1;
+	position: absolute;
+	width: 120px;
+	z-index: 1;
 }
 header > .menu > div > ul > li:nth-child(3) {
     position: relative;
     top: -46px;
 }
 header > .menu > div > ul > li:nth-child(4) {
-margin-left: 110px;
+	margin-left: 110px;
 }
 
 .top {
