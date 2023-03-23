@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id="selectMyReserve" resultType="kr.co.hellopet.vo.ReserveVO">
-		SELECT a.*, b.hosName FROM `reserve_list` AS a JOIN `api_hospital` AS b ON a.medNo = b.hosNo WHERE a.uid =  #{uid} LIMIT #{start}, 7;
+		SELECT a.*, b.hosName FROM `reserve_list` AS a JOIN `api_hospital` AS b ON a.medNo = b.hosNo WHERE a.uid =  #{uid} ORDER BY `rdate` DESC LIMIT #{start}, 7;
 	</select>
 	
 	<select id="selectMyReserves" resultType="kr.co.hellopet.vo.ReserveVO">
