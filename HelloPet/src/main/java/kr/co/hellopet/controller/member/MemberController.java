@@ -1,18 +1,13 @@
 package kr.co.hellopet.controller.member;
 
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +23,7 @@ import kr.co.hellopet.vo.Api_PharmacyVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.TermsVO;
+import lombok.extern.log4j.Log4j2;
 
 /* 
  *  HelloPet Project 
@@ -38,6 +34,7 @@ import kr.co.hellopet.vo.TermsVO;
  */
 
 //푸시되어라
+@Log4j2
 @Controller
 public class MemberController {
 	
@@ -52,20 +49,22 @@ public class MemberController {
 	
 	// 로그인
 	@GetMapping("member/login")
-	public String login(Model model) {
+	public String login(Model model) {		
+		log.debug("member/login...");
 		return "member/login";
 	}
 	
 	// 조인 (회원가입 구분)
 	@GetMapping("member/join")
 	public String join() {
+		log.debug("member/join...");
 		return "member/join";
 	}
 	
 	// 약관
 	@GetMapping("member/terms")
 	public String terms(@RequestParam(value="type") String type, Model model) {
-		
+		log.debug("member/terms...");
 		model.addAttribute("type",type);
 		
 		List<TermsVO> vo = service.selectTerms();
@@ -79,7 +78,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("member/authority")
 	public void authority(@RequestParam("check") boolean check, HttpSession session) {
-		
+		log.debug("member/authority...");
 	    session.setAttribute("termAgreed", check);	
 	    
 	    System.out.println("termAgreed: " + session.getAttribute("termAgreed"));
@@ -88,7 +87,7 @@ public class MemberController {
 	// 가입 (일반회원)
 	@GetMapping("member/register")
 	public String register(HttpSession session) {
-		
+		log.debug("member/register...GET");
 		boolean termAgreed = Boolean.TRUE.equals(session.getAttribute("termAgreed"));
 		
 		  if (!termAgreed) {
@@ -103,7 +102,7 @@ public class MemberController {
 	
 	@PostMapping("member/register")
 	public String register(MemberVO vo, HttpServletRequest req) {
-		
+		log.debug("member/register...POST");
 		// ip 설정
 		String regip = req.getRemoteAddr();
 		vo.setRegip(regip);
@@ -115,7 +114,7 @@ public class MemberController {
 	// 가입 (병원 약국)
 	@GetMapping("member/registerMedical")
 	public String registerMedical(HttpSession session) {
-		
+		log.debug("member/registerMedical...GET");
 		boolean termAgreed = Boolean.TRUE.equals(session.getAttribute("termAgreed"));
 		
 		System.out.println("termsAgreed : " + termAgreed);
@@ -131,7 +130,7 @@ public class MemberController {
 	
 	@PostMapping("member/registerMedical")
 	public String registerMedical(MedicalVO vo, HttpServletRequest req) {
-		
+		log.debug("member/registerMedical...POST");
 		String regip = req.getRemoteAddr();
 		vo.setRegip(regip);
 		

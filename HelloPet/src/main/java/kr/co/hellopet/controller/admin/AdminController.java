@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.hellopet.service.AdminService;
-import kr.co.hellopet.socket.NotificationHandler;
 import kr.co.hellopet.vo.AdminReserveVO;
 import kr.co.hellopet.vo.CommunityVO;
 import kr.co.hellopet.vo.CsVO;
