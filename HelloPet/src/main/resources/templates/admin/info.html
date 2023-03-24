@@ -4,6 +4,17 @@
 	$(function(){
 		var uid = $('input[name=uid]').val();
 		console.log(uid);
+		
+		$('.delete').click(function(){
+			$(this).attr('data-cache', 'false');
+			if(confirm('정말 탈퇴하시겠습니까?')){
+				return true;
+			}else{
+				return false;
+			}
+			
+			
+		});
 	});
 	
 </script>
@@ -16,11 +27,11 @@
                 <input type="hidden" name="uid" th:value="${#authentication.principal.medical.uid}"/>
                     <tr>
                         <td>아이디</td>
-                        <td><span th:text="${vo.uid}"></span></td>
+                        <td><span name="uid" th:text="${vo.uid}"></span></td>
                     </tr>
                     <tr>
                         <td>비밀번호</td>
-                        <td><a href="#"><button>비밀번호수정</button></a></td>
+                        <td><a th:href="@{/admin/pwChange}"><button>비밀번호수정</button></a></td>
                     </tr>
                     <tr>
                         <td>병원명/약국명</td>
@@ -44,7 +55,7 @@
                     </tr>
                     <tr>
                         <td>회원탈퇴</td>
-                        <td><a href="#"><button>탈퇴하기</button></a></td>
+                        <td><a th:href="@{/admin/delete}" class="delete" th:attr="data-cache='false'"><button>탈퇴하기</button></a></td>
                     </tr>
                     <tr>
                         <td>주소</td>
@@ -56,7 +67,7 @@
                 <input type="hidden" name="uid" th:value="${#authentication.principal.medical.uid}"/>
                     <tr>
                         <td>아이디</td>
-                        <td><span th:text="${vo.uid}"></span></td>
+                        <td><span name="uid" th:text="${vo.uid}"></span></td>
                     </tr>
                     <tr>
                         <td>비밀번호</td>
@@ -84,7 +95,7 @@
                     </tr>
                     <tr>
                         <td>회원탈퇴</td>
-                        <td><a href="#"><button>탈퇴하기</button></a></td>
+                        <td><a th:href="@{/admin/delete}" class="delete"><button>탈퇴하기</button></a></td>
                     </tr>
                     <tr>
                         <td>주소</td>
@@ -96,7 +107,7 @@
                 <input type="hidden" name="uid" sec:authorize="hasAuthority('ROLE_7')" th:value="${#authentication.principal.member.uid}"/>
                     <tr>
                         <td>아이디</td>
-                        <td><span th:text="${user.uid}"></span></td>
+                        <td><span name="uid" th:text="${user.uid}"></span></td>
                     </tr>
                     <tr>
                         <td>비밀번호</td>

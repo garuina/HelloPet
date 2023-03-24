@@ -27,6 +27,9 @@ public interface AdminDAO {
 	
 	/* 관리자 정보 수정 */
 	public int updateAdmin(MedicalVO vo);
+	public int deleteWithdrawMember(String uid);
+	public int findPwChange(String uid, String pass);
+	
 	
 	/* 예약내역 */
 	public List<AdminReserveVO> selectReserves(@Param("start") int start, String medNo, int pageSize);
