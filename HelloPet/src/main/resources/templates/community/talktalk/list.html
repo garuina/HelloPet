@@ -11,7 +11,7 @@
         	
         	
         	// 모달 창 열림
-                $('.gallery_item').click(function(){
+                $('.gallery_item').off('click').on('click',function(){
                 	
                 	let no = $(this).attr("value1");
                 	let uid = $('input[name=uid]').val();
@@ -510,32 +510,6 @@
                                                 <div class="content_item_inner">
                                                     
                                                 </div>
-                                                  <!--<div class="reply_items">
-                                                    <div class="reply_item">
-                                                        <div class="reply_item_inner">
-                                                            <div class="reply_item_img" th:style="'background-image: url('+@{/img/봉팔공주엄뉘프사.jpg}+');'"></div>
-                                                            <div class="reply_item_con">
-                                                                <div class="reply_item_con_head">
-                                                                    <div class="reply_item_txt">
-                                                                        <strong>동동</strong>
-                                                                    </div>
-                                                                    <div class="reply_item_date">2023.03.05</div>
-                                                                </div>
-                                                                <div class="reply_item_con_body">
-                                                                    <div class="reply_item_txt">감사합니다!</div>
-                                                                    <div class="reply_item_btn_wrap">
-                                                                        <div class="reply_info_item">
-                                                                            <button class="icon-heart"></button>
-                                                                            <div role="dialog" class="v_dialog_container"></div>
-                                                                            <span style="cursor: pointer;"> 좋아요 0 </span>
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
                                             </div>
                                         </div>
                                     </div>

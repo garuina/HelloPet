@@ -102,7 +102,7 @@ public class AdminProductController {
 	}
 	
 	@PostMapping("admin/product/modify")
-	public String productModify(HttpServletRequest req, AdminProductVO vo, int medNo) {
+	public String productModify(HttpServletRequest req, AdminProductVO vo) {
 		
 		String regip = req.getRemoteAddr();
 		vo.setRegip(regip);
@@ -111,7 +111,7 @@ public class AdminProductController {
 		
 		
 		service.updateAdminProduct(vo);
-		return "redirect:/admin/product/list?medNo="+medNo;
+		return "redirect:/admin/product/list";
 	}
 	
 	@ResponseBody

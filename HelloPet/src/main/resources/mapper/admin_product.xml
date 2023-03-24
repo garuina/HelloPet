@@ -55,8 +55,6 @@
 			`medicalName`=#{medicalName},
 			`price`=#{price},
 			`discount`=#{discount},
-			`thumb1`=#{thumb1},
-			`detail`=#{detail},
 			`regip`=#{regip}
 			where `prodNo`=#{prodNo};
 	</update>
