@@ -25,9 +25,33 @@
 		SELECT * FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} limit #{start}, 9;
 	</select>
 	
+	<select id="SelectProductType" resultType="kr.co.hellopet.vo.ProductVO">
+		SELECT * FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} AND `group` =#{type} limit #{start}, 9;
+	</select>
 	
 	<select id="SelectCountTotal" resultType="int" parameterType="map">
 		Select Count(`prodNo`) FROM `product` where `prodCate1` =#{cate1} and `prodCate2` =#{cate2};  	
+	</select>
+	
+	<select id="SelectCountTotalType" resultType="int" parameterType="map">
+		Select Count(`prodNo`) FROM `product` where `prodCate1` =#{cate1} and  `prodCate2` =#{cate2} and `group` =#{type};  	
+	</select>
+	
+	
+	<select id="SelectProductView" resultType="kr.co.hellopet.vo.ProductVO">
+		Select * From `product` as a
+			JOIN `product_cate1` AS b
+			ON a.prodCate1 = b.cate1
+ 			JOIN `product_cate2` as c
+ 			ON a.prodCate2 = c.cate2
+			WHERE c.cate1=#{cate1} AND c.cate2 =#{cate2}  and `prodNo` =#{prodNo};
+	</select>
+	
+	<select id="SelectProductMap" resultType="kr.co.hellopet.vo.MedicalVO">
+		SELECT a.* FROM `pet_hospital_pharmacy` AS a
+			JOIN `product` AS b
+			ON a.medicalName = b.medicalName
+			WHERE b.prodNo =#{prodNo};
 	</select>
 	
 </mapper>

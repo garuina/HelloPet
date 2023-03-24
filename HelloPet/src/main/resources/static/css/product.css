@@ -890,7 +890,7 @@ footer {
     display: block;
     margin: 0px auto;
     left: 160px;
-    top: 480px
+    top: 500px
 }
 #productView .prod-bx{
 	width: 1200px;
@@ -935,7 +935,9 @@ footer {
 #productView a:hover {
 color: #3c83dc;
 }
-
+#productView .disPrice span:after{
+	content: "원";
+}
 
 
 

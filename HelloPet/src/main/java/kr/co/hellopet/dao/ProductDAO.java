@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.Cate1VO;
 import kr.co.hellopet.vo.Cate2VO;
+import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.ProductVO;
 
 @Mapper
@@ -30,8 +31,13 @@ public interface ProductDAO {
 	
 	// product 불러오기
 	public List<ProductVO> SelectProduct(String cate1, String cate2, int start);
+	public List<ProductVO> SelectProductType(String cate1, String cate2, String type,int start);
 	
 	
+	// view product 불러오기
+	public ProductVO SelectProductView(String cate1, String cate2, String prodNo);
+	public MedicalVO SelectProductMap(String prodNo);
+	public int SelectCountTotalType(String cate1, String cate2, String type);
 	
 	
 }
