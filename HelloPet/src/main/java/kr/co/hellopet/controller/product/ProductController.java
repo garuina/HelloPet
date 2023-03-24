@@ -32,7 +32,9 @@ import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.ProductVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Controller
 public class ProductController {
 	
@@ -40,7 +42,7 @@ public class ProductController {
 	private ProductService service;
 	
 	
-	@GetMapping("product/list")
+	@GetMapping(value = {"product/", "product/list"})
 	public String list(Model model, String cate1, String cate2, String pg) {
 		
 		List<Cate1VO> cate1s = service.Cate1();
@@ -87,16 +89,54 @@ public class ProductController {
 	
 	@ResponseBody
 	@PostMapping("product/list")
-	public String list(Model model, String type) {
+	public Map<String, Object> list(@RequestParam("cate1")String cate1, 
+					   @RequestParam("cate2")String cate2, 
+					   @RequestParam("type") String type,
+					   String pg) {
+		
+		log.info("cate1 : " + cate1);
+		log.info("cate2 : " + cate2);
+		log.info("type : " + type);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		int currentPage = service.getCurrentPage(pg);
+		int start = service.getLimitStart(currentPage);
+		
+		List<ProductVO> p2s = service.SelectProductType(cate1, cate2, type, start);
+		map.put("p2s", p2s);
 		
 		
+		// 페이징처리
+        int total = 0;
+        total = service.SelectCountTotalType(cate1,cate2,type);
+        int lastPageNum = service.getLastPageNum(total);
+        int pageStartNum = service.getpageStartNum(total, start);
+        int[] groups = service.getPageGroup(currentPage, lastPageNum);
+        
+    
+        map.put("cate1", cate1);
+        map.put("cate2", cate2);
+        map.put("currentPage", currentPage);
+        map.put("lastPageNum", lastPageNum);
+        map.put("pageStartNum", pageStartNum);
+        map.put("groups", groups);
+        map.put("pg", pg);
 		
-		return "prodct/list";
+		return map;
 	}
 	
 	
 	@GetMapping("product/view")
-	public String view() {
+	public String view(Model model, String cate1, String cate2, String prodNo) {
+		
+		ProductVO product = service.SelectProductView(cate1, cate2, prodNo);
+		model.addAttribute("product", product);
+
+		MedicalVO med = service.SelectProductMap(prodNo);
+		model.addAttribute("med", med);
+		
+		
 		return "product/view";
 	}
 	

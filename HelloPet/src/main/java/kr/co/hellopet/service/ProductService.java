@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import kr.co.hellopet.dao.ProductDAO;
 import kr.co.hellopet.vo.Cate1VO;
 import kr.co.hellopet.vo.Cate2VO;
+import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.ProductVO;
 
 @Service
@@ -45,6 +46,25 @@ public class ProductService {
 	
 	public List<ProductVO> SelectProduct(String cate1, String cate2, int start){
 		return dao.SelectProduct(cate1, cate2, start);
+	}
+	
+	
+	public List<ProductVO> SelectProductType(String cate1, String cate2, String type,int start){
+		return dao.SelectProductType(cate1, cate2, type, start);
+	}
+	
+	// view
+	
+	public ProductVO SelectProductView(String cate1, String cate2, String prodNo) {
+		return dao.SelectProductView(cate1, cate2, prodNo);
+	}
+	
+	public MedicalVO SelectProductMap(String prodNo) {
+		return dao.SelectProductMap(prodNo);
+	}
+	
+	public int SelectCountTotalType(String cate1, String cate2, String type) {
+		return dao.SelectCountTotalType(cate1, cate2, type);
 	}
 	
 	

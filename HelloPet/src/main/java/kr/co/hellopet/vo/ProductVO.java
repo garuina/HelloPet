@@ -28,4 +28,10 @@ public class ProductVO {
 	private int hit;
 	private String regip;
 	private String rdate;
+	
+	
+	private String cate1;
+	private String cate2;
+	private String c1Name;
+	private String c2Name;
 }
