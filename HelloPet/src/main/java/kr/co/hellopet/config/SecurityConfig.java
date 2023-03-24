@@ -33,20 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		// 접근권한
 		http.authorizeRequests().antMatchers("/").permitAll();
-		// member 에 접근하는 사용자가 로그인을 한 사용자라면 index 로 이동
-		/*
-		http.authorizeRequests().antMatchers("/my/**").hasAnyRole("1");
-		http.authorizeRequests().antMatchers("/community/**").permitAll();
-		http.authorizeRequests().antMatchers("/cs/**").permitAll();
-		http.authorizeRequests().antMatchers("/disease/**").permitAll();
-		http.authorizeRequests().antMatchers("/lists/**").permitAll();
-		http.authorizeRequests().antMatchers("/message/**").permitAll();
-		http.authorizeRequests().antMatchers("/search/**").permitAll();
-		*/
-	/*
-	 * http.authorizeRequests().antMatchers("/admin/**").hasAnyRole("7");
-	 */
-		// 추후 수정 예정 2023/03/08
 		
 		// 위조 방지
 		http.csrf().disable();

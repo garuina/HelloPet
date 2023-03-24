@@ -42,12 +42,6 @@
 						</td>
 	                </tr>
 	                <tr>
-	                    <td>주소</td>
-	                    <td  th:if="${#authentication.principal.member != null}">
-							<input type="text" name="zip"  th:value="${'(' + #authentication.principal.member.zip + ') '+ #authentication.principal.member.addr1 + '  ('+ #authentication.principal.member.addr2 + ')'}">
-						</td>
-	                </tr>
-	                <tr>
 	                    <td>회원탈퇴</td>
 	                    <td><button name="btnWithdrawMember">탈퇴하기</button></td>
 	                </tr>
