@@ -31,7 +31,7 @@ public interface MyDAO {
 	
 	public int selectCountMyReserve(String uid);
 	
-	public void updateInfoModify(@Param("name") String name, @Param("email") String email, @Param("nick") String nick, @Param("hp") String hp, @Param("zip") String zip, @Param("addr1") String addr1, @Param("addr2") String addr2, @Param("uid") String uid);
+	public void updateInfoModify(@Param("name") String name, @Param("email") String email, @Param("nick") String nick, @Param("hp") String hp, @Param("uid") String uid);
 	
 	public int deleteWithdrawMember(@Param("uid") String uid);
 	
