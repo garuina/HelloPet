@@ -62,10 +62,10 @@ public class MyController {
 	}
 	
 	@PostMapping("my/info")
-	public String info(String name, String email, String nick, String hp, String uid) {
+	public String info(String name, String email, String nick, String hp, String uid, String zip, String addr1, String addr2) {
 		
 		// info update
-		service.updateInfoModify(name, email, nick, hp, uid);
+		service.updateInfoModify(name, email, nick, hp, zip, addr1, addr2, uid);
 			
 		return "redirect:/my/info";
 	}

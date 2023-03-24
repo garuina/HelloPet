@@ -1,4 +1,41 @@
 <th:block th:include="@{my/_header.html}"/>
+<style>
+
+	#zip {
+		float : left;
+		width : 250px;
+	    padding: 10px;
+	    margin-right: 7px;
+	    border: 1px solid #c4c4c4;
+	    box-sizing: border-box;
+	}
+	
+	#btnSearchAddr {
+	    width: 100px;
+	    height: 35px;
+	    color: #fff;
+	    background: #60626c;
+	    border: none;
+	}
+	
+	#addr1 {
+		width : 450px;
+		height: 15px;
+    	margin-top: 5px;
+    	text-indent: 10px;
+    	border: 1px solid #c4c4c4;
+	}
+	
+	#addr2 {
+		width : 450px;
+	    height: 15px;
+    	margin-top: 5px;
+    	text-indent: 10px;
+    	border: 1px solid #c4c4c4;
+    }
+	
+
+</style>
  <div class="mypage-contents">
      <div class="mypage-contents_head">
          <h2 class="mypage-contents__title">보호자정보관리</h2>
@@ -42,9 +79,16 @@
 						</td>
 	                </tr>
 	                <tr>
-	                    <td>주소</td>
+	                    <td id="addr">주소</td>
 	                    <td  th:if="${#authentication.principal.member != null}">
-							<input type="text" name="zip"  th:value="${'(' + #authentication.principal.member.zip + ') '+ #authentication.principal.member.addr1 + '  ('+ #authentication.principal.member.addr2 + ')'}">
+							<input type="text" name="zip" id="zip" th:value="${member.zip}" readonly="readonly">
+                            <input type="button" id="btnSearchAddr" onclick="postcode()" value="주소검색">
+                            <input type="text" id="addr1" name="addr1" placeholder="기본주소" th:value="${member.addr1}">
+                             <input type="text" id="addr2" name="addr2" placeholder="상세주소" th:value="${member.addr2}">
+                             
+                            <input type="hidden" name="ori-zip" th:value="${member.zip}" readonly="readonly">
+                            <input type="hidden" name="ori-addr1" placeholder="기본주소" th:value="${member.addr1}">
+                            <input type="hidden" name="ori-addr2" placeholder="상세주소" th:value="${member.addr2}">
 						</td>
 	                </tr>
 	                <tr>

@@ -45,7 +45,7 @@
 	<!-- 회원정보 update -->
 	<update id="updateInfoModify">
 	    UPDATE pet_owner
-	    SET `name` = #{name}, `email`= #{email}, `nick` = #{nick}, `hp` = #{hp}
+	    SET `name` = #{name}, `email`= #{email}, `nick` = #{nick}, `hp` = #{hp}, `zip` = #{zip}, `addr1` = #{addr1}, `addr2` = #{addr2}
 	    WHERE `uid` = #{uid};
 	</update>
 	

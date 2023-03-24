@@ -63,8 +63,8 @@ public class MyService {
 	}
 	
 	// 회원 수정
-	public void updateInfoModify(String name, String email, String nick, String hp, String uid) {
-		dao.updateInfoModify(name, email, nick, hp, uid);
+	public void updateInfoModify(String name, String email, String nick, String hp, String zip, String addr1, String addr2, String uid) {
+		dao.updateInfoModify(name, email, nick, hp, zip, addr1, addr2, uid);
 	}
 	
 	public int deleteWithdrawMember(String uid) {
