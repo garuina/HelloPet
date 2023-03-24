@@ -65,5 +65,15 @@
     <update id="updateReserve">
     	update `pet_hospital_pharmacy` set `reserve` = `reserve`+1 where `medNo`=#{medNo};
     </update>
+    
+    <!-- 회원 삭제 - 데이터 삭제 -->
+	<delete id="deleteWithdrawMember">
+		delete from `pet_hospital_pharmacy`  WHERE `uid` = #{uid};
+	</delete>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="findPwChange">
+		update `pet_hospital_pharmacy` set `pass`=#{pass} where `uid`=#{uid};
+	</update>
 
 </mapper>

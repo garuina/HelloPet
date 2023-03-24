@@ -5,7 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +34,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminService service;
-	
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping("admin/info")
 	public String info(Model model, Principal principal) {
@@ -42,6 +50,44 @@ public class AdminController {
 		model.addAttribute("user",user);
 		return "admin/info";
 	}
+	
+	@GetMapping("admin/pwChange")
+	public String pwchange(Model model, Principal principal){
+		
+		String uid = principal.getName();
+		MedicalVO vo = service.selectAdmin(uid);
+		MemberVO user = service.selectUser(uid);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("user",user);
+		
+		return "admin/pwChange";
+	}
+	
+
+	@ResponseBody
+	@PostMapping("admin/pwChange")
+	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
+		pass = passwordEncoder.encode(pass);
+		int result = service.findPwChange(uid, pass);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		return map;
+	}
+	
+	@Transactional
+	@GetMapping("admin/delete")
+	public String delete(Principal principal, HttpServletRequest request, HttpServletResponse response) {
+		String uid = principal.getName();
+		
+		service.deleteWithdrawMember(uid);
+		
+		// 캐시 비우기
+	    new SecurityContextLogoutHandler().logout(request, response, null);
+		
+		return "redirect:/index";
+	}
+	
 	@GetMapping("admin/confirm/list")
 	public String confirmList(Model model, String pg, String medNo, Principal principal, @RequestParam(value="revNo", required=false) Integer revNo) {
 		

@@ -36,6 +36,12 @@ public class AdminService {
 	public int updateAdmin(MedicalVO vo) {
 		return dao.updateAdmin(vo);
 	}
+	public int deleteWithdrawMember(String uid) {
+		return dao.deleteWithdrawMember(uid);
+	}
+	public int findPwChange(String uid, String pass) {
+		return dao.findPwChange(uid, pass);
+	}
 	
 	/* 예약내역 */
 	public List<AdminReserveVO> selectReserves(int start, String medNo, int pageSize){
