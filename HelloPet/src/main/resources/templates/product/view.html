@@ -4,6 +4,7 @@
 내용 : product view 상품 리스트 출력 구현 하기
 이름 : 장인화
  -->
+
 <div id="productView">
 
     <div id="container" ng-app="appProduct" class="ng-scope">
@@ -83,8 +84,10 @@
 		    
 		        <div class="button-box">
 		            <a style="cursor:pointer" class="btn btn-lg btn-line blue" id="aCardAdd"
-		             	href="#">예약하기</a>
+		             	th:href="@{/search/reserve(hosNo=${product.medNo},prodNo=${product.prodNo})}">예약하기</a>
+		             	
 		        </div>
+		        <label sec:authorize="isAuthenticated()" style="display: none;"><span class="uid" name="uid" sec:authentication="principal.member.uid">길동</span>
 			  </div>  
 		</div>  
 		  
@@ -113,6 +116,8 @@
         
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5f25185293d664bcd951443d8b8e4a67&libraries=services"></script>
         <script>
+        
+        
         
         let addr = $('input[name=addr1]').val();
         let medName = $('input[name=medName]').val();

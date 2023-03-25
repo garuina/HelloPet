@@ -48,10 +48,22 @@ public class ProductService {
 		return dao.SelectProduct(cate1, cate2, start);
 	}
 	
-	
-	public List<ProductVO> SelectProductType(String cate1, String cate2, String type,int start){
-		return dao.SelectProductType(cate1, cate2, type, start);
+	public List<ProductVO> SelectProductDog(String cate1, String cate2,int start){
+		return dao.SelectProductDog(cate1, cate2, start);
 	}
+	public List<ProductVO> SelectProductCat(String cate1, String cate2,int start){
+		return dao.SelectProductCat(cate1, cate2, start);
+	}
+	
+	
+	public int SelectCountDog(String cate1, String cate2) {
+		return dao.SelectCountDog(cate1, cate2);
+	}
+	
+	public int SelectCountCat(String cate1, String cate2) {
+		return dao.SelectCountCat(cate1, cate2);
+	}
+	
 	
 	// view
 	

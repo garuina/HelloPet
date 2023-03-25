@@ -10,6 +10,7 @@ import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
+import kr.co.hellopet.vo.ProductVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 /*
@@ -104,6 +105,10 @@ public class SearchService {
 	}
 	public MedicalVO selectHospital(String medNo) {
 		return dao.selectHospital(medNo);
+	}
+	
+	public ProductVO selectProductOne(String prodNo) {
+		return dao.selectProductOne(prodNo);
 	}
 	
 	// complete

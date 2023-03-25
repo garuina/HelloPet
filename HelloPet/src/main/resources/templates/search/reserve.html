@@ -143,10 +143,18 @@ $(function(){
                                         <th>반려동물 나이 (2)</th>
                                         <td><input type="text" name="petAge2" placeholder="ex)17"><span>숫자만 입력해주세요.</span></td>
                                     </tr>
+                                    <th:block th:if="${prodNo == null}">
                                     <tr>
                                         <th>진료항목</th>
                                         <td><input type="text" name="department" placeholder="ex)예방접종"><span></span></td>
                                     </tr>
+                                    </th:block>
+                                     <th:block th:if="${prodNo != null}">
+                                    <tr>
+                                        <th>진료항목</th>
+                                        <td><input type="hidden" name="department" th:value="${product.prodName}">[[${product.prodName}]]</td>
+                                    </tr>
+                                    </th:block>
                                     <tr>
                                         <th>특이사항</th>
                                         <td><input type="text" name="memo" placeholder="ex) oo 알러지 보유"><span>수의사가 알아야 하는 반려동물의 특이사항을 기재해 주세요.</span></td>

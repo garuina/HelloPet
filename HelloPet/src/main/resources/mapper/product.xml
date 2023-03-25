@@ -25,16 +25,27 @@
 		SELECT * FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} limit #{start}, 9;
 	</select>
 	
-	<select id="SelectProductType" resultType="kr.co.hellopet.vo.ProductVO">
-		SELECT * FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} AND `group` =#{type} limit #{start}, 9;
+	
+	<select id="SelectProductDog" resultType="kr.co.hellopet.vo.ProductVO">
+		SELECT * FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} AND (`group` ='dog' or `group`='all') limit #{start}, 9;
 	</select>
+	
+	<select id="SelectProductCat" resultType="kr.co.hellopet.vo.ProductVO">
+		SELECT * FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} AND (`group` ='cat' or `group`='all') limit #{start}, 9;
+	</select>
+	
+	
+	
 	
 	<select id="SelectCountTotal" resultType="int" parameterType="map">
 		Select Count(`prodNo`) FROM `product` where `prodCate1` =#{cate1} and `prodCate2` =#{cate2};  	
 	</select>
+	<select id="SelectCountDog" resultType="int" parameterType="map">
+		SELECT Count(`prodNo`) FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} AND (`group` ='dog' or `group`='all');
+	</select>
 	
-	<select id="SelectCountTotalType" resultType="int" parameterType="map">
-		Select Count(`prodNo`) FROM `product` where `prodCate1` =#{cate1} and  `prodCate2` =#{cate2} and `group` =#{type};  	
+	<select id="SelectCountCat" resultType="int" parameterType="map">
+		SELECT Count(`prodNo`) FROM `product` WHERE `prodCate1`=#{cate1} AND `prodCate2` =#{cate2} AND (`group` ='cat' or `group`='all');
 	</select>
 	
 	

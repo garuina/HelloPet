@@ -9,6 +9,7 @@ import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
+import kr.co.hellopet.vo.ProductVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 /*
@@ -52,6 +53,7 @@ public interface SearchDAO {
 	
 	
 	//reserve (병원예약하기)
+	public ProductVO selectProductOne(String prodNo);
 	public int insertReserve(ReserveVO vo);
 	
 	//complete (예약결과 가져오기)
