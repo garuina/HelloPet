@@ -26,6 +26,7 @@ import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
+import kr.co.hellopet.vo.ProductVO;
 import kr.co.hellopet.vo.ReserveVO;
 import kr.co.hellopet.vo.SearchVO;
 
@@ -42,13 +43,17 @@ public class SearchController {
 	}
 	
 	@GetMapping("search/reserve")
-	public String reserve(Model model, String hosNo) {
+	public String reserve(Model model, String hosNo, String prodNo) {
 		
 		SearchVO hs = service.selectViewHs(hosNo);
 		model.addAttribute("hs", hs);
 		
 		MedicalVO md = service.selectHospital(hosNo);
 		model.addAttribute("md", md);
+		
+		ProductVO product = service.selectProductOne(prodNo);
+		model.addAttribute("product", product);
+		model.addAttribute("prodNo", prodNo);
 		
 		return "search/reserve";
 	}

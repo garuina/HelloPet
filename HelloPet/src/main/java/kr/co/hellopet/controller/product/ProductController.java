@@ -43,7 +43,7 @@ public class ProductController {
 	
 	
 	@GetMapping(value = {"product/", "product/list"})
-	public String list(Model model, String cate1, String cate2, String pg) {
+	public String list(Model model, String cate1, String cate2, String pg,String type) {
 		
 		List<Cate1VO> cate1s = service.Cate1();
 		List<Cate2VO> cate2s = service.Cate2();
@@ -62,10 +62,17 @@ public class ProductController {
 		int currentPage = service.getCurrentPage(pg);
 		int start = service.getLimitStart(currentPage);
 
-		
-		List<ProductVO> products = service.SelectProduct(cate1, cate2, start);
-		model.addAttribute("products", products);
-		
+
+		if("dog".equals(type)) {
+			List<ProductVO> pros = service.SelectProductDog(cate1, cate2, start);
+			model.addAttribute("pros", pros);
+		}else if("cat".equals(type)) {
+			List<ProductVO> pros = service.SelectProductCat(cate1, cate2, start);
+			model.addAttribute("pros", pros);
+		}else{
+			List<ProductVO> pros = service.SelectProduct(cate1, cate2, start);
+			model.addAttribute("pros", pros);
+		}
 		
 		// 페이징처리
         int total = 0;
@@ -77,7 +84,6 @@ public class ProductController {
     	
 		model.addAttribute("cate1", cate1);
 		model.addAttribute("cate2", cate2);
-		model.addAttribute("products", products);
 	    model.addAttribute("currentPage", currentPage);
         model.addAttribute("lastPageNum", lastPageNum);
         model.addAttribute("pageStartNum", pageStartNum);
@@ -103,13 +109,30 @@ public class ProductController {
 		int currentPage = service.getCurrentPage(pg);
 		int start = service.getLimitStart(currentPage);
 		
-		List<ProductVO> p2s = service.SelectProductType(cate1, cate2, type, start);
-		map.put("p2s", p2s);
-		
+		if("dog".equals(type)) {
+			List<ProductVO> pros = service.SelectProductDog(cate1, cate2, start);
+			map.put("pros", pros);
+		}else if("cat".equals(type)) {
+			List<ProductVO> pros = service.SelectProductCat(cate1, cate2, start);
+			map.put("pros", pros);
+		}else if("all".equals(type)) {
+			List<ProductVO> pros = service.SelectProduct(cate1, cate2, start);
+			map.put("pros", pros);
+		}
 		
 		// 페이징처리
         int total = 0;
-        total = service.SelectCountTotalType(cate1,cate2,type);
+        
+        if("dog".equals(type)) {
+        	total = service.SelectCountDog(cate1,cate2);
+		}else if("cat".equals(type)) {
+			total = service.SelectCountCat(cate1,cate2);
+		}else if("all".equals(type)) {
+			total = service.SelectCountTotal(cate1,cate2);
+		}
+        
+        
+        
         int lastPageNum = service.getLastPageNum(total);
         int pageStartNum = service.getpageStartNum(total, start);
         int[] groups = service.getPageGroup(currentPage, lastPageNum);
