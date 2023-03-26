@@ -17,12 +17,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/cs.css}">
     <script>
-        $(document).ready(function(){
-          
-            $('.slider').bxSlider({
-            easing:'linear'
-          });
-        });
+        
+        function goHos (){
+        	var medNo = $('.medNo').text();
+        	console.log(medNo);
+        	
+        	location.href="/HelloPet/admin/info";
+        }
+        function goPm (){
+        	var pharNo = $('.pharNo').text();
+        	console.log(pharNo);
+        	
+        	location.href="/HelloPet/admin/info";
+        }
+        function goMsg (){
+        	var uid = $('.uid').text();
+        	console.log(uid);
+        	
+        	location.href="/HelloPet/message/message";
+        }
+        function goTop(){
+        	var uid = $('.uid').text();
+        	console.log(uid);
+        	
+        	location.href="/HelloPet/admin/info";
+        }
         
         $(function(){
         	var level = $('.level').text();
@@ -56,13 +75,14 @@
                 	<label style="display: none;" sec:authorize="hasAuthority('ROLE_3')"><span class="level" sec:authentication="principal.medical.level"></span></label>
                     <a sec:authorize="!isAuthenticated()" th:href="@{/member/login}">로그인</a>
                     <a sec:authorize="!isAuthenticated()" th:href="@{/member/join}">회원가입</a>
-                    <a  th:href="@{/cs/notice/list}">고객센터</a>
                     <label sec:authorize="hasAuthority('ROLE_1')"><span class="name" sec:authentication="principal.member.nick">길동</span>님</label>
-                    <label sec:authorize="hasAuthority('ROLE_2')"><span th:onclick="location.href='/HelloPet/admin/info'">병원관리</span></label></a>
-	                <label sec:authorize="hasAuthority('ROLE_3')"><span th:onclick="location.href='/Hellopet/admin/info'">약국관리</span></label></a>
-	                <label sec:authorize="hasAuthority('ROLE_7')"><span>웹관리자님</span></label></a>
+                    <label sec:authorize="hasAuthority('ROLE_2')" onclick="goHos()">내 병원관리</label>
+	                <label sec:authorize="hasAuthority('ROLE_3')" onclick="goPm()">내 약국관리</label>
+	                <label sec:authorize="hasAuthority('ROLE_7')" onclick="goTop()">웹관리자님</label>
                 	<a sec:authorize="isAuthenticated()" th:href="@{/member/logout}" class="logout">로그아웃</a>
-                    <a sec:authorize="hasAuthority('ROLE_1')" href="#">마이페이지</a>
+                    <a sec:authorize="hasAuthority('ROLE_1')" th:href="@{/my/info}">마이페이지</a>
+                    <a sec:authorize="isAuthenticated()" onclick="goMsg()" class="message">알림 ([[${msg2}]])</a>
+                	<a th:href="@{/cs/notice/list}">고객센터</a>
                 </div>
             </div>
             <div class="menu">

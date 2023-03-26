@@ -25,13 +25,19 @@
         	var medNo = $('.medNo').text();
         	console.log(medNo);
         	
-        	location.href="/HelloPet/admin/info?medNo="+medNo;
+        	location.href="/HelloPet/admin/info";
+        }
+        function goPm (){
+        	var pharNo = $('.pharNo').text();
+        	console.log(pharNo);
+        	
+        	location.href="/HelloPet/admin/info";
         }
         function goMsg (){
         	var uid = $('.uid').text();
         	console.log(uid);
         	
-        	location.href="/HelloPet/message/message?uid="+uid;
+        	location.href="/HelloPet/message/message";
         }
     	
     </script>
@@ -41,16 +47,14 @@
         <header class="header">
             <div class="headerTop">
                 <div>
-                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_2')"><span class="medNo" sec:authentication="principal.medical.medNo"></span></label>
-                    <a sec:authorize="!isAuthenticated()" th:href="@{/member/login}">로그인</a>
-                    <a sec:authorize="!isAuthenticated()" th:href="@{/member/join}">회원가입</a>
-                    <label sec:authorize="hasAuthority('ROLE_1')"><span class="name" sec:authentication="principal.member.nick">길동</span>님</label>
+                	<label sec:authorize="hasAuthority('ROLE_1')"><span class="name" sec:authentication="principal.member.nick">길동</span>님</label>
                     <label sec:authorize="hasAuthority('ROLE_2')" onclick="goHos()">내 병원관리</label>
-	                <label sec:authorize="hasAuthority('ROLE_3')"><span th:onclick="location.href='/Hellopet/admin/info'">내 약국관리</span></label></a>
-	                <label sec:authorize="hasAuthority('ROLE_7')"><span>웹관리자님</span></label></a>
+	                <label sec:authorize="hasAuthority('ROLE_3')" onclick="goPm()">내 약국관리</label>
+	                <label sec:authorize="hasAuthority('ROLE_7')" onclick="goTop()">웹관리자님</label>
                 	<a sec:authorize="isAuthenticated()" th:href="@{/member/logout}" class="logout">로그아웃</a>
                     <a sec:authorize="hasAuthority('ROLE_1')" th:href="@{/my/info}">마이페이지</a>
-                    <a onclick="goMsg()" class="message">알림</a>
+                    <a sec:authorize="isAuthenticated()" onclick="goMsg()" class="message">알림 ([[${result}]])</a>
+                	<a th:href="@{/cs/notice/list}">고객센터</a>
                 </div>
             </div>
             <div class="menu">
@@ -93,15 +97,15 @@
                         <div class="paging">
 			                <ul>
 			                <th:block th:if="${groups[0]>1}">
-			                    <li><a th:href="@{/message/message(uid=${uid},pg=${groups[0]-1})}" class="prev">←</a></li>
+			                    <li><a th:href="@{/message/message(pg=${groups[0]-1})}" class="prev">←</a></li>
 			                </th:block>
 			                <th:block th:if="${groups[1] != 0}">
 			                <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
-			                    <li><a th:href="@{/message/message(uid=${uid},pg=${num})}" th:class="${num == currentPage?'num on':'num'}">[[${num}]]</a></li>
+			                    <li><a th:href="@{/message/message(,pg=${num})}" th:class="${num == currentPage?'num on':'num'}">[[${num}]]</a></li>
 			                </th:block>
 			                </th:block>
 			                <th:block th:if="${groups[1]<lastPageNum}">
-			                    <li><a th:href="@{/message/message(uid=${uid},pg=${groups[1]+1})}" class="next">→</a></li>
+			                    <li><a th:href="@{/message/message(pg=${groups[1]+1})}" class="next">→</a></li>
 			                </th:block>
 			                </ul>
 			            </div>

@@ -32,7 +32,8 @@ public class AdminProductController {
 		
 		MedicalVO vo = service.selectAdmin(uid);
 		
-		
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		
 		
 		//페이징 
@@ -69,7 +70,8 @@ public class AdminProductController {
 		String uid = principal.getName();
 		
 		MedicalVO vo = service.selectAdmin(uid);
-		
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		model.addAttribute("vo",vo);
 		
 		return "admin/product/register";
@@ -91,7 +93,8 @@ public class AdminProductController {
 		String uid = principal.getName();
 		
 		MedicalVO vo = service.selectAdmin(uid);
-		
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		// 상품 정보
 		AdminProductVO product = service.selectAdminProduct(prodNo);
 		
@@ -124,6 +127,7 @@ public class AdminProductController {
 		}
 		Map<String, Integer> map = new HashMap<>();
 		map.put("result", result);
+		
 		return map;
 	}
 	

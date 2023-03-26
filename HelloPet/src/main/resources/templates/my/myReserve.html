@@ -1,7 +1,7 @@
 <th:block th:include="@{my/_header.html}"/>
  	<div class="mypage-contents">
 	     <div class="mypage-contents_head">
-	         <h2 class="mypage-contents__title">게시글관리</h2>
+	         <h2 class="mypage-contents__title">예약관리</h2>
 	   	</div>
 	         <!--게시물 목록-->
 	         <div class="reserve_div">
@@ -40,7 +40,7 @@
 	                     <td>[[${article.hosName}]]</td>
 	                     <td>[[${article.petName1}]]</td>
 	                     <td>[[${article.revDate}]]</td>
-	                     <td>[[${article.revTime}]]</td>
+	                     <td>[[${article.revTime.substring(0,5)}]]</td>
 	                 </tr>
 	             </table>
 	             <div class="reserve_cancel">

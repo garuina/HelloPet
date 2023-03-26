@@ -20,7 +20,7 @@
             		<td>[[${pageStartNum - i.index }]]</td>
             		<td><a th:href="@{/cs/qna/view(no=${article.no})}">[[${article.title}]]</a></td>
             		<!-- 날짜를 어떤 형식으로 ?  -->
-            		<td>[[${#strings.substring(article.rdate, 0, 19)}]]</td>
+            		<td>[[${#strings.substring(article.rdate, 0, 10)}]]</td>
         		</tr>
     		</table>
 		</div>

@@ -99,4 +99,6 @@ public interface CommunityDAO {
 	
 	// 메세지 보내기
 	public int insertMsg(MessageVO vo);
+	
+	public int selectMsg(String uid);
 }

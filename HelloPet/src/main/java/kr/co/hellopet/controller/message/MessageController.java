@@ -28,6 +28,9 @@ public class MessageController {
 		
 		String uid = principal.getName();
 		
+		int result = service.selectMsgTotal(uid);
+		model.addAttribute("result", result);
+		
 		int currentPage = service.getCurrentPage(pg);
         int start = service.getLimitStart(currentPage);
 

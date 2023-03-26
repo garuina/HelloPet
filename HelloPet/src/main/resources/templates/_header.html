@@ -93,7 +93,7 @@
         	var uid = $('.uid').text();
         	console.log(uid);
         	
-        	location.href="/HelloPet/message/message?uid="+uid;
+        	location.href="/HelloPet/message/message";
         }
         function goTop(){
         	var uid = $('.uid').text();
@@ -113,10 +113,6 @@
                 	<label style="display: none;" sec:authorize="hasAuthority('ROLE_7')"><span class="level" sec:authentication="principal.member.level"></span></label>
                 	<label style="display: none;" sec:authorize="hasAuthority('ROLE_2')"><span class="level" sec:authentication="principal.medical.level"></span></label>
                 	<label style="display: none;" sec:authorize="hasAuthority('ROLE_3')"><span class="level" sec:authentication="principal.medical.level"></span></label>
-                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_1')"><span class="uid" sec:authentication="principal.member.uid"></span></label>
-                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_7')"><span class="uid" sec:authentication="principal.member.uid"></span></label>
-                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_2')"><span class="uid" sec:authentication="principal.medical.uid"></span></label>
-                	<label style="display: none;" sec:authorize="hasAuthority('ROLE_3')"><span class="uid" sec:authentication="principal.medical.uid"></span></label>
                     <a sec:authorize="!isAuthenticated()" th:href="@{/member/login}">로그인</a>
                     <a sec:authorize="!isAuthenticated()" th:href="@{/member/join}">회원가입</a>
                     <label sec:authorize="hasAuthority('ROLE_1')"><span class="name" sec:authentication="principal.member.nick">길동</span>님</label>

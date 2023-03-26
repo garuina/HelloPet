@@ -12,7 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -21,6 +24,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +37,7 @@ import kr.co.hellopet.config.MyUserDetails;
 import kr.co.hellopet.service.MyService;
 import kr.co.hellopet.vo.CommunityVO;
 import kr.co.hellopet.vo.CsVO;
+import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.ReserveVO;
 
@@ -40,6 +46,9 @@ public class MyController {
 	
 	@Autowired
 	private MyService service;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("my/info")
 	public String info(Authentication authentication, Model model) {
@@ -57,7 +66,8 @@ public class MyController {
 			
 			model.addAttribute("member", vo);
 		}
-		
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		return "my/info";
 	}
 	
@@ -69,12 +79,14 @@ public class MyController {
 			
 		return "redirect:/my/info";
 	}
+	
 
 	@GetMapping("my/myArticle")
 	public String myArticle(Authentication authentication, Model model, String pg) {
 		
 		String uid = authentication.getName();
-		
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		// 현재 페이지
 		int currentPage = service.getCurrentPage(pg);
 		
@@ -117,7 +129,8 @@ public class MyController {
 	public String myQna(Model model, Authentication authentication, String pg) {
 		
 		String uid = authentication.getName();
-		
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		// 현재 페이지
 		int currentPage = service.getCurrentPage(pg);
 		
@@ -159,7 +172,8 @@ public class MyController {
 	public String myReserve(Authentication authentication, Model model, String pg) {
 		
 		String uid = authentication.getName();
-		
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		// 현재 페이지
 		int currentPage = service.getCurrentPage(pg);
 		
@@ -213,25 +227,54 @@ public class MyController {
 		return resultMap;
 	}
 	
+	@Transactional
+	@GetMapping("my/delete")
+	public String delete(Principal principal, HttpServletRequest request, HttpServletResponse response) {
+		String uid = principal.getName();
+		
+		service.deleteWithdrawUser(uid);
+		
+		// 캐시 비우기
+	    new SecurityContextLogoutHandler().logout(request, response, null);
+		
+		return "redirect:/index";
+	}
+	
+	@GetMapping("my/pwChange")
+	public String pwchange(Model model, Principal principal){
+		
+		String uid = principal.getName();
+		MemberVO user = service.selectUser(uid);
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
+		
+		model.addAttribute("user",user);
+		
+		return "my/pwChange";
+	}
+	
+
 	@ResponseBody
-	@GetMapping("my/withdrawMember")
-	public int withdrawMember(@RequestParam("uid") String uid) {
+	@PostMapping("my/pwChange")
+	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass, HttpServletRequest request, HttpServletResponse response) {
+		pass = passwordEncoder.encode(pass);
 		
-		int result = service.deleteWithdrawMember(uid);
+		int result = service.findPwChangeUser(uid, pass);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
 		
-		System.out.println("uid : " + uid);
-		
-		System.out.println(result);
-		
-		return result;
+		// 캐시 비우기
+	    new SecurityContextLogoutHandler().logout(request, response, null);
+		return map;
 	}
 	
 	@ResponseBody
 	@GetMapping("my/myReserve_List")
-	public Map<String, Object> myReserveList(Authentication authentication, String pg) {
+	public Map<String, Object> myReserveList(Authentication authentication, String pg, Model model) {
 		
 		String uid = authentication.getName();
-		
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		// 현재 페이지
 		int currentPage = service.getCurrentPage(pg);
 		

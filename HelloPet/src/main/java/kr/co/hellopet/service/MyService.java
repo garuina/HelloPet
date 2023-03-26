@@ -67,14 +67,20 @@ public class MyService {
 		dao.updateInfoModify(name, email, nick, hp, uid);
 	}
 	
-	public int deleteWithdrawMember(String uid) {
-		int result = dao.deleteWithdrawMember(uid);
+	public int deleteWithdrawUser(String uid) {
+		int result = dao.deleteWithdrawUser(uid);
 		return result;
+	}
+	public int findPwChangeUser(String uid, String pass) {
+		return dao.findPwChangeUser(uid, pass);
 	}
 	
 	// 예약목록 삭제하기
 	public int deleteMyReserve(int no) {
 		return dao.deleteMyReserve(no);
+	}
+	public int selectMsg(String uid) {
+		return dao.selectMsg(uid);
 	}
 	
 	// pagin 작업

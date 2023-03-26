@@ -63,4 +63,8 @@
 		delete from `product` WHERE `prodNo` in (#{prodNo}); 
 	</delete>
 	
+	<select id="selectMsg" resultType="int" parameterType="map">
+		select count(`msgNo`) from `message` where `uid`=#{uid} and `msgStatus`=0;
+	</select>
+	
 </mapper>

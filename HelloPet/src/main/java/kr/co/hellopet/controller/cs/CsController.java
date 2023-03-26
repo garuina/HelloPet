@@ -30,7 +30,7 @@ public class CsController {
 
 	/* notice */
 	@GetMapping("cs/notice/list")
-	public String noticeList(Model model, String pg) {
+	public String noticeList(Model model, String pg, Principal principal) {
 		
 		int currentPage = service.getCurrentPage(pg);
 		int pageSize = 10;
@@ -53,11 +53,23 @@ public class CsController {
         model.addAttribute("pageStartNum", pageStartNum);
         model.addAttribute("groups", groups);
 		
+        if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
+        
 		return "cs/notice/list";
 	}
 
 	@GetMapping("cs/notice/write")
-	public String noticeWrite() {
+	public String noticeWrite(Model model, Principal principal) {
+		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		return "cs/notice/write";
 	}
 	
@@ -72,7 +84,7 @@ public class CsController {
 	}
 	
 	@GetMapping("cs/notice/view")
-	public String noticeView(Model model,int no, String pg, String rdate) {
+	public String noticeView(Model model,int no, String pg, String rdate, Principal principal) {
 		int currentPage = service.getCurrentPage(pg);
 		service.updateArticleHit(no);
 		CsVO prev = service.getPrev(rdate);
@@ -83,16 +95,28 @@ public class CsController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("prev", prev);
 		model.addAttribute("next", next);
+		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		return "cs/notice/view";
 	}
 	
 	@GetMapping("cs/notice/modify")
-	public String noticeModify(Model model,int no, String pg) {
+	public String noticeModify(Model model,int no, String pg, Principal principal) {
 		int currentPage = service.getCurrentPage(pg);
 		CsVO vo = service.selectArticle(no);
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("currentPage", currentPage);
+		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		return "cs/notice/modify";
 	}
 	@PostMapping("cs/notice/modify")
@@ -114,14 +138,26 @@ public class CsController {
 
 	/* faq */
 	@GetMapping("cs/faq/list")
-	public String faqList(Model model) {
+	public String faqList(Model model, Principal principal) {
 		List<CsVO> faqs = service.selectFaqs();
 		model.addAttribute("faqs",faqs);
+		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		return "cs/faq/list";
 	}
 	
 	@GetMapping("cs/faq/write")
-	public String faqWrite() {
+	public String faqWrite(Model model, Principal principal) {
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
+		
 		return "cs/faq/write";
 	}
 	@PostMapping("cs/faq/write")
@@ -134,10 +170,16 @@ public class CsController {
 	}
 	
 	@GetMapping("cs/faq/modify")
-	public String faqModify(Model model,int no) {
+	public String faqModify(Model model,int no, Principal principal) {
 		CsVO vo = service.selectArticle(no);
 		
 		model.addAttribute("vo", vo);
+		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		return "cs/faq/modify";
 	}
 	@PostMapping("cs/faq/modify")
@@ -154,7 +196,7 @@ public class CsController {
 	
 	/* qna */
 	@GetMapping("cs/qna/list")
-	public String qnaList(Model model, String pg) {
+	public String qnaList(Model model, String pg, Principal principal) {
 		
 		int currentPage = service.getCurrentPage(pg);
 		int pageSize = 10;
@@ -176,11 +218,22 @@ public class CsController {
         model.addAttribute("lastPageNum", lastPageNum);
         model.addAttribute("pageStartNum", pageStartNum);
         model.addAttribute("groups", groups);
+        
+        if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		
 		return "cs/qna/list";
 	}
 	@GetMapping("cs/qna/write")
-	public String qnaWrite() {
+	public String qnaWrite(Model model, Principal principal) {
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		return "cs/qna/write";
 	}
 	@PostMapping("cs/qna/write")
@@ -193,7 +246,7 @@ public class CsController {
 	}
 	
 	@GetMapping("cs/qna/view")
-	public String qnaView(Model model,int no, String pg) {
+	public String qnaView(Model model,int no, String pg, Principal principal) {
 		/* 문의하기 글 정보 */
 		int currentPage = service.getCurrentPage(pg);
 		service.updateArticleHit(no);
@@ -202,6 +255,11 @@ public class CsController {
 		model.addAttribute("vo", vo);
 		model.addAttribute("currentPage", currentPage);
 		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		
 		
 		List<CsVO> replys = service.selectReply(no);

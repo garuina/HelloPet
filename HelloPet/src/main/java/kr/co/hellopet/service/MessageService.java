@@ -28,6 +28,9 @@ public class MessageService {
 	public int updateMsg(String msgNo) {
 		return dao.updateMsg(msgNo);
 	}
+	public int selectMsgTotal(String uid) {
+		return dao.selectMsgTotal(uid);
+	}
 	
 	/////////// 페이징 처리 ////////////
 	// 현재 페이지 번호

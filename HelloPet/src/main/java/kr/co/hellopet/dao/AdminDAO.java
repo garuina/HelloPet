@@ -27,8 +27,11 @@ public interface AdminDAO {
 	
 	/* 관리자 정보 수정 */
 	public int updateAdmin(MedicalVO vo);
+	public int updateUser(MemberVO mem);
 	public int deleteWithdrawMember(String uid);
+	public int deleteWithdrawUser(String uid);
 	public int findPwChange(String uid, String pass);
+	public int findPwChangeUser(String uid, String pass);
 	
 	
 	/* 예약내역 */
@@ -43,4 +46,5 @@ public interface AdminDAO {
 	/* 메시지 */
 	public int insertMsg(MessageVO vo);
 	public int updateReserve(String medNo);
+	public int selectMsg(String uid);
 }

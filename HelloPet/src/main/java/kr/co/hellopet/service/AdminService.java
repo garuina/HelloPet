@@ -36,11 +36,20 @@ public class AdminService {
 	public int updateAdmin(MedicalVO vo) {
 		return dao.updateAdmin(vo);
 	}
+	public int updateUser(MemberVO mem) {
+		return dao.updateUser(mem);
+	}
 	public int deleteWithdrawMember(String uid) {
 		return dao.deleteWithdrawMember(uid);
 	}
+	public int deleteWithdrawUser(String uid) {
+		return dao.deleteWithdrawUser(uid);
+	}
 	public int findPwChange(String uid, String pass) {
 		return dao.findPwChange(uid, pass);
+	}
+	public int findPwChangeUser(String uid, String pass) {
+		return dao.findPwChangeUser(uid, pass);
 	}
 	
 	/* 예약내역 */
@@ -69,6 +78,9 @@ public class AdminService {
 	
 	public int updateReserve(String medNo) {
 		return dao.updateReserve(medNo);
+	}
+	public int selectMsg(String uid) {
+		return dao.selectMsg(uid);
 	}
 	
 	/////////// 페이징 처리 ////////////

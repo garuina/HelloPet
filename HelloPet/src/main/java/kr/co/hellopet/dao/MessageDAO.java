@@ -15,5 +15,6 @@ public interface MessageDAO {
 	public MessageVO selectMsg(String msgNo);
 	public int updateMsg(String msgNo);
 	public int selectCountTotal(String uid);
+	public int selectMsgTotal(String uid);
 
 }

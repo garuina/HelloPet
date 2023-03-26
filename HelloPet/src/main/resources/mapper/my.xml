@@ -44,18 +44,31 @@
 
 	<!-- 회원정보 update -->
 	<update id="updateInfoModify">
-	    UPDATE pet_owner
-	    SET `name` = #{name}, `email`= #{email}, `nick` = #{nick}, `hp` = #{hp}
-	    WHERE `uid` = #{uid};
+		update `pet_owner` set
+            `name`=#{name},
+            `hp`=#{hp},
+            `email`=#{email},
+            `nick`=#{nick}
+        where `uid`=#{uid};
 	</update>
 	
-	<!-- 회원 삭제는 하지않고 level 만 변경 -->
-	<update id="deleteWithdrawMember">
-		UPDATE `pet_owner` SET `level` = 0, `wdate` = NOW()  WHERE `uid` = #{uid};
+	<!-- 회원 삭제 -->
+	<delete id="deleteWithdrawUser">
+		delete from `pet_owner`  WHERE `uid` = #{uid};
+	</delete>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="findPwChangeUser">
+		update `pet_owner` set `pass`=#{pass} where `uid`=#{uid};
 	</update>
+	
 	
 	<!-- 예약 삭제 -->
 	<delete id="deleteMyReserve">
 		DELETE FROM `reserve_list` WHERE `revNo` = #{no};
 	</delete>
+	
+	<select id="selectMsg" resultType="int" parameterType="map">
+		select count(`msgNo`) from `message` where `uid`=#{uid} and `msgStatus`=0;
+	</select>
 </mapper>

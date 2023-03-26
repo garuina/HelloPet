@@ -50,4 +50,5 @@ public interface CsDAO {
 
     /* message */
     public int insertMsg(MessageVO vo);
+    public int selectMsg(String uid);
 }

@@ -24,6 +24,14 @@
             `ceoHp`=#{ceoHp}
         where `uid`=#{uid};
 	</update>
+	<update id="updateUser">
+		update `pet_owner` set
+            `name`=#{name},
+            `hp`=#{hp},
+            `email`=#{email},
+            `nick`=#{nick}
+        where `uid`=#{uid};
+	</update>
 
 	<select id="selectReserves" resultType="kr.co.hellopet.vo.AdminReserveVO">
 		select a.*, b.`medicalName` from `reserve_list` as a
@@ -70,10 +78,20 @@
 	<delete id="deleteWithdrawMember">
 		delete from `pet_hospital_pharmacy`  WHERE `uid` = #{uid};
 	</delete>
+	<delete id="deleteWithdrawUser">
+		delete from `pet_owner`  WHERE `uid` = #{uid};
+	</delete>
 	
 	<!-- 비밀번호 변경 -->
 	<update id="findPwChange">
 		update `pet_hospital_pharmacy` set `pass`=#{pass} where `uid`=#{uid};
 	</update>
+	<update id="findPwChangeUser">
+		update `pet_owner` set `pass`=#{pass} where `uid`=#{uid};
+	</update>
+	
+	<select id="selectMsg" resultType="int" parameterType="map">
+		select count(`msgNo`) from `message` where `uid`=#{uid} and `msgStatus`=0;
+	</select>
 
 </mapper>

@@ -47,7 +47,10 @@
                         </div>
                     </div>
                     
-                    <label sec:authorize="isAuthenticated()" style="display: none;"><span class="uid" name="uid" sec:authentication="principal.member.uid">길동</span></label>
+                    <label sec:authorize="hasAuthority('ROLE_1')" style="display: none;"><span class="uid" name="uid" sec:authentication="principal.member.uid">길동</span></label>
+				<label sec:authorize="hasAuthority('ROLE_7')" style="display: none;"><span class="uid" name="uid" sec:authentication="principal.member.uid">길동</span></label>
+				<label sec:authorize="hasAuthority('ROLE_2')"  style="display: none;"><span class="uid" name="uid" sec:authentication="principal.medical.uid">길동</span></label>
+				<label sec:authorize="hasAuthority('ROLE_3')" style="display: none;"><span class="uid" name="uid" sec:authentication="principal.medical.uid">길동</span></label>
                     
             
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5f25185293d664bcd951443d8b8e4a67&libraries=services"></script>
