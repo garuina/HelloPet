@@ -45,6 +45,8 @@ public class AdminController {
 		
 		MedicalVO vo = service.selectAdmin(uid);
 		MemberVO user = service.selectUser(uid);
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		
 		model.addAttribute("vo",vo);
 		model.addAttribute("user",user);
@@ -57,6 +59,8 @@ public class AdminController {
 		String uid = principal.getName();
 		MedicalVO vo = service.selectAdmin(uid);
 		MemberVO user = service.selectUser(uid);
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		
 		model.addAttribute("vo",vo);
 		model.addAttribute("user",user);
@@ -67,11 +71,42 @@ public class AdminController {
 
 	@ResponseBody
 	@PostMapping("admin/pwChange")
-	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
+	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass, HttpServletRequest request, HttpServletResponse response) {
 		pass = passwordEncoder.encode(pass);
 		int result = service.findPwChange(uid, pass);
 		Map<String, Integer> map = new HashMap<>();
 		map.put("result", result);
+		
+		// 캐시 비우기
+	    new SecurityContextLogoutHandler().logout(request, response, null);
+		return map;
+	}
+	@GetMapping("admin/pwChangeUser")
+	public String pwchangeUser(Model model, Principal principal){
+		
+		String uid = principal.getName();
+		MedicalVO vo = service.selectAdmin(uid);
+		MemberVO user = service.selectUser(uid);
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("user",user);
+		
+		return "admin/pwChangeUser";
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("admin/pwChangeUser")
+	public Map<String, Integer> findPwChangeUser(@RequestParam("uid") String uid, @RequestParam("pass") String pass, HttpServletRequest request, HttpServletResponse response) {
+		pass = passwordEncoder.encode(pass);
+		int result = service.findPwChangeUser(uid, pass);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		
+		// 캐시 비우기
+	    new SecurityContextLogoutHandler().logout(request, response, null);
 		return map;
 	}
 	
@@ -81,6 +116,7 @@ public class AdminController {
 		String uid = principal.getName();
 		
 		service.deleteWithdrawMember(uid);
+		service.deleteWithdrawUser(uid);
 		
 		// 캐시 비우기
 	    new SecurityContextLogoutHandler().logout(request, response, null);
@@ -93,6 +129,8 @@ public class AdminController {
 		
 		String uid = principal.getName();
 		MedicalVO vo = service.selectAdmin(uid);
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
 		
 		model.addAttribute("vo",vo);
 		
@@ -110,8 +148,8 @@ public class AdminController {
 		List<AdminReserveVO> reserves = service.selectReserves(start, medNo, pageSize);
 		int size = reserves.size();
 		int idx = 1;
-		for(AdminReserveVO res : reserves) {
-			res.setId(1+ size - idx++);
+		for(AdminReserveVO res2 : reserves) {
+			res2.setId(1+ size - idx++);
 		}
 		// 팝업창 예약 정보 출력
 		AdminReserveVO reserve = service.selectReserve(revNo);
@@ -131,10 +169,14 @@ public class AdminController {
 	
 	@ResponseBody
 	@GetMapping("admin/confirm/ok")
-	public Map<String, AdminReserveVO> list(Model model,@RequestParam(value="revNo", required = false) Integer revNo,@RequestParam(value="medNo", required = false) Integer medNo) {
+	public Map<String, AdminReserveVO> list(Model model,@RequestParam(value="revNo", required = false) Integer revNo,@RequestParam(value="medNo", required = false) Integer medNo, Principal principal) {
 		AdminReserveVO reserve = service.selectReserve(revNo);
 		Map<String, AdminReserveVO> map = new HashMap<>();
 		map.put("result", reserve);
+		
+		String uid = principal.getName();		
+		int res = service.selectMsg(uid);
+		model.addAttribute("res", res);
 		
 		return map;
 	}
@@ -161,10 +203,14 @@ public class AdminController {
 	
 	@ResponseBody
 	@GetMapping("admin/confirm/view")
-	public Map<String, AdminReserveVO> view(@RequestParam(value="revNo", required = false) Integer revNo) {
+	public Map<String, AdminReserveVO> view(Model model, @RequestParam(value="revNo", required = false) Integer revNo, Principal principal) {
 		AdminReserveVO reserve = service.selectReserve(revNo);
 		Map<String, AdminReserveVO> map = new HashMap<>();
 		map.put("result", reserve);
+		
+		String uid = principal.getName();		
+		int res = service.selectMsg(uid);
+		model.addAttribute("res", res);
 		
 		return map;
 	}
@@ -193,14 +239,20 @@ public class AdminController {
 		
 		String uid = principal.getName();
 		MedicalVO vo = service.selectAdmin(uid);
+		MemberVO user = service.selectUser(uid);
+
+		int res = service.selectMsg(uid);
+		model.addAttribute("res", res);
 		
 		model.addAttribute("vo",vo);
+		model.addAttribute("user",user);
 		return "admin/infoModify";
 	}
 	
 	@PostMapping("admin/infoModify")
-	public String infoModify(MedicalVO vo) {
+	public String infoModify(MedicalVO vo, MemberVO mem) {
 		service.updateAdmin(vo);
+		service.updateUser(mem);
 		return "redirect:/admin/info";
 	}
 }

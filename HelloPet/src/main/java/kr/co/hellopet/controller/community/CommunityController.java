@@ -33,7 +33,7 @@ public class CommunityController {
 	
 	// tip 목록
 	@GetMapping("community/tip/list")
-	public String tipList(String pg, Model model) {
+	public String tipList(String pg, Model model, Principal principal) {
 		
 		//페이징 
     	int currentPage = service.getCurrentPage(pg); // 현재 페이지 번호
@@ -52,7 +52,11 @@ public class CommunityController {
 		model.addAttribute("pageGroupEnd", result[1]);
 		model.addAttribute("pageStartNum", pageStartNum+1);
     			
-		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		
 		//전체 목록 가져오기
 		List<CommunityVO> articles = service.selectTipArticles(start);
@@ -76,6 +80,12 @@ public class CommunityController {
 			uid = "";
 		}
 		
+		
+		if(principal != null) {
+			String uid2 = principal.getName();
+			int msg2 = service.selectMsg(uid2);
+			model.addAttribute("msg2", msg2);
+		}
 		CommunityVO article = service.selectTipView(no);
 		
 		int find = service.findHeart(no, uid);
@@ -90,9 +100,13 @@ public class CommunityController {
 	
 	// tip 글쓰기
 	@GetMapping("community/tip/write")
-	public String tipWrite() {
+	public String tipWrite(Model model, Principal principal) {
 		
-		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		return "community/tip/write";
 	}
 	
@@ -111,10 +125,15 @@ public class CommunityController {
 	
 	// tip 글수정
 	@GetMapping("community/tip/modify")
-	public String tipModify(Model model, CommunityVO vo, int no) {
+	public String tipModify(Model model, CommunityVO vo, int no, Principal principal) {
 		
 		CommunityVO article = service.selectTipModify(no);
 		model.addAttribute("article", article);
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		
 		return "community/tip/modify";
 	}
@@ -149,7 +168,11 @@ public class CommunityController {
 				uid = "";
 			}
 			
-			
+			if(principal != null) {
+				String uid2 = principal.getName();
+				int msg2 = service.selectMsg(uid2);
+				model.addAttribute("msg2", msg2);
+			}
 			//페이징 
 	    	int currentPage = service.getCurrentPage2(pg); // 현재 페이지 번호
 			int total = 0;
@@ -190,7 +213,7 @@ public class CommunityController {
 	// talktalk 모달 뷰
 		@ResponseBody
 		@GetMapping("community/talktalk/view")
-		public Map<String, CommunityVO> talkView(@RequestParam("no") int no) {
+		public Map<String, CommunityVO> talkView(@RequestParam("no") int no, Principal principal, Model model) {
 			
 			
 			//글 가져오기
@@ -200,7 +223,11 @@ public class CommunityController {
 			
 			Map<String, CommunityVO> map = new HashMap<>();
 			
-			
+			if(principal != null) {
+				String uid = principal.getName();
+				int msg2 = service.selectMsg(uid);
+				model.addAttribute("msg2", msg2);
+			}
 			
 			map.put("result", article);
 			
@@ -211,7 +238,13 @@ public class CommunityController {
 		
 	// talktalk 글쓰기
 	@GetMapping("community/talktalk/write")
-	public String talkWrite() {
+	public String talkWrite(Model model, Principal principal) {
+		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		return "community/talktalk/write";
 	}
 	
@@ -228,10 +261,15 @@ public class CommunityController {
 	
 	// talktalk 글수정
 	@GetMapping("community/talktalk/modify")
-	public String talkModify(Model model, CommunityVO vo, int no) {
+	public String talkModify(Model model, CommunityVO vo, int no, Principal principal) {
 		
 		CommunityVO article = service.selectTalkArticle(no);
 		model.addAttribute("article", article);
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		
 		return "community/talktalk/modify";
 	}

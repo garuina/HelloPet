@@ -266,6 +266,9 @@ public class CommunityService {
 		return dao.insertMsg(vo);
 	}
 	
+	public int selectMsg(String uid) {
+		return dao.selectMsg(uid);
+	}
 
 	// 페이징(tip)
 	public int getLastPageNum(int total) {

@@ -38,6 +38,6 @@ public interface AdminProductDAO {
 	public AdminProductVO selectAdminProduct(int prodNo);
 	public int updateAdminProduct(AdminProductVO vo);
 	
-	
+	public int selectMsg(String uid);
 	
 }

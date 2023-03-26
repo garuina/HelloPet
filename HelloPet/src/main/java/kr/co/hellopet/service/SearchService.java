@@ -169,5 +169,7 @@ public class SearchService {
 	public int insertMsg(MessageVO vo) {
 		return dao.insertMsg(vo);
 	}
-	
+	public int selectMsg(String uid) {
+		return dao.selectMsg(uid);
+	}
 }

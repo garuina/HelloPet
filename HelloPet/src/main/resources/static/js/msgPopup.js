@@ -4,7 +4,7 @@ $(function(){
     $('.btnClose').click(function(){
 		var urlParams = new URL(location.href).searchParams;
 	    var uid = urlParams.get('uid');
-		var backUrl = "/HelloPet/message/message?uid="+uid;
+		var backUrl = "/HelloPet/message/message";
 		
         $(this).closest('.popup').removeClass('on'); 
         
@@ -21,7 +21,7 @@ $(function(){
 	    var uid = urlParams.get('uid');
     		console.log(uid);
     	
-    	var newUrl = "/HelloPet/message/view?uid="+uid+"&msgNo="+msgNo;
+    	var newUrl = "/HelloPet/message/view?msgNo="+msgNo;
     	window.history.pushState("", "", newUrl); // URL 변경
         
         $('#popMsg').addClass('on');

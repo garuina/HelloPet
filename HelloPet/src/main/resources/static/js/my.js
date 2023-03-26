@@ -223,39 +223,6 @@ let isNickOk 		= true;
 			return true;
 		}
 		
-		// 회원 삭제 - 기능구현 완료
-		$('button[name=btnWithdrawMember]').click(function(e){
-			e.preventDefault();
-			
-			let uid = $('input[name=uid]').val();
-			
-			let jsonData = {'uid' : uid};
-			
-			let aws = confirm('탈퇴하시겠습니까?');
-			
-			if(aws){
-				
-				$.ajax({
-					url : '/HelloPet/my/withdrawMember',
-					method : 'GET',
-					data : jsonData,
-					dataType : 'json',
-					success : function(data){
-						console.log(data);
-						if(data == 1){
-							alert('탈퇴 완료 되었습니다.');
-							location.href = '/HelloPet/';
-						}else{
-							// 실패
-							alert('실패하였습니다. 관리자에게 문의해주세요.');
-						}
-					}
-				});
-			}
-		});	
-	
-	
-	
 	
 		$('.reserve_cancel').click(function(){
 			

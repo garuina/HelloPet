@@ -116,6 +116,9 @@ public class CsService {
     public int insertMsg(MessageVO vo) {
     	return dao.insertMsg(vo);
     }
+    public int selectMsg(String uid) {
+		return dao.selectMsg(uid);
+	}
 	
 	// 파일 이미지
 	@Value("${spring.servlet.multipart.location}")

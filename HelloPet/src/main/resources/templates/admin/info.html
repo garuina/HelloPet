@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <td>비밀번호</td>
-                        <td><a href="#"><button>비밀번호수정</button></a></td>
+                        <td><a th:href="@{/admin/pwChange}"><button>비밀번호수정</button></a></td>
                     </tr>
                     <tr>
                         <td>병원명/약국명</td>
@@ -111,7 +111,7 @@
                     </tr>
                     <tr>
                         <td>비밀번호</td>
-                        <td><a href="#"><button>비밀번호수정</button></a></td>
+                        <td><a th:href="@{/admin/pwChangeUser}"><button>비밀번호수정</button></a></td>
                     </tr>
                     <tr>
                         <td>이름</td>
@@ -130,6 +130,10 @@
                         <td><span th:text="${user.nick}"></span></td>
                     </tr>
                     <tr>
+                        <td>회원탈퇴</td>
+                        <td><a th:href="@{/admin/delete}" class="delete"><button>탈퇴하기</button></a></td>
+                    </tr>
+                    <tr>
                         <td>주소</td>
                         <td><span th:text="${#authentication.principal.member.addr1}"></span></td>
                     </tr>
@@ -140,4 +144,4 @@
                 </div>
             </div>
         </main>
-<th:block th:include="@{_footer.html}"/>
+<th:block th:include="@{admin/_footer.html}"/>

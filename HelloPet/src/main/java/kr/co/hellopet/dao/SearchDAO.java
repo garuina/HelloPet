@@ -59,5 +59,6 @@ public interface SearchDAO {
 	
 	// 메시지 보내기
 	public int insertMsg(MessageVO vo);
+	public int selectMsg(String uid);
 
 }
