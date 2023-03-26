@@ -31,7 +31,11 @@ public interface ProductDAO {
 	
 	// product 불러오기
 	public List<ProductVO> SelectProduct(String cate1, String cate2, int start);
-	public List<ProductVO> SelectProductType(String cate1, String cate2, String type,int start);
+	public List<ProductVO> SelectProductDog(String cate1, String cate2,int start);
+	public List<ProductVO> SelectProductCat(String cate1, String cate2,int start);
+	
+	public int SelectCountDog (String cate1, String cate2);
+	public int SelectCountCat (String cate1, String cate2);
 	
 	
 	// view product 불러오기

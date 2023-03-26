@@ -11,7 +11,7 @@
         	
         	
         	// 모달 창 열림
-                $('.gallery_item').off('click').on('click',function(){
+                $('.gallery_item').on('click',function(){
                 	
                 	let no = $(this).attr("value1");
                 	let uid = $('input[name=uid]').val();
@@ -119,7 +119,7 @@
                 	if(heartVal > 0){
                 		$('.heart-icon').html('<button class="icon-heart-mint"></button>');
                 		
-                		$('.heart-icon').click(function(){
+                		$('.heart-icon').off('click').on('click',function(){
                 			$.ajax({
         						url : "/HelloPet/community/HeartDown",
         				    	method : 'GET',
@@ -140,7 +140,7 @@
                 		
                 		$('.heart-icon').html('<button class="icon-heart"></button>');
                 		
-                		$('.heart-icon').click(function(){
+                		$('.heart-icon').off('click').on('click',function(){
                 			$.ajax({
         						url : "/HelloPet/community/HeartUp",
         				    	method : 'GET',
@@ -159,7 +159,7 @@
                 		
                 	}
                 	
-                	
+                	function getReplyList() {
                 	// 댓글출력
                 	$.ajax({
 						url : "/HelloPet/community/selectReplys",
@@ -179,22 +179,25 @@
 				    	
                 	});
                 	$('.content_reply').empty();
+                	}
+                	getReplyList();
+                	
                 	
                 	
                 	
                 	
                 	 // 댓글달기
-            		$('#modal .button').click(function(){
+            		$('#modal .button').off('click').on('click',function(){
             			
             			let content = $('input[name=content]').val();
-            			
-            			
+            			let replyTotal = $('.content_item_img').length;
             			
                     	jsonData3 = {'uid':uid,
                 				'no':no,
                 				'nick':nick,
                 				'writerUid': writerUid,
-                				'content':content};
+                				'content':content,
+                    	}
 						
                     	
                     	
@@ -207,8 +210,13 @@
     				    	async:false,
     				    	success : function(data){
     				    		
+    				    		
     				    		alert("댓글이 입력되었습니다.");
-    				    		window.location.reload();
+    				    		$('.input').val('');
+    				    		getReplyList();
+    				    		$('.content_info_item span').html('<strong>'+replyTotal+'</strong>');
+    				    		console.log(data.result);
+    				    		
     				    	}
                     		
                     	});
@@ -216,7 +224,7 @@
             		});
             		
                 	// 댓글 삭제하기
-            		$('.content_reply').on('click','button',function(){
+            		$('.content_reply').off('click').on('click','button',function(){
             			
             			let reply_no = $(this).attr("value1");
             			let reply_id = $(this).attr("value2");
@@ -264,7 +272,7 @@
                 });
                 
         	// 모달화면 밖 클릭시 모달 창 닫힘
-               /* $(document).mouseup(function (e){
+                /*$(document).mouseup(function (e){
 
                 	let container = $('#modal');
 					let overlay = $('.v-overlay');
@@ -370,7 +378,7 @@
                                     </div>
                                     <div class="gallery_info2">
                                         <div class="rank_nick_inner">
-                                            <div class="rank_nick"><span class="rank_nick_icon" th:style="'background-image: url('+@{/img/로이밍밍프사.jpg}+');'"></span>[[${rank.nick}]]</div>
+                                            <div class="rank_nick"><span class="rank_nick_icon" th:style="'background-image: url('+@{/img/favicon_x32.png}+');'"></span>[[${rank.nick}]]</div>
                                         </div>    
                                         <div class="rank_date">[[${rank.rdate.substring(2, 10)}]]</div>
                                     </div>
@@ -459,7 +467,7 @@
                                         <div class="gallery_content_head_top">
                                             <div class="content_item">
                                                 <div class="content_item_inner">
-                                                    <div class="content_item_img" th:style="'background-image: url('+@{/img/content_item.jpg}+');'"></div>
+                                                    <div class="content_item_img" th:style="'background-image: url('+@{/img/favicon_x32.png}+');'"></div>
                                                     <div class="content_item_con">
                                                         <div class="content_item_txt writer_nick">
                                                             <strong>동동</strong>

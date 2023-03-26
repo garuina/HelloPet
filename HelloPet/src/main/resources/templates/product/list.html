@@ -29,6 +29,8 @@ $(function() {
         	type = 'cat';
         }else if(!isCheckDog && !isCheckCat) {
         	$('.probx').empty();
+        	alert('반려견, 반려묘 중 한 개 이상 선택해주세요!');
+        	$('.none').show();
         	return;
         }
    	   	   	   	
@@ -46,12 +48,86 @@ $(function() {
         	data: jsonData,
         	success : function(data) {
         		console.log(data);
-        		console.log(data.p2s);
+        		console.log(data.pros);
         		
-        		$('.probx').empty();
+        		$('.none').hide();
+        		$('#divList').empty();
         		
         		
-        		
+        		html = "";
+       
+        		if(data.pros.length > 0) {
+        			  $.each(data.pros, function(index, product) {
+        			    html += '<div class="probx">';
+        			    html += '<a href="/product/view?cate1=' + data.cate1 + '&cate2=' + data.cate2 + '&prodNo=' + product.prodNo + '">';
+        			    html += '<span class="thumb"><img src="' + product.thumb1 + '" alt="" style="width:316px;height:320px;"></span>';
+        			    html += '<div class="desc">';
+        			    html += '<p class="org">' + product.medicalName + '</p>';
+        			    html += '<p class="prd">' + product.prodName + '</p>';
+        			    html += '<p class="txt">' + product.descript + '</p>';
+        			    html += '</div></a>';
+        			    html += '<div class="price">';
+        			    html += '<div class="cost">';
+        			    html += '<p class="sm">마이펫플러스 초대가</p>';
+        			    if(product.discount != 0) {
+        			      html += '<div class="oriPrice">';
+        			      html += '<span class="ori">' + product.price + '원</span>';
+        			      html += '<span class="discount">' + product.discount + '%</span>';
+        			      html += '</div>';
+        			    } else {
+        			      html += '<div class="disPrice">';
+        			      html += '<span>' + product.price + '</span>';
+        			      html += '</div>';
+        			    }
+        			    if(product.discount != 0) {
+        			      html += '<div class="disPrice">';
+        			      html += '<span>' + (product.price*(100-product.discount)/100).toLocaleString() + '원</span>';
+        			      html += '</div>';
+        			    }
+        			    html += '</div></div></div>';
+        			  });
+        			  
+        	          $('#divList').append(html);
+        	          
+        	          let groupStart = data.groups[0];
+        	          let groupEnd = data.groups[1];
+        	          let currentPage = data.currentPage;
+        	          let cate1 = data.cate1;
+        	          let cate2 = data.cate2;
+        	          let pg = data.pg;
+        	          let lastPageNum = data.lastPageNum;
+        	          let pageStartNum = data.pageStartNum;
+        	         
+        	          
+        	          var pag = "";
+        	          	pag +="<span class='prev'>"
+        					pag +="<a class='pageNum P' href ='/HelloPet/product/list?cate1='"+cate1+"'&cate2='"+cate2+"'><input type='hidden' name='pg' value='" +(groupStart-1) +"'><&nbsp;이전</a>"	            	
+        	            pag += "</span>"
+        	          	pag +="<span class='num'>"  
+
+        	          	for(let i = groupStart; i <= groupEnd; i++){
+        	 	            	  
+        	 	             	console.log("i : " + i);
+        	          		
+        	        		if (i === currentPage) {
+        	        		    pag += "<a class='pageNum on' href='/HelloPet/product/list?cate1=" + cate1 + "&cate2=" + cate2 + "&pg=" + i + "'><input type='hidden' name='pg' value='" +i +"'>" + i + "</a>"
+        	        		} else {
+        	        			pag += "<a class='pageNum' href='/HelloPet/product/list?cate1=" + cate1 + "&cate2=" + cate2 + "&type="+type+"&pg=" + i + "'><input type='hidden' name='pg' value='" +i +"'>" + i + "</a>"
+        	        		}
+        	          	}
+        	          	
+        	          	pag +="</span>"  
+        	    		pag +="<span class='next'>"
+       					pag +="<a class='pageNum P' href ='/HelloPet/product/list?cate1='"+cate1+"'&cate2='"+cate2+"'><input type='hidden' name='pg' value='" +(groupEnd+1) +"'>다음&nbsp;></a>"	            	
+       		            pag += "</span>"
+        	          
+        	          $('.paging').empty();
+        	          $('.paging').append(pag);
+        	          
+        			  
+        			}else{// 진료상품이 없을떄
+        				$('.none').show();
+        			}
         		
         	}
         });
@@ -116,7 +192,9 @@ $(function() {
 	       </ul>
       </div>
       <div class="pro-lst" id="productList">
-	        <div class="probx" th:each="product:${products}">
+      		<p style="display: none;" class="none">진료상품이 없습니다.</p>
+      		<div id="divList">
+	        <div class="probx" th:each="product:${pros}">
 		            <a th:href="@{/product/view(cate1=${cate1},cate2=${cate2},prodNo=${product.prodNo})}">
 		                <span class="thumb">
 		                    <img th:src="${product.thumb1}" alt style="width:316px;height:320px;">
@@ -152,7 +230,7 @@ $(function() {
 	          </div>
 	          
 	         
-	        
+	      </div>
 	  </div>
 	  
 	   <!-- 상품목록 페이지 번호 -->
