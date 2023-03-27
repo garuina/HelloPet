@@ -9,6 +9,7 @@
         		<tr class="listTitle">
             		<th>번호</th>
             		<th>내용</th>
+            		<th>답변상태</th>
             		<th>등록일</th>
         		</tr>
         		<tr th:if="${articles.size() == 0}">
@@ -20,6 +21,9 @@
             		<td>[[${pageStartNum - i.index }]]</td>
             		<td><a th:href="@{/cs/qna/view(no=${article.no})}">[[${article.title}]]</a></td>
             		<!-- 날짜를 어떤 형식으로 ?  -->
+            		<td th:if="${article.reply == 0}" style="color: green">답변대기</td>
+            		<td th:if="${article.reply == 1}" style="color: blue">답변완료</td>
+            		<!-- <td>[[${article.reply == 0 ? '답변대기' : '답변완료'}]]</td> -->
             		<td>[[${#strings.substring(article.rdate, 0, 10)}]]</td>
         		</tr>
     		</table>
