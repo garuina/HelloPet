@@ -1,5 +1,18 @@
 <th:block th:include="@{member/_header.html}"/>
 <script>
+
+	$(document).ready(function(){
+		let url = window.location.href;
+		let i = url.lastIndexOf('=');
+		
+		let success = url.substring(i + 1);
+		
+		if(success == 100){
+			alert('로그인 정보가 없습니다.');
+			//location.href="/HelloPet/member/login";
+		}
+	});
+
 </script>
 <main class="login_main">
     <div class="login_div">
@@ -20,7 +33,7 @@
                         <ul>
                             <li><a th:href="@{/member/join}">회원가입</a></li>
                             <li><a th:href="@{/member/find}">아이디</a></li>
-                            <li><a tH:href="@{/member/find}">비밀번호찾기</a></li>
+                            <li><a th:href="@{/member/find}">비밀번호찾기</a></li>
                         </ul>
                     </form>
                 </div>
