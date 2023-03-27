@@ -28,8 +28,8 @@ public interface AdminDAO {
 	/* 관리자 정보 수정 */
 	public int updateAdmin(MedicalVO vo);
 	public int updateUser(MemberVO mem);
-	public int deleteWithdrawMember(String uid);
-	public int deleteWithdrawUser(String uid);
+	public int deleteWithdrawOwner(@Param("uid") String uid);
+	public int deleteWithdrawAdmin(@Param("uid") String uid);
 	public int findPwChange(String uid, String pass);
 	public int findPwChangeUser(String uid, String pass);
 	

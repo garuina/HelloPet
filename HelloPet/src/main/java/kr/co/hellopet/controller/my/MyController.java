@@ -227,6 +227,19 @@ public class MyController {
 		return resultMap;
 	}
 	
+	@ResponseBody
+	@GetMapping("my/withdrawMember")
+	public int withdrawMember(@RequestParam("uid") String uid) {
+		
+		int result = service.deleteWithdrawMember(uid);
+		
+		System.out.println("uid : " + uid);
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	/*
 	@Transactional
 	@GetMapping("my/delete")
 	public String delete(Principal principal, HttpServletRequest request, HttpServletResponse response) {
@@ -239,32 +252,24 @@ public class MyController {
 		
 		return "redirect:/index";
 	}
+	*/
 	
-	@GetMapping("my/pwChange")
-	public String pwchange(Model model, Principal principal){
-		
-		String uid = principal.getName();
-		MemberVO user = service.selectUser(uid);
-		int msg2 = service.selectMsg(uid);
-		model.addAttribute("msg2", msg2);
-		
-		model.addAttribute("user",user);
-		
-		return "my/pwChange";
-	}
 	
-
 	@ResponseBody
 	@PostMapping("my/pwChange")
-	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass, HttpServletRequest request, HttpServletResponse response) {
-		pass = passwordEncoder.encode(pass);
+	public Map<String, Integer> pwChange(String uid, String pass) {
 		
-		int result = service.findPwChangeUser(uid, pass);
+		if(uid != null && pass != null) {
+			System.out.println(uid);
+		}
+		if(pass != null) {
+			System.out.println(pass);
+		}
+		String encodedPassword = passwordEncoder.encode(pass);
+		int result = service.updatePw(uid, encodedPassword);
 		Map<String, Integer> map = new HashMap<>();
 		map.put("result", result);
-		
-		// 캐시 비우기
-	    new SecurityContextLogoutHandler().logout(request, response, null);
+		System.out.println("result :" +result);
 		return map;
 	}
 	

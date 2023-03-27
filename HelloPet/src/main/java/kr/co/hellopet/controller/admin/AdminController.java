@@ -110,6 +110,31 @@ public class AdminController {
 		return map;
 	}
 	
+	@ResponseBody
+	@GetMapping("my/withdrawAdmin")
+	public int withdrawAdmin(@RequestParam("uid") String uid) {
+		
+		int result = service.deleteWithdrawAdmin(uid);
+		
+		System.out.println("uid : " + uid);
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	@ResponseBody
+	@GetMapping("my/withdrawOwner")
+	public int withdrawOwner(@RequestParam("uid") String uid) {
+		
+		int result = service.deleteWithdrawOwner(uid);
+		
+		System.out.println("uid : " + uid);
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	/*
 	@Transactional
 	@GetMapping("admin/delete")
 	public String delete(Principal principal, HttpServletRequest request, HttpServletResponse response) {
@@ -123,6 +148,7 @@ public class AdminController {
 		
 		return "redirect:/index";
 	}
+	*/
 	
 	@GetMapping("admin/confirm/list")
 	public String confirmList(Model model, String pg, String medNo, Principal principal, @RequestParam(value="revNo", required=false) Integer revNo) {

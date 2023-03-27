@@ -33,8 +33,8 @@ public interface MyDAO {
 	
 	public int updateInfoModify(@Param("name") String name, @Param("email") String email, @Param("nick") String nick, @Param("hp") String hp, @Param("uid") String uid);
 	
-	public int deleteWithdrawUser(@Param("uid") String uid);
-	public int findPwChangeUser(String uid, String pass);
+	public int deleteWithdrawMember(@Param("uid") String uid);
+	public int updatePw(String uid, String encodedPass);
 	
 	public int deleteMyReserve(@Param("no") int no );
 	

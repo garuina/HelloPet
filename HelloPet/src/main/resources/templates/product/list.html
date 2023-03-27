@@ -11,7 +11,8 @@ $(function() {
 	
     
 	let type = $('input[name=type]').val();
-
+	let cate22 = $('input[name=cate2]').val();
+	console.log(typeof cate22);
 	console.log("type이다 : " + type);
 
 	if (type === 'dog') {
@@ -24,6 +25,7 @@ $(function() {
 	var urlParams = new URL(location.href).searchParams;
 	var cate1= urlParams.get('cate1');
 	var cate2= urlParams.get('cate2');
+	console.log(typeof cate2);
 	
 
 	$('input[type="checkbox"]').change(function() {
@@ -172,14 +174,14 @@ $(function() {
         
         <div class="sub-cate ng-scope" ng-controller="ProductListController">
             <ul class="depth1">
-                <li th:each="cate1:${cate1s}"> 
-                    <a th:href="@{/product/list(cate1=${cate1.cate1})}">[[${cate1.c1Name}]]</a>
+                <li th:each="cate11:${cate1s}"> 
+                    <a th:class="${#strings.equals(cate11.cate1, cate1)} ? 'on' : 'off'" th:href="@{/product/list(cate1=${cate11.cate1},cate2=10)}">[[${cate11.c1Name}]]</a>
                 </li> 
                
             </ul>
             <ul class="depth2 ng-scope">
                 <li th:each="selectC2:${selectC2s}">
-                    <a style="cursor:pointer;" th:href="@{/product/list(cate1=${selectC2.cate1},cate2=${selectC2.cate2})}">[[${selectC2.c2Name}]]</a>
+                    <a th:class="${#strings.equals(selectC2.cate2, cate2)} ? 'on' : 'off'" style="cursor:pointer;" th:href="@{/product/list(cate1=${selectC2.cate1},cate2=${selectC2.cate2})}">[[${selectC2.c2Name}]]</a>
                		<input type="hidden" name="cate1" th:value="${selectC2.cate1}">	
                		<input type="hidden" name="cate2" th:value="${selectC2.cate2}">	
                 </li>

@@ -53,15 +53,14 @@
 	</update>
 	
 	<!-- 회원 삭제 -->
-	<delete id="deleteWithdrawUser">
-		delete from `pet_owner`  WHERE `uid` = #{uid};
-	</delete>
-	
-	<!-- 비밀번호 변경 -->
-	<update id="findPwChangeUser">
-		update `pet_owner` set `pass`=#{pass} where `uid`=#{uid};
+	<update id="deleteWithdrawMember">
+		UPDATE `pet_owner` SET `level` = 0, `wdate` = NOW()  WHERE `uid` = #{uid};
 	</update>
 	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePw">
+		update `pet_owner` set `pass`=#{encodedPass} where `uid`=#{uid};
+	</update>
 	
 	<!-- 예약 삭제 -->
 	<delete id="deleteMyReserve">

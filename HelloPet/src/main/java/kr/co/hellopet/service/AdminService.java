@@ -39,11 +39,11 @@ public class AdminService {
 	public int updateUser(MemberVO mem) {
 		return dao.updateUser(mem);
 	}
-	public int deleteWithdrawMember(String uid) {
-		return dao.deleteWithdrawMember(uid);
+	public int deleteWithdrawOwner(@Param("uid") String uid) {
+		return dao.deleteWithdrawOwner(uid);
 	}
-	public int deleteWithdrawUser(String uid) {
-		return dao.deleteWithdrawUser(uid);
+	public int deleteWithdrawAdmin(@Param("uid") String uid) {
+		return dao.deleteWithdrawAdmin(uid);
 	}
 	public int findPwChange(String uid, String pass) {
 		return dao.findPwChange(uid, pass);
