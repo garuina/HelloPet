@@ -168,7 +168,7 @@ let isNickOk 		= true;
 		});
 		
 		// 회원 정보 update 기능 구현 완료
-		const form = document.querySelector('form');
+		const form = $('input[name=infoModify]');
 		
 		form.onsubmit = function(){
 			
@@ -180,15 +180,9 @@ let isNickOk 		= true;
 			let oriNick  = $('input[name=ori-Nick]').val();
 			let hp 		 = $('input[name=hp]').val();	
 			let oriHp 	 = $('input[name=ori-Hp]').val();
-			let zip = $('input[name=zip]').val();
-			let addr1 = $('input[name=addr1]').val();
-			let addr2 = $('input[name=addr2]').val();
-			let oriZip = $('input[name=ori-zip]').val();
-			let oriAddr1 = $('input[name=ori-addr1]').val();
-			let oriAddr2 = $('input[name=ori-addr2]').val();
 			
 			// 일치여부
-			if(name == orgName && email == orgEmail &&  nick == oriNick && hp == oriHp && zip == oriZip && addr1 == oriAddr1 && addr2 == oriAddr2){
+			if(name == orgName && email == orgEmail &&  nick == oriNick && hp == oriHp){
 				alert('기존 회원 정보와 동일합니다.');
 			}
 			
