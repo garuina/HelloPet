@@ -75,12 +75,12 @@
     </update>
     
     <!-- 회원 삭제 - 데이터 삭제 -->
-	<delete id="deleteWithdrawMember">
-		delete from `pet_hospital_pharmacy`  WHERE `uid` = #{uid};
-	</delete>
-	<delete id="deleteWithdrawUser">
-		delete from `pet_owner`  WHERE `uid` = #{uid};
-	</delete>
+	<update id="deleteWithdrawOwner">
+		UPDATE `pet_owner` SET `level` = 0, `wdate` = NOW()  WHERE `uid` = #{uid};
+	</update>
+	<update id="deleteWithdrawAdmin">
+		UPDATE `pet_hospital_pharmacy` SET `level` = 0, `wdate` = NOW()  WHERE `uid` = #{uid};
+	</update>
 	
 	<!-- 비밀번호 변경 -->
 	<update id="findPwChange">

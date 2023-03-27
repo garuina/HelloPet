@@ -14,6 +14,10 @@
 						</td>
 	                </tr>
 	                <tr>
+	                    <td>비밀번호</td>
+	                    <td><button name="pwChange">비밀번호수정</button></td>
+	                </tr>
+	                <tr>
 	                    <td>이름</td>
 	                    <td>
 							<input type="hidden" name="ori-Name" th:value="${member.name}">
@@ -54,3 +58,41 @@
     </div>
 </div>
 <th:block th:include="@{my/_footer.html}"/>
+		<!-- 비밀번호 수정 팝업 -->
+        <div id="popPw" class="popup">
+            <div class="find findPwChange">
+		        <nav>
+		            <h1>비밀번호 수정</h1>
+		            <button class="btnClose">X</button>              
+		        </nav>
+				<form action="#" method="post" class="pwForm">
+		             <table border="0">
+		                 <tr>
+		                    <td>아이디</td>
+		                    <td class="pwuid" th:text="${#authentication.principal.member.uid}"></td>
+		                </tr>
+		                <tr>
+		                    <td>새 비밀번호</td>
+		                    <td>
+		                        <input type="password" id="pass1" name="pass1" placeholder="새 비밀번호 입력" required="required"/>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>새 비밀번호 확인</td>
+		                    <td>
+		                        <input type="password" id="pass2" name="pass2" placeholder="새 비밀번호 입력" required="required"/>
+		                    </td>
+		                </tr>
+		             </table>
+		             <p>
+			            비밀번호를 변경해 주세요.<br>
+		            	영문, 숫자, 특수문자를 사용하여 5자 이상 입력해 주세요.
+			         </p>
+			
+			        <div class="btn">
+			            <a th:href="@{/my/info}" class="btnCancel">취소</a>
+			            <input type="submit" class="btnNext" value="완료">
+			        </div>					
+				</form>
+        	</div>
+        </div>

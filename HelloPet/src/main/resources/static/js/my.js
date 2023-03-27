@@ -14,6 +14,8 @@ $(document).ready(function(){
 			$('.mypage-nav_list:nth-child(1) > a').addClass("active");
 		}else if(currentUrl == 'myReserve'){
 			$('.mypage-nav_list:nth-child(2) > a').addClass("active");
+		}else if (currentUrl.indexOf('myReserve') > -1){
+		    $('.mypage-nav_list:nth-child(2) > a').addClass("active");
 		}else if(currentUrl == 'myArticle'){
 			$('.mypage-nav_list:nth-child(3) > a').addClass("active");
 		}else if(currentUrl == 'myQna'){
@@ -217,6 +219,42 @@ let isNickOk 		= true;
 			return true;
 		}
 		
+		// 회원 삭제 - 기능구현 완료
+		$('button[name=btnWithdrawMember]').click(function(e){
+			e.preventDefault();
+
+			let uid = $('input[name=uid]').val();
+
+			let jsonData = {'uid' : uid};
+
+			let aws = confirm('탈퇴하시겠습니까?');
+
+			if(aws){
+
+				$.ajax({
+					url : '/HelloPet/my/withdrawMember',
+					method : 'GET',
+					data : jsonData,
+					dataType : 'json',
+					success : function(data){
+						console.log(data);
+						if(data == 1){
+								$.ajax({
+		                        url: '/HelloPet/member/logout',
+		                        method: 'GET',
+		                        success: function(){
+		                            alert('탈퇴 완료 되었습니다.');
+		                            location.href = '/HelloPet/';
+		                        }
+	                    	});
+						}else{
+							// 실패
+							alert('실패하였습니다. 관리자에게 문의해주세요.');
+						}
+					}
+				});
+			}
+		});
 	
 		$('.reserve_cancel').click(function(){
 			
@@ -272,5 +310,4 @@ let isNickOk 		= true;
 				alert('취소하고 싶은 게시글을 체크해주세요.');
 			}
 		});
-	
 });

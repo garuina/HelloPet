@@ -3,6 +3,7 @@ package kr.co.hellopet.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.co.hellopet.dao.MyDAO;
@@ -23,6 +24,9 @@ public class MyService {
 	
 	@Autowired
 	private MyDAO dao;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	// 회원 조회
 	public MemberVO selectUser(String uid) {
@@ -67,12 +71,12 @@ public class MyService {
 		dao.updateInfoModify(name, email, nick, hp, uid);
 	}
 	
-	public int deleteWithdrawUser(String uid) {
-		int result = dao.deleteWithdrawUser(uid);
+	public int deleteWithdrawMember(String uid) {
+		int result = dao.deleteWithdrawMember(uid);
 		return result;
 	}
-	public int findPwChangeUser(String uid, String pass) {
-		return dao.findPwChangeUser(uid, pass);
+	public int updatePw(String uid, String encodedPass) {
+	    return dao.updatePw(uid, encodedPass);
 	}
 	
 	// 예약목록 삭제하기
