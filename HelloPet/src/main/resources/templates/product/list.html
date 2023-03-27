@@ -9,7 +9,18 @@
 
 $(function() {
 	
-       
+    
+	let type = $('input[name=type]').val();
+
+	console.log("type이다 : " + type);
+
+	if (type === 'dog') {
+	    document.getElementById('cat-checkbox').checked = false;
+	  }
+	if (type === 'cat') {
+	    document.getElementById('dog-checkbox').checked = false;
+	  }
+	
 	var urlParams = new URL(location.href).searchParams;
 	var cate1= urlParams.get('cate1');
 	var cate2= urlParams.get('cate2');
@@ -59,6 +70,7 @@ $(function() {
         		if(data.pros.length > 0) {
         			  $.each(data.pros, function(index, product) {
         			    html += '<div class="probx">';
+        			    html += '<input type="hidden" name="type" value="' + data.type + '">';
         			    html += '<a href="/product/view?cate1=' + data.cate1 + '&cate2=' + data.cate2 + '&prodNo=' + product.prodNo + '">';
         			    html += '<span class="thumb"><img src="' + product.thumb1 + '" alt="" style="width:316px;height:320px;"></span>';
         			    html += '<div class="desc">';
@@ -69,19 +81,19 @@ $(function() {
         			    html += '<div class="price">';
         			    html += '<div class="cost">';
         			    html += '<p class="sm">마이펫플러스 초대가</p>';
-        			    if(product.discount != 0) {
+        			    if(product.discount != 0) {//할인 없어요 할인 전 가격
         			      html += '<div class="oriPrice">';
-        			      html += '<span class="ori">' + product.price + '원</span>';
+        			      html += '<span class="ori">' + product.price + '</span>';
         			      html += '<span class="discount">' + product.discount + '%</span>';
         			      html += '</div>';
-        			    } else {
+        			    } else {//할인 있어요 그냥 원래가격 
         			      html += '<div class="disPrice">';
         			      html += '<span>' + product.price + '</span>';
         			      html += '</div>';
         			    }
-        			    if(product.discount != 0) {
+        			    if(product.discount != 0) {// 할인 있을 때 할인 된 가격이여
         			      html += '<div class="disPrice">';
-        			      html += '<span>' + (product.price*(100-product.discount)/100).toLocaleString() + '원</span>';
+        			      html += '<span>' + (product.price*(100-product.discount)/100).toLocaleString() + '</span>';
         			      html += '</div>';
         			    }
         			    html += '</div></div></div>';
@@ -97,11 +109,12 @@ $(function() {
         	          let pg = data.pg;
         	          let lastPageNum = data.lastPageNum;
         	          let pageStartNum = data.pageStartNum;
-        	         
+        	          let total = data.total;
+
         	          
         	          var pag = "";
         	          	pag +="<span class='prev'>"
-        					pag +="<a class='pageNum P' href ='/HelloPet/product/list?cate1='"+cate1+"'&cate2='"+cate2+"'><input type='hidden' name='pg' value='" +(groupStart-1) +"'><&nbsp;이전</a>"	            	
+        	          		pag +="<a class='pageNum P' href ='/HelloPet/product/list?cate1='"+cate1+"'&cate2='"+cate2+ "&type="+type+"'><input type='hidden' name='pg' value='" +(groupStart-1) +"'></a>"	            	
         	            pag += "</span>"
         	          	pag +="<span class='num'>"  
 
@@ -110,7 +123,7 @@ $(function() {
         	 	             	console.log("i : " + i);
         	          		
         	        		if (i === currentPage) {
-        	        		    pag += "<a class='pageNum on' href='/HelloPet/product/list?cate1=" + cate1 + "&cate2=" + cate2 + "&pg=" + i + "'><input type='hidden' name='pg' value='" +i +"'>" + i + "</a>"
+        	        			 pag += "<a class='pageNum on' href='/HelloPet/product/list?cate1=" + cate1 + "&cate2=" + cate2 + "&type="+type+"&pg=" + i + "'><input type='hidden' name='pg' value='" +i +"'>" + i + "</a>"
         	        		} else {
         	        			pag += "<a class='pageNum' href='/HelloPet/product/list?cate1=" + cate1 + "&cate2=" + cate2 + "&type="+type+"&pg=" + i + "'><input type='hidden' name='pg' value='" +i +"'>" + i + "</a>"
         	        		}
@@ -118,7 +131,7 @@ $(function() {
         	          	
         	          	pag +="</span>"  
         	    		pag +="<span class='next'>"
-       					pag +="<a class='pageNum P' href ='/HelloPet/product/list?cate1='"+cate1+"'&cate2='"+cate2+"'><input type='hidden' name='pg' value='" +(groupEnd+1) +"'>다음&nbsp;></a>"	            	
+        	    			pag +="<a class='pageNum P' href ='/HelloPet/product/list?cate1='"+cate1+"'&cate2='"+cate2+"'><input type='hidden' name='pg' value='" +(groupEnd+1) +"'></a>"	            	
        		            pag += "</span>"
         	          
         	          $('.paging').empty();
@@ -138,10 +151,8 @@ $(function() {
 
 
 </script>
-
-
 <div id="productList">
-
+	<input type="hidden" name="type" th:value="${type}">
     <div id="container" ng-app="appProduct" class="ng-scope">
     	<div class="div1">
 	    	<h3 class="title">진료상품</h3>
@@ -154,7 +165,7 @@ $(function() {
               </span>
                   >
               <span>
-                  <a th:href="@{/product/list}">진료상품</a>
+                  <a th:href="@{/product/list(cate1=10, cate2=10)}">진료상품</a>
               </span>
            </div>
         </div>
@@ -180,11 +191,11 @@ $(function() {
 	                <strong class="tit">반려동물유형</strong>
 	                <div class="con">
 	                    <span>
-	                        <input type="checkbox" name="dog" value="dog" checked="checked">
+	                        <input type="checkbox" name="dog" value="dog" id="dog-checkbox" checked="checked">
 	                        <label for="dog">반려견</label>
 	                    </span>
 	                    <span>
-	                        <input type="checkbox" name="cat" value="cat" checked="checked">
+	                        <input type="checkbox" name="cat" value="cat" id="cat-checkbox" checked="checked">
 	                        <label for="cat">반려묘</label>
 	                    </span>
 	                </div>
@@ -193,6 +204,7 @@ $(function() {
       </div>
       <div class="pro-lst" id="productList">
       		<p style="display: none;" class="none">진료상품이 없습니다.</p>
+      		<p style="display: none;" class="none">반려동물유형을 선택해주세요.</p>
       		<div id="divList">
 	        <div class="probx" th:each="product:${pros}">
 		            <a th:href="@{/product/view(cate1=${cate1},cate2=${cate2},prodNo=${product.prodNo})}">
@@ -207,22 +219,22 @@ $(function() {
 		            </a>
 	                <div class="price">
 	                    <div class="cost">
-	                        <p class="sm">마이펫플러스 초대가</p>
+	                        <p class="sm">헬로펫 초대가</p>
 	                        <th:block th:if="${product.discount != 0}">
 	                        	<div class="oriPrice">
-	                        		<span class="ori">[[${product.price}]]원</span>
+	                        		<span class="ori" data-th-text="${#numbers.formatInteger(product.price, 3, 'COMMA')}">[[${product.price}]]</span>
 	                        		<span class="discount">[[${product.discount}]]%</span>
 	                        	</div>
 	                        </th:block>
 	                        <th:block th:if="${product.discount == 0}">
 		                        <div class="disPrice">
-		                        	<span>[[${product.price}]]원</span>
+		                        	<span data-th-text="${#numbers.formatInteger(product.price, 3, 'COMMA')}">[[${product.price}]]</span>
 		                        </div>
 	                        </th:block>
 	                        <th:block th:if="${product.discount != 0}">
 	                        	<div class="disPrice">
 		                        	<span data-th-text="${#numbers.formatInteger(product.price*(100-product.discount)/100, 3, 'COMMA')}">
-		                        	[[${#numbers.formatInteger(product.price*(100-product.discount)/100, 3)}]]원</span>
+		                        	[[${#numbers.formatInteger(product.price*(100-product.discount)/100, 3)}]]</span>
 		                        </div>
 	                        </th:block>                        
 	                    </div>
@@ -240,7 +252,7 @@ $(function() {
 	       </th:block>
 	       <th:block th:if="${groups[1] != 0}">
 	       <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
-	           <span class="num"><a th:href="@{/product/list(cate1=${cate1},cate2=${cate2},pg=${num})}" th:class="${num == currentPage?'num on':'num'}">[[${num}]]</a></span>
+	            <span class="num"><a th:href="@{/product/list(cate1=${cate1},cate2=${cate2},pg=${num},type=${type})}" th:class="${num == currentPage?'num on':'num'}">[[${num}]]</a></span>
 	       </th:block>
 	       </th:block>
 	       <th:block th:if="${groups[1]<lastPageNum}">

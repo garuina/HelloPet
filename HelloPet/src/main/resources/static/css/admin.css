@@ -462,6 +462,14 @@ table {
 }
 
 /* confirm */
+.reserve_div .empty {
+	padding: 45px;
+    text-align: center;
+    box-sizing: border-box;
+    border:none;
+    font-size: 20px;
+}
+
 .reserve_div {
     position: relative;
     margin: 0 auto;

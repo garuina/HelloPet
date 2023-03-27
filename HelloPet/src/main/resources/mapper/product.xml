@@ -65,4 +65,12 @@
 			WHERE b.prodNo =#{prodNo};
 	</select>
 	
+	<update id="updateHit">
+        update `product` set `hit`=`hit`+1 where `prodNo`=#{prodNo};
+    </update>
+    
+    <select id="selectMsg" resultType="int" parameterType="map">
+		select count(`msgNo`) from `message` where `uid`=#{uid} and `msgStatus`=0;
+	</select>
+	
 </mapper>

@@ -7,6 +7,7 @@
 a {
     text-decoration: none;
     color: #555;
+   	cursor: pointer;
 }
 ul, ol {list-style: none;}
 input, textarea {
@@ -71,7 +72,9 @@ header>.headerTop>div>a:hover {
 header>.headerTop>div>label:hover {
 	color: #10958b;
 }
-
+header>.headerTop>div>.message {
+	color: #3c83dc;
+}
 header>.menu {
     position: absolute;
     top: 35px;
@@ -211,10 +214,19 @@ footer {
 
 /*list*/
 #productList {
-	    min-height: 600px;
+	min-height: 600px;
 		
 }
-
+#productList > .none:nth-child(1) {
+	margin-top: 100px;
+    margin-left: 520px;
+    font-size: 25px;
+}
+#productList > .none:nth-child(2){
+	margin-top: 10px;
+    margin-left: 480px;
+    font-size: 25px;
+}
 
 
 
@@ -253,7 +265,7 @@ footer {
     max-width: 1200px;
     margin: 0 auto; 
     padding: 15px 0;
-    font-size: 13px;
+    font-size: 17px;
 }
 
 
@@ -377,6 +389,8 @@ footer {
     transition: all 0.2s ease-in-out;
 }
 
+#productList a
+
 #productList a:hover{
 	
 }
@@ -421,10 +435,14 @@ footer {
     height: 32px;
     display: block;
 }
-#productList a{
-    color: #666;
-    text-decoration: none;
+#productList .sub-cate .depth1 .on {
+    color: #3c83dc;
 }
+
+#productList .sub-cate .depth2 > li .on {
+   color: #3c83dc;
+}
+
 #productList a:hover{
     color: #3c83dc;
 }
@@ -570,15 +588,15 @@ footer {
 }
 
 #productList .discount{
-	margin-left: 5px;
-    margin-right: 10px;
+	margin-left: 2px;
+    margin-right: 6px;
     color: red;
 
 }
 
 #productList .disPrice{
 	display: inline-block;
-    font-size: 24px;
+    font-size: 23px;
     font-weight: 600;
     margin-left: 0px;
 }
@@ -587,7 +605,9 @@ footer {
 	content: "원";
 }
 
-
+#productList .oriPrice .ori:after{
+	content: "원";
+}
 #productList div{
     
     padding: 0;

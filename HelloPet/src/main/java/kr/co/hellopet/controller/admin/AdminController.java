@@ -193,7 +193,7 @@ public class AdminController {
 	    
 	    if(success == true) {
 	    	vo.setTitle(vo.getMedical()+ "에서 예약을 수락하였습니다.");
-	    	vo.setContent(vo.getMedical()+ "에서 예약을 수락하였습니다.");
+	    	vo.setContent(vo.getMedical()+ "에서 예약을 수락하였습니다. <a href='/HelloPet/my/myReserve'>마이페이지 예약관리 바로가기</a>");
 	    	service.insertMsg(vo);
 	    	service.updateReserve(medNo);
 	    }
@@ -227,7 +227,7 @@ public class AdminController {
 	    
 	    if(success == true) {
 	    	vo.setTitle(vo.getMedical()+ "에서 예약을 거절하였습니다.");
-	    	vo.setContent("거절사유 : "+vo.getContent());
+	    	vo.setContent("거절사유 : "+vo.getContent() + " <a href='/HelloPet/my/myReserve'>마이페이지 예약관리 바로가기</a>");
 	    	service.insertMsg(vo);
 	    }
 	    

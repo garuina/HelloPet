@@ -71,16 +71,15 @@ public class SearchController {
 	@PostMapping("search/reserve")
 	public String reserve(Model model, ReserveVO vo, MessageVO msg, String medicalUid, String medicalName) {
 		
-		
 		int result = service.insertReserve(vo);
 		String uid = vo.getUid();
-		
+		int medNo = vo.getMedNo();
 		
 		if(result > 0) {
 			msg.setUid(medicalUid);
 			msg.setMedical(medicalName);
 			msg.setTitle("새로운 예약이 도착했습니다.");
-			msg.setContent("내 병원관리 > 예약내역을 확인해주세요.");
+			msg.setContent("내 병원관리 > 예약내역을 확인해주세요. <a href='/HelloPet/admin/confirm/list?medNo="+medNo+"'>예약내역 바로가기</a>");
 			service.insertMsg(msg);
 		}
 		return "redirect:/search/complete?uid="+ uid;
@@ -117,6 +116,9 @@ public class SearchController {
 	
 	@GetMapping("search/view")
 	public String view(Model model, String hosNo, String pharNo, boolean isMds, Principal principal) {
+		
+		
+		service.updatePhHit(hosNo);
 		
 		if(principal != null) {
 			String uid = principal.getName();

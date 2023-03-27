@@ -21,7 +21,7 @@ import kr.co.hellopet.vo.ProductVO;
 @Repository
 public interface ProductDAO {
 	
-	
+	public int selectMsg(String uid);
 	// cate 불러오기
 	public List<Cate1VO> Cate1();
 	public List<Cate2VO> Cate2();
@@ -42,6 +42,7 @@ public interface ProductDAO {
 	public ProductVO SelectProductView(String cate1, String cate2, String prodNo);
 	public MedicalVO SelectProductMap(String prodNo);
 	public int SelectCountTotalType(String cate1, String cate2, String type);
-	
+	//hit 올려
+	public int updateHit(String prodNo);
 	
 }

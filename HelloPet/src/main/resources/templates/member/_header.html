@@ -73,13 +73,28 @@ $(function(){
 			return false;
 		}
 	});
+	
+	$('.cs').click(function(){
+		if(level !=  null && $.trim(level) !== ''){
+			if(level == 1 || level == 7){
+				return true;
+			}else{
+				alert('일반회원만 가능합니다.')
+				return false;
+			}
+			
+		}else{
+			alert('로그인이 필요합니다.');
+			return false;
+		}
+	});
 });
 
 	function goHos (){
 		var medNo = $('.medNo').text();
 		console.log(medNo);
 		
-		location.href="/HelloPet/admin/info?medNo="+medNo;
+		location.href="/HelloPet/admin/info";
 	}
 	function goPm (){
 		var pharNo = $('.pharNo').text();
@@ -91,13 +106,13 @@ $(function(){
 		var uid = $('.uid').text();
 		console.log(uid);
 		
-		location.href="/HelloPet/message/message?uid="+uid;
+		location.href="/HelloPet/message/message";
 	}
 	function goTop(){
 		var uid = $('.uid').text();
 		console.log(uid);
 		
-		location.href="/HelloPet/admin/info?uid="+uid;
+		location.href="/HelloPet/admin/info";
 	}
 
 </script>
