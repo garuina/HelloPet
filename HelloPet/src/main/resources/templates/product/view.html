@@ -4,7 +4,27 @@
 내용 : product view 상품 리스트 출력 구현 하기
 이름 : 장인화
  -->
-
+<script>
+	$(function(){
+		var level = $('.level').text();
+		console.log(level);
+		
+		$('#aCardAdd').click(function(){
+			if(level !=  null && $.trim(level) !== ''){
+				if(level == 1 || level == 7){
+					return true;
+				}else{
+					alert('일반회원만 가능합니다.')
+					return false;
+				}
+				
+			}else{
+				alert('로그인이 필요합니다.');
+				return false;
+			}
+		});
+	});
+</script>
 <div id="productView">
 
     <div id="container" ng-app="appProduct" class="ng-scope">
@@ -51,13 +71,13 @@
 		                <dd class="price">
 		                	<th:block th:if="${product.discount != 0}">
 								<div class="oriPrice">
-									<span class="ori">[[${product.price}]]원</span>
+									<span class="ori" data-th-text="${#numbers.formatInteger(product.price, 3, 'COMMA')}">[[${product.price}]]원</span>
 									<span class="discount">[[${product.discount}]]%↓</span>
 								</div>
 							 </th:block>
 							 <th:block th:if="${product.discount == 0}">
 		                        <div class="disPrice">
-		                        	<span>[[${product.price}]]</span>
+		                        	<span data-th-text="${#numbers.formatInteger(product.price, 3, 'COMMA')}">[[${product.price}]]</span>
 		                        </div>
 	                         </th:block>		
 							 <th:block th:if="${product.discount != 0}">

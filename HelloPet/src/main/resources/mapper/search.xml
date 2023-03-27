@@ -65,6 +65,9 @@
 	 	Select Count(`pharAddr`) from `api_pharmacy` WHERE `pharAddr` Like concat('%', #{search}, '%');
 	</select>
 	
+	<update id="updatePhHit">
+        update `pet_hospital_pharmacy` set `hit`=`hit`+1 where `medNo`=#{medNo};
+    </update>
 	
 	<!-- view -->
 	<select id="selectViewHs" resultType="kr.co.hellopet.vo.SearchVO">

@@ -5,6 +5,7 @@ package kr.co.hellopet.controller.product;
  * 이름 : 장인화
  * */
 import java.io.IOException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,13 @@ public class ProductController {
 	
 	
 	@GetMapping(value = {"product/", "product/list"})
-	public String list(Model model, String cate1, String cate2, String pg,String type) {
+	public String list(Model model, String cate1, String cate2, String pg,String type, Principal principal) {
+		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
 		
 		List<Cate1VO> cate1s = service.Cate1();
 		List<Cate2VO> cate2s = service.Cate2();
@@ -74,6 +81,8 @@ public class ProductController {
 			model.addAttribute("pros", pros);
 		}
 		
+		model.addAttribute("type", type);
+
 		// 페이징처리
         int total = 0;
         total = service.SelectCountTotal(cate1,cate2);
@@ -137,7 +146,8 @@ public class ProductController {
         int pageStartNum = service.getpageStartNum(total, start);
         int[] groups = service.getPageGroup(currentPage, lastPageNum);
         
-    
+        map.put("type", type);
+        map.put("total", total);
         map.put("cate1", cate1);
         map.put("cate2", cate2);
         map.put("currentPage", currentPage);
@@ -151,7 +161,15 @@ public class ProductController {
 	
 	
 	@GetMapping("product/view")
-	public String view(Model model, String cate1, String cate2, String prodNo) {
+	public String view(Model model, String cate1, String cate2, String prodNo, Principal principal) {
+		
+		if(principal != null) {
+			String uid = principal.getName();
+			int msg2 = service.selectMsg(uid);
+			model.addAttribute("msg2", msg2);
+		}
+		
+		service.updateHit(prodNo);
 		
 		ProductVO product = service.SelectProductView(cate1, cate2, prodNo);
 		model.addAttribute("product", product);

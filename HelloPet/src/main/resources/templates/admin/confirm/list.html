@@ -128,39 +128,48 @@
                         <th>예약상태</th>
                         <th>상태변경</th>
                     </tr>
-                    <tr th:each="item,i:${reserves}">
-                    <td style="display: none" name="revNo" class="revNo">[[${item.revNo}]]</td>
-                        <td>[[${pageStartNum - i.index}]]</td>
-                        <td>[[${item.oName}]]</td>
-                        <th:block th:if="${item.petNum == '1'}">
-                        	<td>[[${item.petName1}]]</td>
-                        </th:block>
-                        <th:block th:if="${item.petNum == '2'}">
-                        	<td>[[${item.petName1}]], [[${item.petName2}]]</td>
-                        </th:block>
-                        <td>[[${item.revDate}]]</td>
-                        <td>[[${item.revTime.substring(0, 5)}]]</td>
-                        <th:block th:if="${item.status == 0}">
-                        	<td>예약대기</td>
-                        </th:block>
-                        <th:block th:if="${item.status == 1}">
-                        	<td>예약수락</td>
-                        </th:block>
-                        <th:block th:if="${item.status == 2}">
-                        	<td>예약거절</td>
-                        </th:block>
-                        
-                        <th:block th:if="${item.status == 0}">
-	                        <td>
-	                        	<a class="btn btnConfirm">수락</a>
-	                            <a class="btn btnReject">거절</a>
-	                        </td>
-                        </th:block>
-                        <th:block th:unless="${item.status == 0}">
-	                        <td>
-	                        </td>
-                        </th:block>
-                    </tr>
+                    <th:block th:if="${#lists.isEmpty(reserves)}">
+		                 <tr>
+					        <td colspan="7">
+					            <p class="empty">예약이 없습니다.</p>
+					        </td>
+					    </tr>
+	                </th:block>
+                    <th:block th:unless="${#lists.isEmpty(reserves)}">
+	                    <tr th:each="item,i:${reserves}">
+	                    <td style="display: none" name="revNo" class="revNo">[[${item.revNo}]]</td>
+	                        <td>[[${pageStartNum - i.index}]]</td>
+	                        <td>[[${item.oName}]]</td>
+	                        <th:block th:if="${item.petNum == '1'}">
+	                        	<td>[[${item.petName1}]]</td>
+	                        </th:block>
+	                        <th:block th:if="${item.petNum == '2'}">
+	                        	<td>[[${item.petName1}]], [[${item.petName2}]]</td>
+	                        </th:block>
+	                        <td>[[${item.revDate}]]</td>
+	                        <td>[[${item.revTime.substring(0, 5)}]]</td>
+	                        <th:block th:if="${item.status == 0}">
+	                        	<td>예약대기</td>
+	                        </th:block>
+	                        <th:block th:if="${item.status == 1}">
+	                        	<td>예약수락</td>
+	                        </th:block>
+	                        <th:block th:if="${item.status == 2}">
+	                        	<td>예약거절</td>
+	                        </th:block>
+	                        
+	                        <th:block th:if="${item.status == 0}">
+		                        <td>
+		                        	<a class="btn btnConfirm">수락</a>
+		                            <a class="btn btnReject">거절</a>
+		                        </td>
+	                        </th:block>
+	                        <th:block th:unless="${item.status == 0}">
+		                        <td>
+		                        </td>
+	                        </th:block>
+	                    </tr>
+                    </th:block>
                 </table>
                 <div class="paging">
                 <ul>

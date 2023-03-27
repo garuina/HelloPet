@@ -61,6 +61,21 @@
         			return false;
         		}
         	});
+        	
+           	$('.cs').click(function(){
+       			if(level !=  null && $.trim(level) !== ''){
+           			if(level == 1 || level == 7){
+           				return true;
+           			}else{
+           				alert('일반회원만 가능합니다.')
+           				return false;
+           			}
+           			
+           		}else{
+           			alert('로그인이 필요합니다.');
+           			return false;
+           		}
+           	});
         });
     </script>
 </head>
@@ -92,7 +107,7 @@
                         <li><a th:href="@{/search/index}">병원/약국찾기</a></li>
                         <li class="logo"><a th:href="@{/}"><img th:src="@{/img/ci.png}" alt="logo"></a></li>
                         <li><a th:href="@{/community/tip/list}">커뮤니티</a></li>
-                        <li><a th:href="@{/product/list}">진료상품</a></li>
+                        <li><a th:href="@{/product/list(cate1=10, cate2=10)}">진료상품</a></li>
                     </ul>
                 </div>
             </div>

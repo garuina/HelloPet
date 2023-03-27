@@ -283,7 +283,7 @@ public class CsController {
 			
 			msg.setUid(writerUid);
 			msg.setTitle("회원님의 문의글에 답변이 달렸습니다.");
-			msg.setContent("마이페이지 > 1:1 문의에서 확인하세요.");
+			msg.setContent("마이페이지 > 1:1 문의에서 확인하세요. <a href='/HelloPet/cs/qna/view?no="+vo.getNo()+"&pg="+currentPage+"'>문의글 바로가기</a>");
 			service.insertMsg(msg);
 		}
 		

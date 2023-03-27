@@ -24,6 +24,9 @@ public class ProductService {
 	@Autowired
 	private ProductDAO dao;
 	
+	public int selectMsg(String uid) {
+		return dao.selectMsg(uid);
+	}
 	
 	// cate 불러오기
 	public List<Cate1VO> Cate1(){
@@ -79,7 +82,10 @@ public class ProductService {
 		return dao.SelectCountTotalType(cate1, cate2, type);
 	}
 	
-	
+	// hit
+	public int updateHit(String prodNo) {
+		return dao.updateHit(prodNo);
+	}
 	
 	/////// list 페이징 처리
 	// 현재 페이지 번호
@@ -94,7 +100,7 @@ public class ProductService {
 	
 	// 페이지 시작값
 	public int getLimitStart(int currentPage) {
-	  return (currentPage - 1) * 10;
+	  return (currentPage - 1) * 9;
 	}
 	
 	// 마지막 페이지 번호
@@ -102,11 +108,11 @@ public class ProductService {
 	
 	  int lastpageNum = 0;
 	
-	  if(total % 10 == 0) {
-	      lastpageNum = total / 10;
+	  if(total % 9 == 0) {
+	      lastpageNum = total / 9;
 	
 	  }else {
-	      lastpageNum = total / 10 + 1;
+	      lastpageNum = total / 9 + 1;
 	  }
 	  return lastpageNum;
 	}
@@ -119,9 +125,9 @@ public class ProductService {
 	// 페이지 그룹
 	public int[] getPageGroup(int currentPage, int lastPageNum) {
 	
-	  int groupCurrent = (int) Math.ceil(currentPage / 10.0);
-	  int groupStart = (groupCurrent - 1) * 10 + 1;
-	  int groupEnd = groupCurrent * 10;
+	  int groupCurrent = (int) Math.ceil(currentPage / 9.0);
+	  int groupStart = (groupCurrent - 1) * 9 + 1;
+	  int groupEnd = groupCurrent * 9;
 	
 	  if(groupEnd > lastPageNum) {
 	      groupEnd = lastPageNum;

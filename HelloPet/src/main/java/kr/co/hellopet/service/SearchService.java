@@ -55,6 +55,12 @@ public class SearchService {
 		return dao.selectSearchHsTotalAddr(search);
 	}
 	
+	
+	// hit
+	public int updatePhHit(String medNo) {
+		return dao.updatePhHit(medNo);
+	}
+	
 	// searchPh 검색기능
 	public List<SearchVO> SearchPh(String search, int start){
 		return dao.SearchPh(search, start);

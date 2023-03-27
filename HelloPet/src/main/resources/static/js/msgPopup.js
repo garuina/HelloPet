@@ -31,7 +31,7 @@ $(function(){
 	    	method : 'get',
 	    	data : {'msgNo': msgNo},
 			success: function(data){	
-				$('#popMsg .msgDiv > p').text(data.result.content);
+				$('#popMsg .msgDiv > p').html(data.result.content);
 			}	
     	});
     });

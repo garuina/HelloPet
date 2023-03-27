@@ -26,9 +26,11 @@ public class ListsController {
 	@GetMapping("lists/list")
 	public String list(Model model, @RequestParam(value ="type", required=false) String type, String pg, Principal principal) {
 		
-		String uid = principal.getName();
-		int result = service.selectMsg(uid);
-		model.addAttribute("result", result);
+		if(principal != null) {
+			String uid = principal.getName();
+			int result = service.selectMsg(uid);
+			model.addAttribute("result", result);
+		}
 		
 		int currentPage = service.getCurrentPage(pg);
         int start = service.getLimitStart(currentPage);
@@ -41,8 +43,6 @@ public class ListsController {
 		List<ListsVO> hits = service.selectHit(start);
 		List<ListsVO> news = service.selectNew(start);
 		List<ListsVO> reserves = service.selectReserve(start);
-		
-		
 		
 		model.addAttribute("type", type);
 		model.addAttribute("hits", hits);

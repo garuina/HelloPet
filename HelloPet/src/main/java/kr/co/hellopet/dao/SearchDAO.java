@@ -42,6 +42,8 @@ public interface SearchDAO {
 	public int selectSearchPhTotalName(String search);
 	public int selectSearchPhTotalAddr(String search);
 
+	// hit 올리기
+	public int updatePhHit(String medNo);
 	
 	//view
 	public SearchVO selectViewHs(String hosNo);
