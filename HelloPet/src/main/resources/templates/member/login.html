@@ -1,4 +1,5 @@
 <th:block th:include="@{member/_header.html}"/>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script>
 
 	$(document).ready(function(){
@@ -12,8 +13,32 @@
 			//location.href="/HelloPet/member/login";
 		}
 	});
+	
+	
 
 </script>
+<style>
+	#naver_id_login {
+	    width: 450px;
+	    height: 40px;
+	    margin-bottom: 5px;
+	    padding: 5px;
+	    text-indent: 10px;
+	    background: url(../img/social-n.png) no-repeat;
+	    background-position-x: 10px;
+	    background-position-y: 10px;
+	    text-align: center;
+	    background-size: auto 30px;
+	    background-color: #1ec800;
+	    font-size: 14px;
+	    color: #fff;
+	}
+	
+	#naver_id_login img {
+		display : none;
+	}
+	
+</style>
 <main class="login_main">
     <div class="login_div">
         <article class="login">
@@ -23,11 +48,15 @@
                     <form action="#" class="login_form" method="post">
                         <input type="text" name="uid" placeholder="아이디">
                         <input type="password" name="pass" placeholder="비밀번호">
-                        <div>
+                        <div class="remember-div">
                             <input type="checkbox" name="remember-me"><i class="circle"></i><span class="text">아이디저장</span>
                         </div>
                         <input type="submit" id="login" value="로그인">
-                        <input type="text" id="naver" value="Naver 로 로그인">
+	                    <!-- 네이버 로그인 버튼 노출 영역 -->
+					    <div id="naver_id_login">
+					    
+					    </div>
+					    <!-- //네이버 로그인 버튼 노출 영역 -->
                         <input type="text" id="kakao" value="Kakao 로 로그인">
                         <input type="text" id="apple" value="Apple 로 로그인">
                         <ul>
@@ -41,4 +70,13 @@
         </article>
     </div>
 </main>
+<script type="text/javascript">
+    var naver_id_login = new naver_id_login("jiZuINHHWMgk1sv9NlGc", "http://localhost:8081/HelloPet");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 3,40);
+    naver_id_login.setDomain("http://localhost:8081/HelloPet/login");
+    naver_id_login.setState(state);
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+</script>
 <th:block th:include="@{member/_footer.html}"/>

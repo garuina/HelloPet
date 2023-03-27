@@ -47,6 +47,11 @@ public class MemberController {
 	@Autowired
 	private PasswordMailSendService passwordMail;
 	
+	@GetMapping("member/test")
+	public String test() {
+		return "member/test";
+	}
+	
 	// 로그인
 	@GetMapping("member/login")
 	public String login(Model model) {		
