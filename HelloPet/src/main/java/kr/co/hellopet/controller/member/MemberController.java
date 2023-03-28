@@ -47,8 +47,13 @@ public class MemberController {
 	@Autowired
 	private PasswordMailSendService passwordMail;
 	
-	@GetMapping("member/test")
-	public String test() {
+	@ResponseBody
+	@GetMapping("member/naverEmail")
+	public String loginTest(String name, String email) {
+		
+		System.out.println("name : " + name);
+		System.out.println("email : " + email);
+		
 		return "member/test";
 	}
 	

@@ -34,9 +34,13 @@
 	    color: #fff;
 	}
 	
-	#naver_id_login img {
-		display : none;
+	#naver_id_login a {
+		display: block;
+		width: 100%;
+		height: 100%;
 	}
+	
+	#naver_id_login img {}
 	
 </style>
 <main class="login_main">
@@ -53,9 +57,7 @@
                         </div>
                         <input type="submit" id="login" value="로그인">
 	                    <!-- 네이버 로그인 버튼 노출 영역 -->
-					    <div id="naver_id_login">
-					    
-					    </div>
+					    <div id="naver_id_login"></div>
 					    <!-- //네이버 로그인 버튼 노출 영역 -->
                         <input type="text" id="kakao" value="Kakao 로 로그인">
                         <input type="text" id="apple" value="Apple 로 로그인">
@@ -63,6 +65,7 @@
                             <li><a th:href="@{/member/join}">회원가입</a></li>
                             <li><a th:href="@{/member/find}">아이디</a></li>
                             <li><a th:href="@{/member/find}">비밀번호찾기</a></li>
+                            <li><a href=" http://nid.naver.com/nidlogin.logout">로그아웃</a>></li>
                         </ul>
                     </form>
                 </div>
@@ -71,12 +74,11 @@
     </div>
 </main>
 <script type="text/javascript">
-    var naver_id_login = new naver_id_login("jiZuINHHWMgk1sv9NlGc", "http://localhost:8081/HelloPet");
+    var naver_id_login = new naver_id_login("jiZuINHHWMgk1sv9NlGc", "http://localhost:8081/HelloPet/");
     var state = naver_id_login.getUniqState();
     naver_id_login.setButton("green", 3,40);
-    naver_id_login.setDomain("http://localhost:8081/HelloPet/login");
+    naver_id_login.setDomain("http://127.0.0.1:8081/HelloPet/member/login");
     naver_id_login.setState(state);
-    naver_id_login.setPopup();
     naver_id_login.init_naver_id_login();
 </script>
 <th:block th:include="@{member/_footer.html}"/>
