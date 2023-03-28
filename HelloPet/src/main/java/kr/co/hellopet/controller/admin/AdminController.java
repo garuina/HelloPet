@@ -111,7 +111,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@GetMapping("my/withdrawAdmin")
+	@GetMapping("admin/withdrawAdmin")
 	public int withdrawAdmin(@RequestParam("uid") String uid) {
 		
 		int result = service.deleteWithdrawAdmin(uid);
@@ -123,7 +123,7 @@ public class AdminController {
 		return result;
 	}
 	@ResponseBody
-	@GetMapping("my/withdrawOwner")
+	@GetMapping("admin/withdrawOwner")
 	public int withdrawOwner(@RequestParam("uid") String uid) {
 		
 		int result = service.deleteWithdrawOwner(uid);
