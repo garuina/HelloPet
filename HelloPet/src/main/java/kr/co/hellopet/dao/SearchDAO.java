@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.Api_HospitalVO;
+import kr.co.hellopet.vo.ICouponVO;
+import kr.co.hellopet.vo.IMember_couponVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
@@ -57,6 +59,11 @@ public interface SearchDAO {
 	//reserve (병원예약하기)
 	public ProductVO selectProductOne(String prodNo);
 	public int insertReserve(ReserveVO vo);
+	
+	// 병원예약 시 쿠폰 적용
+	public List<IMember_couponVO> selectMemberCoupon(String uid);
+	public List<ICouponVO> selectCoupon(String uid);
+	
 	
 	//complete (예약결과 가져오기)
 	public ReserveVO selectComplete(String uid);

@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.SearchService;
 import kr.co.hellopet.vo.Api_HospitalVO;
+import kr.co.hellopet.vo.ICouponVO;
+import kr.co.hellopet.vo.IMember_couponVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
@@ -56,11 +58,17 @@ public class SearchController {
 		MedicalVO md = service.selectHospital(hosNo);
 		model.addAttribute("md", md);
 		
-		if(principal != null) {
-			String uid = principal.getName();
-			int msg2 = service.selectMsg(uid);
-			model.addAttribute("msg2", msg2);
-		}
+		String uid = principal.getName();
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
+		
+		List<IMember_couponVO> mc = service.selectMemberCoupon(uid);
+		model.addAttribute("mc", mc);
+		
+		List<ICouponVO> cps = service.selectCoupon(uid);
+		model.addAttribute("cps", cps);
+		
+	
 		ProductVO product = service.selectProductOne(prodNo);
 		model.addAttribute("product", product);
 		model.addAttribute("prodNo", prodNo);
@@ -119,6 +127,7 @@ public class SearchController {
 		
 		
 		service.updatePhHit(hosNo);
+		
 		
 		if(principal != null) {
 			String uid = principal.getName();

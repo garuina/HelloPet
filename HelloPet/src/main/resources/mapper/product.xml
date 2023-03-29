@@ -73,4 +73,21 @@
 		select count(`msgNo`) from `message` where `uid`=#{uid} and `msgStatus`=0;
 	</select>
 	
+	
+	<select id="selectMaxCoupon" resultType="kr.co.hellopet.vo.ICouponVO">
+		SELECT * FROM `member_coupon` AS a
+			JOIN `coupon` AS b
+			ON a.cpNo = b.cpNo
+			WHERE a.uid =#{uid} AND `status` = '0' ORDER BY `discount` DESC LIMIT 1;
+	</select>
+	
+	<select id="selectMedicalCoupon" resultType="kr.co.hellopet.vo.ICouponVO">
+		SELECT * FROM `member_coupon` AS a
+			JOIN `coupon` AS b
+			ON a.cpNo = b.cpNo
+			JOIN `product` AS c
+			ON b.medNo = c.medNo
+			WHERE a.uid =#{uid} AND c.prodNo =#{prodNo} and `status` = '0' ORDER BY b.discount DESC LIMIT 1;	
+	</select>
+	
 </mapper>

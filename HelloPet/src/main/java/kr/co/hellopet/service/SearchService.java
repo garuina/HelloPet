@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import kr.co.hellopet.dao.SearchDAO;
 import kr.co.hellopet.vo.Api_HospitalVO;
+import kr.co.hellopet.vo.ICouponVO;
+import kr.co.hellopet.vo.IMember_couponVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.MessageVO;
@@ -115,6 +117,15 @@ public class SearchService {
 	
 	public ProductVO selectProductOne(String prodNo) {
 		return dao.selectProductOne(prodNo);
+	}
+	
+	// 예약하기 할 때 쿠폰 적용
+	public List<IMember_couponVO> selectMemberCoupon(String uid) {
+		return dao.selectMemberCoupon(uid);
+	}
+	
+	public List<ICouponVO> selectCoupon(String uid) {
+		return dao.selectCoupon(uid);
 	}
 	
 	// complete

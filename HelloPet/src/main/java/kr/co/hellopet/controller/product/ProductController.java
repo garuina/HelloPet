@@ -28,6 +28,7 @@ import kr.co.hellopet.service.SearchService;
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.Cate1VO;
 import kr.co.hellopet.vo.Cate2VO;
+import kr.co.hellopet.vo.ICouponVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.ProductVO;
@@ -167,6 +168,10 @@ public class ProductController {
 			String uid = principal.getName();
 			int msg2 = service.selectMsg(uid);
 			model.addAttribute("msg2", msg2);
+			model.addAttribute("uid", uid);
+			
+			ICouponVO cp = service.selectMaxCoupon(uid);
+			model.addAttribute("cp", cp);
 		}
 		
 		service.updateHit(prodNo);
