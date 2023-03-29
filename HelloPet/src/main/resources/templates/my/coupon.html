@@ -6,56 +6,48 @@
                             <!--게시물 목록-->
                             <div class="mypage-contents_body">
                                 <table border="0">
-                                    
                                     <tr class="listTitle">
                                         <th>쿠폰명</th>
                                         <th>할인금액</th>
                                         <th>적용기준</th>
                                         <th>유효기간</th>
+                                        <th>상태</th>
                                     </tr>
-                            
-                                    <tr>
-                                        <td><a href="#">신규 회원 쿠폰</a></td>
-                                        <td>10%</td>
-                                        <td>신규 회원가입시</td>
-                                        <td>~2024-03-28</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">깜짝 이벤트 5000원 쿠폰</a></td>
-                                        <td>5000원</td>
-                                        <td>-</td>
-                                        <td>~2024-03-28</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">깜짝 이벤트 5000원 쿠폰</a></td>
-                                        <td>5000원</td>
-                                        <td>-</td>
-                                        <td>~2024-03-28</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">깜짝 이벤트 5000원 쿠폰</a></td>
-                                        <td>5000원</td>
-                                        <td>-</td>
-                                        <td>~2024-03-28</td>
+                                    <tr th:each="coupon:${coupons}">
+                                        <td>[[${coupon.cpName}]]</td>
+                                        <th:block th:if="${coupon.disprice == 0}">
+                                        	<td>[[${coupon.discount}]]%</td>
+                                        </th:block>
+                                        <th:block th:unless="${coupon.disprice == 0}">
+                                        	<td>[[${coupon.disprice}]]원</td>
+                                        </th:block>
+                                        <td>[[${coupon.require}]]</td>
+                                        <td>~[[${coupon.vaild}]]</td>
+                                        <th:block th:if="${coupon.status == 0}">
+                                        	<td>미사용</td>
+                                        </th:block>
+                                        <th:block th:unless="${coupon.status == 0}">
+                                        	<td>사용완료</td>
+                                        </th:block>
                                     </tr>
                                     
                                 </table>
                             </div>
-                            <!-- 검색목록 페이지 번호 -->
-                            <!-- 검색목록 페이지 번호 -->
                             <div class="paging">
-                                <span class="prev">
-                                    <a href="#"><&nbsp;이전</a>
-                                </span>
-                                <span class="num">
-                                    <a href="#" class="on">1</a>
-                                    <a href="#">2</a>
-                                    <a href="#">3</a>
-                                </span>
-                                <span class="next">
-                                    <a href="#">다음&nbsp;></a>
-                                </span>
-                            </div>
+				              <ul>
+				               <th:block th:if="${groups[0]>1}">
+				                   <li><a th:href="@{/my/coupon(pg=${groups[0]-1})}" class="prev">←</a></li>
+				               </th:block>
+				               <th:block th:if="${groups[1] != 0}">
+				               <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+				                   <li><a th:href="@{/my/coupon(pg=${num})}" th:class="${num == currentPage?'num on':'num'}">[[${num}]]</a></li>
+				               </th:block>
+				               </th:block>
+				               <th:block th:if="${groups[1]<lastPageNum}">
+				                   <li><a th:href="@{/my/coupon(pg=${groups[1]+1})}" class="next">→</a></li>
+				               </th:block>
+				              </ul>
+				          </div>
                         </div>
                     </div>
                 </div>

@@ -144,6 +144,12 @@
 		SELECT * FROM `member_coupon` AS a
 		JOIN `coupon` AS b
 		ON a.cpNo = b.cpNo
+		WHERE a.uid =#{uid} AND (b.medNo IS NULL OR b.medNo = #{hosNo});
+	</select>
+	<select id="selectCoupon2" resultType="kr.co.hellopet.vo.ICouponVO">
+		SELECT * FROM `member_coupon` AS a
+		JOIN `coupon` AS b
+		ON a.cpNo = b.cpNo
 		WHERE a.uid =#{uid};
 	</select>
 	

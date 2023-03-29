@@ -62,7 +62,7 @@ public interface SearchDAO {
 	
 	// 병원예약 시 쿠폰 적용
 	public List<IMember_couponVO> selectMemberCoupon(String uid);
-	public List<ICouponVO> selectCoupon(String uid);
+	public List<ICouponVO> selectCoupon(String uid, String hosNo);
 	
 	
 	//complete (예약결과 가져오기)

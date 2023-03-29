@@ -206,44 +206,51 @@ footer {
     background-image: linear-gradient(90deg,#1dc6f7,#00e5c2);
 }
 
-#qna .paging {
+.paging {
+    display: flex;
+    justify-content: center;
+    margin-top: 75px;
+}
+.paging > ul {
+    align-items: center;
+    display: inline-flex;
+    list-style-type: none;
+    justify-content: center;
+    max-width: 100%;
     width: 100%;
-    padding: 40px 0;
-    text-align: center;
 }
 
-#qna .paging > span > a {
-    color: #777;
-    font-size: 11px;
-    letter-spacing: -1px;
-}
-
-#qna .paging > .num > a {
+ .paging a{
     display: inline-block;
-    min-width: 14px;
-    margin: 0 2px;
-    padding: 8px 9px;
-    border: 1px solid #c4c4c4;
-    background: url() 0 0 repeat-x;
-    color: #000;
-    font-size: 12px;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    border-radius: 4px;
+    align-items: center;
     text-align: center;
-    text-decoration: none;
+    height: 30px;
+    width: 30px;
+    margin: 0.3rem 10px;
+    font-size: 20px;
+    margin-bottom: 8px;
 }
 
-#qna .paging > .num > a.on {
-    color: #39d9c8;
-    font-weight: bold;
-    border: 1px solid #39d9c8;
+ .paging .on {
+    border: 1px solid #0dbcaf;
+    background: #0dbcaf;
+    color: #fff;
 }
-
-#qna .paging > span > a:hover{
-    color: #39d9c8;
+ .paging .prev:hover {
+    background: #0dbcaf;
+    color: #fff;
 }
-
-#qna .paging > .num > a:hover {
-    border: 1px solid #39d9c8;
-    text-decoration: none;
+ .paging .next:hover {
+    background: #0dbcaf;
+    color: #fff;
+}
+ .paging .num:hover {
+    color: #32a69f;
+}
+ .paging .on:hover {
+    color: #fff;
 }
 
 #qna .mypage-contents {

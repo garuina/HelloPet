@@ -57,10 +57,13 @@
 		    `rdate`=NOW();
 	</insert>
 	<select id="countCoupon" resultType="int">
-		SELECT COUNT(`no`) FROM `member_coupon` WHERE `cpNo`=#{cpNo} and `uid` = #{uid} and `status`= 0;
+		SELECT COUNT(`no`) FROM `member_coupon` WHERE `cpNo`=#{cpNo} and `uid` = #{uid};
 	</select>
 	<update id="updateDownload">
         update `coupon` set `download`=`download`+1 where `cpNo`=#{cpNo};
+    </update>
+	<update id="updateCouponOwner">
+        update `pet_owner` set `coupon`=`coupon`+1 where `uid`=#{uid};
     </update>
     
     <!-- faq -->

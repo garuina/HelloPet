@@ -223,6 +223,7 @@ public class AdminController {
 	    	service.insertMsg(vo);
 	    	service.updateReserve(medNo);
 	    	service.deleteCoupon(coupon, uid);
+	    	service.updateCouponOwner(uid);
 	    }
 	    
 	    return map;

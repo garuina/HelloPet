@@ -43,6 +43,7 @@ public interface AdminDAO {
 	public boolean updateConfirm(int revNo);
 	public boolean updateReject(int revNo);
 	public int deleteCoupon(int cpNo, String uid);
+	public int updateCouponOwner(String uid);
 	
 	/* 메시지 */
 	public int insertMsg(MessageVO vo);

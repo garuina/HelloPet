@@ -94,12 +94,12 @@
                         	<td>
 		                        <div class="cs_view_coupon">
 				                	<div class="coupon_button">
+				                		<div class="coupon_text" th:text="${vo.cpName + ' 다운로드'}"></div>
 				                		<div class="coupon_img" style="cursor : pointer;">
 				                			<img th:src="@{/img/cscoupon.png}">
 				                			<span name="cpNo" style="display: none;" th:text="${vo.couponNo}"></span>
 				                		</div>
-				                		<div class="coupon_text" th:text="${vo.cpName + ' 다운로드'}">
-				                		</div>
+				                		
 				                	</div>
 			                	</div>
 		                	</td>

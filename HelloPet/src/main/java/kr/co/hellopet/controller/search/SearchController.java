@@ -6,6 +6,7 @@ package kr.co.hellopet.controller.search;
  * */
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,8 +66,14 @@ public class SearchController {
 		List<IMember_couponVO> mc = service.selectMemberCoupon(uid);
 		model.addAttribute("mc", mc);
 		
-		List<ICouponVO> cps = service.selectCoupon(uid);
-		model.addAttribute("cps", cps);
+		List<ICouponVO> cps = service.selectCoupon(uid, hosNo);
+		List<ICouponVO> filteredCps = new ArrayList<>();
+		for (ICouponVO cp : cps) {
+		    if (cp.getMedNo() == 0 || cp.getMedNo() == Integer.parseInt(hosNo)) {
+		        filteredCps.add(cp);
+		    }
+		}
+		model.addAttribute("cps", filteredCps);
 		
 	
 		ProductVO product = service.selectProductOne(prodNo);

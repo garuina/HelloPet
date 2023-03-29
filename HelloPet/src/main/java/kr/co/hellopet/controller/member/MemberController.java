@@ -116,13 +116,16 @@ public class MemberController {
 	@GetMapping("member/countCoupon")
 	public void countCoupon(Authentication authentication) {
 		
-		String uid = authentication.getName();
+		if(authentication != null) {
+			String uid = authentication.getName();
+			
+			int count = service.selectCountOwnerCoupon(uid);
+			
+			System.out.println("uid : " + uid + " count : " + count);
+			
+			service.updateCouponPetOwner(count, uid);
+		}
 		
-		int count = service.selectCountOwnerCoupon(uid);
-		
-		System.out.println("uid : " + uid + " count : " + count);
-		
-		service.updateCouponPetOwner(count, uid);
 	}
 	
 	

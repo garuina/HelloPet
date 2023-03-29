@@ -38,6 +38,7 @@ import kr.co.hellopet.service.MyService;
 import kr.co.hellopet.vo.CommunityVO;
 import kr.co.hellopet.vo.CsVO;
 import kr.co.hellopet.vo.MedicalVO;
+import kr.co.hellopet.vo.MemberCouponVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.ReserveVO;
 
@@ -313,23 +314,30 @@ public class MyController {
 	}
 	
 	@GetMapping("my/coupon")
-	public String coupon(Authentication authentication, Model model) {
+	public String coupon(Authentication authentication, Model model, String pg) {
 		
-		MyUserDetails userDetails = null;
-		
-		// authentication 으로 사용자 객체 가져오기
 		String uid = authentication.getName();
-		
-		// 사용자 객체 유무 확인...
-		if(authentication != null) {
-			
-			// 사용자 객체 조회 후 vo 에 담아서 화면 구현..
-			MemberVO  vo = service.selectUser(uid);
-			
-			model.addAttribute("member", vo);
-		}
 		int msg2 = service.selectMsg(uid);
 		model.addAttribute("msg2", msg2);
+
+		int currentPage = service.getCurrentPage(pg);
+		int start = service.getLimitStart(currentPage);
+		int total = service.selectCountMyArticle(uid);
+		int lastPageNum = service.getLastPageNum(total);
+		int pageStartNum = service.getPageStartNum(total, start);
+		int groups[] = service.getPageGroup(currentPage, lastPageNum);
+		
+		// article list 정보
+		List<MemberCouponVO> coupons = service.selectMyCoupon(uid, start);
+		
+		// model 에 담기
+		model.addAttribute("coupons", coupons);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("pageStartNum", pageStartNum);
+		model.addAttribute("groups", groups);
+		model.addAttribute("total",total);
+		
 		return "my/coupon";
 	}
 }
