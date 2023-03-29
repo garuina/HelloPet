@@ -1,20 +1,19 @@
 <th:block th:include="@{_header.html}"/>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script>
-
 	$(document).ready(function(){
 		
-		naver_id_login.get_naver_userprofile("naverSignInCallback()");
+		let name = $('span[name=class]').text();
 		
-		let email = naver_id_login.getProfileData('email');
-		
-		if(email != null){
-			alert(email);
+		if(name != null){
+			$.ajax({
+				url : '/HelloPet/member/countCoupon',
+				method : 'GET',
+				dataType : 'json',
+				success : function(data){
+				}
+			});
 		}
-		
 	});
-
-
 </script>
         <main>
             <section>
@@ -207,30 +206,4 @@
                 </section>
             </section>
         </main>
-<script type="text/javascript">
-  var naver_id_login = new naver_id_login("jiZuINHHWMgk1sv9NlGc", "http://localhost:8081/HelloPet/");
-  // 접근 토큰 값 출력
-  console.log(naver_id_login.oauthParams.access_token);
-  // 네이버 사용자 프로필 조회
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-  
-  function naverSignInCallback() {
-	  let name  = (naver_id_login.getProfileData('name'));
-      let email = (naver_id_login.getProfileData('email'));
-	
-      let jsonData = {'name' : name , 'email' : email};
-      
-      
-      $.ajax({
-    	  url : '/HelloPet/member/naverEmail',
-    	  method : 'GET',
-    	  data : jsonData,
-    	  dataType : 'json', 
-		  success : function(){
-			  
-		  }	    	  
-      });
-  }
-</script>
 <th:block th:include="@{_footer.html}"/>

@@ -1,5 +1,6 @@
 package kr.co.hellopet.controller.member;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import kr.co.hellopet.mail.PasswordMailSendService;
 import kr.co.hellopet.service.MemberService;
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.Api_PharmacyVO;
+import kr.co.hellopet.vo.LMHCoupon;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.TermsVO;
@@ -109,15 +112,47 @@ public class MemberController {
 		  }
 		}
 	
+	@ResponseBody
+	@GetMapping("member/countCoupon")
+	public void countCoupon(Authentication authentication) {
+		
+		String uid = authentication.getName();
+		
+		int count = service.selectCountOwnerCoupon(uid);
+		
+		System.out.println("uid : " + uid + " count : " + count);
+		
+		service.updateCouponPetOwner(count, uid);
+	}
+	
 	
 	@PostMapping("member/register")
-	public String register(MemberVO vo, HttpServletRequest req) {
+	public String register(MemberVO vo, HttpServletRequest req, @RequestParam("uid") String uid) {
 		log.debug("member/register...POST");
 		// ip 설정
 		String regip = req.getRemoteAddr();
 		vo.setRegip(regip);
 		
 		service.insertMember(vo);
+		
+		List<LMHCoupon> coupons = service.selectCouponGrade();
+		
+		for(LMHCoupon coupon : coupons) {
+			
+			List<Integer> cpNos = Arrays.asList(coupon.getCpNo());
+			
+			for(Integer cpNo : cpNos) {
+				
+				System.out.println("cpNo : " + cpNo);
+				
+				service.updateCouponDownload(cpNo);
+				
+				service.insertMemberCoupon(cpNo, uid);
+			}
+		}
+		
+		System.out.println("uid : " + uid);
+		
 		return "redirect:/member/login";
 	}
 	

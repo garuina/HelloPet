@@ -23,6 +23,7 @@ public class MemberVO {
 	private String regip;
 	private String wdate;
 	private String rdate;
+	private int coupon;
 	
 
 	public String getRdate() {
