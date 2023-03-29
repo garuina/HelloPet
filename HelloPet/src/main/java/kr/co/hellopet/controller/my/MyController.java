@@ -311,4 +311,25 @@ public class MyController {
 		
 		return map;
 	}
+	
+	@GetMapping("my/coupon")
+	public String coupon(Authentication authentication, Model model) {
+		
+		MyUserDetails userDetails = null;
+		
+		// authentication 으로 사용자 객체 가져오기
+		String uid = authentication.getName();
+		
+		// 사용자 객체 유무 확인...
+		if(authentication != null) {
+			
+			// 사용자 객체 조회 후 vo 에 담아서 화면 구현..
+			MemberVO  vo = service.selectUser(uid);
+			
+			model.addAttribute("member", vo);
+		}
+		int msg2 = service.selectMsg(uid);
+		model.addAttribute("msg2", msg2);
+		return "my/coupon";
+	}
 }
