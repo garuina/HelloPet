@@ -20,6 +20,9 @@ $(document).ready(function(){
 			$('.mypage-nav_list:nth-child(3) > a').addClass("active");
 		}else if(currentUrl == 'myQna'){
 			$('.mypage-nav_list:nth-child(4) > a').addClass("active");
+		
+		}else if(currentUrl == 'coupon'){
+			$('.mypage-nav_list:nth-child(5) > a').addClass("active");
 		}	
 	
 	
