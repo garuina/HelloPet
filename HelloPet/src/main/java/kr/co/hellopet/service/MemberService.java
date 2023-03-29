@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.co.hellopet.dao.MemberDAO;
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.Api_PharmacyVO;
+import kr.co.hellopet.vo.LMHCoupon;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.TermsVO;
@@ -43,8 +44,21 @@ public class MemberService {
 	public void insertMember(MemberVO vo) {
 		
 		vo.setPass(passwordEncoder.encode(vo.getPass2()));
+		
 		dao.insertMember(vo);
 	};
+	
+	public void insertMemberCoupon(int cpNo, String uid) {
+		dao.insertMemberCoupon(cpNo, uid);
+	}
+	
+	public int selectCountOwnerCoupon(String uid) {
+		return dao.selectCountOwnerCoupon(uid);
+	}
+	
+	public List<LMHCoupon> selectCouponGrade(){
+		return dao.selectCouponGrade();
+	}
 	
 	public void insertMedical(MedicalVO vo) {
 		
@@ -149,6 +163,10 @@ public class MemberService {
 		String pass = passwordEncoder.encode(code);
 		dao.updateMedicalPasswordByCodeAndInfo(pass, email, name, hp);
 	}
+	
+	public void updateCouponPetOwner(int coupon, String uid) {
+		dao.updateCouponPetOwner(coupon, uid);
+	};
 	
 	// 파일 업로드
 	@Value("${spring.servlet.multipart.location}")

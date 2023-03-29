@@ -23,6 +23,21 @@
 			`rdate` = now();
 	</insert>
 	
+	<insert id="insertMemberCoupon" parameterType="map">
+		INSERT INTO `member_coupon` SET `cpNo` = #{cpNo},
+										`uid` = #{uid},
+										`rdate` = NOW();
+	</insert>
+	
+	<select id="selectCountOwnerCoupon" resultType="int">
+		SELECT COUNT(`uid`) FROM `member_coupon` WHERE `uid` = #{uid};
+	</select>
+	
+	<select id="selectCouponGrade" resultType="kr.co.hellopet.vo.LMHCoupon">
+		select * from `coupon` where `grade` = 1;
+	</select>
+	
+	
 	<!-- 병원/약국 type, level 은 추후 수정 예정 -->
 	<insert id="insertMedical">
 		insert into `pet_hospital_pharmacy` set
@@ -129,6 +144,10 @@
 	
 	<update id="updateMedicalPasswordByCodeAndInfo">
 		update `pet_hospital_pharmacy` set `pass` = #{pass} where `email` = #{email} AND `name` = #{name} AND `hp` = #{hp}; 
+	</update>
+	
+	<update id="updateCouponPetOwner">
+		UPDATE `pet_owner` SET `coupon` = #{coupon} WHERE `uid` = #{uid};
 	</update>
 
 </mapper>
