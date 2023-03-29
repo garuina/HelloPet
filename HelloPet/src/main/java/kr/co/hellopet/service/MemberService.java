@@ -166,7 +166,11 @@ public class MemberService {
 	
 	public void updateCouponPetOwner(int coupon, String uid) {
 		dao.updateCouponPetOwner(coupon, uid);
-	};
+	}
+	
+	public void updateCouponDownload(int cpNo) {
+		dao.updateCouponDownload(cpNo);
+	}
 	
 	// 파일 업로드
 	@Value("${spring.servlet.multipart.location}")

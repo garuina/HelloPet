@@ -91,4 +91,6 @@ public interface MemberDAO {
 	public void updateMedicalPasswordByCodeAndInfo(@Param("pass") String pass, @Param("email") String email, @Param("name") String name, @Param("hp") String hp);
 	
 	public void updateCouponPetOwner(int coupon, String uid);
+	
+	public void updateCouponDownload(int cpNo);
 }

@@ -143,6 +143,10 @@ public class MemberController {
 			
 			for(Integer cpNo : cpNos) {
 				
+				System.out.println("cpNo : " + cpNo);
+				
+				service.updateCouponDownload(cpNo);
+				
 				service.insertMemberCoupon(cpNo, uid);
 			}
 		}
