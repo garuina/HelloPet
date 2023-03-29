@@ -344,6 +344,30 @@ footer {
     padding-top: 10px;
 }
 
+#notice > #view > .container > .viewTable .coupon {
+	border-bottom: none;
+	width: 100px;
+}
+#notice > #view > .container > .viewTable .coupon td {
+	border-bottom: none;
+	width: 400px;
+	float: right;
+}
+#notice > #view > .container > .viewTable .coupon td .coupon_button {
+	float: right;
+}
+#notice > #view > .container > .viewTable .coupon .coupon_img {
+	width: 50px;
+	float: right;
+}
+#notice > #view > .container > .viewTable .coupon .coupon_text {
+	width: 260px;
+	float: right;
+	margin-top: 10px;
+	color: #108781;
+	cursor: pointer;
+}
+
 #notice > #view > .container > .viewTable2 {
     width: 100%;
     border-collapse: collapse;

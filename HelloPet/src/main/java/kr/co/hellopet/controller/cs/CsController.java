@@ -1,7 +1,9 @@
 package kr.co.hellopet.controller.cs;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.hellopet.service.CsService;
 import kr.co.hellopet.vo.CsVO;
 import kr.co.hellopet.vo.MessageVO;
+import kr.co.hellopet.vo.kcyMemberCouponVO;
 
 /* 
  *  날짜 : 2023/03/09
@@ -84,13 +87,20 @@ public class CsController {
 	}
 	
 	@GetMapping("cs/notice/view")
-	public String noticeView(Model model,int no, String pg, String rdate, Principal principal) {
+	public String noticeView(CsVO cs, Model model,int no, String pg, String rdate, Principal principal) {
 		int currentPage = service.getCurrentPage(pg);
 		service.updateArticleHit(no);
 		CsVO prev = service.getPrev(rdate);
 		CsVO next =service.getNext(rdate);
 		
-		CsVO vo = service.selectArticle(no);
+		CsVO vo = null;
+		
+		if(cs.getCouponNo() > 0) {
+			vo = service.selectArticle(no);
+		}else {
+			vo = service.selectNotice(no);
+		}
+		
 		model.addAttribute("vo", vo);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("prev", prev);
@@ -101,7 +111,35 @@ public class CsController {
 			int msg2 = service.selectMsg(uid);
 			model.addAttribute("msg2", msg2);
 		}
+		
+		
 		return "cs/notice/view";
+	}
+	
+	// 쿠폰 다운로드
+	@ResponseBody
+	@GetMapping("cs/coupon")
+	public int coupon(kcyMemberCouponVO vo ,@RequestParam("cpNo") int cpNo, @RequestParam("uid") String uid){
+		
+		int coupon = service.insertCoupon(vo);
+		if(coupon > 0) {
+			service.updateDownload(cpNo);
+		}
+		
+		return coupon;
+	}
+	
+	// 쿠폰 발급 중복체크
+	@ResponseBody
+	@GetMapping("cs/countCoupon")
+	public Map<String, Integer> countCoupon(@RequestParam("cpNo") String cpNo,@RequestParam("uid") String uid) {
+		int count = service.countCoupon(cpNo, uid);
+		int result = count;
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		
+		return map;
 	}
 	
 	@GetMapping("cs/notice/modify")

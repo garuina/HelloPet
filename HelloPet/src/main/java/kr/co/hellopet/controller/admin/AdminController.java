@@ -209,7 +209,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("admin/confirm/ok")
-	public Map<String, Boolean> ok(@RequestParam(value="revNo", required = false) Integer revNo, MessageVO vo, String medical, String uid, String medNo) {
+	public Map<String, Boolean> ok(@RequestParam(value="coupon", required = false) Integer coupon, @RequestParam(value="revNo", required = false) Integer revNo, MessageVO vo, String medical, String uid, String medNo) {
 	    boolean success = service.updateConfirm(revNo);
 	    Map<String, Boolean> map = new HashMap<>();
 	    map.put("result", success);
@@ -222,6 +222,7 @@ public class AdminController {
 	    	vo.setContent(vo.getMedical()+ "에서 예약을 수락하였습니다. <a href='/HelloPet/my/myReserve'>마이페이지 예약관리 바로가기</a>");
 	    	service.insertMsg(vo);
 	    	service.updateReserve(medNo);
+	    	service.deleteCoupon(coupon, uid);
 	    }
 	    
 	    return map;

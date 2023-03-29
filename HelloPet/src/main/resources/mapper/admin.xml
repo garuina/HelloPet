@@ -93,5 +93,10 @@
 	<select id="selectMsg" resultType="int" parameterType="map">
 		select count(`msgNo`) from `message` where `uid`=#{uid} and `msgStatus`=0;
 	</select>
+	
+	<!-- coupon -->
+	<update id="deleteCoupon">
+        update `member_coupon` set `status`=1 where `cpNo`=#{cpNo} and `uid`=#{uid};
+    </update>
 
 </mapper>

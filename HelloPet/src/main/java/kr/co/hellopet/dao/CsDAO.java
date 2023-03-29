@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.CsVO;
 import kr.co.hellopet.vo.MessageVO;
+import kr.co.hellopet.vo.kcyMemberCouponVO;
 
 /* 
  *  날짜 : 2023/03/09
@@ -25,6 +26,10 @@ public interface CsDAO {
 	public int selectCountTotalNotice();
 	public CsVO getPrev(String rdate);
 	public CsVO getNext(String rdate);
+	public CsVO selectNotice(int no);
+	public int insertCoupon(kcyMemberCouponVO vo);
+	public int countCoupon(String cpNo, String uid);
+	public int updateDownload(int cpNo);
 	
     /* qna */
 	public int insertQna(CsVO vo);

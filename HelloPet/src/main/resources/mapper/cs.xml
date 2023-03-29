@@ -44,6 +44,24 @@
 		  ORDER BY `rdate` asc
 		  LIMIT 1;
     </select>
+    <select id="selectNotice" resultType="kr.co.hellopet.vo.CsVO">
+    	select a.*, b.`nick`, c.`cpName` from `cs_article` as a
+            join `pet_owner` as b on a.uid=b.uid
+            left JOIN `coupon` as c on a.couponNo = c.cpNo
+            where `no`=#{no};
+    </select>
+    <insert id="insertCoupon">
+		insert into `member_coupon` set 
+		    `cpNo`=#{cpNo},
+		    `uid`=#{uid},
+		    `rdate`=NOW();
+	</insert>
+	<select id="countCoupon" resultType="int">
+		SELECT COUNT(`no`) FROM `member_coupon` WHERE `cpNo`=#{cpNo} and `uid` = #{uid} and `status`= 0;
+	</select>
+	<update id="updateDownload">
+        update `coupon` set `download`=`download`+1 where `cpNo`=#{cpNo};
+    </update>
     
     <!-- faq -->
 	<insert id="insertFaq">

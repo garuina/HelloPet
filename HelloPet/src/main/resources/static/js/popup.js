@@ -23,7 +23,7 @@ $(function(){
 				var uid = data.result.uid;
 				var medical = data.result.medicalName;
 				var medNo = data.result.medNo;
-				
+				var coupon = data.result.coupon;
 				
 				if(data.result.petNum == 1){
 					var html = '<td>';
@@ -38,6 +38,7 @@ $(function(){
 					html += '<td style="display:none;">' + uid + '</td>';
 					html += '<td style="display:none;">' + medical + '</td>';
 					html += '<td style="display:none;">' + medNo + '</td>';
+					html += '<td style="display:none;">' + coupon + '</td>';
 				
 					$('.confirmResult').html(html);
 				
@@ -54,6 +55,7 @@ $(function(){
 					html += '<td style="display:none;">' + uid + '</td>';
 					html += '<td style="display:none;">' + medical + '</td>';
 					html += '<td style="display:none;">' + medNo + '</td>';
+					html += '<td style="display:none;">' + coupon + '</td>';
 				
 					$('.confirmResult').html(html);
 				}
