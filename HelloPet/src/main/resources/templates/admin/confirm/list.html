@@ -22,13 +22,17 @@
 				
 				var revNum = $('.popupTable tr:eq(1) td:eq(0)').text();
 				console.log(revNum);
+				
+				var coupon = $('.popupTable tr:eq(1) td:eq(11)').text();
+				console.log(coupon);
 	            
 				let jsonData = {
 						'revNo': parseInt(revNum),
 						'medNo': parseInt(medNo),
 						'uid':uid,
 						'medical':medical,
-						'medNo':medNo
+						'medNo':medNo,
+						'coupon':coupon
 				};
 	            $.ajax({
 	                url: "/HelloPet/admin/confirm/ok",
@@ -77,6 +81,7 @@
 				
 				var revNum = $('.popupTable2 tr:eq(1) td:eq(0)').text();
 				console.log(revNum);
+				
 	            
 				let jsonData = {
 						'revNo': parseInt(revNum),
@@ -138,6 +143,7 @@
                     <th:block th:unless="${#lists.isEmpty(reserves)}">
 	                    <tr th:each="item,i:${reserves}">
 	                    <td style="display: none" name="revNo" class="revNo">[[${item.revNo}]]</td>
+	                    <td style="display: none" name="coupon" class="coupon">[[${item.coupon}]]</td>
 	                        <td>[[${pageStartNum - i.index}]]</td>
 	                        <td>[[${item.oName}]]</td>
 	                        <th:block th:if="${item.petNum == '1'}">

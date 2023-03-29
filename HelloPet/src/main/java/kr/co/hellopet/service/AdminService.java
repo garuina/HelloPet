@@ -70,6 +70,9 @@ public class AdminService {
 	public boolean updateReject(int revNo) {
 		return dao.updateReject(revNo);
 	}
+	public int deleteCoupon(int cpNo, String uid) {
+		return dao.deleteCoupon(cpNo, uid);
+	}
 	
 	/* 메시지 */
 	public int insertMsg(MessageVO vo) {

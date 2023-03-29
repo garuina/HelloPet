@@ -42,6 +42,7 @@ public interface AdminDAO {
 	/* 예약 상태 변경 */
 	public boolean updateConfirm(int revNo);
 	public boolean updateReject(int revNo);
+	public int deleteCoupon(int cpNo, String uid);
 	
 	/* 메시지 */
 	public int insertMsg(MessageVO vo);

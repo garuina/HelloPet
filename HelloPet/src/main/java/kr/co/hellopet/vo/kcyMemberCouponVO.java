@@ -13,22 +13,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class CsVO {
-	private int id;
+public class kcyMemberCouponVO {
 	private int no;
+	private int cpNo;
 	private String uid;
-	private int parent;
-	private int reply;
-	private String group;
-	private String title;
-	private String content;
-	private String img;
-	private int hit;
-	private String regip;
 	private String rdate;
+	private int status;
 	
-	private MultipartFile fileimg;
-	private String nick;
-	private int couponNo;
-	private String cpName;
 }

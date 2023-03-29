@@ -36,6 +36,7 @@ public class AdminReserveVO {
 	private int status;
 	
 	private String medicalName;
+	private int coupon;
 	
 	// 메시지
 	private int msgNo;
