@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.Cate1VO;
 import kr.co.hellopet.vo.Cate2VO;
+import kr.co.hellopet.vo.ICouponVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.ProductVO;
 
@@ -44,5 +45,10 @@ public interface ProductDAO {
 	public int SelectCountTotalType(String cate1, String cate2, String type);
 	//hit 올려
 	public int updateHit(String prodNo);
+	
+	// 쿠폰할인가 구하기
+	public ICouponVO selectMaxCoupon(String uid);
+	public ICouponVO selectMedicalCoupon(String uid, String prodNo);
+	
 	
 }

@@ -1193,9 +1193,10 @@ padding: 0 15px;
 
 #reserve > .re table td > #num {
     width: 40px;
-    height: 20px;
+    height: 30px;
     margin-left: auto;
     border: 1px solid #dfe5ed;
+    text-align: center;
 }
 
 #reserve > .re table input {
@@ -1235,6 +1236,13 @@ padding: 0 15px;
     color: dimgray;
 }
 
+#reserve > .re table td > #coupon {
+    width: 206px;
+    height: 40px;
+    margin-left: auto;
+    border: 1px solid #dfe5ed;
+    text-align: center;
+}
 
 
 /*complete*/

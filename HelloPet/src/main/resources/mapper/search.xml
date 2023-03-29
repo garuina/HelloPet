@@ -123,7 +123,8 @@
 			`revDate` 	= #{revDate} ,
 			`revTime` 	= #{revTime} ,
 			`rdate` 	= now(),
-			`status` 	= 0;
+			`status` 	= 0,
+			`coupon` 	= #{coupon};
 	</insert>
 	
 	<select id="selectHospital" resultType="kr.co.hellopet.vo.MedicalVO">
@@ -133,6 +134,17 @@
 	
 	<select id="selectProductOne" resultType="kr.co.hellopet.vo.ProductVO">
 		SELECT * FROM `product` WHERE `prodNo` =#{prodNo}; 
+	</select>
+	
+	<select id="selectMemberCoupon" resultType="kr.co.hellopet.vo.IMember_couponVO">
+		select * from `member_coupon` where `uid` =#{uid};
+	</select>
+	
+	<select id="selectCoupon" resultType="kr.co.hellopet.vo.ICouponVO">
+		SELECT * FROM `member_coupon` AS a
+		JOIN `coupon` AS b
+		ON a.cpNo = b.cpNo
+		WHERE a.uid =#{uid};
 	</select>
 	
 	<!-- complete -->

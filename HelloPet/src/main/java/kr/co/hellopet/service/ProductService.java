@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import kr.co.hellopet.dao.ProductDAO;
 import kr.co.hellopet.vo.Cate1VO;
 import kr.co.hellopet.vo.Cate2VO;
+import kr.co.hellopet.vo.ICouponVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.ProductVO;
 
@@ -85,6 +86,15 @@ public class ProductService {
 	// hit
 	public int updateHit(String prodNo) {
 		return dao.updateHit(prodNo);
+	}
+	
+	// 쿠폰할인가
+	public ICouponVO selectMaxCoupon(String uid) {
+		return dao.selectMaxCoupon(uid);
+	}
+	
+	public ICouponVO selectMedicalCoupon(String uid, String prodNo) {
+		return dao.selectMedicalCoupon(uid, prodNo);
 	}
 	
 	/////// list 페이징 처리

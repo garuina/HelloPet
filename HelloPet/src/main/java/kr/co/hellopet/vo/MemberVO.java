@@ -24,6 +24,7 @@ public class MemberVO {
 	private String wdate;
 	private String rdate;
 	
+
 	public String getRdate() {
 		return rdate.substring(2, 10);
 	}
