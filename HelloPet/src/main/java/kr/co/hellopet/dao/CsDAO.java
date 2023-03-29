@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import kr.co.hellopet.vo.CsVO;
+import kr.co.hellopet.vo.MemberCouponVO;
 import kr.co.hellopet.vo.MessageVO;
-import kr.co.hellopet.vo.kcyMemberCouponVO;
 
 /* 
  *  날짜 : 2023/03/09
@@ -27,9 +27,10 @@ public interface CsDAO {
 	public CsVO getPrev(String rdate);
 	public CsVO getNext(String rdate);
 	public CsVO selectNotice(int no);
-	public int insertCoupon(kcyMemberCouponVO vo);
+	public int insertCoupon(MemberCouponVO vo);
 	public int countCoupon(String cpNo, String uid);
 	public int updateDownload(int cpNo);
+	public int updateCouponOwner(String uid);
 	
     /* qna */
 	public int insertQna(CsVO vo);

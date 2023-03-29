@@ -168,9 +168,11 @@ $(function(){
                                     	<th>쿠폰</th>
                                     	<td>
                                             <select id="coupon" name="coupon">
-                                                <option value="" selected="selected">쿠폰선택</option>
-                                                <option th:each="cp : ${cps}" th:value="${cp.cpNo}">[[${cp.cpName}]]</option>
-                                            </select>
+											    <option value="" selected="selected">쿠폰선택</option>
+											    <option th:each="cp : ${cps}" th:value="${cp.cpNo}">
+											        [[${cp.cpName}]]
+											    </option>
+											</select>
                                         </td>
                                     </tr>
                                     </th:block>

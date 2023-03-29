@@ -62,6 +62,9 @@ public class AdminService {
 	public AdminReserveVO selectReserve(Integer revNo) {
 		return dao.selectReserve(revNo);
 	}
+	public int updateCouponOwner(String uid) {
+		return dao.updateCouponOwner(uid);
+	}
 	
 	/* 예약 상태 변경 */
 	public boolean updateConfirm(int revNo) {

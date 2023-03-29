@@ -124,8 +124,8 @@ public class SearchService {
 		return dao.selectMemberCoupon(uid);
 	}
 	
-	public List<ICouponVO> selectCoupon(String uid) {
-		return dao.selectCoupon(uid);
+	public List<ICouponVO> selectCoupon(String uid,String hosNo) {
+		return dao.selectCoupon(uid,hosNo);
 	}
 	
 	// complete

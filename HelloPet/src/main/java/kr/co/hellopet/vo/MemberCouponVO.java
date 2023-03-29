@@ -13,11 +13,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class kcyMemberCouponVO {
+public class MemberCouponVO {
 	private int no;
 	private int cpNo;
 	private String uid;
 	private String rdate;
 	private int status;
+	
+	private String cpName;
+	private int disprice;
+	private int discount;
+	private String require;
+	private String vaild;
+	
 	
 }

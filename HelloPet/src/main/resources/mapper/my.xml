@@ -30,6 +30,12 @@
 		SELECT a.*, b.hosName FROM `reserve_list` AS a JOIN `api_hospital` AS b ON a.medNo = b.hosNo WHERE a.uid =  #{uid} LIMIT 7;
 	</select>
 	
+	<select id="selectMyCoupon" resultType="kr.co.hellopet.vo.MemberCouponVO">
+		SELECT * FROM `member_coupon` as a
+		join `coupon` as b on a.cpNo=b.cpNo
+		WHERE `uid` = #{uid} ORDER BY `no` DESC LIMIT #{start},7;
+	</select>
+	
 	<select id="selectCountMyArticle" resultType="int">
 		SELECT COUNT(`no`) FROM `community_article` WHERE `uid` = #{uid} AND `parent` = 0;
 	</select>
@@ -40,6 +46,9 @@
 	
 	<select id="selectCountMyReserve" resultType="int">
 		SELECT COUNT('revNo') FROM `reserve_list` WHERE `uid` = #{uid};
+	</select>	
+	<select id="selectCountMyCoupon" resultType="int">
+		SELECT COUNT('no') FROM `member_coupon` WHERE `uid` = #{uid};
 	</select>	
 
 	<!-- 회원정보 update -->

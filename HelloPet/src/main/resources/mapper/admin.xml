@@ -98,5 +98,8 @@
 	<update id="deleteCoupon">
         update `member_coupon` set `status`=1 where `cpNo`=#{cpNo} and `uid`=#{uid};
     </update>
+    <update id="updateCouponOwner">
+        update `pet_owner` set `coupon`=`coupon`-1 where `uid`=#{uid} AND `coupon` >= 1;
+    </update>
 
 </mapper>

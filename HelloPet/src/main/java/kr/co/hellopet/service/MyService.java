@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.hellopet.dao.MyDAO;
 import kr.co.hellopet.vo.CommunityVO;
 import kr.co.hellopet.vo.CsVO;
+import kr.co.hellopet.vo.MemberCouponVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.ReserveVO;
 
@@ -52,6 +53,9 @@ public class MyService {
 		return dao.selectMyReserves(uid);
 	};
 	
+	public List<MemberCouponVO> selectMyCoupon(String uid, int start){
+		return dao.selectMyCoupon(uid, start);
+	}
 	// myArticle total 구하기 
 	public int selectCountMyArticle(String uid) {
 		return dao.selectCountMyArticle(uid);
@@ -65,6 +69,11 @@ public class MyService {
 	public int selectCountMyReserve(String uid) {
 		return dao.selectCountMyReserve(uid);
 	}
+	public int selectCountMyCoupon(String uid) {
+		return dao.selectCountMyCoupon(uid);
+	}
+	
+	
 	
 	// 회원 수정
 	public void updateInfoModify(String name, String email, String nick, String hp, String uid) {

@@ -14,8 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hellopet.dao.CsDAO;
 import kr.co.hellopet.vo.CsVO;
+import kr.co.hellopet.vo.MemberCouponVO;
 import kr.co.hellopet.vo.MessageVO;
-import kr.co.hellopet.vo.kcyMemberCouponVO;
 
 /* 
  *  날짜 : 2023/03/09
@@ -60,7 +60,7 @@ public class CsService {
 	public CsVO getNext( String rdate) {
 		return dao.getNext(rdate);
 	}
-	public int insertCoupon(kcyMemberCouponVO vo) {
+	public int insertCoupon(MemberCouponVO vo) {
 		return dao.insertCoupon(vo);
 	}
 	
@@ -70,6 +70,10 @@ public class CsService {
 	
 	public int updateDownload(int cpNo) {
 		return dao.updateDownload(cpNo);
+	}
+	
+	public int updateCouponOwner(String uid) {
+		return dao.updateCouponOwner(uid);
 	}
 	
 	/* qna */
