@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.Api_PharmacyVO;
-import kr.co.hellopet.vo.LMHCoupon;
+import kr.co.hellopet.vo.CouponVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.TermsVO;
@@ -28,7 +28,7 @@ public interface MemberDAO {
 	public int selectCountOwnerCoupon(String uid);
 	
 	// 신규회원에게 주는 쿠폰
-	public List<LMHCoupon> selectCouponGrade();
+	public List<CouponVO> selectCouponGrade();
 	
 	// 병원·약국 등록
 	public void insertMedical(MedicalVO vo);

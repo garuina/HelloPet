@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class AdminCouponVO {
+public class CouponVO {
 	private int cpNo;
 	private String cpName;
 	private int disprice;
@@ -22,7 +22,7 @@ public class AdminCouponVO {
 	private String vaild;
 	private String rdate;
 	private int download;
-	
+	private int grade; 
 	private int medNo;
 	
 	

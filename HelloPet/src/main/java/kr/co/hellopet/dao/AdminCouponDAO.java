@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import kr.co.hellopet.vo.AdminCouponVO;
+import kr.co.hellopet.vo.CouponVO;
 import kr.co.hellopet.vo.AdminProductVO;
 import kr.co.hellopet.vo.MedicalVO;
 
@@ -23,10 +23,10 @@ public interface AdminCouponDAO {
 	
 	
 	// 관리자 상품 등록하기
-	public int insertAdminCoupon(AdminCouponVO vo);
+	public int insertAdminCoupon(CouponVO vo);
 	
 	// 관리자 상품 목록
-	public List<AdminCouponVO> selectAdminCoupons(int start);
+	public List<CouponVO> selectAdminCoupons(int start);
 	
 	// 관리자 상품 목록갯수
 	public int selectCouponCount();
@@ -36,8 +36,8 @@ public interface AdminCouponDAO {
 	
 	
 	// 관리자 상품 수정
-	public AdminCouponVO selectAdminCoupon(int cpNo);
-	public int updateAdminCoupon(AdminCouponVO vo);
+	public CouponVO selectAdminCoupon(int cpNo);
+	public int updateAdminCoupon(CouponVO vo);
 	
 	public int selectMsg(String uid);
 	

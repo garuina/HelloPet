@@ -22,7 +22,7 @@ import kr.co.hellopet.mail.PasswordMailSendService;
 import kr.co.hellopet.service.MemberService;
 import kr.co.hellopet.vo.Api_HospitalVO;
 import kr.co.hellopet.vo.Api_PharmacyVO;
-import kr.co.hellopet.vo.LMHCoupon;
+import kr.co.hellopet.vo.CouponVO;
 import kr.co.hellopet.vo.MedicalVO;
 import kr.co.hellopet.vo.MemberVO;
 import kr.co.hellopet.vo.TermsVO;
@@ -138,9 +138,9 @@ public class MemberController {
 		
 		service.insertMember(vo);
 		
-		List<LMHCoupon> coupons = service.selectCouponGrade();
+		List<CouponVO> coupons = service.selectCouponGrade();
 		
-		for(LMHCoupon coupon : coupons) {
+		for(CouponVO coupon : coupons) {
 			
 			List<Integer> cpNos = Arrays.asList(coupon.getCpNo());
 			

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.hellopet.dao.AdminCouponDAO;
-import kr.co.hellopet.vo.AdminCouponVO;
+import kr.co.hellopet.vo.CouponVO;
 import kr.co.hellopet.vo.MedicalVO;
 
 /* 
@@ -26,22 +26,22 @@ public class AdminCouponService {
 	}
 	
 	// 관리자 상품 등록하기
-	public int insertAdminCoupon(AdminCouponVO vo) {
+	public int insertAdminCoupon(CouponVO vo) {
 		int result = dao.insertAdminCoupon(vo);
 		return result;
 	}
 	
 	// 관리자 상품 수정하기
-	public int updateAdminCoupon(AdminCouponVO vo) {
+	public int updateAdminCoupon(CouponVO vo) {
 		
 		return dao.updateAdminCoupon(vo);
 	}
-	public AdminCouponVO selectAdminCoupon(int cpNo) {
+	public CouponVO selectAdminCoupon(int cpNo) {
 		return dao.selectAdminCoupon(cpNo);
 	}
 	
 	// 관리자 상품 목록
-	public List<AdminCouponVO> selectAdminCoupons(int start){
+	public List<CouponVO> selectAdminCoupons(int start){
 		return dao.selectAdminCoupons(start);
 	}
 	

@@ -33,7 +33,7 @@
 		SELECT COUNT(`uid`) FROM `member_coupon` WHERE `uid` = #{uid};
 	</select>
 	
-	<select id="selectCouponGrade" resultType="kr.co.hellopet.vo.LMHCoupon">
+	<select id="selectCouponGrade" resultType="kr.co.hellopet.vo.CouponVO">
 		select * from `coupon` where `grade` = 1;
 	</select>
 	

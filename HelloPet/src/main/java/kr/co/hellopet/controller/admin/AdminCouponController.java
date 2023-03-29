@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hellopet.service.AdminCouponService;
-import kr.co.hellopet.vo.AdminCouponVO;
+import kr.co.hellopet.vo.CouponVO;
 import kr.co.hellopet.vo.MedicalVO;
 
 @Controller
@@ -46,7 +46,7 @@ public class AdminCouponController {
 		int pageStartNum = service.getPageStartNum(total, currentPage); // 페이지 시작번호
 		int start = service.getStartNum(currentPage); // 시작 인덱스
 		
-		List<AdminCouponVO> Coupons = service.selectAdminCoupons(start);
+		List<CouponVO> Coupons = service.selectAdminCoupons(start);
 
 		
 		model.addAttribute("vo",vo);
@@ -77,7 +77,7 @@ public class AdminCouponController {
 	}
 	
 	@PostMapping("admin/coupon/register")
-	public String CouponRegister(HttpServletRequest req, AdminCouponVO vo) {
+	public String CouponRegister(HttpServletRequest req, CouponVO vo) {
 		
 		service.insertAdminCoupon(vo);
 		return "redirect:/admin/coupon/list";
@@ -92,7 +92,7 @@ public class AdminCouponController {
 		int msg2 = service.selectMsg(uid);
 		model.addAttribute("msg2", msg2);
 		// 상품 정보
-		AdminCouponVO coupon = service.selectAdminCoupon(cpNo);
+		CouponVO coupon = service.selectAdminCoupon(cpNo);
 		
 		model.addAttribute("vo",vo);
 		model.addAttribute("coupon",coupon);
@@ -101,7 +101,7 @@ public class AdminCouponController {
 	}
 	
 	@PostMapping("admin/coupon/modify")
-	public String CouponModify(HttpServletRequest req, AdminCouponVO vo) {
+	public String CouponModify(HttpServletRequest req, CouponVO vo) {
 		
 		service.updateAdminCoupon(vo);
 		return "redirect:/admin/coupon/list";
