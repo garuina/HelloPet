@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 
+ 	날짜 : 2023/03/10 ~
+ 	이름 : 장인화
+ 	내용 : HelloPet search 페이지 기능구현
+  -->
+<mapper namespace="kr.co.hellopet.dao.SearchDAO">
+	
+	
+	<!-- searchHs -->
+	<select id="SearchHsName" resultType="kr.co.hellopet.vo.SearchVO">
+		SELECT * FROM `api_hospital` WHERE `hosName` LIKE concat('%', #{search}, '%') limit #{start},10;
+	</select>
+	
+	<select id="SearchHsAddr" resultType="kr.co.hellopet.vo.SearchVO">
+		SELECT * FROM `api_hospital` WHERE `hosAddr` LIKE concat('%', #{search}, '%') limit #{start},10;
+	</select>
+	
+	<select id="SearchHs" resultType="kr.co.hellopet.vo.SearchVO">
+		SELECT * FROM `api_hospital` WHERE `hosName` LIKE concat('%', #{search}, '%') or `hosAddr` LIKE concat('%', #{search}, '%') limit #{start},10;
+	</select>
+	
+	<select id= "searchHsJoin" resultType="kr.co.hellopet.vo.MedicalVO">
+		SELECT * FROM `pet_hospital_pharmacy`;	
+	</select>
+	
+	<select id="selectSearchHsTotal" resultType="int" parameterType="map">
+	 	Select Count(`hosName`) from `api_hospital` WHERE `hosName` Like concat('%', #{search}, '%') or `hosAddr` LIKE concat('%', #{search}, '%');
+	</select>
+	
+	<select id="selectSearchHsTotalName" resultType="int" parameterType="map">
+	 	Select Count(`hosName`) from `api_hospital` WHERE `hosName` Like concat('%', #{search}, '%');
+	</select>
+	
+	<select id="selectSearchHsTotalAddr" resultType="int" parameterType="map">
+	 	Select Count(`hosAddr`) from `api_hospital` WHERE `hosAddr` Like concat('%', #{search}, '%');
+	</select>
+	
+	
+	<!-- searchPh -->
+	<select id="SearchPhName" resultType="kr.co.hellopet.vo.SearchVO">
+		SELECT * FROM `api_pharmacy` WHERE `pharName` LIKE concat('%', #{search}, '%') limit #{start},10;
+	</select>
+	
+	<select id="SearchPhAddr" resultType="kr.co.hellopet.vo.SearchVO">
+		SELECT * FROM `api_pharmacy` WHERE `pharAddr` LIKE concat('%', #{search}, '%') limit #{start},10;
+	</select>
+	
+	<select id="SearchPh" resultType="kr.co.hellopet.vo.SearchVO">
+		SELECT * FROM `api_pharmacy` WHERE `pharName` LIKE concat('%', #{search}, '%') or `pharAddr` LIKE concat('%', #{search}, '%') limit #{start},10;
+	</select>
+	
+	<select id="selectSearchPhTotal" resultType="int" parameterType="map">
+	 	Select Count(`pharName`) from `api_pharmacy` WHERE `pharName` Like concat('%', #{search}, '%') or `pharAddr` LIKE concat('%', #{search}, '%');
+	</select>
+	
+	<select id="selectSearchPhTotalName" resultType="int" parameterType="map">
+	 	Select Count(`pharName`) from `api_pharmacy` WHERE `pharName` Like concat('%', #{search}, '%');
+	</select>
+	
+	<select id="selectSearchPhTotalAddr" resultType="int" parameterType="map">
+	 	Select Count(`pharAddr`) from `api_pharmacy` WHERE `pharAddr` Like concat('%', #{search}, '%');
+	</select>
+	
+	<update id="updatePhHit">
+        update `pet_hospital_pharmacy` set `hit`=`hit`+1 where `medNo`=#{medNo};
+    </update>
+	
+	<!-- view -->
+	<select id="selectViewHs" resultType="kr.co.hellopet.vo.SearchVO">
+		SELECT * FROM `api_hospital` WHERE `hosNo` =#{hosNo};
+	</select>
+	
+	<select id="selectViewPh" resultType="kr.co.hellopet.vo.SearchVO">
+		SELECT * FROM `api_pharmacy` WHERE `pharNo` =#{pharNo};
+	</select>
+	
+	<!-- view2 -->
+	<select id="selectView2" resultType="kr.co.hellopet.vo.MemberVO">
+		select * from `pet_owner` where `uid` =#{uid};
+	</select>
+	
+	<!-- reserve -->
+	<insert id="insertReserve">
+		insert into `reserve_list` set
+			`uid` 		= #{uid} ,
+			`medNo` 	= #{medNo} ,
+			`oPh` 		= #{oPh} ,
+			`oName` 	= #{oName} ,
+			`petNum` 	= #{petNum} ,
+			`petType1` 	= #{petType1} ,
+			<choose>
+				<when test="petNum == 1">
+					`petType2` 	= null ,
+				</when>
+				<when test="petNum == 2">
+					`petType2` 	= #{petType2} ,
+				</when>	
+			</choose>
+			`petName1` 	= #{petName1} ,
+			<choose>
+				<when test="petNum == 1">
+					`petName2` 	= null ,
+				</when>
+				<when test="petNum == 2">
+					`petName2` 	= #{petName2} ,
+				</when>	
+			</choose>
+			`petAge1` 	= #{petAge1} ,
+			<choose>
+				<when test="petNum == 1">
+					`petAge2` 	= null ,
+				</when>
+				<when test="petNum == 2">
+					`petAge2` 	= #{petAge2} ,
+				</when>	
+			</choose>
+			`department`= #{department} ,
+			`memo` 		= #{memo} ,
+			`revDate` 	= #{revDate} ,
+			`revTime` 	= #{revTime} ,
+			`rdate` 	= now(),
+			`status` 	= 0,
+			`coupon` 	= #{coupon};
+	</insert>
+	
+	<select id="selectHospital" resultType="kr.co.hellopet.vo.MedicalVO">
+		SELECT * FROM `pet_hospital_pharmacy` 
+			   WHERE `medNo`= #{medNo};
+	</select>
+	
+	<select id="selectProductOne" resultType="kr.co.hellopet.vo.ProductVO">
+		SELECT * FROM `product` WHERE `prodNo` =#{prodNo}; 
+	</select>
+	
+	<select id="selectMemberCoupon" resultType="kr.co.hellopet.vo.IMember_couponVO">
+		select * from `member_coupon` where `uid` =#{uid};
+	</select>
+	
+	<select id="selectCoupon" resultType="kr.co.hellopet.vo.ICouponVO">
+		SELECT * FROM `member_coupon` AS a
+		JOIN `coupon` AS b
+		ON a.cpNo = b.cpNo
+		WHERE a.uid =#{uid} AND (b.medNo IS NULL OR b.medNo = #{hosNo});
+	</select>
+	<select id="selectCoupon2" resultType="kr.co.hellopet.vo.ICouponVO">
+		SELECT * FROM `member_coupon` AS a
+		JOIN `coupon` AS b
+		ON a.cpNo = b.cpNo
+		WHERE a.uid =#{uid};
+	</select>
+	
+	<!-- complete -->
+	<select id="selectComplete" resultType="kr.co.hellopet.vo.ReserveVO">
+		SELECT a.medicalName, b.* FROM `pet_hospital_pharmacy` AS a 
+			   JOIN `reserve_list` AS b 
+			   ON a.medNo = b.medNo
+			   WHERE b.uid = #{uid} AND `reserveOk`=1 ORDER BY b.rdate DESC LIMIT 1;
+	</select>
+	
+	<!-- 메시지 보내기 -->
+	<insert id="insertMsg">
+    	insert into `message` set
+    		`uid`=#{uid},
+    		<choose>
+					<when test="medical == null">
+						`medical`=null,
+					</when>
+					<when test="medical != null">
+						`medical`=#{medical},
+					</when>
+    		</choose>
+    		`title`=#{title},
+    		`content`=#{content},
+    		`msgRdate`=NOW();
+    </insert>
+    
+    <select id="selectMsg" resultType="int" parameterType="map">
+		select count(`msgNo`) from `message` where `uid`=#{uid} and `msgStatus`=0;
+	</select>
+	
+</mapper>

@@ -1,0 +1,109 @@
+<th:block th:include="@{search/_header.html}"/>
+<!-- 
+날짜 : 2023-03-20 ~ 2023-03-21
+이름 : 장인화
+내용 : View2에 내 주변 병원 찾기
+ -->
+ 
+ <main>
+ 
+ 	  <div class="view2">
+		        <div class="contents">
+		        	<input type="hidden" name="uid" sec:authorize="hasAuthority('ROLE_1')" th:value="${m.uid}">
+				    <input type="hidden" name="addr" sec:authorize="hasAuthority('ROLE_1')" th:value="${m.addr1}">
+		        	<input type="hidden" name="uid" sec:authorize="hasAuthority('ROLE_7')" th:value="${m.uid}">
+				    <input type="hidden" name="addr" sec:authorize="hasAuthority('ROLE_7')" th:value="${m.addr1}">
+				    <input type="hidden" sec:authorize="hasAuthority('ROLE_2')" name="uid" th:value="${#authentication.principal.medical.uid}">
+				    <input type="hidden" sec:authorize="hasAuthority('ROLE_2')" name="addr" th:value="${#authentication.principal.medical.addr1}">
+				    <input type="hidden" sec:authorize="hasAuthority('ROLE_3')" name="uid" th:value="${#authentication.principal.medical.addr1}">
+				    <input type="hidden" sec:authorize="hasAuthority('ROLE_3')" name="addr" th:value="${#authentication.principal.medical.addr1}">
+			          
+			          <div class="view-top">    
+				 	  	<h3 class="title">내 주변 동물병원 찾기</h3>
+				 	  </div>  
+				 	  
+			    </div>
+	     
+			 	 <div class="addrT" sec:authorize="hasAuthority('ROLE_1')">
+			 	  	혹시 주소가 <div class="addrH" id="addrH">' [[${m.addr1}]] '</div>이 아닌가요?
+			 	 </div>
+			 	 <div class="addrT" sec:authorize="hasAuthority('ROLE_7')">
+			 	  	혹시 주소가 <div class="addrH" id="addrH">' [[${m.addr1}]] '</div>이 아닌가요?
+			 	 </div>
+			 	 <div class="addrT" sec:authorize="hasAuthority('ROLE_2')">
+			 	  	혹시 주소가 <div class="addrH" id="addrH" th:text="'\'' +  ${#authentication.principal.medical.addr1} + '\''"></div>이 아닌가요?
+			 	 </div>
+			 	 <div class="addrT" sec:authorize="hasAuthority('ROLE_3')">
+			 	  	혹시 주소가 <div class="addrH" id="addrH" th:text="'\'' +  ${#authentication.principal.medical.addr1} + '\''"></div>이 아닌가요?
+			 	 </div>
+			 	 <div class="ns" id="ns">
+			 	 	<input type="text" name="NewAddr" placeholder="주소를 입력해주세요."><button type="button" id="click">확인</button>
+			 	 </div>
+     
+        
+			    <div id="map" style="width:60%;height:400px; margin: 0 auto;"></div>
+			    
+			    <div class="result">
+			    	
+			        <div class="explain">
+			         <p class="addr"></p>
+			        </div>
+			    </div>
+    
+     </div>
+    <script>
+		
+     $('#ns').hide();	
+     
+     // 회원 주소를 대입함
+     let addr = $('input[name=addr]').val();
+     console.log(addr);
+     
+     // search 만들기
+     let search = addr + ' 동물병원';
+     console.log("s1 : " + search);
+     
+     // 지도 떠라
+     view2();
+     
+     
+     // 주소 바꿀건데 
+     $(function(){
+    	 $('#addrH').click(function(){
+    		 $('#ns').show();	
+    	 });
+    	 
+    	 $('input[name=NewAddr]').keypress(function(event) {
+    	        if (event.which == 13) { // Enter 키 누름
+    	            $('#click').click();
+    	        }
+    	    });
+    	
+    	 $('#click').click(function(){
+    		
+    		 
+    		 $('#ns').hide();
+    		 $('.addr').empty();
+    		 
+    		 let newAddr = $('input[name=NewAddr]').val();
+    		 $('#addrH').html("'" + newAddr + "'").show();
+    		 
+    		 
+    		 search = newAddr + ' 동물병원'; 
+    		 console.log("newAddr : " + newAddr);
+    		 console.log("s2 : " + search);
+    		 
+    		view2();
+    		 
+    	 });   	 
+    	 
+     });
+     
+     console.log("s3 : " + search);
+     
+     
+     
+		
+    </script>
+</main>
+<th:block th:include="@{search/_footer.html}"/>

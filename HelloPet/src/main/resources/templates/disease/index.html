@@ -1,0 +1,61 @@
+<th:block th:include="@{disease/_header.html}"/>
+
+   
+<script>
+$(document).ready(function(){
+	/*
+    $('.tab a').click(function(){
+    	
+    	// this는 내가 클릭한 a태그!!!
+    	let idx = $(this).parent().index();
+    	
+    	//$(this).parent().addClass('on');
+    	
+    	if(i == 0){
+			//li.class.add("active");
+			$(this).parent().addClass('on');
+			
+    	}else{
+			//li.class.remove("active");
+    		$(this).parent().addClass('on');
+    	}
+    	
+            
+    });
+	*/	
+});
+	
+</script>
+    
+    <main>
+        <div id="sub-wrap">
+            <div class="top">
+                <h3>증상별 질병검색</h3>
+            </div>
+            <div class="tab">
+                <ul> 
+                	<li th:classappend="${group=='dog'}?'on':'off'"><a th:href="@{/disease/index(group=dog)}">반려견</a></li> 
+                	<li th:classappend="${group=='cat'}?'on':'off'"><a th:href="@{/disease/index(group=cat)}">반려묘</a></li> 
+                </ul> 
+            </div>
+            <div class="top-round">
+             <h4 class="title">아래의 증상 중 한가지를 선택하세요!</h4>
+         </div>
+         <section class="section-grid">
+             
+             <article th:each="resultMap : ${resultMaps}">
+                 <dl class="search-category-list">
+                     <dt class="title">
+                         [[${resultMap.c1Name}]]
+                     </dt>             
+                    	<dd class="name">
+                         <a th:href="@{/disease/view(group=${group},cate1=${cate2VO.cate1}, cate2=${cate2VO.cate2})}" th:each="cate2VO:${resultMap.cate2VOList}">[[${cate2VO.c2Name}]]</a>
+                    	</dd>
+                 </dl>
+             </article>
+             
+			</section>
+		</div>
+    </main>
+     
+<th:block th:include="@{disease/_footer.html}"/>        

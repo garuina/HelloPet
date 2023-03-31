@@ -1,0 +1,142 @@
+<th:block th:include="@{cs/_header.html}"/>
+<script>
+	$(function(){
+		$('.btnDel').click(function(){
+			if(confirm('정말 삭제하시겠습니까?')){
+				return true;
+			}else{
+				return false;
+			}
+		});
+		var uid = $('input[name=uid]').val();
+    	console.log("uid"+uid);
+
+    	var level = $('input[name=level]').val();
+    	console.log("level"+level);
+    	
+    	var cpNo = parseInt($('span[name=cpNo]').text());
+		console.log("cpNo"+cpNo);
+		
+		let jsonData = {
+				'cpNo' : cpNo,
+				'uid' : uid
+		};
+		
+		$('.coupon_button').click(function(){
+			if(level != null){
+				if(level == 1){
+					$.ajax({
+						url : '/HelloPet/cs/countCoupon',
+						method : 'GET',
+						data : {'uid':uid, 'cpNo':cpNo},
+						dataType : 'json',
+						success : function(data){
+							if(data.result == 0){
+								$.ajax({
+									url : "/HelloPet/cs/coupon",
+							    	method : 'GET',
+							    	data : jsonData,
+							    	dataType : 'json',
+							    	success : function(data){
+							    		alert('쿠폰이 발급되었습니다. 마이페이지 > 나의 쿠폰에서 확인하세요.');
+							    		window.location.reload();
+							    	}
+							    });
+							}else{
+								alert('이미 발급된 쿠폰입니다.');
+								return false;
+							}
+						}
+					 });
+				}else{
+					alert('일반회원만 발급 가능합니다.');
+	    			return false;
+				}
+				
+			}else{
+    			alert('로그인이 필요합니다.');
+    			return false;
+    		}
+		});
+	});
+	
+</script>
+ <main id="notice">
+ <input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}" sec:authorize="hasAuthority('ROLE_1')">
+ <input type="hidden" name="level" th:value="${#authentication.principal.member.level}" sec:authorize="hasAuthority('ROLE_1')">
+ <input type="hidden" name="level" th:value="${#authentication.principal.member.level}" sec:authorize="hasAuthority('ROLE_7')">
+ <input type="hidden" name="level" th:value="${#authentication.principal.medical.level}" sec:authorize="hasAuthority('ROLE_2')">
+ <input type="hidden" name="level" th:value="${#authentication.principal.medical.level}" sec:authorize="hasAuthority('ROLE_3')">
+		    <div class="top">
+		        <h3>고객센터</h3>
+		    </div>
+		    <div class="tab">
+		        <ul>
+		            <li class="on"><a th:href="@{/cs/notice/list}">공지사항</a></li>
+		            <li><a th:href="@{/cs/faq/list}">자주묻는질문</a></li>
+		            <li><a class="btnqna" th:href="@{/cs/qna/list}">문의하기</a></li>
+		        </ul>
+		    </div>
+            <section id="view">
+            <input type="hidden" name="rdate" th:value="${vo.rdate}">
+                <div class="container">
+                    <table class="viewTable">
+                        <tr><th colspan="2">[[${vo.title}]]</th></tr>
+                        <tr>
+                            <td style="height: 40px;">
+                                작성자 : <span>관리자</span> |
+                                작성일 : <span>[[${vo.rdate.substring(2,10)}]]</span> |
+                                조회수 : <span>[[${vo.hit}]]</span>
+                            </td>
+                            <td align="right"></td>
+                        </tr>
+                        <tr class="coupon" th:if="${vo.couponNo} > 0">
+                        	<td>
+		                        <div class="cs_view_coupon">
+				                	<div class="coupon_button">
+				                		<div class="coupon_text" th:text="${vo.cpName + ' 다운로드'}"></div>
+				                		<div class="coupon_img" style="cursor : pointer;">
+				                			<img th:src="@{/img/cscoupon.png}">
+				                			<span name="cpNo" style="display: none;" th:text="${vo.couponNo}"></span>
+				                		</div>
+				                		
+				                	</div>
+			                	</div>
+		                	</td>
+	                	</tr>
+                        <tr>
+                            <td colspan="2" class="content">
+                            	<th:block th:if="${vo.img} != null">
+                            		<img th:src="${vo.img}"/>
+                            	</th:block>
+                                <p>[[${vo.content}]]</p>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    <table class="viewTable2">
+                        <tr>
+                            <th style="width: 20%;">이전글</th>
+                            <td>
+						        <a th:if="${prev != null}" th:href="@{/cs/notice/view(no=${prev.no}, pg=${currentPage}, rdate=${prev.rdate})}" th:text="${prev.title}"></a>
+						        <span th:if="${prev == null}">이전 글이 없습니다.</span>
+						    </td>
+                        </tr>
+                        <tr>
+                            <th>다음글</th>
+                            <td>
+						        <a th:if="${next != null}" th:href="@{/cs/notice/view(no=${next.no}, pg=${currentPage}, rdate=${next.rdate})}" th:text="${next.title}"></a>
+						        <span th:if="${next == null}">다음 글이 없습니다.</span>
+						    </td>
+                        </tr>
+                    </table>
+                    <div class="button">
+                        <a th:href="@{/cs/notice/list(pg=${currentPage})}" class="btnList">목록</a>
+                        <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/cs/notice/modify(no=${vo.no}, pg=${currentPage})}" class="btnModify">수정</a>
+                        <a sec:authorize="hasAuthority('ROLE_7')" th:href="@{/cs/notice/delete(no=${vo.no},pg=${currentPage})}" class="btnDel">삭제</a>
+                    </div>
+                    
+                </div>
+            </section>
+        </main>
+<th:block th:include="@{cs/_footer.html}"/>

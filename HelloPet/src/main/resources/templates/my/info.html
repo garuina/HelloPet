@@ -1,0 +1,98 @@
+<th:block th:include="@{my/_header.html}"/>
+ <div class="mypage-contents">
+     <div class="mypage-contents_head">
+         <h2 class="mypage-contents__title">보호자정보관리</h2>
+     </div>
+     <!--게시물 목록-->
+        <div class="info_div">
+			<form th:action="@{/my/info}" method="post">
+	            <table class="info_table">
+	                <tr>
+	                    <td>아이디</td>
+	                    <td>
+							<input type="text" name="uid" th:value="${member.uid}" readonly="readonly">
+						</td>
+	                </tr>
+	                <tr>
+	                    <td>비밀번호</td>
+	                    <td><button name="pwChange">비밀번호수정</button></td>
+	                </tr>
+	                <tr>
+	                    <td>이름</td>
+	                    <td>
+							<input type="hidden" name="ori-Name" th:value="${member.name}">
+							<input type="text" name="name" th:value="${member.name}">
+						</td>
+	                </tr>
+	                <tr>
+	                    <td>이메일</td>
+	                    <td  th:if="${#authentication.principal.member != null}">
+							<input type="hidden" name="ori-Email" th:value="${member.email}">
+							<input type="text" name="email" th:value="${member.email}">
+						</td>
+	                </tr>
+	                <tr>
+	                    <td>닉네임</td>
+	                    <td  th:if="${#authentication.principal.member != null}">
+							<input type="hidden" name="ori-Nick" th:value="${member.nick}">
+							<input type="text" name="nick" th:value="${member.nick}">
+						</td>
+	                </tr>
+	                <tr>
+	                    <td>휴대폰</td>
+	                    <td  th:if="${#authentication.principal.member != null}">
+							<input type="hidden" name="ori-Hp" th:value="${member.hp}">
+							<input type="text" name="hp" th:value="${member.hp}">
+						</td>
+	                </tr>
+	                <tr>
+	                    <td>회원탈퇴</td>
+	                    <td><button name="btnWithdrawMember">탈퇴하기</button></td>
+	                </tr>
+	            </table>
+	            <div id="info_modify">
+	                <input type="submit" name="infoModify" value="수정하기">
+	            </div>
+			</form>
+        </div>
+    </div>
+</div>
+<th:block th:include="@{my/_footer.html}"/>
+		<!-- 비밀번호 수정 팝업 -->
+        <div id="popPw" class="popup">
+            <div class="find findPwChange">
+		        <nav>
+		            <h1>비밀번호 수정</h1>
+		            <button class="btnClose">X</button>              
+		        </nav>
+				<form action="#" method="post" class="pwForm">
+		             <table border="0">
+		                 <tr>
+		                    <td>아이디</td>
+		                    <td class="pwuid" th:text="${#authentication.principal.member.uid}"></td>
+		                </tr>
+		                <tr>
+		                    <td>새 비밀번호</td>
+		                    <td>
+		                        <input type="password" id="pass1" name="pass1" placeholder="새 비밀번호 입력" required="required"/>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>새 비밀번호 확인</td>
+		                    <td>
+		                        <input type="password" id="pass2" name="pass2" placeholder="새 비밀번호 입력" required="required"/>
+		                    </td>
+		                </tr>
+		             </table>
+		             <p>
+			            비밀번호를 변경해 주세요.<br>
+		            	영문, 숫자, 특수문자를 사용하여 5자 이상 입력해 주세요.
+			         </p>
+			
+			        <div class="btn">
+			            <a th:href="@{/my/info}" class="btnCancel">취소</a>
+			            <input type="submit" class="btnNext" value="완료">
+			        </div>					
+				</form>
+        	</div>
+        </div>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloPet</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/message.css}">
+    <script th:src="@{/js/msgPopup.js}"></script>
+    <script>
+    	$(function(){
+    		
+    		var urlParams = new URL(location.href).searchParams;
+			var uid= urlParams.get('uid');
+			console.log('here1 ' +uid);
+			
+        	var level = $('.level').text();
+        	console.log(level);
+        	
+        	$('.cs').click(function(){
+    			if(level !=  null && $.trim(level) !== ''){
+        			if(level == 1 || level == 7){
+        				return true;
+        			}else{
+        				alert('일반회원만 가능합니다.')
+        				return false;
+        			}
+        			
+        		}else{
+        			alert('로그인이 필요합니다.');
+        			return false;
+        		}
+        	});
+    	});
+    	
+    	function goHos (){
+        	var medNo = $('.medNo').text();
+        	console.log(medNo);
+        	
+        	location.href="/HelloPet/admin/info";
+        }
+        function goPm (){
+        	var pharNo = $('.pharNo').text();
+        	console.log(pharNo);
+        	
+        	location.href="/HelloPet/admin/info";
+        }
+        function goMsg (){
+        	var uid = $('.uid').text();
+        	console.log(uid);
+        	
+        	location.href="/HelloPet/message/message";
+        }
+        function goTop(){
+        	var uid = $('.uid').text();
+        	console.log(uid);
+        	
+        	location.href="/HelloPet/admin/info";
+        }
+    </script>
+    <style>
+    	#popMsg a {
+		    color: #32a69f;
+		    text-decoration: underline;
+		}
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <header class="header">
+            <div class="headerTop">
+                <div>
+                	<label sec:authorize="hasAuthority('ROLE_1')"><span class="name" sec:authentication="principal.member.nick">길동</span>님</label>
+                    <label sec:authorize="hasAuthority('ROLE_2')" onclick="goHos()">내 병원관리</label>
+	                <label sec:authorize="hasAuthority('ROLE_3')" onclick="goPm()">내 약국관리</label>
+	                <label sec:authorize="hasAuthority('ROLE_7')" onclick="goTop()">웹관리자님</label>
+                	<a sec:authorize="isAuthenticated()" th:href="@{/member/logout}" class="logout">로그아웃</a>
+                    <a sec:authorize="hasAuthority('ROLE_1')" th:href="@{/my/info}">마이페이지</a>
+                    <a sec:authorize="isAuthenticated()" onclick="goMsg()" class="message">알림 ([[${result}]])</a>
+                	<a th:href="@{/cs/notice/list}">고객센터</a>
+                </div>
+            </div>
+            <div class="menu">
+                <div>
+                    <ul>
+                        <li><a th:href="@{/disease/index}">증상별질병찾기</a></li>
+                        <li><a th:href="@{/search/index}">병원/약국찾기</a></li>
+                        <li class="logo"><a th:href="@{/}"><img th:src="@{/img/ci.png}" alt="logo"></a></li>
+                        <li><a th:href="@{/community/tip/list}">커뮤니티</a></li>
+                        <li><a th:href="@{/product/list(cate1=10, cate2=10)}">진료상품</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section>
+                <section class="message">
+                    <div class="container">
+                        <div class="msg-div">
+                             <h2>알림창</h2>
+                             <th:block th:if="${#lists.isEmpty(msgs)}">
+		                    	<p class="empty">알림이 없습니다.</p>
+	                   		 </th:block>
+	                   		 <th:block th:unless="${#lists.isEmpty(msgs)}">
+	                            <ul class="msg-list" th:each="msg:${msgs}">
+	                                <li>
+	                                	<span style="display: none;" class="msgNo">[[${msg.msgNo}]]</span>
+	                                    <a href="#" class="msg">[[${msg.title}]]</a>
+	                                    
+	                                    <th:block th:if="${msg.msgStatus == 0}">
+	                                    	<span class="status0">안읽음</span>
+	                                    </th:block>
+	                                    <th:block th:if="${msg.msgStatus == 1}">
+	                                    	<span class="status1">읽음</span>
+	                                    </th:block>
+	                                </li>
+	                            </ul>
+                             </th:block>
+                        </div>
+                        <div class="paging">
+			                <ul>
+			                <th:block th:if="${groups[0]>1}">
+			                    <li><a th:href="@{/message/message(pg=${groups[0]-1})}" class="prev">←</a></li>
+			                </th:block>
+			                <th:block th:if="${groups[1] != 0}">
+			                <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+			                    <li><a th:href="@{/message/message(,pg=${num})}" th:class="${num == currentPage?'num on':'num'}">[[${num}]]</a></li>
+			                </th:block>
+			                </th:block>
+			                <th:block th:if="${groups[1]<lastPageNum}">
+			                    <li><a th:href="@{/message/message(pg=${groups[1]+1})}" class="next">→</a></li>
+			                </th:block>
+			                </ul>
+			            </div>
+	                </div>
+                </section>
+            </section>
+        </main>
+        
+        <footer>
+            <div class="footer">
+                    <div class="container">
+                        <div class="footer-col">
+                            <ul class="info">
+                                <li>GREEN ACADEMY</li>
+                                <li>대표이사 김헬로</li>
+                                <li>사업자 등록번호 230-12-15432</li>
+                                <li>통신판매업신고번호 제 2023-부산-00213호</li>
+                                <li>부산광역시 남구 수영로 299</li>
+                                <li>TEL 051-000-0000</li>
+                                <li>Email HelloPet@email.com</li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <ul class="link">
+                                <li><a href="#">회사소개</a></li>
+                                <li><a href="#">이용약관</a></li>
+                                <li><a class="cs" th:href="@{/cs/qna/list}">문의하기</a></li>
+                                <li><a th:href="@{/cs/notice/list}">고객센터</a></li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+        </footer>
+        <!-- 알림 자세히보기 팝업 -->
+        <div id="popMsg" class="popup">
+            <div class="msgDiv">
+                <nav>
+                    <h1>알림</h1>
+                    <button class="btnClose">X</button>
+                </nav>
+		        <p></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
