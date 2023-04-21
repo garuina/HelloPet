@@ -96,6 +96,9 @@
 				    		}
 				    		
 				    		
+				    		
+				    		
+				    		
 				    		  
 				    	}
 					});
@@ -117,47 +120,49 @@
                 	
                 	// 좋아요 여부
                 	if(heartVal > 0){
-                		$('.heart-icon').html('<button class="icon-heart-mint"></button>');
-                		
+		    			$('.heart-icon').html('<button class="icon-heart-mint"></button>');
+		    		}else{
+		    			$('.heart-icon').html('<button class="icon-heart"></button>');
+		    		}
+                	
+                	// 좋아요 증가/감소
                 		$('.heart-icon').off('click').on('click',function(){
+                			
+                			
+                			if(heartVal > 0){
                 			$.ajax({
         						url : "/HelloPet/community/HeartDown",
         				    	method : 'GET',
         				    	data : jsonData2,
         				    	dataType : 'json',
-        				    	async:false,
         				    	success : function(data){
         				    			$('.heart-icon').html('<button class="icon-heart"></button>');
+        				    			heartVal = 0;
         				    			alert("좋아요를 취소했습니다.");
-        				    			window.location.reload();
         				    	}
         				    	
         				    		
         				    	});
-                		});
-                		
-                	}else{
-                		
-                		$('.heart-icon').html('<button class="icon-heart"></button>');
-                		
-                		$('.heart-icon').off('click').on('click',function(){
+                		}else{
                 			$.ajax({
         						url : "/HelloPet/community/HeartUp",
         				    	method : 'GET',
         				    	data : jsonData2,
         				    	dataType : 'json',
-        				    	async:false,
         				    	success : function(data){
         				    		$('.heart-icon').html('<button class="icon-heart-mint"></button>');
+        				    		heartVal = 1;
         				    		alert("좋아요를 눌렀습니다.");
-        				    		window.location.reload();
         				    	}
         				    	
         				    		
         				    	});
-                		});
+                			
+                		}
                 		
-                	}
+                	});
+                	
+                	
                 	
                 	function getReplyList() {
                 	// 댓글출력
@@ -265,15 +270,13 @@
         	
         	// x를 누르면 모달 창 닫힘
                 $('.modal_close').click(function(){
-                	/*$('#modal').css('display','none');
-                	$('.v-overlay').css('display','none');*/
-                	window.location.reload();
+                	$('#modal').css('display','none');
+                	$('.v-overlay').css('display','none');
                 	
                 });
                 
         	// 모달화면 밖 클릭시 모달 창 닫힘
-                /*$(document).mouseup(function (e){
-
+                $(document).mouseup(function (e){
                 	let container = $('#modal');
 					let overlay = $('.v-overlay');
 					
@@ -281,7 +284,7 @@
                 	container.css('display','none');
                 	overlay.css('display','none');
                 	}
-                });*/
+                });
         	
         		
         	
