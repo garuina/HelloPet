@@ -36,8 +36,15 @@
                 
                 	if(heartVal > 0){
                 		$('.heart_img').html('<img src="/HelloPet/img/icon-heart-mint.png">');
-                		
+                	}else{
+                		$('.heart_img').html('<img src="/HelloPet/img/icon-heart.png">');
+                	}
+                	
+                	
+                	
                 		$('.heart_img').click(function(){
+                			
+                			if(heartVal > 0){
                 			$.ajax({
         						url : "/HelloPet/community/HeartDown",
         				    	method : 'GET',
@@ -45,17 +52,11 @@
         				    	dataType : 'json',
         				    	success : function(data){
         				    			$('.heart_img').html('<img src="/HelloPet/img/icon-heart.png">');
-        				    			window.location.reload();
+        				    			heartVal = 0;
         				    	}
         				    		
         				    	});
-                		});
-                		
-                	}else{
-                		
-                		$('.heart_img').html('<img src="/HelloPet/img/icon-heart.png">');
-                		
-                		$('.heart_img').click(function(){
+                		}else{
                 			$.ajax({
         						url : "/HelloPet/community/HeartUp",
         				    	method : 'GET',
@@ -63,14 +64,21 @@
         				    	dataType : 'json',
         				    	success : function(data){
         				    		$('.heart_img').html('<img src="/HelloPet/img/icon-heart-mint.png">');
-        				    		window.location.reload();
+        				    		heartVal = 1;
         				    	}
         				    		
         				    	});
+                		}
                 		});
                 		
+                	
                 		
-                	}
+                		
+                		
+                		
+                		
+                		
+                	
                 	
                 	
          });
