@@ -76,9 +76,9 @@
 	
 	<select id="selectMaxCoupon" resultType="kr.co.hellopet.vo.ICouponVO">
 		SELECT * FROM `member_coupon` AS a
-			JOIN `coupon` AS b
-			ON a.cpNo = b.cpNo
-			WHERE a.uid =#{uid} AND `status` = '0' ORDER BY `discount` DESC LIMIT 1;
+		JOIN `coupon` AS b
+		ON a.cpNo = b.cpNo
+		WHERE a.uid =#{uid} AND `status` = '0' and b.medNo IS NULL ORDER BY `discount` DESC LIMIT 1;
 	</select>
 	
 	<select id="selectMedicalCoupon" resultType="kr.co.hellopet.vo.ICouponVO">

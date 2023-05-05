@@ -88,15 +88,24 @@
 	                        </th:block>
 		                </dd>
 		            </dl>
-		             <dl sec:authorize="isAuthenticated()">
-		                <dt>쿠폰할인가</dt>
-		                <dd class="MaxDc">
-		                    <strong id="coupon">[[${cp.cpName}]] 적용 시 
-		                    <span id="MaxDcRE" data-th-text="${#numbers.formatInteger(product.price*(100-cp.discount)/100, 3, 'COMMA')}">
-		                    [[${#numbers.formatInteger(product.price*(100-cp.discount)/100, 3)}]]</span></strong>
-		                    <span class="nono">(중복할인 불가)</span>
-		                </dd>
-		             </dl>
+		             <dl sec:authorize="isAuthenticated()" th:if="${cp != null and cp2!=null}">
+						<dt>쿠폰할인가</dt>
+						<dd class="MaxDc">
+						<strong id="coupon">[[${cp2.cpName}]] 적용 시
+						<span id="MaxDcRE" data-th-text="${#numbers.formatInteger(product.price*(100-cp2.discount)/100, 3, 'COMMA')}">
+						[[${#numbers.formatInteger(product.price*(100-cp2.discount)/100, 3)}]]</span></strong>
+						<span class="nono">(중복할인 불가)</span>
+						</dd>
+					</dl>
+					<dl sec:authorize="isAuthenticated()" th:if="${cp != null and cp2 == null}">
+						<dt>쿠폰할인가</dt>
+						<dd class="MaxDc">
+						<strong id="coupon">[[${cp.cpName}]] 적용 시
+						<span id="MaxDcRE" data-th-text="${#numbers.formatInteger(product.price*(100-cp.discount)/100, 3, 'COMMA')}">
+						[[${#numbers.formatInteger(product.price*(100-cp.discount)/100, 3)}]]</span></strong>
+						<span class="nono">(중복할인 불가)</span>
+						</dd>
+					</dl>
 		            <dl>
 		                <dt>판매병원명</dt>
 		                <dd class="hospital">

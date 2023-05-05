@@ -172,6 +172,8 @@ public class ProductController {
 			
 			ICouponVO cp = service.selectMaxCoupon(uid);
 			model.addAttribute("cp", cp);
+			ICouponVO cp2 = service.selectMedicalCoupon(uid, prodNo);
+			model.addAttribute("cp2", cp2);
 		}
 		
 		service.updateHit(prodNo);

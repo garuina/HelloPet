@@ -22,14 +22,14 @@
 			`rdate`= NOW();
 	</insert>
 	
-	<select id="selectAdminCoupons" resultType="kr.co.hellopet.vo.AdminCouponVO">
+	<select id="selectAdminCoupons" resultType="kr.co.hellopet.vo.CouponVO">
 		select * from `coupon`
 			 
 			order by `cpNo` desc
 			limit #{start},10;
 	</select>
 	
-	<select id="selectAdminCoupon" resultType="kr.co.hellopet.vo.AdminCouponVO">
+	<select id="selectAdminCoupon" resultType="kr.co.hellopet.vo.CouponVO">
 		select * from `coupon`
 			where `cpNo`=#{cpNo};
 	</select>
